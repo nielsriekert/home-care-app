@@ -4,11 +4,11 @@ import './App.css';
 import CurrentUsage from './CurrentUsage';
 
 import { ApolloClient, HttpLink, InMemoryCache, ApolloProvider } from '@apollo/client';
-
+console.log(process.env.API_ENDPOINT);
 const client = new ApolloClient({
 	cache: new InMemoryCache(),
 	link: new HttpLink({
-		uri: 'http://192.168.178.68',
+		uri: process.env.REACT_APP_API_ENDPOINT,
 	})
 });
 
