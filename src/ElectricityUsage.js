@@ -36,7 +36,7 @@ function ElectricityUsage() {
 					backgroundColor: data.electricityUsage.map(usage => 'rgba(255, 255, 245, .2)'),
 					borderColor:  data.electricityUsage.map(usage => 'rgba(255, 255, 245, .3)'),
 					borderWidth: data.electricityUsage.map(usage => 2),
-					data: data.electricityUsage.map(usage => usage.received.toFixed(2))
+					data: data.electricityUsage.map(usage => usage.received.toFixed(3))
 				}]
 			}}
 			width={800}
