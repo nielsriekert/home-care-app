@@ -2,9 +2,10 @@ import React from 'react';
 import './App.css';
 
 import CurrentUsage from './CurrentUsage';
+import ElectricityUsage from './ElectricityUsage';
 
 import { ApolloClient, HttpLink, InMemoryCache, ApolloProvider } from '@apollo/client';
-console.log(process.env.API_ENDPOINT);
+
 const client = new ApolloClient({
 	cache: new InMemoryCache(),
 	link: new HttpLink({
@@ -19,6 +20,7 @@ function App() {
 				<header className="App-header">
 					<h1>Home Care</h1>
 					<CurrentUsage />
+					<ElectricityUsage />
 				</header>
 			</div>
 		</ApolloProvider>
