@@ -33,8 +33,8 @@ function GasUsage() {
 					}),
 					datasets: [{
 						label: "Received (m³)",
-						backgroundColor: data.gasUsage.map(usage => 'rgba(255, 255, 245, .2)'),
-						borderColor:  data.gasUsage.map(usage => 'rgba(255, 255, 245, .3)'),
+						backgroundColor: data.gasUsage.map(usage => 'rgba(255, 235, 200, .2)'),
+						borderColor:  data.gasUsage.map(usage => 'rgba(255, 235, 200, .3)'),
 						borderWidth: data.gasUsage.map(usage => 2),
 						data: data.gasUsage.map(usage => usage.received.toFixed(3))
 					}]

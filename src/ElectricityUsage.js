@@ -34,8 +34,8 @@ function ElectricityUsage() {
 					}),
 					datasets: [{
 						label: "Received (kWh)",
-						backgroundColor: data.electricityUsage.map(usage => 'rgba(240, 245, 255, .2)'),
-						borderColor:  data.electricityUsage.map(usage => 'rgba(240, 245, 255, .3)'),
+						backgroundColor: data.electricityUsage.map(usage => 'rgba(200, 215, 255, .2)'),
+						borderColor:  data.electricityUsage.map(usage => 'rgba(200, 215, 255, .3)'),
 						borderWidth: data.electricityUsage.map(usage => 2),
 						data: data.electricityUsage.map(usage => usage.received.toFixed(3))
 					}]
