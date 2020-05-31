@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.electricy-usage-container,
+.gas-usage-container {
+  display: flex;
+  width: 100%;
+  padding: 40px;
+  box-sizing: border-box;
+}

@@ -4,10 +4,9 @@ import { useQuery, gql } from '@apollo/client';
 
 import { Bar } from 'react-chartjs-2';
 
-const ELECTRIC_USAGE = gql`
-	query electricityUsage {
-		electricityUsage {
-			delivered
+const GAS_USAGE = gql`
+	query gasUsage {
+		gasUsage {
 			received
 			period {
 				start
@@ -17,27 +16,27 @@ const ELECTRIC_USAGE = gql`
 	}
 `;
 
-function ElectricityUsage() {
-	const { loading, error, data } = useQuery(ELECTRIC_USAGE);
+function GasUsage() {
+	const { loading, error, data } = useQuery(GAS_USAGE);
 
 	if (loading) return <p>Loading...</p>;
 	if (error) return <p>Error :(</p>;
 
 	return (
-		<div className="electricy-usage-container">
+		<div className="gas-usage-container">
 			<Bar
 				data={{
-					labels: data.electricityUsage.map(usage => {
+					labels: data.gasUsage.map(usage => {
 						const hours = new Date(usage.period.end * 1000).getHours();
 						const minutes = new Date(usage.period.end * 1000).getMinutes();
 						return (hours.toString().length === 1 ? '0' : '') + hours + ':' + (minutes.toString().length === 1 ? '0' : '') + + minutes
 					}),
 					datasets: [{
-						label: "Received (kWh)",
-						backgroundColor: data.electricityUsage.map(usage => 'rgba(240, 245, 255, .2)'),
-						borderColor:  data.electricityUsage.map(usage => 'rgba(240, 245, 255, .3)'),
-						borderWidth: data.electricityUsage.map(usage => 2),
-						data: data.electricityUsage.map(usage => usage.received.toFixed(3))
+						label: "Received (m³)",
+						backgroundColor: data.gasUsage.map(usage => 'rgba(255, 255, 245, .2)'),
+						borderColor:  data.gasUsage.map(usage => 'rgba(255, 255, 245, .3)'),
+						borderWidth: data.gasUsage.map(usage => 2),
+						data: data.gasUsage.map(usage => usage.received.toFixed(3))
 					}]
 				}}
 				width={800}
@@ -46,7 +45,7 @@ function ElectricityUsage() {
 					title: {
 						display: true,
 						fontColor: 'white',
-						text: 'Electrical Usage'
+						text: 'Gas Usage'
 					}
 				}}
 			/>
@@ -54,4 +53,4 @@ function ElectricityUsage() {
 	);
 }
 
-export default ElectricityUsage;
+export default GasUsage;

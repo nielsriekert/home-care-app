@@ -3,6 +3,7 @@ import './App.css';
 
 import CurrentUsage from './CurrentUsage';
 import ElectricityUsage from './ElectricityUsage';
+import GasUsage from './GasUsage';
 
 import { ApolloClient, HttpLink, InMemoryCache, ApolloProvider } from '@apollo/client';
 
@@ -21,6 +22,7 @@ function App() {
 					<h1>Home Care</h1>
 					<CurrentUsage />
 					<ElectricityUsage />
+					<GasUsage />
 				</header>
 			</div>
 		</ApolloProvider>
