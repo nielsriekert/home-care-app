@@ -5,8 +5,8 @@ import { useQuery, gql } from '@apollo/client';
 import { Bar } from 'react-chartjs-2';
 
 const ELECTRIC_USAGE = gql`
-	query electricityUsage {
-		electricityUsage {
+	query electricityUsage($resolution: TimeResolution) {
+		electricityUsage(resolution: $resolution) {
 			delivered
 			received
 			period {
@@ -18,7 +18,11 @@ const ELECTRIC_USAGE = gql`
 `;
 
 function ElectricityUsage() {
-	const { loading, error, data } = useQuery(ELECTRIC_USAGE);
+	const { loading, error, data } = useQuery(ELECTRIC_USAGE, {
+		variables: {
+			resolution: 'TEN_MINUTES'
+		}
+	});
 
 	if (loading) return <p>Loading...</p>;
 	if (error) return <p>Error :(</p>;
