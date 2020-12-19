@@ -2,23 +2,37 @@
   "name": "home-care-app",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "export": "next build && next export",
-    "start": "next start"
-  },
   "dependencies": {
     "@apollo/client": "^3.3.6",
-    "chart.js": "^2.9.4",
-    "graphql": "^15.4.0",
-    "next": "10.0.3",
-    "react": "17.0.1",
-    "react-chartjs-2": "^2.11.1",
-    "react-dom": "17.0.1"
+    "@testing-library/jest-dom": "^5.11.1",
+    "@testing-library/react": "^10.4.7",
+    "@testing-library/user-event": "^12.0.15",
+    "chart.js": "^2.9.3",
+    "graphql": "^15.3.0",
+    "react": "^16.13.1",
+    "react-chartjs-2": "^2.9.0",
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.1"
   },
-  "devDependencies": {
-    "eslint": "^7.15.0",
-    "eslint-plugin-react": "^7.21.5"
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
