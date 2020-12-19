@@ -92,10 +92,3 @@ Thumbs.db
 .vscode
 *.sublime-project
 *.sublime-workspace
-
-# next.js
-/.next/
-/out/
-
-# vercel
-.vercel
