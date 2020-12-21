@@ -1,12 +1,15 @@
 import React from 'react';
 import './App.css';
 
-import CurrentUsage from './CurrentUsage';
-import ElectricityUsage from './ElectricityUsage';
-import GasUsage from './GasUsage';
-import ElectricityUsageMonth from './ElectricityUsageMonth';
-
 import { ApolloClient, HttpLink, InMemoryCache, ApolloProvider } from '@apollo/client';
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+} from 'react-router-dom';
+
+import Login from './pages/Login/Login';
+import Dashboard from './pages/Dashboard';
 
 const client = new ApolloClient({
 	cache: new InMemoryCache(),
@@ -18,15 +21,16 @@ const client = new ApolloClient({
 function App() {
 	return (
 		<ApolloProvider client={client}>
-			<div className="App">
-				<header className="App-header">
-					<h1>Home Care</h1>
-					<CurrentUsage />
-					<ElectricityUsage />
-					<GasUsage />
-					<ElectricityUsageMonth />
-				</header>
-			</div>
+			 <Router>
+				<Switch>
+					<Route path="/login">
+						<Login />
+					</Route>
+					<Route path="/">
+						<Dashboard />
+					</Route>
+				</Switch>
+			</Router>
 		</ApolloProvider>
 	);
 }

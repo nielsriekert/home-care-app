@@ -8,10 +8,13 @@
     "@testing-library/react": "^10.4.7",
     "@testing-library/user-event": "^12.0.15",
     "chart.js": "^2.9.3",
+    "cookies.js": "^2.1.15",
     "graphql": "^15.3.0",
+    "normalize.css": "^8.0.1",
     "react": "^16.13.1",
     "react-chartjs-2": "^2.9.0",
     "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1"
   },
   "scripts": {
@@ -25,7 +28,7 @@
   },
   "browserslist": {
     "production": [
-      ">0.2%",
+      "> 0.5% in NL",
       "not dead",
       "not op_mini all"
     ],
