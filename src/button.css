@@ -1,0 +1,12 @@
+.button {
+	height: 3.5em;
+	padding: .5em 1.5em;
+	border-radius: 10px;
+	border: none;
+	background-color: transparent;
+}
+
+.button.type-primary {
+	color: white;
+	background-color: var(--color-primary, darkgray);
+}
