@@ -1,0 +1,77 @@
+.page-login-container {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-areas: 'content';
+	justify-items: center;
+	align-items: center;
+	min-height: 100vh;
+	background-color: rgb(0, 7, 13);
+}
+
+@media(min-width: 550px) {
+	.page-login-container {
+		grid-template-columns: 1fr 34em;
+		grid-template-areas: 'fill content';
+	}
+}
+
+.page-login-container h1,
+.page-login-container p,
+.page-login-container ul,
+.page-login-container ol,
+.page-login-container table,
+.page-login-container label,
+.page-login-container input {
+	color: white;
+}
+
+.page-login-fill-container {
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+@media(min-width: 550px) {
+	.page-login-fill-container {
+		justify-self: stretch;
+		align-self: stretch;
+		background-image:
+			linear-gradient(to right, rgba(0, 7, 13, 1) 0%, rgba(0, 7, 13, 0) 50%, rgba(0, 7, 13, 1) 100% ),
+			url('./leaves-large.jpg');
+	}
+}
+
+@media(max-width: 550px) {
+	.page-login-fill-container {
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		filter: blur(8px);
+		opacity: .5;
+		background-image: url('./leaves-small.jpg');
+	}
+}
+
+.page-login-content-container {
+	grid-area: content;
+	position: relative;
+}
+
+@media(max-width: 550px) {
+	.page-login-content-container {
+		padding-left: var(--content-padding-horizontal);
+		padding-right: var(--content-padding-horizontal);
+	}
+}
+
+@media(min-width: 550px) {
+	.page-login-content-container {
+		padding: 5em;
+	}
+}
+
+.page-login-content-container h1 {
+	text-align: center;
+}

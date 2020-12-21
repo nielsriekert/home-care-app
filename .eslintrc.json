@@ -1,0 +1,37 @@
+{
+    "extends": "react-app",
+    "rules": {
+        "indent": [
+            "error",
+            "tab"
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "eqeqeq": [
+            "error"
+        ],
+        "quote-props": [
+            "error",
+            "as-needed"
+        ],
+        "object-curly-spacing": [
+            "error",
+            "always"
+        ],
+        "object-shorthand": [
+            "error"
+        ],
+        "keyword-spacing": "error",
+        "no-trailing-spaces": "error"
+    }
+}
