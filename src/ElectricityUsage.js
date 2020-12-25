@@ -5,7 +5,7 @@ import { useQuery, gql } from '@apollo/client';
 import { Bar } from 'react-chartjs-2';
 
 const ELECTRIC_USAGE = gql`
-	query electricityUsage($resolution: TimeResolution) {
+	query electricityUsage($resolution: TimeSpan) {
 		electricityUsage(resolution: $resolution) {
 			delivered
 			received

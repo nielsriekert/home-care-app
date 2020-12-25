@@ -5,7 +5,10 @@ import { useQuery, gql } from '@apollo/client';
 
 const CURRENT_ELECTRIC_USAGE = gql`
 	query currentElectricityUsage {
-		currentElectricityUsage
+		currentElectricityUsage {
+			received,
+			readingAt
+		}
 	}
 `;
 
@@ -16,7 +19,7 @@ function CurrentUsage() {
 	if (error) return <p>Error :(</p>;
 	return (
 		<div>
-			Current Electric Usage: {data.currentElectricityUsage} kW (refresh page to refresh)
+			Current Electric Usage: {data.currentElectricityUsage.received} kW (refresh page to refresh)
 		</div>
 	);
 }
