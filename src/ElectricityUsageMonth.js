@@ -2,7 +2,8 @@ import React from 'react';
 
 import { useQuery, gql } from '@apollo/client';
 
-import { Bar } from 'react-chartjs-2';
+import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
 
 const ELECTRIC_USAGE = gql`
 	query electricityConsumptionByMonth(
@@ -90,25 +91,38 @@ function ElectricityUsageMonth() {
 
 	return (
 		<div className="electricy-usage-month-container">
-			<Bar
-				data={{
-					labels: months.map(monthUsage => monthUsage.monthName),
-					datasets: [{
-						label: "Received (kWh)",
-						backgroundColor: months.map(usage => 'rgba(200, 215, 255, .2)'),
-						borderColor:  months.map(usage => 'rgba(200, 215, 255, .3)'),
-						borderWidth: months.map(usage => 2),
-						data: months.map(monthUsage => monthUsage.data.received.toFixed(3))
-					}]
-				}}
-				width={800}
-				height={280}
+			<h3>Electrical usage by Month</h3>
+			<HighchartsReact
+				highcharts={Highcharts}
 				options={{
-					title: {
-						display: true,
-						fontColor: 'white',
-						text: 'Electrical Usage per Month'
-					}
+					title: false,
+					chart: {
+						backgroundColor: 'transparent',
+					},
+					credits: {
+						enabled: false
+					},
+					xAxis: {
+						categories: months.slice().reverse().map(monthUsage => monthUsage.monthName),
+						lineColor: 'rgba(255, 255, 255, .2)',
+						tickColor: 'rgba(255, 255, 255, .2)'
+					},
+					yAxis: {
+						title: {
+							text: 'kWh'
+						},
+						gridLineColor: 'rgba(255, 255, 255, .1)',
+					},
+					time: {
+						useUTC: false
+					},
+					series: [{
+						name: 'kWh',
+						type: 'column',
+						showInLegend: false,
+						data: months.slice().reverse().map(monthUsage => [monthUsage.monthName, Math.round((monthUsage.data.received + Number.EPSILON) * 100) / 100]),
+						color: 'rgba(200, 215, 255, .5)'
+					}]
 				}}
 			/>
 		</div>

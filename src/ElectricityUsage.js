@@ -59,7 +59,8 @@ function ElectricityUsage() {
 					series: [{
 						name: 'Wh',
 						showInLegend: false,
-						data: data.electricityUsage.slice().reverse().map(usage => [usage.period.end * 1000, Math.round((usage.received + Number.EPSILON) * 100) / 100])
+						data: data.electricityUsage.slice().reverse().map(usage => [usage.period.end * 1000, Math.round((usage.received + Number.EPSILON) * 100) / 100]),
+						color: 'rgba(200, 215, 255, .5)'
 					}]
 				}}
 			/>
