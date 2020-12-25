@@ -37,7 +37,6 @@ function ElectricityUsage() {
 				options={{
 					title: false,
 					chart: {
-						width: 1200,
 						backgroundColor: 'transparent',
 					},
 					credits: {
