@@ -2,7 +2,8 @@ import React from 'react';
 
 import { useQuery, gql } from '@apollo/client';
 
-import { Bar } from 'react-chartjs-2';
+import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
 
 const GAS_USAGE = gql`
 	query gasUsage($resolution: TimeSpan) {
@@ -19,7 +20,7 @@ const GAS_USAGE = gql`
 function GasUsage() {
 	const { loading, error, data } = useQuery(GAS_USAGE, {
 		variables: {
-			resolution: null
+			resolution: 'TWO_HOURS'
 		}
 	});
 
@@ -28,29 +29,38 @@ function GasUsage() {
 
 	return (
 		<div className="gas-usage-container">
-			<Bar
-				data={{
-					labels: data.gasUsage.map(usage => {
-						const hours = new Date(usage.period.end * 1000).getHours();
-						const minutes = new Date(usage.period.end * 1000).getMinutes();
-						return (hours.toString().length === 1 ? '0' : '') + hours + ':' + (minutes.toString().length === 1 ? '0' : '') + + minutes
-					}),
-					datasets: [{
-						label: "Received (m³)",
-						backgroundColor: data.gasUsage.map(usage => 'rgba(255, 235, 200, .2)'),
-						borderColor:  data.gasUsage.map(usage => 'rgba(255, 235, 200, .3)'),
-						borderWidth: data.gasUsage.map(usage => 2),
-						data: data.gasUsage.map(usage => usage.received.toFixed(3))
-					}]
-				}}
-				width={800}
-				height={280}
+			<h3>Gas Usage</h3>
+			<HighchartsReact
+				highcharts={Highcharts}
 				options={{
-					title: {
-						display: true,
-						fontColor: 'white',
-						text: 'Gas Usage'
-					}
+					title: false,
+					chart: {
+						backgroundColor: 'transparent',
+					},
+					credits: {
+						enabled: false
+					},
+					xAxis: {
+						type: 'datetime',
+						lineColor: 'rgba(255, 255, 255, .2)',
+						tickColor: 'rgba(255, 255, 255, .2)'
+					},
+					yAxis: {
+						title: {
+							text: 'm³'
+						},
+						gridLineColor: 'rgba(255, 255, 255, .1)',
+					},
+					time: {
+						useUTC: false
+					},
+					series: [{
+						name: 'm³',
+						type: 'column',
+						showInLegend: false,
+						data: data.gasUsage.slice().reverse().map(usage => [usage.period.end * 1000, Math.round((usage.received + Number.EPSILON) * 100) / 100]),
+						color: 'rgba(255, 235, 200, .5)'
+					}]
 				}}
 			/>
 		</div>
