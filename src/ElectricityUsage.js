@@ -8,8 +8,8 @@ import HighchartsReact from 'highcharts-react-official';
 const ELECTRIC_USAGE = gql`
 	query electricityUsage($resolution: TimeSpan) {
 		electricityUsage(resolution: $resolution) {
-			delivered
-			received
+			received(unit:WATT_HOUR)
+			received(unit:WATT_HOUR)
 			period {
 				start
 				end
@@ -43,13 +43,25 @@ function ElectricityUsage() {
 					credits: {
 						enabled: false
 					},
+					colorAxis: [{
+						gridLineColor: 'rgba(255, 0, 0, .1)',
+						gridLineDashStyle: 'longdash'
+					}],
 					xAxis: {
 						type: 'datetime',
-						reversed: true
+						lineColor: 'rgba(255, 255, 255, .2)',
+						tickColor: 'rgba(255, 255, 255, .2)'
+					},
+					yAxis: {
+						title: {
+							text: 'Wh'
+						},
+						gridLineColor: 'rgba(255, 255, 255, .1)',
 					},
 					series: [{
 						name: 'Wh',
-						data: data.electricityUsage.map(usage => [usage.period.end * 1000, usage.received])
+						showInLegend: false,
+						data: data.electricityUsage.slice().reverse().map(usage => [usage.period.end * 1000, usage.received])
 					}]
 				}}
 			/>
