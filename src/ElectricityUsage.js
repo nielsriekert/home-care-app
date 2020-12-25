@@ -6,7 +6,7 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
 const ELECTRIC_USAGE = gql`
-	query electricityUsage($resolution: TimeResolution) {
+	query electricityUsage($resolution: TimeSpan) {
 		electricityUsage(resolution: $resolution) {
 			delivered
 			received

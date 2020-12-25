@@ -5,7 +5,7 @@ import { useQuery, gql } from '@apollo/client';
 import { Bar } from 'react-chartjs-2';
 
 const GAS_USAGE = gql`
-	query gasUsage($resolution: TimeResolution) {
+	query gasUsage($resolution: TimeSpan) {
 		gasUsage(resolution: $resolution) {
 			received
 			period {
