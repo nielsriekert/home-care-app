@@ -6,8 +6,8 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
 const ELECTRIC_USAGE = gql`
-	query electricityUsage($resolution: TimeSpan) {
-		electricityUsage(resolution: $resolution) {
+	query electricityUsage($resolution: TimeSpan $hoursInThePast: Float) {
+		electricityUsage(resolution: $resolution hoursInThePast: $hoursInThePast) {
 			received(unit:WATT_HOUR)
 			received(unit:WATT_HOUR)
 			period {
@@ -21,7 +21,8 @@ const ELECTRIC_USAGE = gql`
 function ElectricityUsage() {
 	const { loading, error, data } = useQuery(ELECTRIC_USAGE, {
 		variables: {
-			resolution: 'MINUTE'
+			resolution: 'FIVE_MINUTES',
+			hoursInThePast: 8
 		}
 	});
 
@@ -36,17 +37,11 @@ function ElectricityUsage() {
 				options={{
 					title: false,
 					chart: {
-						width: 1200,
 						backgroundColor: 'transparent',
-						// styledMode: true
 					},
 					credits: {
 						enabled: false
 					},
-					colorAxis: [{
-						gridLineColor: 'rgba(255, 0, 0, .1)',
-						gridLineDashStyle: 'longdash'
-					}],
 					xAxis: {
 						type: 'datetime',
 						lineColor: 'rgba(255, 255, 255, .2)',
@@ -58,10 +53,13 @@ function ElectricityUsage() {
 						},
 						gridLineColor: 'rgba(255, 255, 255, .1)',
 					},
+					time: {
+						useUTC: false
+					},
 					series: [{
 						name: 'Wh',
 						showInLegend: false,
-						data: data.electricityUsage.slice().reverse().map(usage => [usage.period.end * 1000, usage.received])
+						data: data.electricityUsage.slice().reverse().map(usage => [usage.period.end * 1000, Math.round((usage.received + Number.EPSILON) * 100) / 100])
 					}]
 				}}
 			/>
