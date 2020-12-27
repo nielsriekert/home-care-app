@@ -91,7 +91,6 @@ function ElectricityUsageMonth() {
 
 	return (
 		<div className="electricy-usage-month-container">
-			<h3>Electrical usage by Month</h3>
 			<HighchartsReact
 				highcharts={Highcharts}
 				options={{

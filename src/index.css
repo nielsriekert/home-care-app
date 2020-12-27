@@ -1,8 +1,27 @@
+/* andika-new-basic-regular - latin */
+@font-face {
+	font-family: 'Andika New Basic';
+	font-style: normal;
+	font-weight: 400;
+	src: local(''),
+			url('./fonts/andika-new-basic-v1-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+			url('./fonts/andika-new-basic-v1-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* andika-new-basic-700 - latin */
+@font-face {
+	font-family: 'Andika New Basic';
+	font-style: normal;
+	font-weight: 700;
+	src: local(''),
+			url('./fonts/andika-new-basic-v1-latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+			url('./fonts/andika-new-basic-v1-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+
 body {
 	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-		sans-serif;
+	font-family: 'Andika New Basic', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
@@ -14,7 +33,13 @@ code {
 
 :root {
 	--color-primary: rgb(22, 129, 73);
-	--content-padding-horizontal: 2rem;
+	--content-padding-horizontal: 1rem;
+}
+
+@media(min-width: 34em) {
+	:root {
+		--content-padding-horizontal: 2rem;
+	}
 }
 
 * {
