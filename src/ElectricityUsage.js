@@ -18,11 +18,11 @@ const ELECTRIC_USAGE = gql`
 	}
 `;
 
-function ElectricityUsage() {
+function ElectricityUsage({ resolution, hoursInThePast }) {
 	const { loading, error, data } = useQuery(ELECTRIC_USAGE, {
 		variables: {
-			resolution: 'FIVE_MINUTES',
-			hoursInThePast: 8
+			resolution: resolution || 'FIVE_MINUTES',
+			hoursInThePast: hoursInThePast || 8
 		}
 	});
 
@@ -30,8 +30,7 @@ function ElectricityUsage() {
 	if (error) return <p>Error :(</p>;
 
 	return (
-		<div className="electricy-usage-container">
-			<h3>Electric Usage</h3>
+		<div className="electricity-usage-container">
 			<HighchartsReact
 				highcharts={Highcharts}
 				options={{

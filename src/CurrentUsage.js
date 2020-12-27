@@ -2,11 +2,10 @@ import React from 'react';
 
 import { useQuery, gql } from '@apollo/client';
 
-
 const CURRENT_ELECTRIC_USAGE = gql`
 	query currentElectricityUsage {
 		currentElectricityUsage {
-			received,
+			received(unit: WATT),
 			readingAt
 		}
 	}
@@ -18,8 +17,8 @@ function CurrentUsage() {
 	if (loading) return <p>Loading...</p>;
 	if (error) return <p>Error :(</p>;
 	return (
-		<div>
-			Current Electric Usage: {data.currentElectricityUsage.received} kW (refresh page to refresh)
+		<div className="current-usage">
+			{data.currentElectricityUsage.received} W
 		</div>
 	);
 }

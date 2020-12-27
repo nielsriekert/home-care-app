@@ -1,0 +1,11 @@
+.widget-container {
+	padding: 20px;
+	border-radius: 6px;
+	background-color: rgba(0, 0, 0, .1);
+}
+
+.widget-title {
+	margin-top: 0;
+	font-size: 1.25rem;
+	color: white;
+}

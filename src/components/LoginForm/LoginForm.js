@@ -4,13 +4,13 @@ import {
 	Redirect
 } from 'react-router-dom';
 
-import { useMutation, gql } from '@apollo/client';
+import { useMutation, gql, makeVar } from '@apollo/client';
 
 import Cookies from 'cookies.js';
 
 import InputField from '../components/InputField';
 import Message from '../components/Message';
-import Button from '../Button';
+import Button from '../components/Button/Button';
 
 const LOGIN = gql`
 	mutation login($email: String! $password: String!) {
@@ -30,6 +30,7 @@ const getFieldValueByName = (fields, name) => {
 };
 
 function LoginForm() {
+	const userVar = makeVar(null);
 	const [fields, setFields] = useState([
 		{
 			type: 'email',
@@ -76,6 +77,7 @@ function LoginForm() {
 	};
 
 	if (data && data.login.token) {
+		userVar(data.login.user);
 		Cookies.set('authorization-token', data.login.token, { expires: 365 });
 		return (
 			<Redirect to="/" />

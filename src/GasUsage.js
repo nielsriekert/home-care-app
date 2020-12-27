@@ -29,7 +29,6 @@ function GasUsage() {
 
 	return (
 		<div className="gas-usage-container">
-			<h3>Gas Usage</h3>
 			<HighchartsReact
 				highcharts={Highcharts}
 				options={{
