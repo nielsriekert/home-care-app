@@ -1,18 +1,7 @@
-.App {
-	text-align: center;
-}
-
-.App-header {
+.page-container {
 	min-height: 100vh;
+	color: white;
 	padding-top: 20px;
 	padding-bottom: 20px;
-	font-size: calc(10px + 2vmin);
-	color: white;
 	background-color: #282c34;
-}
-
-.electricy-usage-container,
-.gas-usage-container {
-	padding: 40px 2rem;
-	box-sizing: border-box;
 }
