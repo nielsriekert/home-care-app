@@ -8,9 +8,9 @@ import { useMutation, gql, makeVar } from '@apollo/client';
 
 import Cookies from 'cookies.js';
 
-import InputField from '../components/InputField';
-import Message from '../components/Message';
-import Button from '../components/Button/Button';
+import InputField from '../InputField';
+import Message from '../Message';
+import Button from '../Button/Button';
 
 const LOGIN = gql`
 	mutation login($email: String! $password: String!) {
