@@ -8,6 +8,7 @@ const ME = gql`
 		me {
 			name
 			email
+			avatar
 		}
 	}
 `;
@@ -25,8 +26,8 @@ function UserMenu() {
 
 	return (
 		<nav className="user-menu-container">
-			<button className="user-avatar-container">
-				{data.me.name}
+			<button className={'user-avatar-container' + (!data.me.avatar ? ' contains-no-image' : '')}>
+				{data.me.avatar ? <img src={data.me.avatar} alt={data.me.name} /> : data.me.name}
 			</button>
 		</nav>
 	);
