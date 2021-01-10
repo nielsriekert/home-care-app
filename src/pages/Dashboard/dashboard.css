@@ -11,7 +11,10 @@
 }
 
 .widget-electricity-usage,
-.widget-gas-usage {
+.widget-gas-usage,
+.widget-electrical-usage-by-week,
+.widget-electrical-usage-by-month,
+.widget-electrical-usage-current-week {
 	grid-column: 1/-1;
 }
 
@@ -22,12 +25,10 @@
 	}
 }
 
-.widget-electrical-usage-by-month {
-	grid-column:  1/-1;
-}
-
 @media(min-width: 850px) {
-	.widget-electrical-usage-by-month {
+	.widget-electrical-usage-by-week,
+	.widget-electrical-usage-by-month,
+	.widget-electrical-usage-current-week {
 		grid-column: span 3;
 	}
 }
