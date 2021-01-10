@@ -1,7 +1,7 @@
 import './input-field.css';
 import React, { useState, useCallback } from 'react';
 
-function InputFieldEmail({ type, label, name, value, onChange, error }) {
+function InputField({ type, label, name, value, onChange, error }) {
 	const [isFocused, setFocus] = useState(false);
 
 	function onValueChange(event) {
@@ -22,4 +22,4 @@ function InputFieldEmail({ type, label, name, value, onChange, error }) {
 	);
 }
 
-export default InputFieldEmail;
+export default InputField;
