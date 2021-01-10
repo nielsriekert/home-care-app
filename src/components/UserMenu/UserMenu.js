@@ -1,5 +1,6 @@
 import './user-menu.css';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { useQuery, gql } from '@apollo/client';
 
@@ -26,9 +27,9 @@ function UserMenu() {
 
 	return (
 		<nav className="user-menu-container">
-			<button className={'user-avatar-container' + (!data.me.avatar ? ' contains-no-image' : '')}>
+			<Link to="/profile" className={'user-avatar-container' + (!data.me.avatar ? ' contains-no-image' : '')}>
 				{data.me.avatar ? <img src={data.me.avatar} alt={data.me.name} /> : data.me.name}
-			</button>
+			</Link>
 		</nav>
 	);
 }

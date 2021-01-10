@@ -7,15 +7,16 @@ import {
 	Switch,
 	Route,
 } from 'react-router-dom';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 import Cookies from 'cookies.js';
 
 import Login from './pages/Login/Login';
 import Portal from './pages/Portal/Portal';
 import Dashboard from './pages/Dashboard/Dashboard';
+import ProfileDashboard from './pages/ProfileDashboard/ProfileDashboard';
+import MinderGasNlSettings from './pages/MinderGasNlSettings/MinderGasNlSettings';
 import FourOFour from './pages/FourOFour/FourOFour';
-
-const authorizationToken = Cookies.get('authorization-token');
 
 // TODO: doesn't work after logging in
 const authLink = new ApolloLink((operation, forward) => {
@@ -50,11 +51,15 @@ function App() {
 					<Route path="/login">
 						<Login />
 					</Route>
-					<Route exact path="/">
-						{authorizationToken ?// TODO: token should be checked against api
-							<Dashboard /> :
-							<Portal />}
-					</Route>
+					<PrivateRoute redirectComponents={<Portal test="test" />} exact path="/">
+						<Dashboard />
+					</PrivateRoute>
+					<PrivateRoute path="/profile">
+						<ProfileDashboard />
+					</PrivateRoute>
+					<PrivateRoute path="/minder-gas-nl">
+						<MinderGasNlSettings />
+					</PrivateRoute>
 					<Route>
 						<FourOFour />
 					</Route>
