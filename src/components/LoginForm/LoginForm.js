@@ -8,8 +8,9 @@ import { useMutation, gql, makeVar } from '@apollo/client';
 
 import Cookies from 'cookies.js';
 
-import InputField from '../InputField';
-import Message from '../Message';
+import InputField from '../InputField/InputField';
+import InputFieldEmail from '../InputFieldEmail/InputFieldEmail';
+import Message from '../Message/Message';
 import Button from '../Button/Button';
 
 const LOGIN = gql`
@@ -36,13 +37,15 @@ function LoginForm() {
 			type: 'email',
 			label: 'E-mail',
 			name: 'email',
-			value: ''
+			value: '',
+			component: InputFieldEmail
 		},
 		{
 			type: 'password',
 			label: 'Password',
 			name: 'password',
-			value: ''
+			value: '',
+			component: InputField
 		}
 	]);
 	const [error, setError] = useState(null);
@@ -87,7 +90,7 @@ function LoginForm() {
 	return (
 		<form noValidate onSubmit={onSubmit}>
 			{fields.map(field => (
-				<InputField
+				<field.component
 					{...field}
 					key={field.name}
 					onChange={handleInputChange}
