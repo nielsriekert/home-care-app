@@ -99,7 +99,7 @@ function LoginForm() {
 			<div className="form-footer-container">
 				{error ?
 					<Message type="error" ><p>{error.message}</p></Message> : ''}
-				<Button label="Send" type="primary" />
+				<Button type="primary">Send</Button>
 			</div>
 		</form>
 	);
