@@ -23,6 +23,9 @@ const SET_STATE_MINDER_GAS_SYNC = gql`
 `;
 
 const isSyncStateCheckboxChecked = field => field.fields.filter(checkField => checkField.checked).length >= 1;
+const getSyncStateFromApi = (queryData, mutateData) => (
+	typeof mutateData === 'undefined' ? (queryData && queryData.isMinderGasNlSynchronizationActive) === true : mutateData.setSyncStateSendingReadingsToMinderGasNl === true
+);
 
 function Dashboard() {
 	const [field, setField] = useState({
@@ -41,16 +44,6 @@ function Dashboard() {
 	useEffect(() => {
 		setErrorToDisplay(error);
 	}, [error]);
-
-	useEffect(() => {
-		setField(prevField => ({
-			...prevField,
-			fields: prevField.fields.map(field => ({
-				...field,
-				checked: (data && data.isMinderGasNlSynchronizationActive) === true,
-			}))
-		}));
-	}, [data]);
 
 	const handleInputChange = (name, value) => {
 		setField(prevField => {
@@ -74,16 +67,15 @@ function Dashboard() {
 	};
 
 	useEffect(() => {
-		console.log('sendingData', sendingData);
 		setField(prevField => ({
 			...prevField,
 			fields: prevField.fields.map(field => ({
 				...field,
-				checked: typeof sendingData !== 'undefined' && sendingData.setSyncStateSendingReadingsToMinderGasNl === true,
+				checked: getSyncStateFromApi(data, sendingData),
 				disabled: false
 			}))
 		}));
-	}, [sendingData]);
+	}, [data, sendingData]);
 
 	return (
 		<div className="App">
