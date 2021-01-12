@@ -1,0 +1,17 @@
+.cardsContainer {
+	display: grid;
+	gap: 15px;
+}
+
+ul.cardsContainer {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+.cardsFooter {
+	display: flex;
+	justify-content: center;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
