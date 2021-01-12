@@ -49,3 +49,7 @@ code {
 h1 {
 	font-size: 3rem;
 }
+
+p {
+	line-height: 1.8;
+}
