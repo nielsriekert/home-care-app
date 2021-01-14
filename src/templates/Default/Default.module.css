@@ -1,0 +1,8 @@
+.default {
+	background-color: #282c34;
+}
+
+.pageContainer {
+	color: white;
+	padding: 20px var(--content-padding-horizontal);
+}

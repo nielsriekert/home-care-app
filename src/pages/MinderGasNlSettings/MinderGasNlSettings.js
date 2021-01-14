@@ -1,14 +1,14 @@
 import './minder-gas-nl-settings.css';
 import React, { useState, useEffect } from 'react';
 
-import { useQuery, useMutation, gql } from '@apollo/client';
+import Default from '../../templates/Default/Default';
 
-import Header from '../../components/Header/Header';
+import { useQuery, useMutation, gql } from '@apollo/client';
 
 import ProfileNavigation from '../../components/ProfileNavigation/ProfileNavigation';
 
 import InputFieldCheckbox from '../../components/InputFieldCheckbox/InputFieldCheckbox';
-import Message from '../../components/Message/Message';
+import Message from '../../atoms/Message/Message';
 
 const IS_MINDER_GAS_SYNC_ACTIVE = gql`
 	query isMinderGasNlSynchronizationActive {
@@ -78,21 +78,18 @@ function Dashboard() {
 	}, [data, sendingData]);
 
 	return (
-		<div className="App">
-			<Header />
-			<main className="page-container">
-				<ProfileNavigation />
-				<h1>MinderGas.nl synchronization</h1>
-				{errorToDisplay ?
-					<Message type="error" ><p>{errorToDisplay.message}</p></Message> : ''}
-				{!loading ?
-					<InputFieldCheckbox
-						{...field}
-						key={field.name}
-						onChange={handleInputChange}
-					/> : ''}
-			</main>
-		</div>
+		<Default>
+			<ProfileNavigation />
+			<h1>MinderGas.nl synchronization</h1>
+			{errorToDisplay ?
+				<Message type="error" ><p>{errorToDisplay.message}</p></Message> : ''}
+			{!loading ?
+				<InputFieldCheckbox
+					{...field}
+					key={field.name}
+					onChange={handleInputChange}
+				/> : ''}
+		</Default>
 	);
 }
 

@@ -1,0 +1,4 @@
+.pageContainer {
+	color: white;
+	padding: 20px var(--content-padding-horizontal);
+}

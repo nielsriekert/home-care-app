@@ -10,8 +10,8 @@ import Cookies from 'cookies.js';
 
 import InputField from '../InputField/InputField';
 import InputFieldEmail from '../InputFieldEmail/InputFieldEmail';
-import Message from '../Message/Message';
-import Button from '../Button/Button';
+import Message from '../../atoms/Message/Message';
+import Button from '../../atoms/Button/Button';
 
 const LOGIN = gql`
 	mutation login($email: String! $password: String!) {
