@@ -6,7 +6,7 @@
 	background-color: transparent;
 }
 
-.button.type-primary {
+.button.primary {
 	color: white;
 	background-color: var(--color-primary, darkgray);
 }

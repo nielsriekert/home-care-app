@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 
 import EventCard from '../EventCard/EventCard';
-import Message from '../Message/Message';
+import Message from '../../atoms/Message/Message';
 
 const EVENTS = gql`
 	query events (
@@ -37,7 +37,7 @@ function EventList() {
 			...event,
 			type: event.type.toLowerCase(),
 			timeStamp: event.date,
-			date: new Date(event.date).toLocaleDateString('nl-NL', {
+			date: new Date(event.date * 1000).toLocaleDateString('nl-NL', {
 				month: 'short',
 				day: 'numeric',
 				hour: 'numeric',

@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 
 import { ApolloClient, HttpLink, ApolloLink, InMemoryCache, ApolloProvider } from '@apollo/client';
 import {
