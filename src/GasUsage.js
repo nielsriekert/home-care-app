@@ -19,6 +19,7 @@ const GAS_USAGE = gql`
 
 function GasUsage() {
 	const { loading, error, data } = useQuery(GAS_USAGE, {
+		fetchPolicy: 'cache-and-network',
 		variables: {
 			resolution: 'TWO_HOURS'
 		}

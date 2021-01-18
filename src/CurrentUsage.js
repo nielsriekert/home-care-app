@@ -12,7 +12,9 @@ const CURRENT_ELECTRIC_USAGE = gql`
 `;
 
 function CurrentUsage() {
-	const { loading, error, data } = useQuery(CURRENT_ELECTRIC_USAGE);
+	const { loading, error, data } = useQuery(CURRENT_ELECTRIC_USAGE, {
+		fetchPolicy: 'cache-and-network',
+	});
 
 	if (loading) return <p>Loading...</p>;
 	if (error) return <p>Error :(</p>;

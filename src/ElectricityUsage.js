@@ -20,6 +20,7 @@ const ELECTRIC_USAGE = gql`
 
 function ElectricityUsage({ resolution, hoursInThePast }) {
 	const { loading, error, data } = useQuery(ELECTRIC_USAGE, {
+		fetchPolicy: 'cache-and-network',
 		variables: {
 			resolution: resolution || 'FIVE_MINUTES',
 			hoursInThePast: hoursInThePast || 8
