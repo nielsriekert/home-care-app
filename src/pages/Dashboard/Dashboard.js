@@ -11,6 +11,7 @@ import CurrentUsage from '../../CurrentUsage';
 import ElectricityUsage from '../../ElectricityUsage';
 import GasUsage from '../../GasUsage';
 import ElectricityUsageMonth from '../../ElectricityUsageMonth';
+import GasUsageMonth from '../../GasUsageMonth';
 
 function Dashboard() {
 	return (
@@ -27,6 +28,9 @@ function Dashboard() {
 				</Widget>
 				<Widget title="Electrical usage by Month"  name="electrical-usage-by-month">
 					<ElectricityUsageMonth />
+				</Widget>
+				<Widget title="Gas usage by Month"  name="gas-usage-by-month">
+					<GasUsageMonth />
 				</Widget>
 			</WidgetGrid>
 		</Default>
