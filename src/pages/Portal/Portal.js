@@ -15,7 +15,7 @@ import ElectricityUsageMonth from '../../ElectricityUsageMonth';
 function Portal() {
 	return (
 		<LoggedOut>
-			<h1 style={{ 'text-align': 'center' }}>Home Care</h1>
+			<h1 style={{ 'textAlign': 'center' }}>Home Care</h1>
 			<WidgetGrid>
 				<Widget title="Current Electricity Usage" name="current-electricity-usage">
 					<CurrentUsage />
