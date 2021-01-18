@@ -10,14 +10,18 @@
 	margin: 0;
 }
 
-.profile-navigation-container ul li a {
+.profile-navigation-container ul li a,
+.profile-navigation-container ul li button {
 	display: block;
 	padding: 1em 1.5em;
 	color: white;
 	text-decoration: none;
+	background-color: transparent;
 	transition: background-color .1s;
+	border: none;
 }
 
+.profile-navigation-container ul li button:hover,
 .profile-navigation-container ul li a:hover {
 	background-color: rgba(0, 0, 0, 0.2);
 }
