@@ -24,6 +24,7 @@ const EVENTS = gql`
 function EventList() {
 	const [events, setEvents] = useState([]);
 	const { data } = useQuery(EVENTS, {
+		fetchPolicy: 'cache-and-network',
 		variables: {
 			pageSize: 24
 		}

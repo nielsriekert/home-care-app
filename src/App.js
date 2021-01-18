@@ -50,7 +50,7 @@ function App() {
 					<Route path="/login">
 						<Login />
 					</Route>
-					<PrivateRoute redirectComponents={<Portal test="test" />} exact path="/">
+					<PrivateRoute redirectComponents={<Portal />} exact path="/">
 						<Dashboard />
 					</PrivateRoute>
 					<PrivateRoute path="/profile">

@@ -1,12 +1,12 @@
 import './login-form.css';
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import {
 	Redirect
 } from 'react-router-dom';
 
-import { useMutation, gql, makeVar } from '@apollo/client';
+import { useMutation, gql } from '@apollo/client';
 
-import Cookies from 'cookies.js';
+import useCookie from '../../hooks/useCookie';
 
 import InputField from '../InputField/InputField';
 import InputFieldEmail from '../InputFieldEmail/InputFieldEmail';
@@ -31,7 +31,7 @@ const getFieldValueByName = (fields, name) => {
 };
 
 function LoginForm() {
-	const userVar = makeVar(null);
+	const [accessToken, setCookie] = useCookie('authorization-token', null);
 	const [fields, setFields] = useState([
 		{
 			type: 'email',
@@ -57,7 +57,7 @@ function LoginForm() {
 		})));
 	}, [fields]);
 
-	const [login, { data }] = useMutation(LOGIN);
+	const [login, { data, client } ] = useMutation(LOGIN);
 
 	const onSubmit = (event) => {
 		event.preventDefault();
@@ -79,13 +79,17 @@ function LoginForm() {
 		});
 	};
 
-	if (data && data.login.token) {
-		userVar(data.login.user);
-		Cookies.set('authorization-token', data.login.token, { expires: 365 });
+	useEffect(() => {
+		if (data && data.login.token) {
+			setCookie(data.login.token, 720);
+		}
+	}, [data, client, setCookie]);
+
+	if (accessToken) {
 		return (
 			<Redirect to="/" />
 		);
-	}
+	};
 
 	return (
 		<form noValidate onSubmit={onSubmit}>
