@@ -10,12 +10,14 @@
 	}
 }
 
-.widget-electrical-usage-by-month {
+.widget-electrical-usage-by-month,
+.widget-gas-usage-by-month {
 	grid-column:  1/-1;
 }
 
 @media(min-width: 850px) {
-	.widget-electrical-usage-by-month {
+	.widget-electrical-usage-by-month,
+	.widget-gas-usage-by-month {
 		grid-column: span 3;
 	}
 }

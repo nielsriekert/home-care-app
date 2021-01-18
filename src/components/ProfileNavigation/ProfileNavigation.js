@@ -17,7 +17,6 @@ function Navigation() {
 	};
 
 	useEffect(() => {
-		console.log(accessToken);
 		if (!accessToken) {
 			client.clearStore().then(() => {
 				// TODO: not the best solution...
