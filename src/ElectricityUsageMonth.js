@@ -86,6 +86,10 @@ function ElectricityUsageMonth() {
 		{
 			data: data.consumptionPreviousMonth,
 			monthName: startPreviousMonth.toLocaleString('default', { month: 'long' })
+		},
+		{
+			data: data.consumptionTwoMonthsAgo,
+			monthName: startTwoMonthsAgo.toLocaleString('default', { month: 'long' })
 		}
 	].filter(monthData => monthData.data);
 
