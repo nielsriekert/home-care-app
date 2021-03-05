@@ -26,3 +26,8 @@
 	font-size: 1.5rem;
 	color: rgba(200, 215, 255, 1);
 }
+
+.current-water-consumption {
+	font-size: 1.5rem;
+	color: rgba(0, 215, 255, 1);
+}

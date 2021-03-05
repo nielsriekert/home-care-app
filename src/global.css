@@ -33,7 +33,13 @@ code {
 }
 
 :root {
-	--color-primary: rgb(22, 129, 73);
+	--color-primary: rgb(87, 127, 103);
+	--color-secondary: rgb(241, 203, 182);
+	--color-tertiary: rgb(252, 247, 244);
+	--color-quaternary: rgb(24, 44, 43);
+	--color-quinary: rgb(199, 186, 169);
+	--color-senary: rgb(239, 230, 224);
+	--color-septenary: rgb(248, 236, 224);
 	--content-padding-horizontal: 1rem;
 }
 
