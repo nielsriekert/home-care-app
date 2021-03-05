@@ -8,6 +8,7 @@ import WidgetGrid from '../../organisms/WidgetGrid/WidgetGrid';
 import Widget from '../../components/Widget/Widget';
 
 import CurrentUsage from '../../CurrentUsage';
+import CurrentWaterConsumption from '../../CurrentWaterConsumption';
 import ElectricityUsage from '../../ElectricityUsage';
 import GasUsage from '../../GasUsage';
 import ElectricityUsageMonth from '../../ElectricityUsageMonth';
@@ -19,6 +20,9 @@ function Dashboard() {
 			<WidgetGrid>
 				<Widget title="Current Electricity Usage" name="current-electricity-usage">
 					<CurrentUsage />
+				</Widget>
+				<Widget title="Current Water Consumption" name="current-water-consumption">
+					<CurrentWaterConsumption />
 				</Widget>
 				<Widget title="Electric Usage" name="electricity-usage">
 					<ElectricityUsage resolution="FIVE_MINUTES" hoursInThePast={8} />
