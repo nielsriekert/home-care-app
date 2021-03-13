@@ -1,10 +1,10 @@
-.widget-electricity-usage,
+.widget-electricity-usage-chart,
 .widget-gas-usage {
 	grid-column: 1/-1;
 }
 
 @media(min-width: 1400px) {
-	.widget-electricity-usage,
+	.widget-electricity-usage-chart,
 	.widget-gas-usage {
 		grid-column: span 5;
 	}
