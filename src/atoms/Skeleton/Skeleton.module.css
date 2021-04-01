@@ -1,0 +1,22 @@
+.container {
+	display: inline-block;
+	height: 2rem;
+	width: 6em;
+	animation: skeleton;
+	animation-duration: .5s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+	background-color: white;
+	border-radius: 4px;
+}
+
+@keyframes skeleton {
+	from {
+		opacity: .1;
+	}
+
+	to {
+		opacity: .05;
+	}
+}

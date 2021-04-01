@@ -1,0 +1,34 @@
+.container {
+	padding: 20px;
+	border-radius: 6px;
+	background-color: rgba(0, 0, 0, .1);
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 1.5em;
+	width: 1.5em;
+}
+
+.icon > svg {
+	height: 100%;
+	width: 100%;
+}
+
+.header > h3 {
+	margin: 0;
+	font-size: 1.25rem;
+	color: var(--color-secondary-shade-3);
+}
+
+.body:not(:first-child) {
+	margin-top: 20px;
+}

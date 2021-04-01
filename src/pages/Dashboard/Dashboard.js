@@ -7,6 +7,10 @@ import WidgetGrid from '../../organisms/WidgetGrid/WidgetGrid';
 
 import Widget from '../../components/Widget/Widget';
 
+import BoltIcon from '../../atoms/BoltIcon/BoltIcon';
+import WaterIcon from '../../atoms/WaterIcon/WaterIcon';
+import FireIcon from '../../atoms/FireIcon/FireIcon';
+
 import CurrentUsage from '../../CurrentUsage';
 import ElectricityUsage from '../../molecules/ElectricityUsage/ElectricityUsage';
 import WaterUsage from '../../molecules/WaterUsage/WaterUsage';
@@ -60,22 +64,22 @@ function Dashboard() {
 	return (
 		<Default>
 			<WidgetGrid>
-				<Widget title="Current Electricity Usage" name="current-electricity-usage">
+				<Widget title="Current" name="current-electricity-usage" icon={<BoltIcon />}>
 					<CurrentUsage />
 				</Widget>
-				<Widget title="Today" name="electricity-usage">
+				<Widget title="Today" name="electricity-usage" icon={<BoltIcon />}>
 					<ElectricityUsage />
 				</Widget>
-				<Widget title="Today" name="water-usage">
+				<Widget title="Today" name="water-usage" icon={<WaterIcon />}>
 					<WaterUsage />
 				</Widget>
-				<Widget title="Electric Usage" name="electricity-usage-chart">
+				<Widget title="Last 8 hours" name="electricity-usage-chart" icon={<BoltIcon />}>
 					<ElectricityUsageChart resolution="FIVE_MINUTES" hoursInThePast={8} />
 				</Widget>
-				<Widget title="Gas Usage" name="gas-usage">
+				<Widget title="Last 4 days" name="gas-usage" icon={<FireIcon />}>
 					<GasUsage />
 				</Widget>
-				<Widget title="Water usage today" name="cumulative-water-usage-chart">
+				<Widget title="Today" name="cumulative-water-usage-chart" icon={<WaterIcon />}>
 					<ul style={{ display: 'flex', gap: '10px', listStyleType: 'none', padding: '0' }}>
 						<li><Button onClick={setMinus2} type="primary">-2</Button></li>
 						<li><Button onClick={setYesterday} type="primary">Yesterday</Button></li>
@@ -83,10 +87,10 @@ function Dashboard() {
 					</ul>
 					<CumulativeWaterUsageChart {...waterChartDay} />
 				</Widget>
-				<Widget title="Electrical usage by Month"  name="electrical-usage-by-month">
+				<Widget title="Month" name="electrical-usage-by-month" icon={<BoltIcon />}>
 					<ElectricityUsageMonth />
 				</Widget>
-				<Widget title="Gas usage by Month"  name="gas-usage-by-month">
+				<Widget title="Month" name="gas-usage-by-month" icon={<FireIcon />}>
 					<GasUsageMonth />
 				</Widget>
 			</WidgetGrid>
