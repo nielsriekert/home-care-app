@@ -37,7 +37,7 @@ function Portal() {
 					<GasUsage />
 				</Widget>
 				<Widget title="Water usage today" name="cumulative-water-usage-chart">
-					<CumulativeWaterUsageChart />
+					<CumulativeWaterUsageChart/>
 				</Widget>
 				<Widget title="Electrical usage by Month"  name="electrical-usage-by-month">
 					<ElectricityUsageMonth />

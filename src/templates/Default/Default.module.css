@@ -1,5 +1,5 @@
 .default {
-	background-color: #282c34;
+	background-color: var(--color-secondary-shade-1);
 }
 
 .pageContainer {

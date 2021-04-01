@@ -18,35 +18,48 @@
 			url('./fonts/andika-new-basic-v1-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
-
-body {
-	margin: 0;
-	font-family: 'Andika New Basic', sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	background-color: #282c34;
-}
-
-code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-		monospace;
-}
-
 :root {
-	--color-primary: rgb(87, 127, 103);
-	--color-secondary: rgb(241, 203, 182);
-	--color-tertiary: rgb(252, 247, 244);
-	--color-quaternary: rgb(24, 44, 43);
-	--color-quinary: rgb(199, 186, 169);
-	--color-senary: rgb(239, 230, 224);
-	--color-septenary: rgb(248, 236, 224);
+	--color-primary-shade-1-hs: 222, 100%;
+	--color-primary-shade-1: hsl(var(--color-primary-shade-1-hs), 56%);
+	--color-primary-shade-2-hs: 21, 68%;
+	--color-primary-shade-2: hsl(var(--color-primary-shade-2-hs), 83%);
+
+	--color-secondary-shade-1-hsl: 221, 10%;
+	--color-secondary-shade-1: hsl(var(--color-secondary-shade-1-hsl), 18%);
+	--color-secondary-shade-2-hsl: 224, 13%;
+	--color-secondary-shade-2: hsl(var(--color-secondary-shade-2-hsl), 68%);
+	--color-secondary-shade-3-hsl: 213, 17%;
+	--color-secondary-shade-3: hsl(var(--color-secondary-shade-3-hsl), 88%);
+
 	--content-padding-horizontal: 1rem;
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		/* --color-secondary-shade-1-hsl: 221, 30%; */
+		--color-secondary-shade-1: hsl(var(--color-secondary-shade-1-hsl), 84%);
+	}
 }
 
 @media(min-width: 34em) {
 	:root {
 		--content-padding-horizontal: 2rem;
 	}
+}
+
+body {
+	margin: 0;
+	font-family: 'Andika New Basic', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	/* background-color: #282c34; */
+	background-color: var(--color-secondary-shade-1);
+}
+
+code {
+	color: hsl(222, 100%, 56%);
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+		monospace;
 }
 
 * {

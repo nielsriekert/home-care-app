@@ -40,7 +40,7 @@ export default function WaterUsage({ start, end }) {
 	if (error) return <p>Error :(</p>;
 	return (
 		<div className={styles.container}>
-			{data.waterConsumption.received} l
+			{data.waterConsumption ? data.waterConsumption.received : 0} l
 		</div>
 	);
 }

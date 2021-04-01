@@ -71,7 +71,9 @@ export default function CumulativeWaterUsageChart({ start, end }) {
 					xAxis: {
 						type: 'datetime',
 						lineColor: 'rgba(255, 255, 255, .2)',
-						tickColor: 'rgba(255, 255, 255, .2)'
+						tickColor: 'rgba(255, 255, 255, .2)',
+						min: (start || getStartOfToday()) * 1000,
+						max: (end || getEndOfToday()) * 1000
 					},
 					yAxis: {
 						title: {
