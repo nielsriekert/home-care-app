@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from './WaterUsage.module.css';
 
+import Skeleton from '../../atoms/Skeleton/Skeleton';
+
 import { useQuery, gql } from '@apollo/client';
 
 const WATER_CONSUMPTION = gql`
@@ -36,11 +38,10 @@ export default function WaterUsage({ start, end }) {
 		}
 	});
 
-	if (loading) return <p>Loading...</p>;
 	if (error) return <p>Error :(</p>;
 	return (
 		<div className={styles.container}>
-			{data.waterConsumption ? data.waterConsumption.received : 0} l
+			{!loading ? data.waterConsumption ? data.waterConsumption.received + ' l' : 0 + ' l' : <Skeleton width="3em" /> }
 		</div>
 	);
 }

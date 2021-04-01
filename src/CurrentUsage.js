@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Skeleton from './atoms/Skeleton/Skeleton';
+
 import { useQuery, gql } from '@apollo/client';
 
 const CURRENT_ELECTRIC_USAGE = gql`
@@ -16,11 +18,10 @@ function CurrentUsage() {
 		fetchPolicy: 'cache-and-network',
 	});
 
-	if (loading) return <p>Loading...</p>;
 	if (error) return <p>Error :(</p>;
 	return (
 		<div className="current-usage">
-			{data.currentElectricityUsage.received} W
+			{!loading ? data.currentElectricityUsage ? data.currentElectricityUsage.received + ' W' : 0 + ' W' : <Skeleton width="3em" /> }
 		</div>
 	);
 }

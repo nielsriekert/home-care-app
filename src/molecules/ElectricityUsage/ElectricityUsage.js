@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from './ElectricityUsage.module.css';
 
+import Skeleton from '../../atoms/Skeleton/Skeleton';
+
 import { useQuery, gql } from '@apollo/client';
 
 const ELECTRICITY_CONSUMPTION = gql`
@@ -36,11 +38,10 @@ export default function WaterUsage({ start, end }) {
 		}
 	});
 
-	if (loading) return <p>Loading...</p>;
 	if (error) return <p>Error :(</p>;
 	return (
 		<div className={styles.container}>
-			{data.electricityConsumption.received} kWh
+			{!loading ? data.electricityConsumption ? data.electricityConsumption.received + ' kWh' : 0 + ' kWh' : <Skeleton width="3em" /> }
 		</div>
 	);
 }
