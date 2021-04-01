@@ -10,7 +10,7 @@
 	height: 60px;
 	padding-left: var(--content-padding-horizontal);
 	padding-right: var(--content-padding-horizontal);
-	background-color: rgb(40, 44, 52);
+	background-color: var(--color-secondary-shade-1);
 }
 
 .appName {

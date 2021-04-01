@@ -7,5 +7,5 @@
 .widget-title {
 	margin-top: 0;
 	font-size: 1.25rem;
-	color: white;
+	color: var(--color-secondary-shade-3);
 }
