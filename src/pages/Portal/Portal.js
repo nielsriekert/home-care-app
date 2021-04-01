@@ -8,9 +8,11 @@ import WidgetGrid from '../../organisms/WidgetGrid/WidgetGrid';
 import Widget from '../../components/Widget/Widget';
 
 import CurrentUsage from '../../CurrentUsage';
-import CurrentWaterConsumption from '../../CurrentWaterConsumption';
-import ElectricityUsage from '../../ElectricityUsage';
+import ElectricityUsage from '../../molecules/ElectricityUsage/ElectricityUsage';
+import WaterUsage from '../../molecules/WaterUsage/WaterUsage';
+import ElectricityUsageChart from '../../ElectricityUsage';
 import GasUsage from '../../GasUsage';
+import CumulativeWaterUsageChart from '../../molecules/CumulativeWaterUsageChart/CumulativeWaterUsageChart';
 import ElectricityUsageMonth from '../../ElectricityUsageMonth';
 import GasUsageMonth from '../../GasUsageMonth';
 
@@ -22,14 +24,20 @@ function Portal() {
 				<Widget title="Current Electricity Usage" name="current-electricity-usage">
 					<CurrentUsage />
 				</Widget>
-				<Widget title="Current Water Consumption" name="current-water-consumption">
-					<CurrentWaterConsumption />
+				<Widget title="Today's electricity usage" name="electricity-usage">
+					<ElectricityUsage />
 				</Widget>
-				<Widget title="Electric Usage" name="electricity-usage">
-					<ElectricityUsage resolution="FIVE_MINUTES" hoursInThePast={8} />
+				<Widget title="Today's water usage" name="water-usage">
+					<WaterUsage />
+				</Widget>
+				<Widget title="Electric Usage" name="electricity-usage-chart">
+					<ElectricityUsageChart resolution="FIVE_MINUTES" hoursInThePast={8} />
 				</Widget>
 				<Widget title="Gas Usage" name="gas-usage">
 					<GasUsage />
+				</Widget>
+				<Widget title="Water usage today" name="cumulative-water-usage-chart">
+					<CumulativeWaterUsageChart />
 				</Widget>
 				<Widget title="Electrical usage by Month"  name="electrical-usage-by-month">
 					<ElectricityUsageMonth />
