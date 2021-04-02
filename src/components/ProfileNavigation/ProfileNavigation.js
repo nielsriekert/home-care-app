@@ -1,4 +1,4 @@
-import './profile-navigation.css';
+import styles from './ProfileNavigation.module.css';
 import React, { useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
@@ -26,7 +26,7 @@ function Navigation() {
 	}, [accessToken, client, history]);
 
 	return (
-		<nav className="profile-navigation-container">
+		<nav className={styles.container}>
 			<ul>
 				<li><Link to="/profile">Profile</Link></li>
 				<li><Link to="/minder-gas-nl">MinderGas.nl</Link></li>

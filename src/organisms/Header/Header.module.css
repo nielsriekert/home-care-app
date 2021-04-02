@@ -10,7 +10,7 @@
 	height: 60px;
 	padding-left: var(--content-padding-horizontal);
 	padding-right: var(--content-padding-horizontal);
-	background-color: var(--color-secondary-shade-1);
+	background-color: var(--color-secondary-shade-2);
 }
 
 .appName {
@@ -19,12 +19,18 @@
 	padding: 10px 0;
 	font-size: 2em;
 	font-weight: 700;
-	color: white;
+	color: var(--color-secondary-shade-4);
 	text-decoration: none;
 }
 
 .appName:hover {
-	background-color: rgb(39, 43, 49);
+	color: hsl(var(--color-secondary-shade-4-h), var(--color-secondary-shade-4-s), 100%);
+}
+
+@media (prefers-color-scheme: light) {
+	.appName:hover {
+		color: hsl(var(--color-secondary-shade-4-h), var(--color-secondary-shade-4-s), 0%);
+	}
 }
 
 .container .userMenu {

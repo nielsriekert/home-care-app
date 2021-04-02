@@ -44,14 +44,14 @@ function ElectricityUsage({ resolution, hoursInThePast }) {
 					},
 					xAxis: {
 						type: 'datetime',
-						lineColor: 'rgba(255, 255, 255, .2)',
-						tickColor: 'rgba(255, 255, 255, .2)'
+						lineColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)',
+						tickColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)'
 					},
 					yAxis: {
 						title: {
 							text: 'Wh'
 						},
-						gridLineColor: 'rgba(255, 255, 255, .1)',
+						gridLineColor: 'var(--color-secondary-shade-2)',
 					},
 					time: {
 						useUTC: false
@@ -60,7 +60,7 @@ function ElectricityUsage({ resolution, hoursInThePast }) {
 						name: 'Wh',
 						showInLegend: false,
 						data: data.electricityUsage.slice().reverse().map(usage => [usage.period.end * 1000, Math.round((usage.received + Number.EPSILON) * 100) / 100]),
-						color: 'rgba(200, 215, 255, .5)'
+						color: 'hsla(var(--color-electricity-h), var(--color-electricity-s), var(--color-electricity-l), .6)'
 					}]
 				}}
 			/>

@@ -1,8 +1,8 @@
 .default {
-	background-color: var(--color-secondary-shade-1);
+	background-color: var(--color-secondary-shade-2);
 }
 
 .pageContainer {
-	color: white;
+	color: var(--color-secondary-shade-4);
 	padding: 20px var(--content-padding-horizontal);
 }

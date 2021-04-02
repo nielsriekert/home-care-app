@@ -2,6 +2,7 @@
 	padding: 20px;
 	border-radius: 6px;
 	background-color: rgba(0, 0, 0, .1);
+	background-color: hsla(var(--color-secondary-shade-1-h), var(--color-secondary-shade-1-s), var(--color-secondary-shade-1-l), .2);
 }
 
 .header {
@@ -26,7 +27,7 @@
 .header > h3 {
 	margin: 0;
 	font-size: 1.25rem;
-	color: var(--color-secondary-shade-3);
+	color: var(--color-secondary-shade-4);
 }
 
 .body:not(:first-child) {

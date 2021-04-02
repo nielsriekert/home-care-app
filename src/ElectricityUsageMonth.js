@@ -107,14 +107,14 @@ function ElectricityUsageMonth() {
 					},
 					xAxis: {
 						categories: months.slice().reverse().map(monthUsage => monthUsage.monthName),
-						lineColor: 'rgba(255, 255, 255, .2)',
-						tickColor: 'rgba(255, 255, 255, .2)'
+						lineColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)',
+						tickColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)'
 					},
 					yAxis: {
 						title: {
 							text: 'kWh'
 						},
-						gridLineColor: 'rgba(255, 255, 255, .1)',
+						gridLineColor: 'var(--color-secondary-shade-2)',
 					},
 					time: {
 						useUTC: false
@@ -124,7 +124,7 @@ function ElectricityUsageMonth() {
 						type: 'column',
 						showInLegend: false,
 						data: months.slice().reverse().map(monthUsage => [monthUsage.monthName, Math.round((monthUsage.data.received + Number.EPSILON) * 100) / 100]),
-						color: 'rgba(200, 215, 255, .5)'
+						color: 'hsla(var(--color-electricity-h), var(--color-electricity-s), var(--color-electricity-l), .6)'
 					}]
 				}}
 			/>
