@@ -1,4 +1,4 @@
 .pageContainer {
-	color: white;
+	color: var(--color-secondary-shade-4);
 	padding: 20px var(--content-padding-horizontal);
 }

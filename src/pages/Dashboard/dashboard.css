@@ -26,10 +26,10 @@
 
 .current-usage {
 	font-size: 1.5rem;
-	color: rgba(200, 215, 255, 1);
+	color: var(--color-electricity);
 }
 
 .current-water-consumption {
 	font-size: 1.5rem;
-	color: rgba(0, 215, 255, 1);
+	color: var(--color-water);
 }

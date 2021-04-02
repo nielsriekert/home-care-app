@@ -5,7 +5,7 @@ import { useQuery, gql } from '@apollo/client';
 
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import HighchartsAnnotations from 'highcharts/modules/annotations'
+import HighchartsAnnotations from 'highcharts/modules/annotations';
 
 HighchartsAnnotations(Highcharts);
 
@@ -70,8 +70,8 @@ export default function CumulativeWaterUsageChart({ start, end }) {
 					}],
 					xAxis: {
 						type: 'datetime',
-						lineColor: 'rgba(255, 255, 255, .2)',
-						tickColor: 'rgba(255, 255, 255, .2)',
+						lineColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)',
+						tickColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)',
 						min: (start || getStartOfToday()) * 1000,
 						max: (end || getEndOfToday()) * 1000
 					},
@@ -79,7 +79,7 @@ export default function CumulativeWaterUsageChart({ start, end }) {
 						title: {
 							text: 'liter'
 						},
-						gridLineColor: 'rgba(255, 255, 255, .1)',
+						gridLineColor: 'var(--color-secondary-shade-2)',
 					},
 					time: {
 						useUTC: false
@@ -88,7 +88,7 @@ export default function CumulativeWaterUsageChart({ start, end }) {
 						name: 'liter',
 						showInLegend: false,
 						data: data.cumulativeWaterUsage.map(usage => [usage.readingAt * 1000, usage.reading]),
-						color: 'rgba(0, 215, 255, .5)'
+						color: 'hsla(var(--color-water-h), var(--color-water-s), var(--color-water-l), .6)'
 					}]
 				}}
 			/>

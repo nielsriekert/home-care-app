@@ -24,20 +24,54 @@
 	--color-primary-shade-2-hs: 21, 68%;
 	--color-primary-shade-2: hsl(var(--color-primary-shade-2-hs), 83%);
 
-	--color-secondary-shade-1-hsl: 221, 10%;
-	--color-secondary-shade-1: hsl(var(--color-secondary-shade-1-hsl), 18%);
-	--color-secondary-shade-2-hsl: 224, 13%;
-	--color-secondary-shade-2: hsl(var(--color-secondary-shade-2-hsl), 68%);
-	--color-secondary-shade-3-hsl: 213, 17%;
-	--color-secondary-shade-3: hsl(var(--color-secondary-shade-3-hsl), 88%);
+	--color-secondary-shade-1-h: 221;
+	--color-secondary-shade-1-s: 10%;
+	--color-secondary-shade-1-l: 6%;
+	--color-secondary-shade-1: hsl(var(--color-secondary-shade-1-h), var(--color-secondary-shade-1-s), var(--color-secondary-shade-1-l));
+
+	--color-secondary-shade-2-h: 221;
+	--color-secondary-shade-2-s: 10%;
+	--color-secondary-shade-2-l: 18%;
+	--color-secondary-shade-2: hsl(var(--color-secondary-shade-2-h), var(--color-secondary-shade-2-s), var(--color-secondary-shade-2-l));
+
+	--color-secondary-shade-3-h: 224;
+	--color-secondary-shade-3-s: 13%;
+	--color-secondary-shade-3-l: 68%;
+	--color-secondary-shade-3: hsl(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l));
+
+	--color-secondary-shade-4-h: 213;
+	--color-secondary-shade-4-s: 17%;
+	--color-secondary-shade-4-l: 88%;
+	--color-secondary-shade-4: hsl(var(--color-secondary-shade-4-h), var(--color-secondary-shade-4-s), var(--color-secondary-shade-4-l));
+
+	--color-electricity-h: 224;
+	--color-electricity-s: 100%;
+	--color-electricity-l: 89%;
+	--color-electricity: hsl(var(--color-electricity-h), var(--color-electricity-s), var(--color-electricity-l));
+
+	--color-gas-h: 38;
+	--color-gas-s: 100%;
+	--color-gas-l: 89%;
+	--color-gas: hsl(var(--color-gas-h), var(--color-gas-s), var(--color-gas-l));
+
+	--color-water-h: 189;
+	--color-water-s: 100%;
+	--color-water-l: 50%;
+	--color-water: hsl(var(--color-water-h), var(--color-water-s), var(--color-water-l));
 
 	--content-padding-horizontal: 1rem;
 }
 
 @media (prefers-color-scheme: light) {
 	:root {
-		/* --color-secondary-shade-1-hsl: 221, 30%; */
-		--color-secondary-shade-1: hsl(var(--color-secondary-shade-1-hsl), 84%);
+		--color-secondary-shade-1-l: 97%;
+		--color-secondary-shade-2-l: 82%;
+		--color-secondary-shade-3-l: 22%;
+		--color-secondary-shade-4-l: 12%;
+
+		--color-electricity-l: 32%;
+		--color-gas-l: 35%;
+		--color-water-l: 40%;
 	}
 }
 
@@ -52,8 +86,7 @@ body {
 	font-family: 'Andika New Basic', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	/* background-color: #282c34; */
-	background-color: var(--color-secondary-shade-1);
+	background-color: var(--color-secondary-shade-2);
 }
 
 code {
