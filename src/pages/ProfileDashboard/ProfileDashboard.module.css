@@ -1,5 +1,5 @@
 .widget-electricity-usage-chart,
-.widget-gas-usage,
+.widget-gas-usage-chart,
 .widget-electrical-usage-by-week,
 .widget-electrical-usage-by-month,
 .widget-gas-usage-by-month,
@@ -9,7 +9,7 @@
 
 @media(min-width: 1400px) {
 	.widget-electricity-usage-chart,
-	.widget-gas-usage {
+	.widget-gas-usage-chart {
 		grid-column: span 5;
 	}
 }

@@ -9,7 +9,6 @@ const ELECTRIC_USAGE = gql`
 	query electricityUsage($resolution: TimeSpan $hoursInThePast: Float) {
 		electricityUsage(resolution: $resolution hoursInThePast: $hoursInThePast) {
 			received(unit:WATT_HOUR)
-			received(unit:WATT_HOUR)
 			period {
 				start
 				end
