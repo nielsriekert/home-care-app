@@ -15,7 +15,7 @@ import CurrentUsage from '../../CurrentUsage';
 import ElectricityUsage from '../../molecules/ElectricityUsage/ElectricityUsage';
 import WaterUsage from '../../molecules/WaterUsage/WaterUsage';
 import ElectricityUsageChart from '../../ElectricityUsage';
-import GasUsage from '../../GasUsage';
+import GasUsageChart from '../../GasUsage';
 import CumulativeWaterUsageChart from '../../molecules/CumulativeWaterUsageChart/CumulativeWaterUsageChart';
 import ElectricityUsageMonth from '../../ElectricityUsageMonth';
 import GasUsageMonth from '../../GasUsageMonth';
@@ -37,8 +37,8 @@ function Portal() {
 				<Widget title="Last 8 hours" name="electricity-usage-chart" icon={<BoltIcon />}>
 					<ElectricityUsageChart resolution="FIVE_MINUTES" hoursInThePast={8} />
 				</Widget>
-				<Widget title="Last 4 days" name="gas-usage" icon={<FireIcon />}>
-					<GasUsage />
+				<Widget title="Last 4 days" name="gas-usage-chart" icon={<FireIcon />}>
+					<GasUsageChart />
 				</Widget>
 				<Widget title="Today" name="cumulative-water-usage-chart" icon={<WaterIcon />}>
 					<CumulativeWaterUsageChart/>

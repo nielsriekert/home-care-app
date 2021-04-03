@@ -1,13 +1,13 @@
 .widget-electricity-usage-chart,
 .widget-cumulative-water-usage-chart,
-.widget-gas-usage {
+.widget-gas-usage-chart {
 	grid-column: 1/-1;
 }
 
 @media(min-width: 1400px) {
 	.widget-electricity-usage-chart,
 	.widget-cumulative-water-usage-chart,
-	.widget-gas-usage {
+	.widget-gas-usage-chart {
 		grid-column: span 5;
 	}
 }
