@@ -1,4 +1,4 @@
-import './login-form.css';
+import styles from './LoginForm.module.css';
 import React, { useState, useCallback, useEffect } from 'react';
 import {
 	Redirect
@@ -8,8 +8,8 @@ import { useMutation, gql } from '@apollo/client';
 
 import useCookie from '../../hooks/useCookie';
 
-import InputField from '../InputField/InputField';
-import InputFieldEmail from '../InputFieldEmail/InputFieldEmail';
+import InputField from '../../molecules/InputField/InputField';
+
 import Message from '../../atoms/Message/Message';
 import Button from '../../atoms/Button/Button';
 
@@ -38,7 +38,7 @@ function LoginForm() {
 			label: 'E-mail',
 			name: 'email',
 			value: '',
-			component: InputFieldEmail
+			component: InputField
 		},
 		{
 			type: 'password',
@@ -100,7 +100,7 @@ function LoginForm() {
 					onChange={handleInputChange}
 				/>
 			))}
-			<div className="form-footer-container">
+			<div className={styles.footer}>
 				{error ?
 					<Message type="error" ><p>{error.message}</p></Message> : ''}
 				<Button type="primary">Send</Button>

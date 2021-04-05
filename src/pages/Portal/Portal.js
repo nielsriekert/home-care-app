@@ -1,11 +1,15 @@
-import './portal.css';
+import styles from './Portal.module.css';
 import React from 'react';
+
+import { Link } from 'react-router-dom';
 
 import LoggedOut from '../../templates/LoggedOut/LoggedOut';
 
+import Button from '../../atoms/Button/Button';
+
 import WidgetGrid from '../../organisms/WidgetGrid/WidgetGrid';
 
-import Widget from '../../components/Widget/Widget';
+import Widget from '../../molecules/Widget/Widget';
 
 import BoltIcon from '../../atoms/BoltIcon/BoltIcon';
 import WaterIcon from '../../atoms/WaterIcon/WaterIcon';
@@ -13,17 +17,19 @@ import FireIcon from '../../atoms/FireIcon/FireIcon';
 
 import CurrentUsage from '../../CurrentUsage';
 import ElectricityUsage from '../../molecules/ElectricityUsage/ElectricityUsage';
+import GasUsage from '../../molecules/GasUsage/GasUsage';
 import WaterUsage from '../../molecules/WaterUsage/WaterUsage';
-import ElectricityUsageChart from '../../ElectricityUsage';
-import GasUsageChart from '../../GasUsage';
-import CumulativeWaterUsageChart from '../../molecules/CumulativeWaterUsageChart/CumulativeWaterUsageChart';
+
 import ElectricityUsageMonth from '../../ElectricityUsageMonth';
 import GasUsageMonth from '../../GasUsageMonth';
 
-function Portal() {
+export default function Portal() {
 	return (
 		<LoggedOut>
 			<h1 style={{ textAlign: 'center' }}>Home Care</h1>
+			<div className={styles.loginButtonContainer}>
+				<Link to="/login"><Button type="primary">Login</Button></Link>
+			</div>
 			<WidgetGrid>
 				<Widget title="Current" name="current-electricity-usage" icon={<BoltIcon />}>
 					<CurrentUsage />
@@ -31,17 +37,11 @@ function Portal() {
 				<Widget title="Today" name="electricity-usage" icon={<BoltIcon />}>
 					<ElectricityUsage />
 				</Widget>
+				<Widget title="Today" name="gas-usage" icon={<FireIcon />}>
+					<GasUsage />
+				</Widget>
 				<Widget title="Today" name="water-usage" icon={<WaterIcon />}>
 					<WaterUsage />
-				</Widget>
-				<Widget title="Last 8 hours" name="electricity-usage-chart" icon={<BoltIcon />}>
-					<ElectricityUsageChart resolution="FIVE_MINUTES" hoursInThePast={8} />
-				</Widget>
-				<Widget title="Last 4 days" name="gas-usage-chart" icon={<FireIcon />}>
-					<GasUsageChart />
-				</Widget>
-				<Widget title="Today" name="cumulative-water-usage-chart" icon={<WaterIcon />}>
-					<CumulativeWaterUsageChart/>
 				</Widget>
 				<Widget title="Month" name="electrical-usage-by-month" icon={<BoltIcon />}>
 					<ElectricityUsageMonth />
@@ -53,5 +53,3 @@ function Portal() {
 		</LoggedOut>
 	);
 }
-
-export default Portal;
