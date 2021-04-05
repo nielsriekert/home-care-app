@@ -13,6 +13,8 @@ const ELECTRIC_USAGE = gql`
 		$endPreviousMonth: Int!
 		$startTwoMonthsAgo: Int!
 		$endTwoMonthsAgo: Int!
+		$startThreeMonthsAgo: Int!
+		$endThreeMonthsAgo: Int!
 	) {
 		consumptionCurrentMonth: gasConsumption(
 			start: $startCurrentMonth
@@ -46,10 +48,21 @@ const ELECTRIC_USAGE = gql`
 				end
 			}
 		}
+
+		consumptionThreeMonthsAgo: gasConsumption(
+			start: $startThreeMonthsAgo
+			end: $endThreeMonthsAgo
+		) {
+			received
+			period {
+				start
+				end
+			}
+		}
 	}
 `;
 
-function GasUsageMonth() {
+export default function GasUsageMonth() {
 	const date = new Date();
 	const startCurrentMonth = new Date(date.getFullYear(), date.getMonth(), 1, 0, 0, 0);
 	const endCurrentMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0, 23, 59, 59);
@@ -60,6 +73,9 @@ function GasUsageMonth() {
 	const startTwoMonthsAgo = new Date(date.getFullYear(), date.getMonth() - 2, 1, 0, 0, 0);
 	const endTwoMonthsAgo = new Date(date.getFullYear(), date.getMonth() - 1, 0, 23, 59, 59);
 
+	const startThreeMonthsAgo = new Date(date.getFullYear(), date.getMonth() - 3, 1, 0, 0, 0);
+	const endThreeMonthsAgo = new Date(date.getFullYear(), date.getMonth() - 2, 0, 23, 59, 59);
+
 	const { loading, error, data } = useQuery(ELECTRIC_USAGE, {
 		variables: {
 			startCurrentMonth: startCurrentMonth.getTime() / 1000,
@@ -68,6 +84,8 @@ function GasUsageMonth() {
 			endPreviousMonth: endPreviousMonth.getTime() / 1000,
 			startTwoMonthsAgo: startTwoMonthsAgo.getTime() / 1000,
 			endTwoMonthsAgo: endTwoMonthsAgo.getTime() / 1000,
+			startThreeMonthsAgo: startThreeMonthsAgo.getTime() / 1000,
+			endThreeMonthsAgo: endThreeMonthsAgo.getTime() / 1000,
 		}
 	});
 
@@ -87,6 +105,10 @@ function GasUsageMonth() {
 		{
 			data: data.consumptionTwoMonthsAgo,
 			monthName: startTwoMonthsAgo.toLocaleString('default', { month: 'long' })
+		},
+		{
+			data: data.consumptionThreeMonthsAgo,
+			monthName: startThreeMonthsAgo.toLocaleString('default', { month: 'long' })
 		}
 	].filter(monthData => monthData.data);
 
@@ -128,5 +150,3 @@ function GasUsageMonth() {
 		</div>
 	);
 }
-
-export default GasUsageMonth;

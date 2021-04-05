@@ -1,38 +1,37 @@
-.page-login-container {
+.container {
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-template-areas: 'content';
 	justify-items: center;
 	align-items: center;
-	min-height: 100vh;
-	background-color: rgb(0, 7, 13);
+	min-height: calc(100vh - (20px * 2));
 }
 
 @media(min-width: 550px) {
-	.page-login-container {
+	.container {
 		grid-template-columns: 1fr 34em;
 		grid-template-areas: 'fill content';
 	}
 }
 
-.page-login-container h1,
-.page-login-container p,
-.page-login-container ul,
-.page-login-container ol,
-.page-login-container table,
-.page-login-container label,
-.page-login-container input {
+.container h1,
+.container p,
+.container ul,
+.container ol,
+.container table,
+.container label,
+.container input {
 	color: white;
 }
 
-.page-login-fill-container {
+.fillContainer {
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: cover;
 }
 
 @media(min-width: 550px) {
-	.page-login-fill-container {
+	.fillContainer {
 		justify-self: stretch;
 		align-self: stretch;
 		background-image:
@@ -42,7 +41,7 @@
 }
 
 @media(max-width: 550px) {
-	.page-login-fill-container {
+	.fillContainer {
 		position: absolute;
 		left: 0;
 		top: 0;
@@ -54,24 +53,24 @@
 	}
 }
 
-.page-login-content-container {
+.contentContainer {
 	grid-area: content;
 	position: relative;
 }
 
 @media(max-width: 550px) {
-	.page-login-content-container {
+	.contentContainer {
 		padding-left: var(--content-padding-horizontal);
 		padding-right: var(--content-padding-horizontal);
 	}
 }
 
 @media(min-width: 550px) {
-	.page-login-content-container {
+	.contentContainer {
 		padding: 5em;
 	}
 }
 
-.page-login-content-container h1 {
+.contentContainer h1 {
 	text-align: center;
 }

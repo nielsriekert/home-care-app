@@ -1,0 +1,11 @@
+.footer {
+	margin-top: 30px;
+}
+
+.footer .button {
+	width: 100%;
+}
+
+.footer .button:not(:first-child) {
+	margin-top: 2em;
+}

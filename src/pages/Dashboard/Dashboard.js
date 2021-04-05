@@ -5,7 +5,7 @@ import Default from '../../templates/Default/Default';
 
 import WidgetGrid from '../../organisms/WidgetGrid/WidgetGrid';
 
-import Widget from '../../components/Widget/Widget';
+import Widget from '../../molecules/Widget/Widget';
 
 import BoltIcon from '../../atoms/BoltIcon/BoltIcon';
 import WaterIcon from '../../atoms/WaterIcon/WaterIcon';

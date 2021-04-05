@@ -1,18 +1,20 @@
-import './login.css';
+import styles from  './Login.module.css';
 import React from 'react';
 
-import LoginForm from '../../components/LoginForm/LoginForm';
+import LoggedOut from '../../templates/LoggedOut/LoggedOut';
 
-function Login() {
+import LoginForm from '../../organisms/LoginForm/LoginForm';
+
+export default function Login() {
 	return (
-		<div className="page-login-container">
-			<div className="page-login-fill-container" />
-			<div className="page-login-content-container">
-				<h1>Hello, Welcome Back!</h1>
-				<LoginForm />
+		<LoggedOut>
+			<div className={styles.container}>
+				<div className={styles.fillContainer} />
+				<div className={styles.contentContainer}>
+					<h1>Hello, Welcome Back!</h1>
+					<LoginForm />
+				</div>
 			</div>
-		</div>
+		</LoggedOut>
 	);
 }
-
-export default Login;

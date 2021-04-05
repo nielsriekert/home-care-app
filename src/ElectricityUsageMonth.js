@@ -13,6 +13,8 @@ const ELECTRIC_USAGE = gql`
 		$endPreviousMonth: Int!
 		$startTwoMonthsAgo: Int!
 		$endTwoMonthsAgo: Int!
+		$startThreeMonthsAgo: Int!
+		$endThreeMonthsAgo: Int!
 	) {
 		consumptionCurrentMonth: electricityConsumption(
 			start: $startCurrentMonth
@@ -49,10 +51,22 @@ const ELECTRIC_USAGE = gql`
 				end
 			}
 		}
+
+		consumptionThreeMonthsAgo: electricityConsumption(
+			start: $startThreeMonthsAgo
+			end: $endThreeMonthsAgo
+		) {
+			received
+			delivered
+			period {
+				start
+				end
+			}
+		}
 	}
 `;
 
-function ElectricityUsageMonth() {
+export default function ElectricityUsageMonth() {
 	const date = new Date();
 	const startCurrentMonth = new Date(date.getFullYear(), date.getMonth(), 1, 0, 0, 0);
 	const endCurrentMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0, 23, 59, 59);
@@ -63,6 +77,9 @@ function ElectricityUsageMonth() {
 	const startTwoMonthsAgo = new Date(date.getFullYear(), date.getMonth() - 2, 1, 0, 0, 0);
 	const endTwoMonthsAgo = new Date(date.getFullYear(), date.getMonth() - 1, 0, 23, 59, 59);
 
+	const startThreeMonthsAgo = new Date(date.getFullYear(), date.getMonth() - 3, 1, 0, 0, 0);
+	const endThreeMonthsAgo = new Date(date.getFullYear(), date.getMonth() - 2, 0, 23, 59, 59);
+
 	const { loading, error, data } = useQuery(ELECTRIC_USAGE, {
 		variables: {
 			startCurrentMonth: startCurrentMonth.getTime() / 1000,
@@ -71,6 +88,8 @@ function ElectricityUsageMonth() {
 			endPreviousMonth: endPreviousMonth.getTime() / 1000,
 			startTwoMonthsAgo: startTwoMonthsAgo.getTime() / 1000,
 			endTwoMonthsAgo: endTwoMonthsAgo.getTime() / 1000,
+			startThreeMonthsAgo: startThreeMonthsAgo.getTime() / 1000,
+			endThreeMonthsAgo: endThreeMonthsAgo.getTime() / 1000,
 		}
 	});
 
@@ -90,6 +109,10 @@ function ElectricityUsageMonth() {
 		{
 			data: data.consumptionTwoMonthsAgo,
 			monthName: startTwoMonthsAgo.toLocaleString('default', { month: 'long' })
+		},
+		{
+			data: data.consumptionThreeMonthsAgo,
+			monthName: startThreeMonthsAgo.toLocaleString('default', { month: 'long' })
 		}
 	].filter(monthData => monthData.data);
 
@@ -131,5 +154,3 @@ function ElectricityUsageMonth() {
 		</div>
 	);
 }
-
-export default ElectricityUsageMonth;

@@ -1,0 +1,15 @@
+.container {
+	padding: .25em 0;
+	line-height: 1.5;
+	border-top: 2px solid rgba(0, 0, 0, .5);
+}
+
+.container.isError {
+	color: red;
+	border-top: 2px solid red;
+}
+
+.container.isValidated {
+	color: green;
+	border-top: 2px solid green;
+}
