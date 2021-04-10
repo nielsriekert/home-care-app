@@ -42,7 +42,7 @@ const client = new ApolloClient({
 	connectToDevTools: process.env.NODE_ENV !== 'production'
 });
 
-function App() {
+export default function App() {
 	return (
 		<ApolloProvider client={client}>
 			 <Router>
@@ -67,5 +67,3 @@ function App() {
 		</ApolloProvider>
 	);
 }
-
-export default App;

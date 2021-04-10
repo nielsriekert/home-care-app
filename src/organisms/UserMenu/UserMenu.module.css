@@ -1,4 +1,4 @@
-.user-avatar-container {
+.container {
 	display: flex;
 	justify-self: center;
 	align-items: center;
@@ -17,12 +17,12 @@
 	border: 1px solid rgba(0, 0, 0, .3);
 }
 
-.user-avatar-container.contains-no-image {
+.container.noImage {
 	display: block;
 	padding: 6px;
 }
 
-.user-avatar-container > img {
+.container > img {
 	width: 100%;
 	height: 100%;
 	object-fit: contain;

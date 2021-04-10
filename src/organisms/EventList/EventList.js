@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 import { useQuery, gql } from '@apollo/client';
 
-import EventCard from '../EventCard/EventCard';
+import EventCard from '../../molecules/EventCard/EventCard';
 import Message from '../../atoms/Message/Message';
 
 const EVENTS = gql`
@@ -21,7 +21,7 @@ const EVENTS = gql`
 	}
 `;
 
-function EventList() {
+export default function EventList() {
 	const [events, setEvents] = useState([]);
 	const { data } = useQuery(EVENTS, {
 		fetchPolicy: 'cache-and-network',
@@ -60,5 +60,3 @@ function EventList() {
 		</div>
 	);
 }
-
-export default EventList;

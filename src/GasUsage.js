@@ -17,7 +17,7 @@ const GAS_USAGE = gql`
 	}
 `;
 
-function GasUsage() {
+export default function GasUsage() {
 	const { loading, error, data } = useQuery(GAS_USAGE, {
 		fetchPolicy: 'cache-and-network',
 		variables: {
@@ -67,5 +67,3 @@ function GasUsage() {
 		</div>
 	);
 }
-
-export default GasUsage;

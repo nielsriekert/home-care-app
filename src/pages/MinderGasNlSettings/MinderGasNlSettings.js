@@ -5,7 +5,7 @@ import Default from '../../templates/Default/Default';
 
 import { useQuery, useMutation, gql } from '@apollo/client';
 
-import ProfileNavigation from '../../components/ProfileNavigation/ProfileNavigation';
+import ProfileNavigation from '../../molecules/ProfileNavigation/ProfileNavigation';
 
 import InputFieldCheckbox from '../../components/InputFieldCheckbox/InputFieldCheckbox';
 import Message from '../../atoms/Message/Message';
