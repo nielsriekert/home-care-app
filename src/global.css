@@ -49,6 +49,11 @@
 	--color-electricity-l: 89%;
 	--color-electricity: hsl(var(--color-electricity-h), var(--color-electricity-s), var(--color-electricity-l));
 
+	--color-electricity-delivered-h: 147;
+	--color-electricity-delivered-s: 100%;
+	--color-electricity-delivered-l: 89%;
+	--color-electricity-delivered: hsl(var(--color-electricity-delivered-h), var(--color-electricity-delivered-s), var(--color-electricity-delivered-l));
+
 	--color-gas-h: 38;
 	--color-gas-s: 100%;
 	--color-gas-l: 89%;

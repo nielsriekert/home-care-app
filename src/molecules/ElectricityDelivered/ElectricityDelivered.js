@@ -1,14 +1,14 @@
 import React from 'react';
-import styles from './ElectricityUsage.module.css';
+import styles from './ElectricityDelivered.module.css';
 
 import Skeleton from '../../atoms/Skeleton/Skeleton';
 
 import { useQuery, gql } from '@apollo/client';
 
-const ELECTRICITY_CONSUMPTION = gql`
-	query electricityConsumption($start: Int! $end: Int!) {
+const ELECTRICITY_DELIVERED = gql`
+	query electricityDelivered($start: Int! $end: Int!) {
 		electricityConsumption(start: $start end: $end) {
-			received
+			delivered
 			period {
 				start
 				end
@@ -29,8 +29,8 @@ const getEndOfToday = () => {
 	return Math.round(today.getTime() / 1000);
 };
 
-export default function ElectricityUsage({ start, end }) {
-	const { loading, error, data } = useQuery(ELECTRICITY_CONSUMPTION, {
+export default function ElectricityDelivered({ start, end }) {
+	const { loading, error, data } = useQuery(ELECTRICITY_DELIVERED, {
 		fetchPolicy: 'cache-and-network',
 		variables: {
 			start: start || getStartOfToday(),
@@ -41,7 +41,7 @@ export default function ElectricityUsage({ start, end }) {
 	if (error) return <p>Error :(</p>;
 	return (
 		<div className={styles.container}>
-			{!loading ? data.electricityConsumption ? data.electricityConsumption.received + ' kWh' : 0 + ' kWh' : <Skeleton width="3em" /> }
+			{!loading ? data.electricityConsumption ? data.electricityConsumption.delivered + ' kWh' : 0 + ' kWh' : <Skeleton width="3em" /> }
 		</div>
 	);
 }
