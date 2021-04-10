@@ -20,3 +20,7 @@
 		opacity: .05;
 	}
 }
+
+.container.circle {
+	border-radius: 300px;
+}

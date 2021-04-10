@@ -17,7 +17,7 @@ const ELECTRIC_USAGE = gql`
 	}
 `;
 
-function ElectricityUsage({ resolution, hoursInThePast }) {
+export default function ElectricityUsage({ resolution, hoursInThePast }) {
 	const { loading, error, data } = useQuery(ELECTRIC_USAGE, {
 		fetchPolicy: 'cache-and-network',
 		variables: {
@@ -66,5 +66,3 @@ function ElectricityUsage({ resolution, hoursInThePast }) {
 		</div>
 	);
 }
-
-export default ElectricityUsage;

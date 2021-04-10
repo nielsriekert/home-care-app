@@ -1,7 +1,7 @@
 import styles from './EventCard.module.css';
 import React from 'react';
 
-function EventCard({ date, type, message }) {
+export default function EventCard({ date, type, message }) {
 	return (
 		<div className={styles.container + ' ' + styles[type]}>
 			<div className={styles.header}>
@@ -13,5 +13,3 @@ function EventCard({ date, type, message }) {
 		</div>
 	);
 }
-
-export default EventCard;

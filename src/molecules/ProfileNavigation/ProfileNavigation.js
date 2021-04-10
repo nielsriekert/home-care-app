@@ -6,7 +6,7 @@ import { useApolloClient } from '@apollo/client';
 
 import useCookie from '../../hooks/useCookie';
 
-function Navigation() {
+export default function Navigation() {
 	const history = useHistory();
 	const [accessToken, setCookie] = useCookie('authorization-token', null);
 	const client = useApolloClient();
@@ -35,5 +35,3 @@ function Navigation() {
 		</nav>
 	);
 }
-
-export default Navigation;

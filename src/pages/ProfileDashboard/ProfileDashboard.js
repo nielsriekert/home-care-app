@@ -3,9 +3,9 @@ import './ProfileDashboard.module.css';
 
 import Default from '../../templates/Default/Default';
 
-import ProfileNavigation from '../../components/ProfileNavigation/ProfileNavigation';
+import ProfileNavigation from '../../molecules/ProfileNavigation/ProfileNavigation';
 
-import EventList from '../../components/EventList/EventList';
+import EventList from '../../organisms/EventList/EventList';
 
 function Dashboard() {
 	return (
