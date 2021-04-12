@@ -1,0 +1,71 @@
+.container > ul {
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+}
+
+@media(min-width: 700px) {
+	.container > ul {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 40px;
+	}
+}
+
+.container a {
+	display: grid;
+	grid-template-areas:
+		'icon title'
+		'icon description';
+	grid-template-columns: min-content 1fr;
+	align-items: center;
+	gap: .25rem 1rem;
+	padding: 20px;
+	color: var(--color-secondary-shade-4);
+	text-decoration: none;
+	transition: background-color .1s;
+	border-radius: 6px;
+}
+
+@media(max-width: 650px) {
+	.container a {
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
+@media(min-width: 650px) {
+	.container a:hover {
+		background-color: hsl(var(--color-secondary-shade-2-h), var(--color-secondary-shade-2-s), calc(var(--color-secondary-shade-2-l) * .85));
+	}
+}
+
+.container .icon {
+	grid-area: icon;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 2.75rem;
+	height: 2.75rem;
+	color: var(--color-secondary-shade-2);
+	border-radius: 2.75rem;
+	background-color: var(--color-secondary-shade-4);
+}
+
+.container .title,
+.container .description {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.container .title {
+	grid-area: title;
+	font-weight: 700;
+}
+
+.container .description {
+	grid-area: description;
+	opacity: .7;
+}

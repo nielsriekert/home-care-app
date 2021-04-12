@@ -6,6 +6,8 @@ import { useQuery, gql } from '@apollo/client';
 import EventCard from '../../molecules/EventCard/EventCard';
 import Message from '../../atoms/Message/Message';
 
+import Skeleton from '../../atoms/Skeleton/Skeleton';
+
 const EVENTS = gql`
 	query events (
 		$after: Int
@@ -23,7 +25,7 @@ const EVENTS = gql`
 
 export default function EventList() {
 	const [events, setEvents] = useState([]);
-	const { data } = useQuery(EVENTS, {
+	const { loading, error, data } = useQuery(EVENTS, {
 		fetchPolicy: 'cache-and-network',
 		variables: {
 			pageSize: 24
@@ -49,14 +51,29 @@ export default function EventList() {
 
 	return (
 		<div className={styles.container}>
-			{events.length > 0 ?
-				<div>
+			{!loading && events.length > 0 ?
+				<ul className={styles.cardsContainer}>
+					{events.map(event => (
+						<li><EventCard key={event.timeStamp} {...event} /></li>
+					))}
+				</ul>
+				: loading ?
 					<ul className={styles.cardsContainer}>
-						{events.map(event => (
-							<EventCard key={event.timeStamp} {...event} />
-						))}
+						<li>
+							<Skeleton height="26px" width="100%" />
+							<Skeleton height="32px" width="100%" />
+						</li>
+						<li>
+							<Skeleton height="26px" width="100%" />
+							<Skeleton height="32px" width="100%" />
+						</li>
+						<li>
+							<Skeleton height="26px" width="100%" />
+							<Skeleton height="32px" width="100%" />
+						</li>
 					</ul>
-				</div> : <Message>No events found</Message>}
+					: error ?
+						<Message type="error">{error}</Message>	: <Message>No events found</Message>}
 		</div>
 	);
 }

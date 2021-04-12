@@ -37,7 +37,7 @@ const getEndOfToday = () => {
 	return Math.round(today.getTime() / 1000);
 };
 
-function Dashboard() {
+export default function Dashboard() {
 	const [waterChartDay, setWaterChartDay] = useState({
 		start: getStartOfToday(),
 		end: getEndOfToday()
@@ -109,5 +109,3 @@ function Dashboard() {
 		</Default>
 	);
 }
-
-export default Dashboard;

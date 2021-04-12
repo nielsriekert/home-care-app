@@ -29,7 +29,6 @@ export default function Navigation() {
 		<nav className={styles.container}>
 			<ul>
 				<li><Link to="/profile">Profile</Link></li>
-				<li><Link to="/minder-gas-nl">MinderGas.nl</Link></li>
 				<li><button onClick={onLogout}>Logout</button></li>
 			</ul>
 		</nav>

@@ -5,12 +5,18 @@
 
 .main {
 	display: grid;
-	grid-template-columns: auto 1fr;
+	grid-template-columns: auto min-content min-content;
+	gap: 30px;
 	align-items: center;
 	height: 60px;
 	padding-left: var(--content-padding-horizontal);
 	padding-right: var(--content-padding-horizontal);
 	background-color: var(--color-secondary-shade-2);
+}
+
+.main a {
+	color: var(--color-secondary-shade-4);
+	text-decoration: none;
 }
 
 .appName {
@@ -19,20 +25,14 @@
 	padding: 10px 0;
 	font-size: 2em;
 	font-weight: 700;
-	color: var(--color-secondary-shade-4);
-	text-decoration: none;
 }
 
-.appName:hover {
+.main a:hover {
 	color: hsl(var(--color-secondary-shade-4-h), var(--color-secondary-shade-4-s), 100%);
 }
 
 @media (prefers-color-scheme: light) {
-	.appName:hover {
+	.main a:hover {
 		color: hsl(var(--color-secondary-shade-4-h), var(--color-secondary-shade-4-s), 0%);
 	}
-}
-
-.container .userMenu {
-	justify-self: right;
 }

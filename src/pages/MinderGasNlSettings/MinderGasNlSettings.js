@@ -1,7 +1,7 @@
 import './minder-gas-nl-settings.css';
 import React, { useState, useEffect } from 'react';
 
-import Default from '../../templates/Default/Default';
+import Settings from '../../templates/Settings/Settings';
 
 import { useQuery, useMutation, gql } from '@apollo/client';
 
@@ -27,7 +27,7 @@ const getSyncStateFromApi = (queryData, mutateData) => (
 	typeof mutateData === 'undefined' ? (queryData && queryData.isMinderGasNlSynchronizationActive) === true : mutateData.setSyncStateSendingReadingsToMinderGasNl === true
 );
 
-function Dashboard() {
+export default function MinderGasNlSettings() {
 	const [field, setField] = useState({
 		type: 'checkbox',
 		name: 'minder-gas-nl-synchronization',
@@ -78,9 +78,7 @@ function Dashboard() {
 	}, [data, sendingData]);
 
 	return (
-		<Default>
-			<ProfileNavigation />
-			<h1>MinderGas.nl synchronization</h1>
+		<Settings title="MinderGas.nl synchronization">
 			{errorToDisplay ?
 				<Message type="error" ><p>{errorToDisplay.message}</p></Message> : ''}
 			{!loading ?
@@ -89,8 +87,6 @@ function Dashboard() {
 					key={field.name}
 					onChange={handleInputChange}
 				/> : ''}
-		</Default>
+		</Settings>
 	);
 }
-
-export default Dashboard;
