@@ -5,8 +5,6 @@ import Settings from '../../templates/Settings/Settings';
 
 import { useQuery, useMutation, gql } from '@apollo/client';
 
-import ProfileNavigation from '../../molecules/ProfileNavigation/ProfileNavigation';
-
 import InputFieldCheckbox from '../../components/InputFieldCheckbox/InputFieldCheckbox';
 import Message from '../../atoms/Message/Message';
 
