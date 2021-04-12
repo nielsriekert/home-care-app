@@ -16,6 +16,7 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import Settings from './pages/Settings/Settings';
 import ProfileDashboard from './pages/ProfileDashboard/ProfileDashboard';
 import MinderGasNlSettings from './pages/MinderGasNlSettings/MinderGasNlSettings';
+import WaterReaderSettings from './pages/WaterReaderSettings/WaterReaderSettings';
 import FourOFour from './pages/FourOFour/FourOFour';
 
 // TODO: doesn't work after logging in
@@ -62,6 +63,9 @@ export default function App() {
 					</PrivateRoute>
 					<PrivateRoute path="/minder-gas-nl">
 						<MinderGasNlSettings />
+					</PrivateRoute>
+					<PrivateRoute path="/water-reader">
+						<WaterReaderSettings />
 					</PrivateRoute>
 					<Route>
 						<FourOFour />

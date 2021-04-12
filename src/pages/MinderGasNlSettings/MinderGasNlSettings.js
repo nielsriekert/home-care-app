@@ -1,7 +1,7 @@
 import './minder-gas-nl-settings.css';
 import React, { useState, useEffect } from 'react';
 
-import Default from '../../templates/Default/Default';
+import Settings from '../../templates/Settings/Settings';
 
 import { useQuery, useMutation, gql } from '@apollo/client';
 
@@ -78,8 +78,7 @@ export default function MinderGasNlSettings() {
 	}, [data, sendingData]);
 
 	return (
-		<Default>
-			<h1>MinderGas.nl synchronization</h1>
+		<Settings title="MinderGas.nl synchronization">
 			{errorToDisplay ?
 				<Message type="error" ><p>{errorToDisplay.message}</p></Message> : ''}
 			{!loading ?
@@ -88,6 +87,6 @@ export default function MinderGasNlSettings() {
 					key={field.name}
 					onChange={handleInputChange}
 				/> : ''}
-		</Default>
+		</Settings>
 	);
 }

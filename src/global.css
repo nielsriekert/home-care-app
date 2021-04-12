@@ -19,10 +19,15 @@
 }
 
 :root {
-	--color-primary-shade-1-hs: 222, 100%;
-	--color-primary-shade-1: hsl(var(--color-primary-shade-1-hs), 56%);
-	--color-primary-shade-2-hs: 21, 68%;
-	--color-primary-shade-2: hsl(var(--color-primary-shade-2-hs), 83%);
+	--color-primary-shade-1-h: 222;
+	--color-primary-shade-1-s: 100%;
+	--color-primary-shade-1-l: 56%;
+	--color-primary-shade-1: hsl(var(--color-primary-shade-1-h), var(--color-primary-shade-1-s), var(--color-primary-shade-1-l));
+
+	--color-primary-shade-2-h: 21;
+	--color-primary-shade-2-s: 68%;
+	--color-primary-shade-2-l: 83%;
+	--color-primary-shade-2: hsl(var(--color-primary-shade-2-h), var(--color-primary-shade-2-s), var(--color-primary-shade-2-l));
 
 	--color-secondary-shade-1-h: 221;
 	--color-secondary-shade-1-s: 10%;
@@ -106,7 +111,7 @@ code {
 }
 
 h1 {
-	font-size: 2.5rem;
+	font-size: 2rem;
 }
 
 p {
