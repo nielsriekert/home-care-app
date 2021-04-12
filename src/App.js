@@ -13,6 +13,7 @@ import Cookies from 'cookies.js';
 import Login from './pages/Login/Login';
 import Portal from './pages/Portal/Portal';
 import Dashboard from './pages/Dashboard/Dashboard';
+import Settings from './pages/Settings/Settings';
 import ProfileDashboard from './pages/ProfileDashboard/ProfileDashboard';
 import MinderGasNlSettings from './pages/MinderGasNlSettings/MinderGasNlSettings';
 import FourOFour from './pages/FourOFour/FourOFour';
@@ -52,6 +53,9 @@ export default function App() {
 					</Route>
 					<PrivateRoute redirectComponents={<Portal />} exact path="/">
 						<Dashboard />
+					</PrivateRoute>
+					<PrivateRoute path="/settings">
+						<Settings />
 					</PrivateRoute>
 					<PrivateRoute path="/profile">
 						<ProfileDashboard />

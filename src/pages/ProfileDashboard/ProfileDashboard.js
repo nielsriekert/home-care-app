@@ -7,7 +7,7 @@ import ProfileNavigation from '../../molecules/ProfileNavigation/ProfileNavigati
 
 import EventList from '../../organisms/EventList/EventList';
 
-function Dashboard() {
+export default function Dashboard() {
 	return (
 		<Default>
 			<ProfileNavigation />
@@ -16,5 +16,3 @@ function Dashboard() {
 		</Default>
 	);
 }
-
-export default Dashboard;

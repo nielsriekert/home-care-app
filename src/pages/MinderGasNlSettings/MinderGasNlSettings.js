@@ -27,7 +27,7 @@ const getSyncStateFromApi = (queryData, mutateData) => (
 	typeof mutateData === 'undefined' ? (queryData && queryData.isMinderGasNlSynchronizationActive) === true : mutateData.setSyncStateSendingReadingsToMinderGasNl === true
 );
 
-function Dashboard() {
+export default function MinderGasNlSettings() {
 	const [field, setField] = useState({
 		type: 'checkbox',
 		name: 'minder-gas-nl-synchronization',
@@ -79,7 +79,6 @@ function Dashboard() {
 
 	return (
 		<Default>
-			<ProfileNavigation />
 			<h1>MinderGas.nl synchronization</h1>
 			{errorToDisplay ?
 				<Message type="error" ><p>{errorToDisplay.message}</p></Message> : ''}
@@ -92,5 +91,3 @@ function Dashboard() {
 		</Default>
 	);
 }
-
-export default Dashboard;
