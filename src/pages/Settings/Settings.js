@@ -6,6 +6,7 @@ import PageNav from '../../molecules/PageNav/PageNav';
 
 import FireIcon from '../../atoms/FireIcon/FireIcon';
 import WaterIcon from '../../atoms/WaterIcon/WaterIcon';
+import CogwheelIcon from '../../atoms/CogwheelIcon/CogwheelIcon';
 
 export default function Settings() {
 	return (
@@ -22,6 +23,12 @@ export default function Settings() {
 					to: '/water-reader',
 					label: 'Water Reader',
 					description: 'Add verified water readings to reset your meters reading'
+				},
+				{
+					icon: CogwheelIcon,
+					to: '/about',
+					label: 'About',
+					description: 'App and server version numbers'
 				}
 			]} />
 		</SettingsTemplate>

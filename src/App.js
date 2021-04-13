@@ -17,6 +17,7 @@ import Settings from './pages/Settings/Settings';
 import ProfileDashboard from './pages/ProfileDashboard/ProfileDashboard';
 import MinderGasNlSettings from './pages/MinderGasNlSettings/MinderGasNlSettings';
 import WaterReaderSettings from './pages/WaterReaderSettings/WaterReaderSettings';
+import About from './pages/About/About';
 import FourOFour from './pages/FourOFour/FourOFour';
 
 // TODO: doesn't work after logging in
@@ -66,6 +67,9 @@ export default function App() {
 					</PrivateRoute>
 					<PrivateRoute path="/water-reader">
 						<WaterReaderSettings />
+					</PrivateRoute>
+					<PrivateRoute path="/about">
+						<About />
 					</PrivateRoute>
 					<Route>
 						<FourOFour />

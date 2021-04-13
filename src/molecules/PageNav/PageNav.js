@@ -5,19 +5,15 @@ import { Link } from 'react-router-dom';
 export default function PageNav({ menuItems = [] }) {
 	return (
 		<nav className={styles.container}>
-			<ul>
-				{menuItems.map(item => (
-					<li>
-						<Link to={item.to}>
-							<div className={styles.icon}>
-								<item.icon />
-							</div>
-							<span className={styles.title}>{item.label}</span>
-							<span className={styles.description}>{item.description}</span>
-						</Link>
-					</li>
-				))}
-			</ul>
+			{menuItems.map(item => (
+				<Link to={item.to}>
+					<div className={styles.icon}>
+						<item.icon />
+					</div>
+					<span className={styles.title}>{item.label}</span>
+					<span className={styles.description}>{item.description}</span>
+				</Link>
+			))}
 		</nav>
 	);
 }
