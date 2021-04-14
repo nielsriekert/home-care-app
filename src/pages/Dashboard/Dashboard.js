@@ -7,7 +7,8 @@ import WidgetGrid from '../../organisms/WidgetGrid/WidgetGrid';
 
 import Widget from '../../molecules/Widget/Widget';
 
-import BoltIcon from '../../atoms/BoltIcon/BoltIcon';
+import BoltArrowUpIcon from '../../atoms/BoltArrowUpIcon/BoltArrowUpIcon';
+import BoltArrowDownIcon from '../../atoms/BoltArrowDownIcon/BoltArrowDownIcon';
 import WaterIcon from '../../atoms/WaterIcon/WaterIcon';
 import FireIcon from '../../atoms/FireIcon/FireIcon';
 
@@ -68,16 +69,16 @@ export default function Dashboard() {
 	return (
 		<Default>
 			<WidgetGrid>
-				<Widget title="Current" name="current-electricity-usage" icon={<BoltIcon />}>
+				<Widget title="Receiving" name="current-electricity-usage" icon={<BoltArrowDownIcon />}>
 					<CurrentElectricityUsage />
 				</Widget>
-				<Widget title="Current" name="current-electricity-delivered" icon={<BoltIcon />}>
+				<Widget title="Delivering" name="current-electricity-delivered" icon={<BoltArrowUpIcon />}>
 					<CurrentElectricityDelivered />
 				</Widget>
-				<Widget title="Today" name="electricity-usage" icon={<BoltIcon />}>
+				<Widget title="Today" name="electricity-usage" icon={<BoltArrowDownIcon />}>
 					<ElectricityUsage />
 				</Widget>
-				<Widget title="Today" name="electricity-delivered" icon={<BoltIcon />}>
+				<Widget title="Today" name="electricity-delivered" icon={<BoltArrowUpIcon />}>
 					<ElectricityDelivered />
 				</Widget>
 				<Widget title="Today" name="gas-usage" icon={<FireIcon />}>
@@ -86,10 +87,10 @@ export default function Dashboard() {
 				<Widget title="Today" name="water-usage" icon={<WaterIcon />}>
 					<WaterUsage />
 				</Widget>
-				<Widget title="Last 8 hours" name="electricity-usage-chart" icon={<BoltIcon />}>
+				<Widget title="Last 8 hours" name="electricity-usage-chart" icon={<BoltArrowDownIcon />}>
 					<ElectricityReceivedChart resolution="FIVE_MINUTES" hoursInThePast={8} />
 				</Widget>
-				<Widget title="Last 8 hours" name="electricity-usage-chart" icon={<BoltIcon />}>
+				<Widget title="Last 8 hours" name="electricity-usage-chart" icon={<BoltArrowUpIcon />}>
 					<ElectricityDeliveredChart resolution="FIVE_MINUTES" hoursInThePast={8} />
 				</Widget>
 				<Widget title="Last 4 days" name="gas-usage-chart" icon={<FireIcon />}>
@@ -103,7 +104,7 @@ export default function Dashboard() {
 					</ul>
 					<CumulativeWaterUsageChart {...waterChartDay} />
 				</Widget>
-				<Widget title="Month" name="electrical-usage-by-month" icon={<BoltIcon />}>
+				<Widget title="Month" name="electrical-usage-by-month" icon={<BoltArrowDownIcon />}>
 					<ElectricityUsageMonth />
 				</Widget>
 				<Widget title="Month" name="gas-usage-by-month" icon={<FireIcon />}>
