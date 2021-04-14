@@ -17,7 +17,8 @@ import ElectricityUsage from '../../molecules/ElectricityUsage/ElectricityUsage'
 import ElectricityDelivered from '../../molecules/ElectricityDelivered/ElectricityDelivered';
 import GasUsage from '../../molecules/GasUsage/GasUsage';
 import WaterUsage from '../../molecules/WaterUsage/WaterUsage';
-import ElectricityUsageChart from '../../ElectricityUsage';
+import ElectricityReceivedChart from '../../molecules/ElectricityReceivedChart/ElectricityReceivedChart';
+import ElectricityDeliveredChart from '../../molecules/ElectricityDeliveredChart/ElectricityDeliveredChart';
 import GasUsageChart from '../../GasUsage';
 import CumulativeWaterUsageChart from '../../molecules/CumulativeWaterUsageChart/CumulativeWaterUsageChart';
 import ElectricityUsageMonth from '../../ElectricityUsageMonth';
@@ -86,7 +87,10 @@ export default function Dashboard() {
 					<WaterUsage />
 				</Widget>
 				<Widget title="Last 8 hours" name="electricity-usage-chart" icon={<BoltIcon />}>
-					<ElectricityUsageChart resolution="FIVE_MINUTES" hoursInThePast={8} />
+					<ElectricityReceivedChart resolution="FIVE_MINUTES" hoursInThePast={8} />
+				</Widget>
+				<Widget title="Last 8 hours" name="electricity-usage-chart" icon={<BoltIcon />}>
+					<ElectricityDeliveredChart resolution="FIVE_MINUTES" hoursInThePast={8} />
 				</Widget>
 				<Widget title="Last 4 days" name="gas-usage-chart" icon={<FireIcon />}>
 					<GasUsageChart />

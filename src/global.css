@@ -49,10 +49,10 @@
 	--color-secondary-shade-4-l: 88%;
 	--color-secondary-shade-4: hsl(var(--color-secondary-shade-4-h), var(--color-secondary-shade-4-s), var(--color-secondary-shade-4-l));
 
-	--color-electricity-h: 224;
-	--color-electricity-s: 100%;
-	--color-electricity-l: 89%;
-	--color-electricity: hsl(var(--color-electricity-h), var(--color-electricity-s), var(--color-electricity-l));
+	--color-electricity-received-h: 224;
+	--color-electricity-received-s: 100%;
+	--color-electricity-received-l: 89%;
+	--color-electricity-received: hsl(var(--color-electricity-received-h), var(--color-electricity-received-s), var(--color-electricity-received-l));
 
 	--color-electricity-delivered-h: 168;
 	--color-electricity-delivered-s: 100%;
@@ -79,7 +79,7 @@
 		--color-secondary-shade-3-l: 22%;
 		--color-secondary-shade-4-l: 12%;
 
-		--color-electricity-l: 32%;
+		--color-electricity-received-l: 32%;
 		--color-electricity-delivered-l: 25%;
 		--color-gas-l: 35%;
 		--color-water-l: 40%;
