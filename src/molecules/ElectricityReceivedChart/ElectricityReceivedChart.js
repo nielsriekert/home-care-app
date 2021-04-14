@@ -17,7 +17,7 @@ const ELECTRIC_USAGE = gql`
 	}
 `;
 
-export default function ElectricityUsage({ resolution, hoursInThePast }) {
+export default function ElectricityReceivedChart({ resolution, hoursInThePast }) {
 	const { loading, error, data } = useQuery(ELECTRIC_USAGE, {
 		fetchPolicy: 'cache-and-network',
 		variables: {
@@ -30,7 +30,7 @@ export default function ElectricityUsage({ resolution, hoursInThePast }) {
 	if (error) return <p>Error :(</p>;
 
 	return (
-		<div className="electricity-usage-container">
+		<div>
 			<HighchartsReact
 				highcharts={Highcharts}
 				options={{
@@ -59,7 +59,7 @@ export default function ElectricityUsage({ resolution, hoursInThePast }) {
 						name: 'Wh',
 						showInLegend: false,
 						data: data.electricityUsage.slice().reverse().map(usage => [usage.period.end * 1000, Math.round((usage.received + Number.EPSILON) * 100) / 100]),
-						color: 'hsla(var(--color-electricity-h), var(--color-electricity-s), var(--color-electricity-l), .6)'
+						color: 'hsla(var(--color-electricity-received-h), var(--color-electricity-received-s), var(--color-electricity-received-l), .6)'
 					}]
 				}}
 			/>
