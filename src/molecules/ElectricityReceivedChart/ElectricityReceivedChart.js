@@ -5,8 +5,8 @@ import { useQuery, gql } from '@apollo/client';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-const ELECTRIC_USAGE = gql`
-	query electricityUsage($resolution: TimeSpan $hoursInThePast: Float) {
+const ELECTRIC_RECEIVED_CHART = gql`
+	query electricityReceivedChart($resolution: TimeSpan $hoursInThePast: Float) {
 		electricityUsage(resolution: $resolution hoursInThePast: $hoursInThePast) {
 			received(unit:WATT_HOUR)
 			period {
@@ -18,8 +18,8 @@ const ELECTRIC_USAGE = gql`
 `;
 
 export default function ElectricityReceivedChart({ resolution, hoursInThePast }) {
-	const { loading, error, data } = useQuery(ELECTRIC_USAGE, {
-		fetchPolicy: 'cache-and-network',
+	const { loading, error, data } = useQuery(ELECTRIC_RECEIVED_CHART, {
+		fetchPolicy: 'no-cache',
 		variables: {
 			resolution: resolution || 'FIVE_MINUTES',
 			hoursInThePast: hoursInThePast || 8

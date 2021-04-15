@@ -5,7 +5,7 @@ import { useQuery, gql } from '@apollo/client';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-const ELECTRIC_USAGE = gql`
+const GAS_USAGE = gql`
 	query gasConsumptionByMonth(
 		$startCurrentMonth: Int!
 		$endCurrentMonth: Int!
@@ -76,7 +76,7 @@ export default function GasUsageMonth() {
 	const startThreeMonthsAgo = new Date(date.getFullYear(), date.getMonth() - 3, 1, 0, 0, 0);
 	const endThreeMonthsAgo = new Date(date.getFullYear(), date.getMonth() - 2, 0, 23, 59, 59);
 
-	const { loading, error, data } = useQuery(ELECTRIC_USAGE, {
+	const { loading, error, data } = useQuery(GAS_USAGE, {
 		variables: {
 			startCurrentMonth: startCurrentMonth.getTime() / 1000,
 			endCurrentMonth: endCurrentMonth.getTime() / 1000,

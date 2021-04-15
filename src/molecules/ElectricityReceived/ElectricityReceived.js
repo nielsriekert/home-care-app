@@ -1,12 +1,12 @@
 import React from 'react';
-import styles from './ElectricityUsage.module.css';
+import styles from './ElectricityReceived.module.css';
 
 import Skeleton from '../../atoms/Skeleton/Skeleton';
 
 import { useQuery, gql } from '@apollo/client';
 
-const ELECTRICITY_CONSUMPTION = gql`
-	query electricityConsumption($start: Int! $end: Int!) {
+const ELECTRICITY_RECEIVED = gql`
+	query electricityReceived($start: Int! $end: Int!) {
 		electricityConsumption(start: $start end: $end) {
 			received
 			period {
@@ -29,8 +29,8 @@ const getEndOfToday = () => {
 	return Math.round(today.getTime() / 1000);
 };
 
-export default function ElectricityUsage({ start, end }) {
-	const { loading, error, data } = useQuery(ELECTRICITY_CONSUMPTION, {
+export default function ElectricityReceived({ start, end }) {
+	const { loading, error, data } = useQuery(ELECTRICITY_RECEIVED, {
 		fetchPolicy: 'cache-and-network',
 		variables: {
 			start: start || getStartOfToday(),

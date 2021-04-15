@@ -15,9 +15,9 @@ import BoltIcon from '../../atoms/BoltIcon/BoltIcon';
 import WaterIcon from '../../atoms/WaterIcon/WaterIcon';
 import FireIcon from '../../atoms/FireIcon/FireIcon';
 
-import CurrentElectricityUsage from '../../molecules/CurrentElectricityUsage/CurrentElectricityUsage';
+import CurrentElectricityReceived from '../../molecules/CurrentElectricityReceived/CurrentElectricityReceived';
 import CurrentElectricityDelivered from '../../molecules/CurrentElectricityDelivered/CurrentElectricityDelivered';
-import ElectricityUsage from '../../molecules/ElectricityUsage/ElectricityUsage';
+import ElectricityReceived from '../../molecules/ElectricityReceived/ElectricityReceived';
 import ElectricityDelivered from '../../molecules/ElectricityDelivered/ElectricityDelivered';
 import GasUsage from '../../molecules/GasUsage/GasUsage';
 import WaterUsage from '../../molecules/WaterUsage/WaterUsage';
@@ -34,13 +34,13 @@ export default function Portal() {
 			</div>
 			<WidgetGrid>
 				<Widget title="Current" name="current-electricity-usage" icon={<BoltIcon />}>
-					<CurrentElectricityUsage />
+					<CurrentElectricityReceived />
 				</Widget>
 				<Widget title="Current" name="current-electricity-delivered" icon={<BoltIcon />}>
 					<CurrentElectricityDelivered />
 				</Widget>
 				<Widget title="Today" name="electricity-usage" icon={<BoltIcon />}>
-					<ElectricityUsage />
+					<ElectricityReceived />
 				</Widget>
 				<Widget title="Today" name="electricity-delivered" icon={<BoltIcon />}>
 					<ElectricityDelivered />

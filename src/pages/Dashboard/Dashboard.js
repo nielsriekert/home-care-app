@@ -12,9 +12,9 @@ import BoltArrowDownIcon from '../../atoms/BoltArrowDownIcon/BoltArrowDownIcon';
 import WaterIcon from '../../atoms/WaterIcon/WaterIcon';
 import FireIcon from '../../atoms/FireIcon/FireIcon';
 
-import CurrentElectricityUsage from '../../molecules/CurrentElectricityUsage/CurrentElectricityUsage';
+import CurrentElectricityReceived from '../../molecules/CurrentElectricityReceived/CurrentElectricityReceived';
 import CurrentElectricityDelivered from '../../molecules/CurrentElectricityDelivered/CurrentElectricityDelivered';
-import ElectricityUsage from '../../molecules/ElectricityUsage/ElectricityUsage';
+import ElectricityReceived from '../../molecules/ElectricityReceived/ElectricityReceived';
 import ElectricityDelivered from '../../molecules/ElectricityDelivered/ElectricityDelivered';
 import GasUsage from '../../molecules/GasUsage/GasUsage';
 import WaterUsage from '../../molecules/WaterUsage/WaterUsage';
@@ -69,14 +69,14 @@ export default function Dashboard() {
 	return (
 		<Default>
 			<WidgetGrid>
-				<Widget title="Receiving" name="current-electricity-usage" icon={<BoltArrowDownIcon />}>
-					<CurrentElectricityUsage />
+				<Widget title="Receiving" name="current-electricity-received" icon={<BoltArrowDownIcon />}>
+					<CurrentElectricityReceived />
 				</Widget>
 				<Widget title="Delivering" name="current-electricity-delivered" icon={<BoltArrowUpIcon />}>
 					<CurrentElectricityDelivered />
 				</Widget>
 				<Widget title="Today" name="electricity-usage" icon={<BoltArrowDownIcon />}>
-					<ElectricityUsage />
+					<ElectricityReceived />
 				</Widget>
 				<Widget title="Today" name="electricity-delivered" icon={<BoltArrowUpIcon />}>
 					<ElectricityDelivered />
