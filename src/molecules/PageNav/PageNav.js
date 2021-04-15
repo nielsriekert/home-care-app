@@ -6,7 +6,7 @@ export default function PageNav({ menuItems = [] }) {
 	return (
 		<nav className={styles.container}>
 			{menuItems.map(item => (
-				<Link to={item.to}>
+				<Link key={item.to} to={item.to}>
 					<div className={styles.icon}>
 						<item.icon />
 					</div>

@@ -1,12 +1,12 @@
 import React from 'react';
-import styles from './CurrentElectricityUsage.module.css';
+import styles from './CurrentElectricityReceived.module.css';
 
 import Skeleton from '../../atoms/Skeleton/Skeleton';
 
 import { useQuery, gql } from '@apollo/client';
 
-const CURRENT_ELECTRIC_USAGE = gql`
-	query currentElectricityUsage {
+const CURRENT_ELECTRIC_RECEIVED = gql`
+	query currentElectricityReceived {
 		currentElectricityUsage {
 			received(unit: WATT),
 			readingAt
@@ -14,8 +14,8 @@ const CURRENT_ELECTRIC_USAGE = gql`
 	}
 `;
 
-export default function CurrentElectricityUsage() {
-	const { loading, error, data } = useQuery(CURRENT_ELECTRIC_USAGE, {
+export default function CurrentElectricityReceived() {
+	const { loading, error, data } = useQuery(CURRENT_ELECTRIC_RECEIVED, {
 		fetchPolicy: 'cache-and-network',
 	});
 
