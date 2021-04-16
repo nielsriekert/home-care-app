@@ -1,0 +1,23 @@
+.wrapper {
+	text-align: left;
+}
+
+.body {
+	transition: opacity .5s;
+}
+
+.wrapper.isLoading .body {
+	opacity: .3;
+	pointer-events: none;
+}
+
+.form-login-container .error-message-container:not(:first-child) {
+	margin-top: 1em;
+}
+
+.footer {
+	display: grid;
+	gap: 20px;
+	justify-items: left;
+	padding-top: 30px;
+}

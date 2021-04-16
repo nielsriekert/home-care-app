@@ -13,10 +13,29 @@
 }
 
 .button.primary:hover {
-	background-color: hsl(var(--color-primary-shade-1-hs), 52%);
+	background-color: hsl(var(--color-primary-shade-1-h), var(--color-primary-shade-1-s), calc(var(--color-primary-shade-1-l) * .85));
 }
 
 .button.secondary {
 	color: white;
 	background-color: var(--color-secondary-shade-3);
+}
+
+.button:disabled {
+	opacity: .5;
+	filter: contrast(70%);
+}
+
+.button.pending {
+	animation: pending .5s infinite alternate;
+}
+
+@keyframes pending {
+	from {
+		opacity: 1;
+	}
+
+	to {
+		opacity: .5;
+	}
 }
