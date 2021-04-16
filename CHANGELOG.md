@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2021-04-16
+### Added
+- Add verified water reading form, for correcting the water sensor.
+
+### Changed
+- Updated dependencies.
+
 ## [1.3.1] - 2021-04-15
 ### Fixed
 - Fetch delivered received chart widgets infinite loop.
