@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './GasUsage.module.css';
 
 import Skeleton from '../../atoms/Skeleton/Skeleton';
+import Message from '../../atoms/Message/Message';
 
 import { useQuery, gql } from '@apollo/client';
 
@@ -38,7 +39,7 @@ export default function GasUsage({ start, end }) {
 		}
 	});
 
-	if (error) return <p>Error :(</p>;
+	if (error) return <Message type="error">{error.message}</Message>;
 	return (
 		<div className={styles.container}>
 			{!loading ? data.gasConsumption ? data.gasConsumption.received + ' m³' : 0 + ' m³' : <Skeleton width="3em" /> }

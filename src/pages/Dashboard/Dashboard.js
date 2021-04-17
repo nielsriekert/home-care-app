@@ -22,6 +22,7 @@ import ElectricityReceivedChart from '../../molecules/ElectricityReceivedChart/E
 import ElectricityDeliveredChart from '../../molecules/ElectricityDeliveredChart/ElectricityDeliveredChart';
 import GasUsageChart from '../../GasUsage';
 import CumulativeWaterUsageChart from '../../molecules/CumulativeWaterUsageChart/CumulativeWaterUsageChart';
+import ElectricityReceivedWeekChart from '../../molecules/ElectricityReceivedWeekChart/ElectricityReceivedWeekChart';
 import ElectricityUsageMonth from '../../ElectricityUsageMonth';
 import GasUsageMonth from '../../GasUsageMonth';
 
@@ -103,6 +104,9 @@ export default function Dashboard() {
 						<li><Button onClick={setToday} type="primary">Today</Button></li>
 					</ul>
 					<CumulativeWaterUsageChart {...waterChartDay} />
+				</Widget>
+				<Widget title="Week" name="electrical-usage-current-week" icon={<BoltArrowDownIcon />}>
+					<ElectricityReceivedWeekChart />
 				</Widget>
 				<Widget title="Month" name="electrical-usage-by-month" icon={<BoltArrowDownIcon />}>
 					<ElectricityUsageMonth />

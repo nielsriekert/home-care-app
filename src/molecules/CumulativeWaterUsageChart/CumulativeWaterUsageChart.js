@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from './CumulativeWaterUsageChart.module.css';
 
+import Message from '../../atoms/Message/Message';
+
 import { useQuery, gql } from '@apollo/client';
 
 import Highcharts from 'highcharts';
@@ -39,7 +41,7 @@ export default function CumulativeWaterUsageChart({ start, end }) {
 		}
 	});
 	if (loading) return <p>Loading...</p>;
-	if (error) return <p>Error :(</p>;
+	if (error) return <Message type="error">{error.message}</Message>;
 
 	return (
 		<div className={styles.container}>
