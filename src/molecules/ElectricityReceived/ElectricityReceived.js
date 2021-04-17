@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './ElectricityReceived.module.css';
 
 import Skeleton from '../../atoms/Skeleton/Skeleton';
+import Message from '../../atoms/Message/Message';
 
 import { useQuery, gql } from '@apollo/client';
 
@@ -37,11 +38,11 @@ export default function ElectricityReceived({ start, end }) {
 			end: end || getEndOfToday()
 		}
 	});
-
-	if (error) return <p>Error :(</p>;
+	console.log(error);
+	if (error) return <Message type="error">{error.message}</Message>;
 	return (
 		<div className={styles.container}>
-			{!loading ? data.electricityConsumption ? data.electricityConsumption.received + ' kWh' : 0 + ' kWh' : <Skeleton width="3em" /> }
+			{!loading ? data ? data.electricityConsumption.received + ' kWh' : 0 + ' kWh' : <Skeleton width="3em" /> }
 		</div>
 	);
 }

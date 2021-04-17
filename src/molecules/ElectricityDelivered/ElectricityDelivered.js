@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './ElectricityDelivered.module.css';
 
+import Message from '../../atoms/Message/Message';
 import Skeleton from '../../atoms/Skeleton/Skeleton';
 
 import { useQuery, gql } from '@apollo/client';
@@ -38,10 +39,10 @@ export default function ElectricityDelivered({ start, end }) {
 		}
 	});
 
-	if (error) return <p>Error :(</p>;
+	if (error) return <Message type="error">{error.message}</Message>;
 	return (
 		<div className={styles.container}>
-			{!loading ? data.electricityConsumption ? data.electricityConsumption.delivered + ' kWh' : 0 + ' kWh' : <Skeleton width="3em" /> }
+			{!loading ? data ? data.electricityConsumption.delivered + ' kWh' : 0 + ' kWh' : <Skeleton width="3em" />}
 		</div>
 	);
 }
