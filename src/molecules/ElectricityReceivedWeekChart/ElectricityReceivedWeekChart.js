@@ -109,7 +109,7 @@ export default function ElectricityReceivedWeekChart() {
 		}
 	});
 
-	if (loading) return <Skeleton width="100%" height="700px" />;
+	if (loading) return <Skeleton width="100%" height="300px" />;
 	if (error) return <Message type="error">{error.message}</Message>;
 
 	const weekDays = [

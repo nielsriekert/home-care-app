@@ -38,7 +38,7 @@ export default function ElectricityReceived({ start, end }) {
 			end: end || getEndOfToday()
 		}
 	});
-	console.log(error);
+
 	if (error) return <Message type="error">{error.message}</Message>;
 	return (
 		<div className={styles.container}>
