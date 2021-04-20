@@ -33,6 +33,6 @@
         ],
         "keyword-spacing": "error",
         "no-trailing-spaces": "error",
-        "no-console": "error"
+        "no-console": "warn"
     }
 }

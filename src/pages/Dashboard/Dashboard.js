@@ -23,6 +23,7 @@ import ElectricityDeliveredChart from '../../molecules/ElectricityDeliveredChart
 import GasUsageChart from '../../GasUsage';
 import CumulativeWaterUsageChart from '../../molecules/CumulativeWaterUsageChart/CumulativeWaterUsageChart';
 import ElectricityReceivedWeekChart from '../../molecules/ElectricityReceivedWeekChart/ElectricityReceivedWeekChart';
+import GasReceivedWeekChart from '../../molecules/GasReceivedWeekChart/GasReceivedWeekChart';
 import ElectricityUsageMonth from '../../ElectricityUsageMonth';
 import GasUsageMonth from '../../GasUsageMonth';
 
@@ -107,6 +108,9 @@ export default function Dashboard() {
 				</Widget>
 				<Widget title="Week" name="electrical-usage-current-week" icon={<BoltArrowDownIcon />}>
 					<ElectricityReceivedWeekChart />
+				</Widget>
+				<Widget title="Week" name="gas-usage-current-week" icon={<FireIcon />}>
+					<GasReceivedWeekChart />
 				</Widget>
 				<Widget title="Month" name="electrical-usage-by-month" icon={<BoltArrowDownIcon />}>
 					<ElectricityUsageMonth />
