@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Updated dependencies.
 - Updated existing portal page widgets to be the same as the dashboard page.
+- Week widgets now show all days of the week instead of only the current and previous days.
 
 ## [1.5.0] - 2021-04-18
 ### Added

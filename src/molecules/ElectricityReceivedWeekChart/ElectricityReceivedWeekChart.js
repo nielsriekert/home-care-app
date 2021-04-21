@@ -115,33 +115,42 @@ export default function ElectricityReceivedWeekChart() {
 	const weekDays = [
 		{
 			data: data.consumptionMonday,
-			weekDayName: startMonday.toLocaleString({ weekday: 'long' })
+			weekDay: startMonday
 		},
 		{
 			data: data.consumptionTuesday,
-			weekDayName: startTuesday.toLocaleString({ weekday: 'long' })
+			weekDay: startTuesday
 		},
 		{
 			data: data.consumptionWednesday,
-			weekDayName: startWednesday.toLocaleString({ weekday: 'long' })
+			weekDay: startWednesday
 		},
 		{
 			data: data.consumptionThursday,
-			weekDayName: startThursday.toLocaleString({ weekday: 'long' })
+			weekDay: startThursday
 		},
 		{
 			data: data.consumptionFriday,
-			weekDayName: startFriday.toLocaleString({ weekday: 'long' })
+			weekDay: startFriday
 		},
 		{
 			data: data.consumptionSaturday,
-			weekDayName: startSaturday.toLocaleString({ weekday: 'long' })
+			weekDay: startSaturday
 		},
 		{
 			data: data.consumptionSunday,
-			weekDayName: startSunday.toLocaleString({ weekday: 'long' })
+			weekDay: startSunday
 		}
-	].filter(weekData => weekData.data);
+	].map(weekData => ({
+		...weekData,
+		data: weekData.data || {
+			received: 0,
+			period: {
+				start: weekData.weekDay.toSeconds(),
+				end: weekData.weekDay.plus({ day: 1 }).toSeconds()
+			}
+		}
+	}));
 
 	return (
 		<div>
@@ -156,7 +165,7 @@ export default function ElectricityReceivedWeekChart() {
 						enabled: false
 					},
 					xAxis: {
-						categories: weekDays.slice().map(weekDayUsage => weekDayUsage.weekDayName),
+						categories: weekDays.slice().map(weekDayUsage => weekDayUsage.weekDay.toLocaleString({ weekday: 'long' })),
 						lineColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)',
 						tickColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)'
 					},
@@ -173,7 +182,7 @@ export default function ElectricityReceivedWeekChart() {
 						name: 'kWh',
 						type: 'column',
 						showInLegend: false,
-						data: weekDays.slice().map(weekDayUsage => [weekDayUsage.weekDayName, Math.round((weekDayUsage.data.received + Number.EPSILON) * 100) / 100]),
+						data: weekDays.slice().map(weekDayUsage => [weekDayUsage.weekDay.toLocaleString({ weekday: 'long' }), Math.round((weekDayUsage.data.received + Number.EPSILON) * 100) / 100]),
 						color: 'hsla(var(--color-electricity-received-h), var(--color-electricity-received-s), var(--color-electricity-received-l), .6)'
 					}]
 				}}
