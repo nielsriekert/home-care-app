@@ -12,9 +12,9 @@ import { DateTime } from 'luxon';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-const ELECTRIC_RECEIVED_WEEK_CHART = gql`
+const GAS_RECEIVED_WEEK_CHART = gql`
 	${CONSUMPTION}
-	query electricityConsumptionCurrentWeek(
+	query gasConsumptionCurrentWeek(
 		$startMonday: Int!
 		$endMonday: Int!
 		$startTuesday: Int!
@@ -30,49 +30,49 @@ const ELECTRIC_RECEIVED_WEEK_CHART = gql`
 		$startSunday: Int!
 		$endSunday: Int!
 	) {
-		consumptionMonday: electricityConsumption(
+		consumptionMonday: gasConsumption(
 			start: $startMonday
 			end: $endMonday
 		) {
 			...consumption
 		}
 
-		consumptionTuesday: electricityConsumption(
+		consumptionTuesday: gasConsumption(
 			start: $startTuesday
 			end: $endTuesday
 		) {
 			...consumption
 		}
 
-		consumptionWednesday: electricityConsumption(
+		consumptionWednesday: gasConsumption(
 			start: $startWednesday
 			end: $endWednesday
 		) {
 			...consumption
 		}
 
-		consumptionThursday: electricityConsumption(
+		consumptionThursday: gasConsumption(
 			start: $startThursday
 			end: $endThursday
 		) {
 			...consumption
 		}
 
-		consumptionFriday: electricityConsumption(
+		consumptionFriday: gasConsumption(
 			start: $startFriday
 			end: $endFriday
 		) {
 			...consumption
 		}
 
-		consumptionSaturday: electricityConsumption(
+		consumptionSaturday: gasConsumption(
 			start: $startSaturday
 			end: $endSaturday
 		) {
 			...consumption
 		}
 
-		consumptionSunday: electricityConsumption(
+		consumptionSunday: gasConsumption(
 			start: $startSunday
 			end: $endSunday
 		) {
@@ -81,7 +81,7 @@ const ELECTRIC_RECEIVED_WEEK_CHART = gql`
 	}
 `;
 
-export default function ElectricityReceivedWeekChart() {
+export default function GasReceivedWeekChart() {
 	const startMonday = DateTime.local().startOf('week');
 	const startTuesday =  DateTime.local().startOf('week').plus({ day: 1 });
 	const startWednesday = DateTime.local().startOf('week').plus({ day: 2 });
@@ -90,7 +90,7 @@ export default function ElectricityReceivedWeekChart() {
 	const startSaturday = DateTime.local().startOf('week').plus({ day: 5 });
 	const startSunday = DateTime.local().startOf('week').plus({ day: 6 });
 
-	const { loading, error, data } = useQuery(ELECTRIC_RECEIVED_WEEK_CHART, {
+	const { loading, error, data } = useQuery(GAS_RECEIVED_WEEK_CHART, {
 		variables: {
 			startMonday: startMonday.toSeconds(),
 			endMonday: startTuesday.toSeconds(),
@@ -183,7 +183,7 @@ export default function ElectricityReceivedWeekChart() {
 						type: 'column',
 						showInLegend: false,
 						data: weekDays.slice().map(weekDayUsage => [weekDayUsage.weekDay.toLocaleString({ weekday: 'long' }), Math.round((weekDayUsage.data.received + Number.EPSILON) * 100) / 100]),
-						color: 'hsla(var(--color-electricity-received-h), var(--color-electricity-received-s), var(--color-electricity-received-l), .6)'
+						color: 'hsla(var(--color-gas-h), var(--color-gas-s), var(--color-gas-l), .6)'
 					}]
 				}}
 			/>

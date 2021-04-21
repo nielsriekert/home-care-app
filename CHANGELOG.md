@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.6.0] - 2021-04-21
+### Added
+- Current week Gas received widget.
+
+### Changed
+- Updated dependencies.
+- Updated existing portal page widgets to be the same as the dashboard page.
+- Week widgets now show all days of the week instead of only the current and previous days.
+
 ## [1.5.0] - 2021-04-18
 ### Added
 - Current week Electricity received widget.
