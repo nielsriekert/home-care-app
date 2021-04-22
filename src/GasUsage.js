@@ -58,8 +58,7 @@ export default function GasUsage() {
 						name: 'm³',
 						type: 'column',
 						showInLegend: false,
-						data: data.gasUsage.slice().reverse().map(usage => [usage.period.end * 1000, Math.round((usage.received + Number.EPSILON) * 100) / 100]),
-						// color: 'rgba(255, 235, 200, .5)'
+						data: data.gasUsage.slice().reverse().map(usage => [usage.period.end * 1000, Math.round((usage.received + Number.EPSILON) * 1000) / 1000]),
 						color: 'hsla(var(--color-gas-h), var(--color-gas-s), var(--color-gas-l), .6)'
 					}]
 				}}
