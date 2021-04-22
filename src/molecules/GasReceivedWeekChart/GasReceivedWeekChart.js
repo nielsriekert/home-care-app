@@ -171,7 +171,7 @@ export default function GasReceivedWeekChart() {
 					},
 					yAxis: {
 						title: {
-							text: 'kWh'
+							text: 'm³'
 						},
 						gridLineColor: 'var(--color-secondary-shade-2)',
 					},
@@ -179,7 +179,7 @@ export default function GasReceivedWeekChart() {
 						useUTC: false
 					},
 					series: [{
-						name: 'kWh',
+						name: 'm³',
 						type: 'column',
 						showInLegend: false,
 						data: weekDays.slice().map(weekDayUsage => [weekDayUsage.weekDay.toLocaleString({ weekday: 'long' }), Math.round((weekDayUsage.data.received + Number.EPSILON) * 100) / 100]),
