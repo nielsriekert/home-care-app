@@ -1,11 +1,12 @@
-import './minder-gas-nl-settings.css';
 import React, { useState, useEffect } from 'react';
 
 import Settings from '../../templates/Settings/Settings';
 
 import { useQuery, useMutation, gql } from '@apollo/client';
 
-import InputFieldCheckbox from '../../components/InputFieldCheckbox/InputFieldCheckbox';
+import InputFieldCheckbox from '../../molecules/InputFieldCheckbox/InputFieldCheckbox';
+
+import Skeleton from '../../atoms/Skeleton/Skeleton';
 import Message from '../../atoms/Message/Message';
 
 const IS_MINDER_GAS_SYNC_ACTIVE = gql`
@@ -20,19 +21,18 @@ const SET_STATE_MINDER_GAS_SYNC = gql`
 	}
 `;
 
-const isSyncStateCheckboxChecked = field => field.fields.filter(checkField => checkField.checked).length >= 1;
+const isSyncStateCheckboxChecked = field => field.choices.filter(checkField => checkField.checked).length >= 1;
 const getSyncStateFromApi = (queryData, mutateData) => (
 	typeof mutateData === 'undefined' ? (queryData && queryData.isMinderGasNlSynchronizationActive) === true : mutateData.setSyncStateSendingReadingsToMinderGasNl === true
 );
 
 export default function MinderGasNlSettings() {
 	const [field, setField] = useState({
-		type: 'checkbox',
+		label: 'Synchronization',
 		name: 'minder-gas-nl-synchronization',
-		fields: [{
+		choices: [{
 			label: 'Synchronization',
 			value: 'active-mindergas-nl-synchronization',
-			checked: false
 		}]
 	});
 	const { loading, error, data } = useQuery(IS_MINDER_GAS_SYNC_ACTIVE);
@@ -55,10 +55,10 @@ export default function MinderGasNlSettings() {
 
 			return {
 				...prevField,
-				fields: prevField.fields.map(field => ({
+				isDisabled: true,
+				choices: prevField.choices.map(field => ({
 					...field,
 					checked: !field.checked,
-					disabled: true
 				}))
 			};
 		});
@@ -67,10 +67,10 @@ export default function MinderGasNlSettings() {
 	useEffect(() => {
 		setField(prevField => ({
 			...prevField,
-			fields: prevField.fields.map(field => ({
+			isDisabled: false,
+			choices: prevField.choices.map(field => ({
 				...field,
 				checked: getSyncStateFromApi(data, sendingData),
-				disabled: false
 			}))
 		}));
 	}, [data, sendingData]);
@@ -78,13 +78,13 @@ export default function MinderGasNlSettings() {
 	return (
 		<Settings title="MinderGas.nl synchronization">
 			{errorToDisplay ?
-				<Message type="error" ><p>{errorToDisplay.message}</p></Message> : ''}
+				<Message type="error" >{errorToDisplay.message}</Message> : ''}
 			{!loading ?
 				<InputFieldCheckbox
 					{...field}
-					key={field.name}
 					onChange={handleInputChange}
-				/> : ''}
+				/>
+				: <Skeleton />}
 		</Settings>
 	);
 }

@@ -6,10 +6,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Changed
-- More accurate 4 day gas widget.
+- More accurate 4 day gas widget (same day total).
+- Improved forms and inputs (layout and usability).
 
 ### Removed
 - Rounding values for 4 day gas usage chart because they are already.
+
+### Fixed
+- Login form button not working.
 
 ## [1.6.1] - 2021-04-22
 ### Fixed
