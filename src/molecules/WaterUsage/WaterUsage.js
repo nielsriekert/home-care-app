@@ -32,7 +32,6 @@ const getEndOfToday = () => {
 
 export default function WaterUsage({ start, end }) {
 	const { loading, error, data } = useQuery(WATER_CONSUMPTION, {
-		fetchPolicy: 'network-only',
 		variables: {
 			start: start || getStartOfToday(),
 			end: end || getEndOfToday()

@@ -26,9 +26,7 @@ const SMART_METER_STATISTICS = gql`
 `;
 
 export default function SmartMeterSettings() {
-	const { loading, error, data } = useQuery(SMART_METER_STATISTICS, {
-		fetchPolicy: 'cache-and-network'
-	});
+	const { loading, error, data } = useQuery(SMART_METER_STATISTICS);
 
 	return (
 		<Settings title="Smart Meter">

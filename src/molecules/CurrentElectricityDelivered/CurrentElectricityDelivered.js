@@ -16,9 +16,7 @@ const CURRENT_ELECTRIC_DELIVERED = gql`
 `;
 
 export default function CurrentElectricityDelivered() {
-	const { loading, error, data } = useQuery(CURRENT_ELECTRIC_DELIVERED, {
-		fetchPolicy: 'network-only',
-	});
+	const { loading, error, data } = useQuery(CURRENT_ELECTRIC_DELIVERED);
 
 	if (error) return <Message type="error">{error.message}</Message>;
 	return (
