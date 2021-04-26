@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - Smart Meter settings page with general info from the Smart Meter.
+- Custom favicon image.
 
 ### Changed
 - More accurate 4 day gas widget (same day total).
