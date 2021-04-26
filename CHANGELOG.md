@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Smart Meter settings page with general info from the Smart Meter.
+
 ### Changed
 - More accurate 4 day gas widget (same day total).
 - Improved forms and inputs (layout and usability).
