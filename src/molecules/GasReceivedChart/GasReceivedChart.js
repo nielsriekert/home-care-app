@@ -26,7 +26,7 @@ const now = DateTime.now();
 
 export default function GasUsage() {
 	const { loading, error, data } = useQuery(GAS_EXCHANGES_CHART, {
-		fetchPolicy: 'cache-and-network',
+		fetchPolicy: 'network-only',
 		variables: {
 			resolution: 'TWO_HOURS',
 			timePeriod: {

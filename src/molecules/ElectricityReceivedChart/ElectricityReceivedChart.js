@@ -21,7 +21,7 @@ const ELECTRIC_RECEIVED_CHART = gql`
 
 export default function ElectricityReceivedChart({ resolution, hoursInThePast }) {
 	const { loading, error, data } = useQuery(ELECTRIC_RECEIVED_CHART, {
-		fetchPolicy: 'no-cache',
+		fetchPolicy: 'network-only',
 		variables: {
 			resolution: resolution || 'FIVE_MINUTES',
 			hoursInThePast: hoursInThePast || 8
@@ -60,7 +60,7 @@ export default function ElectricityReceivedChart({ resolution, hoursInThePast })
 					series: [{
 						name: 'Wh',
 						showInLegend: false,
-						data: data.electricityUsage.slice().reverse().map(usage => [usage.period.end * 1000, Math.round((usage.received + Number.EPSILON) * 100) / 100]),
+						data: data.electricityUsage.slice().reverse().map(usage => [usage.period.end * 1000, usage.received]),
 						color: 'hsla(var(--color-electricity-received-h), var(--color-electricity-received-s), var(--color-electricity-received-l), .6)'
 					}]
 				}}

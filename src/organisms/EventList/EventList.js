@@ -26,7 +26,7 @@ const EVENTS = gql`
 export default function EventList() {
 	const [events, setEvents] = useState([]);
 	const { loading, error, data } = useQuery(EVENTS, {
-		fetchPolicy: 'cache-and-network',
+		fetchPolicy: 'network-only',
 		variables: {
 			pageSize: 24
 		}

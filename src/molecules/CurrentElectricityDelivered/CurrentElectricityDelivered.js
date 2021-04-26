@@ -6,7 +6,7 @@ import Message from '../../atoms/Message/Message';
 
 import { useQuery, gql } from '@apollo/client';
 
-const CURRENT_ELECTRIC_USAGE = gql`
+const CURRENT_ELECTRIC_DELIVERED = gql`
 	query currentElectricityDelivered {
 		currentElectricityUsage {
 			delivered(unit: WATT),
@@ -16,8 +16,8 @@ const CURRENT_ELECTRIC_USAGE = gql`
 `;
 
 export default function CurrentElectricityDelivered() {
-	const { loading, error, data } = useQuery(CURRENT_ELECTRIC_USAGE, {
-		fetchPolicy: 'cache-and-network',
+	const { loading, error, data } = useQuery(CURRENT_ELECTRIC_DELIVERED, {
+		fetchPolicy: 'network-only',
 	});
 
 	if (error) return <Message type="error">{error.message}</Message>;

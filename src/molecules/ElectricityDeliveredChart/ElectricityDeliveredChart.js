@@ -21,7 +21,7 @@ const ELECTRIC_DELIVERED_CHART = gql`
 
 export default function ElectricityDeliveredChart({ resolution, hoursInThePast }) {
 	const { loading, error, data } = useQuery(ELECTRIC_DELIVERED_CHART, {
-		fetchPolicy: 'no-cache',
+		fetchPolicy: 'network-only',
 		variables: {
 			resolution: resolution || 'FIVE_MINUTES',
 			hoursInThePast: hoursInThePast || 8
