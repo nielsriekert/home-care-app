@@ -32,7 +32,6 @@ const getEndOfToday = () => {
 
 export default function ElectricityReceived({ start, end }) {
 	const { loading, error, data } = useQuery(ELECTRICITY_RECEIVED, {
-		fetchPolicy: 'network-only',
 		variables: {
 			start: start || getStartOfToday(),
 			end: end || getEndOfToday()
