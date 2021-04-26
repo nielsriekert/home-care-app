@@ -1,4 +1,3 @@
-import styles from './LoginForm.module.css';
 import React, { useState, useCallback, useEffect } from 'react';
 import {
 	Redirect
@@ -8,10 +7,8 @@ import { useMutation, gql } from '@apollo/client';
 
 import useCookie from '../../hooks/useCookie';
 
+import Form from '../../organisms/Form/Form';
 import InputField from '../../molecules/InputField/InputField';
-
-import Message from '../../atoms/Message/Message';
-import Button from '../../atoms/Button/Button';
 
 const LOGIN = gql`
 	mutation login($email: String! $password: String!) {
@@ -30,13 +27,14 @@ const getFieldValueByName = (fields, name) => {
 	return foundFields.length === 1 ? foundFields[0].value : null;
 };
 
-function LoginForm() {
+export default function LoginForm() {
 	const [accessToken, setCookie] = useCookie('authorization-token', null);
 	const [fields, setFields] = useState([
 		{
 			type: 'email',
 			label: 'E-mail',
 			name: 'email',
+			isRequired: true,
 			value: '',
 			component: InputField
 		},
@@ -44,11 +42,11 @@ function LoginForm() {
 			type: 'password',
 			label: 'Password',
 			name: 'password',
+			isRequired: true,
 			value: '',
 			component: InputField
 		}
 	]);
-	const [error, setError] = useState(null);
 
 	const handleInputChange = useCallback((name, value) => {
 		setFields(fields.map(field => ({
@@ -57,30 +55,19 @@ function LoginForm() {
 		})));
 	}, [fields]);
 
-	const [login, { data, client } ] = useMutation(LOGIN);
+	const [login, { data, loading, error, client } ] = useMutation(LOGIN, { errorPolicy: 'all' });
 
 	const onSubmit = (event) => {
-		event.preventDefault();
 		login({
 			variables: {
 				email: getFieldValueByName(fields, 'email'),
 				password: getFieldValueByName(fields, 'password'),
 			}
-		}).catch(error => {
-			if (error.message !== 'Invalid email and password combination') {
-				throw error;
-			}
-
-			setError(error);
-			setFields(fields.map(field => ({
-				...field,
-				error
-			})));
 		});
 	};
 
 	useEffect(() => {
-		if (data && data.login.token) {
+		if (data && data.login && data.login.token) {
 			setCookie(data.login.token, 720);
 		}
 	}, [data, client, setCookie]);
@@ -92,7 +79,12 @@ function LoginForm() {
 	};
 
 	return (
-		<form noValidate onSubmit={onSubmit}>
+		<Form
+			error={error}
+			onSubmit={onSubmit}
+			isLoading={loading}
+			submitButtonText="Login"
+		>
 			{fields.map(field => (
 				<field.component
 					{...field}
@@ -100,13 +92,6 @@ function LoginForm() {
 					onChange={handleInputChange}
 				/>
 			))}
-			<div className={styles.footer}>
-				{error ?
-					<Message type="error" ><p>{error.message}</p></Message> : ''}
-				<Button type="primary">Send</Button>
-			</div>
-		</form>
+		</Form>
 	);
 }
-
-export default LoginForm;

@@ -16,6 +16,7 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import Settings from './pages/Settings/Settings';
 import ProfileDashboard from './pages/ProfileDashboard/ProfileDashboard';
 import MinderGasNlSettings from './pages/MinderGasNlSettings/MinderGasNlSettings';
+import SmartMeterSettings from './pages/SmartMeterSettings/SmartMeterSettings';
 import WaterReaderSettings from './pages/WaterReaderSettings/WaterReaderSettings';
 import About from './pages/About/About';
 import FourOFour from './pages/FourOFour/FourOFour';
@@ -64,6 +65,9 @@ export default function App() {
 					</PrivateRoute>
 					<PrivateRoute path="/minder-gas-nl">
 						<MinderGasNlSettings />
+					</PrivateRoute>
+					<PrivateRoute path="/smart-meter">
+						<SmartMeterSettings />
 					</PrivateRoute>
 					<PrivateRoute path="/water-reader">
 						<WaterReaderSettings />

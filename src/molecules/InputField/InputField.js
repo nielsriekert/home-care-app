@@ -1,10 +1,11 @@
 import styles from './InputField.module.css';
 import React, { useState, useCallback } from 'react';
 
+import FieldLabel from '../../atoms/FieldLabel/FieldLabel';
 import FieldDescription from '../../atoms/FieldDescription/FieldDescription';
 import FieldMessage from '../../atoms/FieldMessage/FieldMessage';
 
-export default function InputField({ type, label, name, value, description, onChange, onFocus, state, isDisabled = false, message, containerClass }) {
+export default function InputField({ type, label, name, value, description, onChange, isRequired, onFocus, state, isDisabled = false, message, containerClass }) {
 	const [isFocused, setFocus] = useState(false);
 
 	const onValueChange = useCallback((event) => {
@@ -22,7 +23,7 @@ export default function InputField({ type, label, name, value, description, onCh
 
 	return (
 		<div className={styles.container + (isDisabled ? ' ' + styles.isDisabled : '') + (containerClass ? ' ' + containerClass : '')}>
-			<label className={isFocused || value ? styles.isFloating : undefined}>{label}</label>
+			<FieldLabel label={label} fieldIsRequired={isRequired} isFloating={isFocused || value} />
 			<div className={styles.inputContainer + (state ? ' ' + styles[state] : '')}>
 				<input
 					type={type}

@@ -1,13 +1,18 @@
 import React from 'react';
 
+import Skeleton from '../../atoms/Skeleton/Skeleton';
+import Message from '../../atoms/Message/Message';
+
 import { useQuery, gql } from '@apollo/client';
+
+import { DateTime } from 'luxon';
 
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-const GAS_USAGE = gql`
-	query gasUsage($resolution: TimeSpan) {
-		gasUsage(resolution: $resolution) {
+const GAS_EXCHANGES_CHART = gql`
+	query gasExchanges($resolution: TimeSpan $timePeriod: TimePeriodInput!) {
+		gasExchanges(resolution: $resolution, timePeriod: $timePeriod) {
 			received
 			period {
 				start
@@ -17,16 +22,22 @@ const GAS_USAGE = gql`
 	}
 `;
 
+const now = DateTime.now();
+
 export default function GasUsage() {
-	const { loading, error, data } = useQuery(GAS_USAGE, {
-		fetchPolicy: 'cache-and-network',
+	const { loading, error, data } = useQuery(GAS_EXCHANGES_CHART, {
+		fetchPolicy: 'network-only',
 		variables: {
-			resolution: 'TWO_HOURS'
+			resolution: 'TWO_HOURS',
+			timePeriod: {
+				start: Math.floor(now.minus({ days: 4 }).toSeconds()),
+				end: Math.floor(now.toSeconds())
+			}
 		}
 	});
 
-	if (loading) return <p>Loading...</p>;
-	if (error) return <p>Error :(</p>;
+	if (loading) return <Skeleton width="100%" height="300px" />;
+	if (error) return <Message type="error">{error.message}</Message>;
 
 	return (
 		<div className="gas-usage-container">
@@ -58,7 +69,7 @@ export default function GasUsage() {
 						name: 'm³',
 						type: 'column',
 						showInLegend: false,
-						data: data.gasUsage.slice().reverse().map(usage => [usage.period.end * 1000, Math.round((usage.received + Number.EPSILON) * 1000) / 1000]),
+						data: data.gasExchanges.map(usage => [usage.period.end * 1000, usage.received]),
 						color: 'hsla(var(--color-gas-h), var(--color-gas-s), var(--color-gas-l), .6)'
 					}]
 				}}

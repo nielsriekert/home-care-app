@@ -20,7 +20,7 @@ import GasUsage from '../../molecules/GasUsage/GasUsage';
 import WaterUsage from '../../molecules/WaterUsage/WaterUsage';
 import ElectricityReceivedChart from '../../molecules/ElectricityReceivedChart/ElectricityReceivedChart';
 import ElectricityDeliveredChart from '../../molecules/ElectricityDeliveredChart/ElectricityDeliveredChart';
-import GasUsageChart from '../../GasUsage';
+import GasReceivedChart from '../../molecules/GasReceivedChart/GasReceivedChart';
 import CumulativeWaterUsageChart from '../../molecules/CumulativeWaterUsageChart/CumulativeWaterUsageChart';
 import ElectricityReceivedWeekChart from '../../molecules/ElectricityReceivedWeekChart/ElectricityReceivedWeekChart';
 import GasReceivedWeekChart from '../../molecules/GasReceivedWeekChart/GasReceivedWeekChart';
@@ -96,7 +96,7 @@ export default function Dashboard() {
 					<ElectricityDeliveredChart resolution="FIVE_MINUTES" hoursInThePast={8} />
 				</Widget>
 				<Widget title="Last 4 days" name="gas-usage-chart" icon={<FireIcon />}>
-					<GasUsageChart />
+					<GasReceivedChart />
 				</Widget>
 				<Widget title="Today" name="cumulative-water-usage-chart" icon={<WaterIcon />}>
 					<ul style={{ display: 'flex', gap: '10px', listStyleType: 'none', padding: '0' }}>

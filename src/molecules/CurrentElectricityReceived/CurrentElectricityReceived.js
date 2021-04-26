@@ -17,7 +17,7 @@ const CURRENT_ELECTRIC_RECEIVED = gql`
 
 export default function CurrentElectricityReceived() {
 	const { loading, error, data } = useQuery(CURRENT_ELECTRIC_RECEIVED, {
-		fetchPolicy: 'cache-and-network',
+		fetchPolicy: 'network-only',
 	});
 
 	if (error) return <Message type="error">{error.message}</Message>;

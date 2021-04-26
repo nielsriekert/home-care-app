@@ -32,7 +32,7 @@ const getEndOfToday = () => {
 
 export default function GasUsage({ start, end }) {
 	const { loading, error, data } = useQuery(GAS_CONSUMPTION, {
-		fetchPolicy: 'cache-and-network',
+		fetchPolicy: 'network-only',
 		variables: {
 			start: start || getStartOfToday(),
 			end: end || getEndOfToday()

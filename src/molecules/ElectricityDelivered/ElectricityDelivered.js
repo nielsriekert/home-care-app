@@ -32,7 +32,7 @@ const getEndOfToday = () => {
 
 export default function ElectricityDelivered({ start, end }) {
 	const { loading, error, data } = useQuery(ELECTRICITY_DELIVERED, {
-		fetchPolicy: 'cache-and-network',
+		fetchPolicy: 'network-only',
 		variables: {
 			start: start || getStartOfToday(),
 			end: end || getEndOfToday()
@@ -42,7 +42,7 @@ export default function ElectricityDelivered({ start, end }) {
 	if (error) return <Message type="error">{error.message}</Message>;
 	return (
 		<div className={styles.container}>
-			{!loading ? data ? data.electricityConsumption.delivered + ' kWh' : 0 + ' kWh' : <Skeleton width="3em" />}
+			{!loading ? data && data.electricityConsumption ? data.electricityConsumption.delivered + ' kWh' : 0 + ' kWh' : <Skeleton width="3em" />}
 		</div>
 	);
 }

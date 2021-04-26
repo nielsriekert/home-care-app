@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.7.0] - 2021-04-26
+### Added
+- Smart Meter settings page with general info from the Smart Meter.
+- Custom favicon image.
+
+### Changed
+- More accurate 4 day gas widget (same day total).
+- Improved forms and inputs (layout and usability).
+
+### Removed
+- Rounding values for 4 day gas usage chart because they are already.
+
+### Fixed
+- Login form button not working.
+
 ## [1.6.1] - 2021-04-22
 ### Fixed
 - Wrong unit (kWh) in gas week chart widget.

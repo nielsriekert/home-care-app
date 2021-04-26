@@ -4,7 +4,8 @@ import styles from './Message.module.css';
 export default function Message({ type, children }) {
 	return (
 		<div className={styles.container + (type ? ' ' + styles[type] : ' ' + styles.notice)} >
-			{children}
+			{typeof children === 'string' ?
+				<p>{children}</p> : children}
 		</div>
 	);
 }

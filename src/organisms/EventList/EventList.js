@@ -26,7 +26,7 @@ const EVENTS = gql`
 export default function EventList() {
 	const [events, setEvents] = useState([]);
 	const { loading, error, data } = useQuery(EVENTS, {
-		fetchPolicy: 'cache-and-network',
+		fetchPolicy: 'network-only',
 		variables: {
 			pageSize: 24
 		}
@@ -54,7 +54,7 @@ export default function EventList() {
 			{!loading && events.length > 0 ?
 				<ul className={styles.cardsContainer}>
 					{events.map(event => (
-						<li><EventCard key={event.timeStamp} {...event} /></li>
+						<li key={event.timeStamp}><EventCard  {...event} /></li>
 					))}
 				</ul>
 				: loading ?
@@ -73,7 +73,7 @@ export default function EventList() {
 						</li>
 					</ul>
 					: error ?
-						<Message type="error">{error}</Message>	: <Message>No events found</Message>}
+						<Message type="error">{error.message}</Message>	: <Message>No events found</Message>}
 		</div>
 	);
 }
