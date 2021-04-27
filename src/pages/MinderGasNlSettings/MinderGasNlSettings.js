@@ -21,7 +21,7 @@ const SET_STATE_MINDER_GAS_SYNC = gql`
 	}
 `;
 
-const isSyncStateCheckboxChecked = field => field.choices.filter(checkField => checkField.checked).length >= 1;
+const isSyncStateCheckboxChecked = field => field.choices.filter(checkField => checkField.isChecked).length >= 1;
 const getSyncStateFromApi = (queryData, mutateData) => (
 	typeof mutateData === 'undefined' ? (queryData && queryData.isMinderGasNlSynchronizationActive) === true : mutateData.setSyncStateSendingReadingsToMinderGasNl === true
 );
@@ -58,7 +58,7 @@ export default function MinderGasNlSettings() {
 				isDisabled: true,
 				choices: prevField.choices.map(field => ({
 					...field,
-					checked: !field.checked,
+					isChecked: !field.isChecked,
 				}))
 			};
 		});
@@ -70,7 +70,7 @@ export default function MinderGasNlSettings() {
 			isDisabled: false,
 			choices: prevField.choices.map(field => ({
 				...field,
-				checked: getSyncStateFromApi(data, sendingData),
+				isChecked: getSyncStateFromApi(data, sendingData),
 			}))
 		}));
 	}, [data, sendingData]);
