@@ -18,6 +18,7 @@ const ADD_VERIFIED_WATER_READING = gql`
 export default function WaterReaderSettings() {
 	const [addReading, { data, error, loading }] = useMutation(ADD_VERIFIED_WATER_READING);
 	const [fieldValue, setFieldValue] = useState('');
+	const [fieldError, setFieldError] = useState('');
 	const [successMessage, setSuccessMessage] = useState(null);
 
 	const onChange = useCallback((name, value) => {
@@ -25,6 +26,11 @@ export default function WaterReaderSettings() {
 	}, [setFieldValue]);
 
 	const onSubmit = useCallback(() => {
+		if (!fieldValue) {
+			setFieldError('No input or not a number');
+			return;
+		}
+
 		addReading({
 			variables: {
 				reading: parseInt(fieldValue)
@@ -53,6 +59,11 @@ export default function WaterReaderSettings() {
 					type="number"
 					onChange={onChange}
 					value={fieldValue}
+					isRequired
+					message={fieldError ? {
+						type: 'isError',
+						content: fieldError
+					} : false}
 					description={
 						<div>
 							<p>

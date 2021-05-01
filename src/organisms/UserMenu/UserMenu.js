@@ -17,7 +17,9 @@ const ME = gql`
 `;
 
 export default function UserMenu({ className }) {
-	const { loading, error, data } = useQuery(ME);
+	const { loading, error, data } = useQuery(ME, {
+		fetchPolicy: 'cache-first'
+	});
 
 	if (error) {
 		return <div className="loading">error</div>;

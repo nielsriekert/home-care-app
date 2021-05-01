@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.8.0] - 2021-05-02
+### Added
+- Background color for values without data points in the electricity chart and gas chart.
+
+### Changed
+- Cache data for user avatar in memory.
+- Better error feedback add verified water reading form.
+- More accurate electricity 8 hour chart.
+- Combined delivered and received electricity in one chart.
+
+### Fixed
+- Add verified water readings required field.
+
 ## [1.7.2] - 2021-04-27
 ### Fixed
 - MinderGas.nl synchronization checkbox toggle.

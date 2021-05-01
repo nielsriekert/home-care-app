@@ -7,6 +7,7 @@ import WidgetGrid from '../../organisms/WidgetGrid/WidgetGrid';
 
 import Widget from '../../molecules/Widget/Widget';
 
+import BoltIcon from '../../atoms/BoltIcon/BoltIcon';
 import BoltArrowUpIcon from '../../atoms/BoltArrowUpIcon/BoltArrowUpIcon';
 import BoltArrowDownIcon from '../../atoms/BoltArrowDownIcon/BoltArrowDownIcon';
 import WaterIcon from '../../atoms/WaterIcon/WaterIcon';
@@ -18,8 +19,7 @@ import ElectricityReceived from '../../molecules/ElectricityReceived/Electricity
 import ElectricityDelivered from '../../molecules/ElectricityDelivered/ElectricityDelivered';
 import GasUsage from '../../molecules/GasUsage/GasUsage';
 import WaterUsage from '../../molecules/WaterUsage/WaterUsage';
-import ElectricityReceivedChart from '../../molecules/ElectricityReceivedChart/ElectricityReceivedChart';
-import ElectricityDeliveredChart from '../../molecules/ElectricityDeliveredChart/ElectricityDeliveredChart';
+import ElectricityChart from '../../molecules/ElectricityChart/ElectricityChart';
 import GasReceivedChart from '../../molecules/GasReceivedChart/GasReceivedChart';
 import CumulativeWaterUsageChart from '../../molecules/CumulativeWaterUsageChart/CumulativeWaterUsageChart';
 import ElectricityReceivedWeekChart from '../../molecules/ElectricityReceivedWeekChart/ElectricityReceivedWeekChart';
@@ -89,11 +89,8 @@ export default function Dashboard() {
 				<Widget title="Today" name="water-usage" icon={<WaterIcon />}>
 					<WaterUsage />
 				</Widget>
-				<Widget title="Last 8 hours" name="electricity-usage-chart" icon={<BoltArrowDownIcon />}>
-					<ElectricityReceivedChart resolution="FIVE_MINUTES" hoursInThePast={8} />
-				</Widget>
-				<Widget title="Last 8 hours" name="electricity-usage-chart" icon={<BoltArrowUpIcon />}>
-					<ElectricityDeliveredChart resolution="FIVE_MINUTES" hoursInThePast={8} />
+				<Widget title="Last 8 hours" name="electricity-usage-chart" icon={<BoltIcon />}>
+					<ElectricityChart resolution="FIVE_MINUTES" />
 				</Widget>
 				<Widget title="Last 4 days" name="gas-usage-chart" icon={<FireIcon />}>
 					<GasReceivedChart />
