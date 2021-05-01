@@ -5,9 +5,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Background color for values without data points in the electricity chart and gas chart.
+
 ### Changed
 - Cache data for user avatar in memory.
 - Better error feedback add verified water reading form.
+- More accurate electricity 8 hour chart.
+- Combined delivered and received electricity in one chart.
 
 ### Fixed
 - Add verified water readings required field.
