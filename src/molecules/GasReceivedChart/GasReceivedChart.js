@@ -56,7 +56,7 @@ export default function GasReceivedChart() {
 						lineColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)',
 						tickColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)',
 						plotBands: data.gasExchanges.filter(exchange => exchange.dataPointsCount === 0).map(exchange => ({
-							color: 'hsla(var(--color-secondary-shade-1-h), var(--color-secondary-shade-1-s), var(--color-secondary-shade-1-l), 0.1)', // Color value
+							color: 'hsla(var(--color-secondary-shade-1-h), var(--color-secondary-shade-1-s), var(--color-secondary-shade-1-l), 0.2)', // Color value
 							from: exchange.period.start * 1000,
 							to: exchange.period.end * 1000
 						})),
