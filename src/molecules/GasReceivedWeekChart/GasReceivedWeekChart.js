@@ -14,7 +14,7 @@ import HighchartsReact from 'highcharts-react-official';
 
 const GAS_RECEIVED_WEEK_CHART = gql`
 	${CONSUMPTION}
-	query gasConsumptionCurrentWeek(
+	query gasExchangeCurrentWeek(
 		$startMonday: Int!
 		$endMonday: Int!
 		$startTuesday: Int!
@@ -30,49 +30,49 @@ const GAS_RECEIVED_WEEK_CHART = gql`
 		$startSunday: Int!
 		$endSunday: Int!
 	) {
-		consumptionMonday: gasConsumption(
+		consumptionMonday: gasExchange(
 			start: $startMonday
 			end: $endMonday
 		) {
 			...consumption
 		}
 
-		consumptionTuesday: gasConsumption(
+		consumptionTuesday: gasExchange(
 			start: $startTuesday
 			end: $endTuesday
 		) {
 			...consumption
 		}
 
-		consumptionWednesday: gasConsumption(
+		consumptionWednesday: gasExchange(
 			start: $startWednesday
 			end: $endWednesday
 		) {
 			...consumption
 		}
 
-		consumptionThursday: gasConsumption(
+		consumptionThursday: gasExchange(
 			start: $startThursday
 			end: $endThursday
 		) {
 			...consumption
 		}
 
-		consumptionFriday: gasConsumption(
+		consumptionFriday: gasExchange(
 			start: $startFriday
 			end: $endFriday
 		) {
 			...consumption
 		}
 
-		consumptionSaturday: gasConsumption(
+		consumptionSaturday: gasExchange(
 			start: $startSaturday
 			end: $endSaturday
 		) {
 			...consumption
 		}
 
-		consumptionSunday: gasConsumption(
+		consumptionSunday: gasExchange(
 			start: $startSunday
 			end: $endSunday
 		) {

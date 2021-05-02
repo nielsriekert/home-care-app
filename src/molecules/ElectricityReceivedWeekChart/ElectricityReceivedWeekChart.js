@@ -14,7 +14,7 @@ import HighchartsReact from 'highcharts-react-official';
 
 const ELECTRIC_RECEIVED_WEEK_CHART = gql`
 	${CONSUMPTION}
-	query electricityConsumptionCurrentWeek(
+	query electricityExchangeCurrentWeek(
 		$startMonday: Int!
 		$endMonday: Int!
 		$startTuesday: Int!
@@ -30,49 +30,49 @@ const ELECTRIC_RECEIVED_WEEK_CHART = gql`
 		$startSunday: Int!
 		$endSunday: Int!
 	) {
-		consumptionMonday: electricityConsumption(
+		consumptionMonday: electricityExchange(
 			start: $startMonday
 			end: $endMonday
 		) {
 			...consumption
 		}
 
-		consumptionTuesday: electricityConsumption(
+		consumptionTuesday: electricityExchange(
 			start: $startTuesday
 			end: $endTuesday
 		) {
 			...consumption
 		}
 
-		consumptionWednesday: electricityConsumption(
+		consumptionWednesday: electricityExchange(
 			start: $startWednesday
 			end: $endWednesday
 		) {
 			...consumption
 		}
 
-		consumptionThursday: electricityConsumption(
+		consumptionThursday: electricityExchange(
 			start: $startThursday
 			end: $endThursday
 		) {
 			...consumption
 		}
 
-		consumptionFriday: electricityConsumption(
+		consumptionFriday: electricityExchange(
 			start: $startFriday
 			end: $endFriday
 		) {
 			...consumption
 		}
 
-		consumptionSaturday: electricityConsumption(
+		consumptionSaturday: electricityExchange(
 			start: $startSaturday
 			end: $endSaturday
 		) {
 			...consumption
 		}
 
-		consumptionSunday: electricityConsumption(
+		consumptionSunday: electricityExchange(
 			start: $startSunday
 			end: $endSunday
 		) {

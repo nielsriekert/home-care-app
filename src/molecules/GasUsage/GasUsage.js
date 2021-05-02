@@ -7,8 +7,8 @@ import Message from '../../atoms/Message/Message';
 import { useQuery, gql } from '@apollo/client';
 
 const GAS_CONSUMPTION = gql`
-	query gasConsumption($start: Int! $end: Int!) {
-		gasConsumption(start: $start end: $end) {
+	query gasExchange($start: Int! $end: Int!) {
+		gasExchange(start: $start end: $end) {
 			received
 			period {
 				start
@@ -41,7 +41,7 @@ export default function GasUsage({ start, end }) {
 	if (error) return <Message type="error">{error.message}</Message>;
 	return (
 		<div className={styles.container}>
-			{!loading ? data.gasConsumption ? data.gasConsumption.received + ' m³' : 0 + ' m³' : <Skeleton width="3em" /> }
+			{!loading ? data.gasExchange ? data.gasExchange.received + ' m³' : 0 + ' m³' : <Skeleton width="3em" /> }
 		</div>
 	);
 }

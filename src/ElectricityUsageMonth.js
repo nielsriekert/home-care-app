@@ -6,7 +6,7 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
 const ELECTRIC_USAGE = gql`
-	query electricityConsumptionByMonth(
+	query electricityExchangeByMonth(
 		$startCurrentMonth: Int!
 		$endCurrentMonth: Int!
 		$startPreviousMonth: Int!
@@ -16,7 +16,7 @@ const ELECTRIC_USAGE = gql`
 		$startThreeMonthsAgo: Int!
 		$endThreeMonthsAgo: Int!
 	) {
-		consumptionCurrentMonth: electricityConsumption(
+		consumptionCurrentMonth: electricityExchange(
 			start: $startCurrentMonth
 			end: $endCurrentMonth
 		) {
@@ -28,7 +28,7 @@ const ELECTRIC_USAGE = gql`
 			}
 		}
 
-		consumptionPreviousMonth: electricityConsumption(
+		consumptionPreviousMonth: electricityExchange(
 			start: $startPreviousMonth
 			end: $endPreviousMonth
 		) {
@@ -40,7 +40,7 @@ const ELECTRIC_USAGE = gql`
 			}
 		}
 
-		consumptionTwoMonthsAgo: electricityConsumption(
+		consumptionTwoMonthsAgo: electricityExchange(
 			start: $startTwoMonthsAgo
 			end: $endTwoMonthsAgo
 		) {
@@ -52,7 +52,7 @@ const ELECTRIC_USAGE = gql`
 			}
 		}
 
-		consumptionThreeMonthsAgo: electricityConsumption(
+		consumptionThreeMonthsAgo: electricityExchange(
 			start: $startThreeMonthsAgo
 			end: $endThreeMonthsAgo
 		) {
