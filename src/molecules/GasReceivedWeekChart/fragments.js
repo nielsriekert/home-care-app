@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const CONSUMPTION = gql`
-	fragment consumption on GasConsumption {
+	fragment consumption on GasExchange {
 		received
 		period {
 			start

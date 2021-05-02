@@ -6,7 +6,7 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
 const GAS_USAGE = gql`
-	query gasConsumptionByMonth(
+	query gasExchangeByMonth(
 		$startCurrentMonth: Int!
 		$endCurrentMonth: Int!
 		$startPreviousMonth: Int!
@@ -16,7 +16,7 @@ const GAS_USAGE = gql`
 		$startThreeMonthsAgo: Int!
 		$endThreeMonthsAgo: Int!
 	) {
-		consumptionCurrentMonth: gasConsumption(
+		consumptionCurrentMonth: gasExchange(
 			start: $startCurrentMonth
 			end: $endCurrentMonth
 		) {
@@ -27,7 +27,7 @@ const GAS_USAGE = gql`
 			}
 		}
 
-		consumptionPreviousMonth: gasConsumption(
+		consumptionPreviousMonth: gasExchange(
 			start: $startPreviousMonth
 			end: $endPreviousMonth
 		) {
@@ -38,7 +38,7 @@ const GAS_USAGE = gql`
 			}
 		}
 
-		consumptionTwoMonthsAgo: gasConsumption(
+		consumptionTwoMonthsAgo: gasExchange(
 			start: $startTwoMonthsAgo
 			end: $endTwoMonthsAgo
 		) {
@@ -49,7 +49,7 @@ const GAS_USAGE = gql`
 			}
 		}
 
-		consumptionThreeMonthsAgo: gasConsumption(
+		consumptionThreeMonthsAgo: gasExchange(
 			start: $startThreeMonthsAgo
 			end: $endThreeMonthsAgo
 		) {

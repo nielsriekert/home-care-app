@@ -8,7 +8,7 @@ import { useQuery, gql } from '@apollo/client';
 
 const ELECTRICITY_DELIVERED = gql`
 	query electricityDelivered($start: Int! $end: Int!) {
-		electricityConsumption(start: $start end: $end) {
+		electricityExchange(start: $start end: $end) {
 			delivered
 			period {
 				start
@@ -41,7 +41,7 @@ export default function ElectricityDelivered({ start, end }) {
 	if (error) return <Message type="error">{error.message}</Message>;
 	return (
 		<div className={styles.container}>
-			{!loading ? data && data.electricityConsumption ? data.electricityConsumption.delivered + ' kWh' : 0 + ' kWh' : <Skeleton width="3em" />}
+			{!loading ? data && data.electricityExchange ? data.electricityExchange.delivered + ' kWh' : 0 + ' kWh' : <Skeleton width="3em" />}
 		</div>
 	);
 }
