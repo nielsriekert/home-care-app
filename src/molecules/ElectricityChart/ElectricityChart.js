@@ -57,9 +57,9 @@ export default function ElectricityReceivedChart({ resolution }) {
 						lineColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)',
 						tickColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)',
 						plotBands: data.electricityExchanges.filter(exchange => exchange.dataPointsCount === 0).map(exchange => ({
-							color: 'hsla(var(--color-secondary-shade-1-h), var(--color-secondary-shade-1-s), var(--color-secondary-shade-1-l), 0.2)', // Color value
-							from: exchange.period.start * 1000, // Start of the plot band
-							to: exchange.period.end * 1000 // End of the plot band
+							color: 'hsla(var(--color-secondary-shade-1-h), var(--color-secondary-shade-1-s), var(--color-secondary-shade-1-l), 0.2)',
+							from: exchange.period.start * 1000,
+							to: exchange.period.end * 1000
 						})),
 					},
 					yAxis: {

@@ -175,6 +175,11 @@ export default function ElectricityReceivedWeekChart() {
 						},
 						gridLineColor: 'var(--color-secondary-shade-2)',
 					},
+					plotOptions: {
+						series: {
+							stacking: 'normal'
+						}
+					},
 					time: {
 						useUTC: false
 					},
@@ -182,8 +187,15 @@ export default function ElectricityReceivedWeekChart() {
 						name: 'kWh',
 						type: 'column',
 						showInLegend: false,
-						data: weekDays.slice().map(weekDayUsage => [weekDayUsage.weekDay.toLocaleString({ weekday: 'long' }), Math.round((weekDayUsage.data.received + Number.EPSILON) * 100) / 100]),
+						data: weekDays.slice().map(weekDayUsage => [weekDayUsage.weekDay.toLocaleString({ weekday: 'long' }), weekDayUsage.data.received * -1]),
 						color: 'hsla(var(--color-electricity-received-h), var(--color-electricity-received-s), var(--color-electricity-received-l), .6)'
+					},
+					{
+						name: 'kWh',
+						type: 'column',
+						showInLegend: false,
+						data: weekDays.slice().map(weekDayUsage => [weekDayUsage.weekDay.toLocaleString({ weekday: 'long' }), weekDayUsage.data.delivered]),
+						color: 'hsla(var(--color-electricity-delivered-h), var(--color-electricity-delivered-s), var(--color-electricity-delivered-l), .6)'
 					}]
 				}}
 			/>

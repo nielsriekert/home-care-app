@@ -6,3 +6,7 @@
 	color: var(--color-secondary-shade-4);
 	padding: 20px var(--content-padding-horizontal);
 }
+
+.pageContainer > p {
+	max-width: 40em;
+}
