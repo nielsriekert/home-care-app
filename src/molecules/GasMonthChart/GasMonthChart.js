@@ -2,6 +2,9 @@ import React from 'react';
 
 import { useQuery, gql } from '@apollo/client';
 
+import SkeletonChart from '../../molecules/SkeletonChart/SkeletonChart';
+import Message from '../../atoms/Message/Message';
+
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
@@ -89,8 +92,8 @@ export default function GasUsageMonth() {
 		}
 	});
 
-	if (loading) return <p>Loading...</p>;
-	if (error) return <p>Error :(</p>;
+	if (loading) return <SkeletonChart />;
+	if (error) return <Message type="error">{error.message}</Message>;
 
 	// TODO: not in render method
 	const months = [

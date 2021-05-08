@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Skeleton from '../../atoms/Skeleton/Skeleton';
+import SkeletonChart from '../../molecules/SkeletonChart/SkeletonChart';
 import Message from '../../atoms/Message/Message';
 
 import { CONSUMPTION } from './fragments';
@@ -109,7 +109,7 @@ export default function WaterReceivedWeekChart() {
 		}
 	});
 
-	if (loading) return <Skeleton width="100%" height="300px" />;
+	if (loading) return <SkeletonChart />;
 	if (error) return <Message type="error">{error.message}</Message>;
 
 	const weekDays = [

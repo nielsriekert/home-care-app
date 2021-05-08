@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Water received week chart added to dashboard page.
 - Descriptions on water and mindergas.nl settings pages.
 
+### Changed
+- Nicer skeleton loading for charts.
+
+### Fixed
+- Time 8 hour electricity and 4 day gas chart was not updating on navigating back to the dashboard page.
+
 ### Removed
 - Rounding for month widgets.
 

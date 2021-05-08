@@ -23,8 +23,8 @@ import ElectricityDelivered from '../../molecules/ElectricityDelivered/Electrici
 import GasUsage from '../../molecules/GasUsage/GasUsage';
 import WaterUsage from '../../molecules/WaterUsage/WaterUsage';
 
-import ElectricityUsageMonth from '../../ElectricityUsageMonth';
-import GasUsageMonth from '../../GasUsageMonth';
+import ElectricityMonthChart from '../../molecules/ElectricityMonthChart/ElectricityUsageMonth';
+import GasMonthChart from '../../molecules/GasMonthChart/GasMonthChart';
 
 export default function Portal() {
 	return (
@@ -53,10 +53,10 @@ export default function Portal() {
 					<WaterUsage />
 				</Widget>
 				<Widget title="Month" name="electrical-usage-by-month" icon={<BoltArrowDownIcon />}>
-					<ElectricityUsageMonth />
+					<ElectricityMonthChart />
 				</Widget>
 				<Widget title="Month" name="gas-usage-by-month" icon={<FireIcon />}>
-					<GasUsageMonth />
+					<GasMonthChart />
 				</Widget>
 			</WidgetGrid>
 		</LoggedOut>

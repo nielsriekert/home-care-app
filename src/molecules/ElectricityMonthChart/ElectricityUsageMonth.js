@@ -2,6 +2,9 @@ import React from 'react';
 
 import { useQuery, gql } from '@apollo/client';
 
+import SkeletonChart from '../../molecules/SkeletonChart/SkeletonChart';
+import Message from '../../atoms/Message/Message';
+
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
@@ -66,7 +69,7 @@ const ELECTRIC_USAGE = gql`
 	}
 `;
 
-export default function ElectricityUsageMonth() {
+export default function ElectricityMonthChart() {
 	const date = new Date();
 	const startCurrentMonth = new Date(date.getFullYear(), date.getMonth(), 1, 0, 0, 0);
 	const endCurrentMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0, 23, 59, 59);
@@ -93,8 +96,8 @@ export default function ElectricityUsageMonth() {
 		}
 	});
 
-	if (loading) return <p>Loading...</p>;
-	if (error) return <p>Error :(</p>;
+	if (loading) return <SkeletonChart />;
+	if (error) return <Message type="error">{error.message}</Message>;
 
 	// TODO: not in render method
 	const months = [

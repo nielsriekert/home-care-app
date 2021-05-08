@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Skeleton from '../../atoms/Skeleton/Skeleton';
+import SkeletonChart from '../../molecules/SkeletonChart/SkeletonChart';
 import Message from '../../atoms/Message/Message';
 
 import { useQuery, gql } from '@apollo/client';
@@ -24,9 +24,8 @@ const ELECTRIC_RECEIVED_CHART = gql`
 	}
 `;
 
-const now = DateTime.now();
-
 export default function ElectricityReceivedChart({ resolution }) {
+	const now = DateTime.now();
 	const { loading, error, data } = useQuery(ELECTRIC_RECEIVED_CHART, {
 		variables: {
 			resolution: resolution || 'FIVE_MINUTES',
@@ -37,7 +36,7 @@ export default function ElectricityReceivedChart({ resolution }) {
 		}
 	});
 
-	if (loading) return <Skeleton width="100%" height="300px" />;
+	if (loading) return <SkeletonChart />;
 	if (error) return <Message type="error">{error.message}</Message>;
 
 	return (
