@@ -1,6 +1,8 @@
 import './dashboard.css';
 import React, { useState, useCallback } from 'react';
 
+import { DateTime } from 'luxon';
+
 import Default from '../../templates/Default/Default';
 
 import WidgetGrid from '../../organisms/WidgetGrid/WidgetGrid';
@@ -91,7 +93,11 @@ export default function Dashboard() {
 					<WaterUsage />
 				</Widget>
 				<Widget title="Last 8 hours" name="electricity-usage-chart" icon={<BoltIcon />}>
-					<ElectricityChart resolution="FIVE_MINUTES" />
+					<ElectricityChart
+						resolution="FIVE_MINUTES"
+						start={Math.floor(DateTime.now().minus({ hours: 8 }).toSeconds())}
+						end={Math.floor(DateTime.now().toSeconds())}
+					/>
 				</Widget>
 				<Widget title="Last 4 days" name="gas-usage-chart" icon={<FireIcon />}>
 					<GasReceivedChart />

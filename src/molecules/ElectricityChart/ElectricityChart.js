@@ -5,8 +5,6 @@ import Message from '../../atoms/Message/Message';
 
 import { useQuery, gql } from '@apollo/client';
 
-import { DateTime } from 'luxon';
-
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
@@ -24,14 +22,13 @@ const ELECTRIC_RECEIVED_CHART = gql`
 	}
 `;
 
-export default function ElectricityReceivedChart({ resolution }) {
-	const now = DateTime.now();
+export default function ElectricityChart({ resolution, start, end }) {
 	const { loading, error, data } = useQuery(ELECTRIC_RECEIVED_CHART, {
 		variables: {
 			resolution: resolution || 'FIVE_MINUTES',
 			timePeriod: {
-				start: Math.floor(now.minus({ hours: 8 }).toSeconds()),
-				end: Math.floor(now.toSeconds())
+				start,
+				end
 			}
 		}
 	});
