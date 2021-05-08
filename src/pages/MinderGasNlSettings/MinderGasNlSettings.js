@@ -77,6 +77,10 @@ export default function MinderGasNlSettings() {
 
 	return (
 		<Settings title="MinderGas.nl synchronization">
+			<p>
+				Monitor your natural gas consumption, by connecting to mindergas.nl.<br />
+				The backend server needs to be configured with the api key from mindergas.nl to activate this feature.
+			</p>
 			{errorToDisplay ?
 				<Message type="error" >{errorToDisplay.message}</Message> : ''}
 			{!loading ?

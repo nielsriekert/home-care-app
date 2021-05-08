@@ -12,9 +12,9 @@ import { DateTime } from 'luxon';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-const GAS_RECEIVED_WEEK_CHART = gql`
+const WATER_RECEIVED_WEEK_CHART = gql`
 	${CONSUMPTION}
-	query gasExchangeCurrentWeek(
+	query waterExchangeCurrentWeek(
 		$startMonday: Int!
 		$endMonday: Int!
 		$startTuesday: Int!
@@ -30,49 +30,49 @@ const GAS_RECEIVED_WEEK_CHART = gql`
 		$startSunday: Int!
 		$endSunday: Int!
 	) {
-		consumptionMonday: gasExchange(
+		consumptionMonday: waterConsumption(
 			start: $startMonday
 			end: $endMonday
 		) {
 			...consumption
 		}
 
-		consumptionTuesday: gasExchange(
+		consumptionTuesday: waterConsumption(
 			start: $startTuesday
 			end: $endTuesday
 		) {
 			...consumption
 		}
 
-		consumptionWednesday: gasExchange(
+		consumptionWednesday: waterConsumption(
 			start: $startWednesday
 			end: $endWednesday
 		) {
 			...consumption
 		}
 
-		consumptionThursday: gasExchange(
+		consumptionThursday: waterConsumption(
 			start: $startThursday
 			end: $endThursday
 		) {
 			...consumption
 		}
 
-		consumptionFriday: gasExchange(
+		consumptionFriday: waterConsumption(
 			start: $startFriday
 			end: $endFriday
 		) {
 			...consumption
 		}
 
-		consumptionSaturday: gasExchange(
+		consumptionSaturday: waterConsumption(
 			start: $startSaturday
 			end: $endSaturday
 		) {
 			...consumption
 		}
 
-		consumptionSunday: gasExchange(
+		consumptionSunday: waterConsumption(
 			start: $startSunday
 			end: $endSunday
 		) {
@@ -81,7 +81,7 @@ const GAS_RECEIVED_WEEK_CHART = gql`
 	}
 `;
 
-export default function GasReceivedWeekChart() {
+export default function WaterReceivedWeekChart() {
 	const startMonday = DateTime.local().startOf('week');
 	const startTuesday =  DateTime.local().startOf('week').plus({ day: 1 });
 	const startWednesday = DateTime.local().startOf('week').plus({ day: 2 });
@@ -90,7 +90,7 @@ export default function GasReceivedWeekChart() {
 	const startSaturday = DateTime.local().startOf('week').plus({ day: 5 });
 	const startSunday = DateTime.local().startOf('week').plus({ day: 6 });
 
-	const { loading, error, data } = useQuery(GAS_RECEIVED_WEEK_CHART, {
+	const { loading, error, data } = useQuery(WATER_RECEIVED_WEEK_CHART, {
 		variables: {
 			startMonday: startMonday.toSeconds(),
 			endMonday: startTuesday.toSeconds(),
@@ -171,7 +171,7 @@ export default function GasReceivedWeekChart() {
 					},
 					yAxis: {
 						title: {
-							text: 'm³'
+							text: 'liter'
 						},
 						gridLineColor: 'var(--color-secondary-shade-2)',
 					},
@@ -179,11 +179,11 @@ export default function GasReceivedWeekChart() {
 						useUTC: false
 					},
 					series: [{
-						name: 'm³',
+						name: 'liter',
 						type: 'column',
 						showInLegend: false,
 						data: weekDays.slice().map(weekDayUsage => [weekDayUsage.weekDay.toLocaleString({ weekday: 'long' }), weekDayUsage.data.received]),
-						color: 'hsla(var(--color-gas-h), var(--color-gas-s), var(--color-gas-l), .6)'
+						color: 'hsla(var(--color-water-h), var(--color-water-s), var(--color-water-l), .6)'
 					}]
 				}}
 			/>

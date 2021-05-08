@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Skeleton from '../../atoms/Skeleton/Skeleton';
+import SkeletonChart from '../../molecules/SkeletonChart/SkeletonChart';
 import Message from '../../atoms/Message/Message';
 
 import { useQuery, gql } from '@apollo/client';
@@ -24,9 +24,8 @@ const ELECTRIC_RECEIVED_CHART = gql`
 	}
 `;
 
-const now = DateTime.now();
-
 export default function ElectricityReceivedChart({ resolution }) {
+	const now = DateTime.now();
 	const { loading, error, data } = useQuery(ELECTRIC_RECEIVED_CHART, {
 		variables: {
 			resolution: resolution || 'FIVE_MINUTES',
@@ -37,7 +36,7 @@ export default function ElectricityReceivedChart({ resolution }) {
 		}
 	});
 
-	if (loading) return <Skeleton width="100%" height="300px" />;
+	if (loading) return <SkeletonChart />;
 	if (error) return <Message type="error">{error.message}</Message>;
 
 	return (
@@ -57,15 +56,16 @@ export default function ElectricityReceivedChart({ resolution }) {
 						lineColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)',
 						tickColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)',
 						plotBands: data.electricityExchanges.filter(exchange => exchange.dataPointsCount === 0).map(exchange => ({
-							color: 'hsla(var(--color-secondary-shade-1-h), var(--color-secondary-shade-1-s), var(--color-secondary-shade-1-l), 0.1)', // Color value
-							from: exchange.period.start * 1000, // Start of the plot band
-							to: exchange.period.end * 1000 // End of the plot band
+							color: 'hsla(var(--color-secondary-shade-1-h), var(--color-secondary-shade-1-s), var(--color-secondary-shade-1-l), 0.2)',
+							from: exchange.period.start * 1000,
+							to: exchange.period.end * 1000
 						})),
 					},
 					yAxis: {
 						title: {
 							text: 'Wh'
 						},
+						softMax: 100,
 						gridLineColor: 'var(--color-secondary-shade-2)',
 					},
 					time: {

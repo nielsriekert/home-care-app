@@ -22,10 +22,11 @@ import WaterUsage from '../../molecules/WaterUsage/WaterUsage';
 import ElectricityChart from '../../molecules/ElectricityChart/ElectricityChart';
 import GasReceivedChart from '../../molecules/GasReceivedChart/GasReceivedChart';
 import CumulativeWaterUsageChart from '../../molecules/CumulativeWaterUsageChart/CumulativeWaterUsageChart';
-import ElectricityReceivedWeekChart from '../../molecules/ElectricityReceivedWeekChart/ElectricityReceivedWeekChart';
+import ElectricityWeekChart from '../../molecules/ElectricityWeekChart/ElectricityWeekChart';
 import GasReceivedWeekChart from '../../molecules/GasReceivedWeekChart/GasReceivedWeekChart';
-import ElectricityUsageMonth from '../../ElectricityUsageMonth';
-import GasUsageMonth from '../../GasUsageMonth';
+import WaterReceivedWeekChart from '../../molecules/WaterReceivedWeekChart/WaterReceivedWeekChart';
+import ElectricityMonthChart from '../../molecules/ElectricityMonthChart/ElectricityUsageMonth';
+import GasMonthChart from '../../molecules/GasMonthChart/GasMonthChart';
 
 import Button from '../../atoms/Button/Button';
 
@@ -103,17 +104,20 @@ export default function Dashboard() {
 					</ul>
 					<CumulativeWaterUsageChart {...waterChartDay} />
 				</Widget>
-				<Widget title="Week" name="electrical-usage-current-week" icon={<BoltArrowDownIcon />}>
-					<ElectricityReceivedWeekChart />
+				<Widget title="Week" name="electrical-usage-current-week" icon={<BoltIcon />}>
+					<ElectricityWeekChart />
 				</Widget>
 				<Widget title="Week" name="gas-usage-current-week" icon={<FireIcon />}>
 					<GasReceivedWeekChart />
 				</Widget>
+				<Widget title="Week" name="water-usage-current-week" icon={<WaterIcon />}>
+					<WaterReceivedWeekChart />
+				</Widget>
 				<Widget title="Month" name="electrical-usage-by-month" icon={<BoltArrowDownIcon />}>
-					<ElectricityUsageMonth />
+					<ElectricityMonthChart />
 				</Widget>
 				<Widget title="Month" name="gas-usage-by-month" icon={<FireIcon />}>
-					<GasUsageMonth />
+					<GasMonthChart />
 				</Widget>
 			</WidgetGrid>
 		</Default>

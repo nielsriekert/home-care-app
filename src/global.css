@@ -45,8 +45,8 @@
 	--color-secondary-shade-3: hsl(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l));
 
 	--color-secondary-shade-4-h: 213;
-	--color-secondary-shade-4-s: 17%;
-	--color-secondary-shade-4-l: 88%;
+	--color-secondary-shade-4-s: 15%;
+	--color-secondary-shade-4-l: 90%;
 	--color-secondary-shade-4: hsl(var(--color-secondary-shade-4-h), var(--color-secondary-shade-4-s), var(--color-secondary-shade-4-l));
 
 	--color-electricity-received-h: 224;
@@ -75,7 +75,7 @@
 @media (prefers-color-scheme: light) {
 	:root {
 		--color-secondary-shade-1-l: 97%;
-		--color-secondary-shade-2-l: 82%;
+		--color-secondary-shade-2-l: 84%;
 		--color-secondary-shade-3-l: 22%;
 		--color-secondary-shade-4-l: 12%;
 

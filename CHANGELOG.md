@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.10.0] - 2021-05-08
+### Added
+- Water received week chart added to dashboard page.
+- Descriptions on water and mindergas.nl settings pages.
+
+### Changed
+- Nicer skeleton loading for charts.
+
+### Fixed
+- Time 8 hour electricity and 4 day gas chart was not updating on navigating back to the dashboard page.
+
+### Removed
+- Rounding for month widgets.
+
 ## [1.9.0] - 2021-05-02
 ### Changed
 - All Consumption queries to new Exchange queries.

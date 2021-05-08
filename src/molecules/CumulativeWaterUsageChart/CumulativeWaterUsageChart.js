@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './CumulativeWaterUsageChart.module.css';
 
+import SkeletonChart from '../../molecules/SkeletonChart/SkeletonChart';
 import Message from '../../atoms/Message/Message';
 
 import { useQuery, gql } from '@apollo/client';
@@ -40,7 +41,7 @@ export default function CumulativeWaterUsageChart({ start, end }) {
 			end: end || getEndOfToday()
 		}
 	});
-	if (loading) return <p>Loading...</p>;
+	if (loading) return <SkeletonChart />;
 	if (error) return <Message type="error">{error.message}</Message>;
 
 	return (

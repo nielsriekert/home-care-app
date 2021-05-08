@@ -46,6 +46,10 @@ export default function WaterReaderSettings() {
 
 	return (
 		<Settings title="Water Reader">
+			<p>
+				The water sensor isn't 100% accurate. To correct the water meter reading count you can
+				add a reading manually. The next reading will count up from the added manual reading.
+			</p>
 			<Form
 				error={error}
 				onSubmit={onSubmit}

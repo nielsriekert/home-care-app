@@ -2,11 +2,14 @@ import React from 'react';
 
 import { useQuery, gql } from '@apollo/client';
 
+import SkeletonChart from '../../molecules/SkeletonChart/SkeletonChart';
+import Message from '../../atoms/Message/Message';
+
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-const ELECTRIC_USAGE = gql`
-	query electricityExchangeByMonth(
+const GAS_USAGE = gql`
+	query gasExchangeByMonth(
 		$startCurrentMonth: Int!
 		$endCurrentMonth: Int!
 		$startPreviousMonth: Int!
@@ -16,48 +19,44 @@ const ELECTRIC_USAGE = gql`
 		$startThreeMonthsAgo: Int!
 		$endThreeMonthsAgo: Int!
 	) {
-		consumptionCurrentMonth: electricityExchange(
+		consumptionCurrentMonth: gasExchange(
 			start: $startCurrentMonth
 			end: $endCurrentMonth
 		) {
 			received
-			delivered
 			period {
 				start
 				end
 			}
 		}
 
-		consumptionPreviousMonth: electricityExchange(
+		consumptionPreviousMonth: gasExchange(
 			start: $startPreviousMonth
 			end: $endPreviousMonth
 		) {
 			received
-			delivered
 			period {
 				start
 				end
 			}
 		}
 
-		consumptionTwoMonthsAgo: electricityExchange(
+		consumptionTwoMonthsAgo: gasExchange(
 			start: $startTwoMonthsAgo
 			end: $endTwoMonthsAgo
 		) {
 			received
-			delivered
 			period {
 				start
 				end
 			}
 		}
 
-		consumptionThreeMonthsAgo: electricityExchange(
+		consumptionThreeMonthsAgo: gasExchange(
 			start: $startThreeMonthsAgo
 			end: $endThreeMonthsAgo
 		) {
 			received
-			delivered
 			period {
 				start
 				end
@@ -66,7 +65,7 @@ const ELECTRIC_USAGE = gql`
 	}
 `;
 
-export default function ElectricityUsageMonth() {
+export default function GasUsageMonth() {
 	const date = new Date();
 	const startCurrentMonth = new Date(date.getFullYear(), date.getMonth(), 1, 0, 0, 0);
 	const endCurrentMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0, 23, 59, 59);
@@ -80,7 +79,7 @@ export default function ElectricityUsageMonth() {
 	const startThreeMonthsAgo = new Date(date.getFullYear(), date.getMonth() - 3, 1, 0, 0, 0);
 	const endThreeMonthsAgo = new Date(date.getFullYear(), date.getMonth() - 2, 0, 23, 59, 59);
 
-	const { loading, error, data } = useQuery(ELECTRIC_USAGE, {
+	const { loading, error, data } = useQuery(GAS_USAGE, {
 		variables: {
 			startCurrentMonth: startCurrentMonth.getTime() / 1000,
 			endCurrentMonth: endCurrentMonth.getTime() / 1000,
@@ -93,8 +92,8 @@ export default function ElectricityUsageMonth() {
 		}
 	});
 
-	if (loading) return <p>Loading...</p>;
-	if (error) return <p>Error :(</p>;
+	if (loading) return <SkeletonChart />;
+	if (error) return <Message type="error">{error.message}</Message>;
 
 	// TODO: not in render method
 	const months = [
@@ -117,7 +116,7 @@ export default function ElectricityUsageMonth() {
 	].filter(monthData => monthData.data);
 
 	return (
-		<div className="electricy-usage-month-container">
+		<div className="gas-usage-month-container">
 			<HighchartsReact
 				highcharts={Highcharts}
 				options={{
@@ -135,7 +134,7 @@ export default function ElectricityUsageMonth() {
 					},
 					yAxis: {
 						title: {
-							text: 'kWh'
+							text: 'm³'
 						},
 						gridLineColor: 'var(--color-secondary-shade-2)',
 					},
@@ -143,11 +142,11 @@ export default function ElectricityUsageMonth() {
 						useUTC: false
 					},
 					series: [{
-						name: 'kWh',
+						name: 'm³',
 						type: 'column',
 						showInLegend: false,
-						data: months.slice().reverse().map(monthUsage => [monthUsage.monthName, Math.round((monthUsage.data.received + Number.EPSILON) * 100) / 100]),
-						color: 'hsla(var(--color-electricity-received-h), var(--color-electricity-received-s), var(--color-electricity-received-l), .6)'
+						data: months.slice().map(monthUsage => [monthUsage.monthName, monthUsage.data.received]),
+						color: 'hsla(var(--color-gas-h), var(--color-gas-s), var(--color-gas-l), .6)'
 					}]
 				}}
 			/>
