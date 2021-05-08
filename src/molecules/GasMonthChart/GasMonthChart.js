@@ -98,21 +98,21 @@ export default function GasUsageMonth() {
 	// TODO: not in render method
 	const months = [
 		{
-			data: data.consumptionCurrentMonth,
-			monthName: startCurrentMonth.toLocaleString('default', { month: 'long' })
-		},
-		{
-			data: data.consumptionPreviousMonth,
-			monthName: startPreviousMonth.toLocaleString('default', { month: 'long' })
+			data: data.consumptionThreeMonthsAgo,
+			monthName: startThreeMonthsAgo.toLocaleString('default', { month: 'long' })
 		},
 		{
 			data: data.consumptionTwoMonthsAgo,
 			monthName: startTwoMonthsAgo.toLocaleString('default', { month: 'long' })
 		},
 		{
-			data: data.consumptionThreeMonthsAgo,
-			monthName: startThreeMonthsAgo.toLocaleString('default', { month: 'long' })
-		}
+			data: data.consumptionPreviousMonth,
+			monthName: startPreviousMonth.toLocaleString('default', { month: 'long' })
+		},
+		{
+			data: data.consumptionCurrentMonth,
+			monthName: startCurrentMonth.toLocaleString('default', { month: 'long' })
+		},
 	].filter(monthData => monthData.data);
 
 	return (
@@ -128,7 +128,7 @@ export default function GasUsageMonth() {
 						enabled: false
 					},
 					xAxis: {
-						categories: months.slice().reverse().map(monthUsage => monthUsage.monthName),
+						categories: months.slice().map(monthUsage => monthUsage.monthName),
 						lineColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)',
 						tickColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)'
 					},

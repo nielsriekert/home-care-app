@@ -27,7 +27,7 @@ import CumulativeWaterUsageChart from '../../molecules/CumulativeWaterUsageChart
 import ElectricityWeekChart from '../../molecules/ElectricityWeekChart/ElectricityWeekChart';
 import GasReceivedWeekChart from '../../molecules/GasReceivedWeekChart/GasReceivedWeekChart';
 import WaterReceivedWeekChart from '../../molecules/WaterReceivedWeekChart/WaterReceivedWeekChart';
-import ElectricityMonthChart from '../../molecules/ElectricityMonthChart/ElectricityUsageMonth';
+import ElectricityMonthChart from '../../molecules/ElectricityMonthChart/ElectricityMonthChart';
 import GasMonthChart from '../../molecules/GasMonthChart/GasMonthChart';
 
 import Button from '../../atoms/Button/Button';

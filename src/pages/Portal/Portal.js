@@ -23,7 +23,7 @@ import ElectricityDelivered from '../../molecules/ElectricityDelivered/Electrici
 import GasUsage from '../../molecules/GasUsage/GasUsage';
 import WaterUsage from '../../molecules/WaterUsage/WaterUsage';
 
-import ElectricityMonthChart from '../../molecules/ElectricityMonthChart/ElectricityUsageMonth';
+import ElectricityMonthChart from '../../molecules/ElectricityMonthChart/ElectricityMonthChart';
 import GasMonthChart from '../../molecules/GasMonthChart/GasMonthChart';
 
 export default function Portal() {
