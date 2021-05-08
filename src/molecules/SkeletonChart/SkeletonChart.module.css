@@ -1,5 +1,11 @@
 .container {
 	display: flex;
 	align-items: flex-end;
-	gap: 15px;
+	gap: 8px;
+}
+
+@media (min-width: 600px) {
+	.container {
+		gap: 15px;
+	}
 }
