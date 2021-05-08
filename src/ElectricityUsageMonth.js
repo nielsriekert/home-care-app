@@ -146,7 +146,7 @@ export default function ElectricityUsageMonth() {
 						name: 'kWh',
 						type: 'column',
 						showInLegend: false,
-						data: months.slice().reverse().map(monthUsage => [monthUsage.monthName, Math.round((monthUsage.data.received + Number.EPSILON) * 100) / 100]),
+						data: months.slice().map(monthUsage => [monthUsage.monthName, monthUsage.data.received]),
 						color: 'hsla(var(--color-electricity-received-h), var(--color-electricity-received-s), var(--color-electricity-received-l), .6)'
 					}]
 				}}

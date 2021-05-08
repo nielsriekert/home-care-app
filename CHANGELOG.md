@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - Water received week chart added to dashboard page.
+- Descriptions on water and mindergas.nl settings pages.
+
+### Removed
+- Rounding for month widgets.
 
 ## [1.9.0] - 2021-05-02
 ### Changed

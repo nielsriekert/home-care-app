@@ -21,7 +21,7 @@ export default function CurrentElectricityReceived() {
 	if (error) return <Message type="error">{error.message}</Message>;
 	return (
 		<div className={styles.container}>
-			{!loading ? data.currentElectricityUsage ? data.currentElectricityUsage.received + ' W' : 0 + ' W' : <Skeleton width="3em" /> }
+			{!loading ? data?.currentElectricityUsage?.received ? data.currentElectricityUsage.received + ' W' : 0 + ' W' : <Skeleton width="3em" /> }
 		</div>
 	);
 }

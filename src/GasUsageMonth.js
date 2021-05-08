@@ -142,7 +142,7 @@ export default function GasUsageMonth() {
 						name: 'm³',
 						type: 'column',
 						showInLegend: false,
-						data: months.slice().reverse().map(monthUsage => [monthUsage.monthName, Math.round((monthUsage.data.received + Number.EPSILON) * 100) / 100]),
+						data: months.slice().map(monthUsage => [monthUsage.monthName, monthUsage.data.received]),
 						color: 'hsla(var(--color-gas-h), var(--color-gas-s), var(--color-gas-l), .6)'
 					}]
 				}}

@@ -182,7 +182,7 @@ export default function GasReceivedWeekChart() {
 						name: 'm³',
 						type: 'column',
 						showInLegend: false,
-						data: weekDays.slice().map(weekDayUsage => [weekDayUsage.weekDay.toLocaleString({ weekday: 'long' }), Math.round((weekDayUsage.data.received + Number.EPSILON) * 100) / 100]),
+						data: weekDays.slice().map(weekDayUsage => [weekDayUsage.weekDay.toLocaleString({ weekday: 'long' }), weekDayUsage.data.received]),
 						color: 'hsla(var(--color-gas-h), var(--color-gas-s), var(--color-gas-l), .6)'
 					}]
 				}}
