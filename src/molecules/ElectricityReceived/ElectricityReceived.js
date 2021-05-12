@@ -5,6 +5,7 @@ import Skeleton from '../../atoms/Skeleton/Skeleton';
 import Message from '../../atoms/Message/Message';
 
 import { useQuery, gql } from '@apollo/client';
+import { FormattedNumber } from 'react-intl';
 
 const ELECTRICITY_RECEIVED = gql`
 	query electricityReceived($start: Int! $end: Int!) {
@@ -41,7 +42,7 @@ export default function ElectricityReceived({ start, end }) {
 	if (error) return <Message type="error">{error.message}</Message>;
 	return (
 		<div className={styles.container}>
-			{!loading ? data && data.electricityExchange ? data.electricityExchange.received + ' kWh' : 0 + ' kWh' : <Skeleton width="3em" /> }
+			{!loading ? data && data.electricityExchange ? <span><FormattedNumber value={data.electricityExchange.received} /> kWh</span> : 0 + ' kWh' : <Skeleton width="3em" /> }
 		</div>
 	);
 }

@@ -33,6 +33,12 @@
         ],
         "keyword-spacing": "error",
         "no-trailing-spaces": "error",
-        "no-console": "warn"
+        "no-console": "warn",
+        "react/style-prop-object": [
+            "error",
+            {
+                "allow": ["FormattedNumber", "FormattedDateParts", "FormattedRelativeTime"]
+            }
+        ]
     }
 }

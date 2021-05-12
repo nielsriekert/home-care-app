@@ -5,6 +5,7 @@ import Skeleton from '../../atoms/Skeleton/Skeleton';
 import Message from '../../atoms/Message/Message';
 
 import { useQuery, gql } from '@apollo/client';
+import { FormattedNumber } from 'react-intl';
 
 const CURRENT_ELECTRIC_RECEIVED = gql`
 	query currentElectricityReceived {
@@ -21,7 +22,7 @@ export default function CurrentElectricityReceived() {
 	if (error) return <Message type="error">{error.message}</Message>;
 	return (
 		<div className={styles.container}>
-			{!loading ? data?.currentElectricityUsage?.received ? data.currentElectricityUsage.received + ' W' : 0 + ' W' : <Skeleton width="3em" /> }
+			{!loading ? data?.currentElectricityUsage?.received ? <span><FormattedNumber value={data.currentElectricityUsage.received} /> W</span> : 0 + ' W' : <Skeleton width="3em" /> }
 		</div>
 	);
 }
