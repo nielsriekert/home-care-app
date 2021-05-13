@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - Current water meter reading on settings page.
+- Formatting numbers with correct decimal and thousand separators bases on browser language setting.
 
 ### Changed
 - Improved chart loading state styling for smaller screen sizes.
