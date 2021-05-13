@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { ApolloClient, HttpLink, ApolloLink, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { IntlProvider } from 'react-intl';
 import {
 	BrowserRouter as Router,
 	Switch,
@@ -54,37 +55,39 @@ const client = new ApolloClient({
 export default function App() {
 	return (
 		<ApolloProvider client={client}>
-			 <Router>
-				<Switch>
-					<Route path="/login">
-						<Login />
-					</Route>
-					<PrivateRoute redirectComponents={<Portal />} exact path="/">
-						<Dashboard />
-					</PrivateRoute>
-					<PrivateRoute path="/settings">
-						<Settings />
-					</PrivateRoute>
-					<PrivateRoute path="/profile">
-						<ProfileDashboard />
-					</PrivateRoute>
-					<PrivateRoute path="/minder-gas-nl">
-						<MinderGasNlSettings />
-					</PrivateRoute>
-					<PrivateRoute path="/smart-meter">
-						<SmartMeterSettings />
-					</PrivateRoute>
-					<PrivateRoute path="/water-reader">
-						<WaterReaderSettings />
-					</PrivateRoute>
-					<PrivateRoute path="/about">
-						<About />
-					</PrivateRoute>
-					<Route>
-						<FourOFour />
-					</Route>
-				</Switch>
-			</Router>
+			<IntlProvider locale={navigator.language}>
+				<Router>
+					<Switch>
+						<Route path="/login">
+							<Login />
+						</Route>
+						<PrivateRoute redirectComponents={<Portal />} exact path="/">
+							<Dashboard />
+						</PrivateRoute>
+						<PrivateRoute path="/settings">
+							<Settings />
+						</PrivateRoute>
+						<PrivateRoute path="/profile">
+							<ProfileDashboard />
+						</PrivateRoute>
+						<PrivateRoute path="/minder-gas-nl">
+							<MinderGasNlSettings />
+						</PrivateRoute>
+						<PrivateRoute path="/smart-meter">
+							<SmartMeterSettings />
+						</PrivateRoute>
+						<PrivateRoute path="/water-reader">
+							<WaterReaderSettings />
+						</PrivateRoute>
+						<PrivateRoute path="/about">
+							<About />
+						</PrivateRoute>
+						<Route>
+							<FourOFour />
+						</Route>
+					</Switch>
+				</Router>
+			</IntlProvider>
 		</ApolloProvider>
 	);
 }

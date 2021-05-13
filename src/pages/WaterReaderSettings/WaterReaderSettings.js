@@ -2,10 +2,13 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import Settings from '../../templates/Settings/Settings';
 
+import Skeleton from '../../atoms/Skeleton/Skeleton';
+import Message from '../../atoms/Message/Message';
 import Form from '../../organisms/Form/Form';
 import InputField from '../../molecules/InputField/InputField';
 
-import { useMutation, gql } from '@apollo/client';
+import { useMutation, gql, useQuery } from '@apollo/client';
+import { FormattedNumber } from 'react-intl';
 
 import Sensus620Image from './sensus-620.jpg';
 
@@ -15,7 +18,14 @@ const ADD_VERIFIED_WATER_READING = gql`
 	}
 `;
 
+const CURRENT_WATER_METER_READING = gql`
+	query currentWaterMeterReading {
+		currentWaterMeterReading
+	}
+`;
+
 export default function WaterReaderSettings() {
+	const { loading: readingLoading, error: readingError, data: readingData } = useQuery(CURRENT_WATER_METER_READING);
 	const [addReading, { data, error, loading }] = useMutation(ADD_VERIFIED_WATER_READING);
 	const [fieldValue, setFieldValue] = useState('');
 	const [fieldError, setFieldError] = useState('');
@@ -40,7 +50,7 @@ export default function WaterReaderSettings() {
 
 	useEffect(() => {
 		if (data && typeof data.addVerifiedWaterReading === 'number') {
-			setSuccessMessage(<p>Successfully added a water reading of <strong>{data.addVerifiedWaterReading}</strong></p>);
+			setSuccessMessage(<p>Successfully added a water reading of <strong><FormattedNumber value={data.addVerifiedWaterReading} style="unit" unit="liter" /></strong></p>);
 		}
 	}, [data]);
 
@@ -49,6 +59,19 @@ export default function WaterReaderSettings() {
 			<p>
 				The water sensor isn't 100% accurate. To correct the water meter reading count you can
 				add a reading manually. The next reading will count up from the added manual reading.
+			</p>
+			<p>
+				{!readingLoading && readingData ?
+					typeof readingData.currentWaterMeterReading === 'number' ?
+						<Message>
+							The current water meter reading is <strong><FormattedNumber value={readingData.currentWaterMeterReading} style="unit" unit="liter" unitDisplay="long" /></strong>
+						</Message> :
+						<Message>
+							No actual water reading found for the water meter
+						</Message> :
+					readingError ?
+						<Message type="error">{readingError.message}</Message> :
+						<Skeleton />}
 			</p>
 			<Form
 				error={error}
