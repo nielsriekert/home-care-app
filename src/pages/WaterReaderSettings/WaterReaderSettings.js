@@ -8,6 +8,7 @@ import Form from '../../organisms/Form/Form';
 import InputField from '../../molecules/InputField/InputField';
 
 import { useMutation, gql, useQuery } from '@apollo/client';
+import { FormattedNumber } from 'react-intl';
 
 import Sensus620Image from './sensus-620.jpg';
 
@@ -49,7 +50,7 @@ export default function WaterReaderSettings() {
 
 	useEffect(() => {
 		if (data && typeof data.addVerifiedWaterReading === 'number') {
-			setSuccessMessage(<p>Successfully added a water reading of <strong>{data.addVerifiedWaterReading}</strong></p>);
+			setSuccessMessage(<p>Successfully added a water reading of <strong><FormattedNumber value={data.addVerifiedWaterReading} style="unit" unit="liter" /></strong></p>);
 		}
 	}, [data]);
 
@@ -63,7 +64,7 @@ export default function WaterReaderSettings() {
 				{!readingLoading && readingData ?
 					typeof readingData.currentWaterMeterReading === 'number' ?
 						<Message>
-							Current water reading <strong>{readingData.currentWaterMeterReading}</strong> liter
+							The current water meter reading is <strong><FormattedNumber value={readingData.currentWaterMeterReading} style="unit" unit="liter" unitDisplay="long" /></strong>
 						</Message> :
 						<Message>
 							No actual water reading found for the water meter

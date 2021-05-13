@@ -5,6 +5,7 @@ import Skeleton from '../../atoms/Skeleton/Skeleton';
 import Message from '../../atoms/Message/Message';
 
 import { useQuery, gql } from '@apollo/client';
+import { FormattedNumber } from 'react-intl';
 
 const GAS_CONSUMPTION = gql`
 	query gasExchange($start: Int! $end: Int!) {
@@ -41,7 +42,7 @@ export default function GasUsage({ start, end }) {
 	if (error) return <Message type="error">{error.message}</Message>;
 	return (
 		<div className={styles.container}>
-			{!loading ? data.gasExchange ? data.gasExchange.received + ' m³' : 0 + ' m³' : <Skeleton width="3em" /> }
+			{!loading ? data.gasExchange ? <span><FormattedNumber value={data.gasExchange.received} /> m³</span> : 0 + ' m³' : <Skeleton width="3em" /> }
 		</div>
 	);
 }

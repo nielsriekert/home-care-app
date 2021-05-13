@@ -5,6 +5,7 @@ import Skeleton from '../../atoms/Skeleton/Skeleton';
 import Message from '../../atoms/Message/Message';
 
 import { useQuery, gql } from '@apollo/client';
+import { FormattedNumber } from 'react-intl';
 
 const WATER_CONSUMPTION = gql`
 	query waterConsumption($start: Int! $end: Int!) {
@@ -41,7 +42,7 @@ export default function WaterUsage({ start, end }) {
 	if (error) return <Message type="error">{error.message}</Message>;
 	return (
 		<div className={styles.container}>
-			{!loading ? data.waterConsumption ? data.waterConsumption.received + ' l' : 0 + ' l' : <Skeleton width="3em" /> }
+			{!loading ? data.waterConsumption ? <FormattedNumber value={data.waterConsumption.received} style="unit" unit="liter" /> : 0 + ' l' : <Skeleton width="3em" /> }
 		</div>
 	);
 }
