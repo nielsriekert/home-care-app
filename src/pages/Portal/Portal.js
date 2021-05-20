@@ -11,6 +11,7 @@ import WidgetGrid from '../../organisms/WidgetGrid/WidgetGrid';
 
 import Widget from '../../molecules/Widget/Widget';
 
+import BoltIcon from '../../atoms/BoltIcon/BoltIcon';
 import BoltArrowUpIcon from '../../atoms/BoltArrowUpIcon/BoltArrowUpIcon';
 import BoltArrowDownIcon from '../../atoms/BoltArrowDownIcon/BoltArrowDownIcon';
 import WaterIcon from '../../atoms/WaterIcon/WaterIcon';
@@ -52,7 +53,7 @@ export default function Portal() {
 				<Widget title="Today" name="water-usage" icon={<WaterIcon />}>
 					<WaterUsage />
 				</Widget>
-				<Widget title="Month" name="electrical-usage-by-month" icon={<BoltArrowDownIcon />}>
+				<Widget title="Month" name="electrical-usage-by-month" icon={<BoltIcon/>}>
 					<ElectricityMonthChart />
 				</Widget>
 				<Widget title="Month" name="gas-usage-by-month" icon={<FireIcon />}>

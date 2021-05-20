@@ -119,7 +119,7 @@ export default function Dashboard() {
 				<Widget title="Week" name="water-usage-current-week" icon={<WaterIcon />}>
 					<WaterReceivedWeekChart />
 				</Widget>
-				<Widget title="Month" name="electrical-usage-by-month" icon={<BoltArrowDownIcon />}>
+				<Widget title="Month" name="electrical-usage-by-month" icon={<BoltIcon />}>
 					<ElectricityMonthChart />
 				</Widget>
 				<Widget title="Month" name="gas-usage-by-month" icon={<FireIcon />}>
