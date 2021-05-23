@@ -1,7 +1,9 @@
 import styles from './Widget.module.css';
 import React from 'react';
 
-export default function Widget({ children, title, name, icon }) {
+import LastUpdated from '../../atoms/LastUpdated/LastUpdated';
+
+export default function Widget({ children, title, name, icon, updatedAt }) {
 	return (
 		<div className={styles.container + (name ? ' widget-' + name : '')}>
 			{icon || title ?
@@ -12,6 +14,10 @@ export default function Widget({ children, title, name, icon }) {
 				</div> : ''}
 			<div className={styles.body}>
 				{children}
+				{updatedAt ?
+					<div className={styles.dataTime}>
+						<LastUpdated timestamp={updatedAt} />
+					</div> : ''}
 			</div>
 		</div>
 	);

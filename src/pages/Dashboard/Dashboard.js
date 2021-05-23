@@ -45,6 +45,9 @@ const getEndOfToday = () => {
 };
 
 export default function Dashboard() {
+	const [updatedCurrentElectricityReceived, setUpdatedCurrentElectricityReceived] = useState(null);
+	const [updatedCurrentElectricityDelivered, setUpdatedCurrentElectricityDelivered] = useState(null);
+
 	const [waterChartDay, setWaterChartDay] = useState({
 		start: getStartOfToday(),
 		end: getEndOfToday()
@@ -71,14 +74,22 @@ export default function Dashboard() {
 		});
 	}, [setWaterChartDay]);
 
+	const updatedAtCurrentElectricityReceived = (timestamp) =>{
+		setUpdatedCurrentElectricityReceived(timestamp);
+	};
+
+	const updatedAtCurrentElectricityDelivered = (timestamp) =>{
+		setUpdatedCurrentElectricityDelivered(timestamp);
+	};
+
 	return (
 		<Default>
 			<WidgetGrid>
-				<Widget title="Receiving" name="current-electricity-received" icon={<BoltArrowDownIcon />}>
-					<CurrentElectricityReceived />
+				<Widget title="Receiving" name="current-electricity-received" updatedAt={updatedCurrentElectricityReceived} icon={<BoltArrowDownIcon />}>
+					<CurrentElectricityReceived updatedAt={updatedAtCurrentElectricityReceived} />
 				</Widget>
-				<Widget title="Delivering" name="current-electricity-delivered" icon={<BoltArrowUpIcon />}>
-					<CurrentElectricityDelivered />
+				<Widget title="Delivering" name="current-electricity-delivered" updatedAt={updatedCurrentElectricityDelivered} icon={<BoltArrowUpIcon />}>
+					<CurrentElectricityDelivered updatedAt={updatedAtCurrentElectricityDelivered}  />
 				</Widget>
 				<Widget title="Today" name="electricity-usage" icon={<BoltArrowDownIcon />}>
 					<ElectricityReceived />
