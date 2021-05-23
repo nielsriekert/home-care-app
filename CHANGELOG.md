@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Electricity received to month chart.
 
+### Removed
+- All widgets (except actual receiving and delivering widgets) on portal page (home page when logged out).
+
 ## [1.11.0] - 2021-05-13
 ### Added
 - Current water meter reading on settings page.
