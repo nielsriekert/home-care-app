@@ -34,49 +34,49 @@ const WATER_RECEIVED_WEEK_CHART = gql`
 			start: $startMonday
 			end: $endMonday
 		) {
-			...consumption
+			...WaterConsumption
 		}
 
 		consumptionTuesday: waterConsumption(
 			start: $startTuesday
 			end: $endTuesday
 		) {
-			...consumption
+			...WaterConsumption
 		}
 
 		consumptionWednesday: waterConsumption(
 			start: $startWednesday
 			end: $endWednesday
 		) {
-			...consumption
+			...WaterConsumption
 		}
 
 		consumptionThursday: waterConsumption(
 			start: $startThursday
 			end: $endThursday
 		) {
-			...consumption
+			...WaterConsumption
 		}
 
 		consumptionFriday: waterConsumption(
 			start: $startFriday
 			end: $endFriday
 		) {
-			...consumption
+			...WaterConsumption
 		}
 
 		consumptionSaturday: waterConsumption(
 			start: $startSaturday
 			end: $endSaturday
 		) {
-			...consumption
+			...WaterConsumption
 		}
 
 		consumptionSunday: waterConsumption(
 			start: $startSunday
 			end: $endSunday
 		) {
-			...consumption
+			...WaterConsumption
 		}
 	}
 `;

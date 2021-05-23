@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './CurrentElectricityDelivered.module.css';
 
 import Skeleton from '../../atoms/Skeleton/Skeleton';
@@ -16,8 +16,14 @@ const CURRENT_ELECTRIC_DELIVERED = gql`
 	}
 `;
 
-export default function CurrentElectricityDelivered() {
+export default function CurrentElectricityDelivered({ updatedAt }) {
 	const { loading, error, data } = useQuery(CURRENT_ELECTRIC_DELIVERED);
+
+	useEffect(() => {
+		if (data?.currentElectricityUsage?.readingAt && typeof updatedAt === 'function') {
+			updatedAt(data.currentElectricityUsage.readingAt);
+		}
+	}, [data, updatedAt]);
 
 	if (error) return <Message type="error">{error.message}</Message>;
 	return (

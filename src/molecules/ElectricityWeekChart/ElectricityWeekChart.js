@@ -34,49 +34,49 @@ const ELECTRIC_RECEIVED_WEEK_CHART = gql`
 			start: $startMonday
 			end: $endMonday
 		) {
-			...consumption
+			...ElectricityExchange
 		}
 
 		consumptionTuesday: electricityExchange(
 			start: $startTuesday
 			end: $endTuesday
 		) {
-			...consumption
+			...ElectricityExchange
 		}
 
 		consumptionWednesday: electricityExchange(
 			start: $startWednesday
 			end: $endWednesday
 		) {
-			...consumption
+			...ElectricityExchange
 		}
 
 		consumptionThursday: electricityExchange(
 			start: $startThursday
 			end: $endThursday
 		) {
-			...consumption
+			...ElectricityExchange
 		}
 
 		consumptionFriday: electricityExchange(
 			start: $startFriday
 			end: $endFriday
 		) {
-			...consumption
+			...ElectricityExchange
 		}
 
 		consumptionSaturday: electricityExchange(
 			start: $startSaturday
 			end: $endSaturday
 		) {
-			...consumption
+			...ElectricityExchange
 		}
 
 		consumptionSunday: electricityExchange(
 			start: $startSunday
 			end: $endSunday
 		) {
-			...consumption
+			...ElectricityExchange
 		}
 	}
 `;

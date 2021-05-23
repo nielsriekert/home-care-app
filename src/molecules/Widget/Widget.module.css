@@ -1,5 +1,6 @@
 .container {
-	padding: 20px;
+	position: relative;
+	padding: 20px 20px 35px 20px;
 	border-radius: 6px;
 	background-color: rgba(0, 0, 0, .1);
 	background-color: hsla(var(--color-secondary-shade-1-h), var(--color-secondary-shade-1-s), var(--color-secondary-shade-1-l), .2);
@@ -32,4 +33,12 @@
 
 .body:not(:first-child) {
 	margin-top: 20px;
+}
+
+.dataTime {
+	position: absolute;
+	right: 20px;
+	bottom: 15px;
+	opacity: .35;
+	font-size: .75rem;
 }

@@ -34,49 +34,49 @@ const GAS_RECEIVED_WEEK_CHART = gql`
 			start: $startMonday
 			end: $endMonday
 		) {
-			...consumption
+			...GasExchange
 		}
 
 		consumptionTuesday: gasExchange(
 			start: $startTuesday
 			end: $endTuesday
 		) {
-			...consumption
+			...GasExchange
 		}
 
 		consumptionWednesday: gasExchange(
 			start: $startWednesday
 			end: $endWednesday
 		) {
-			...consumption
+			...GasExchange
 		}
 
 		consumptionThursday: gasExchange(
 			start: $startThursday
 			end: $endThursday
 		) {
-			...consumption
+			...GasExchange
 		}
 
 		consumptionFriday: gasExchange(
 			start: $startFriday
 			end: $endFriday
 		) {
-			...consumption
+			...GasExchange
 		}
 
 		consumptionSaturday: gasExchange(
 			start: $startSaturday
 			end: $endSaturday
 		) {
-			...consumption
+			...GasExchange
 		}
 
 		consumptionSunday: gasExchange(
 			start: $startSunday
 			end: $endSunday
 		) {
-			...consumption
+			...GasExchange
 		}
 	}
 `;

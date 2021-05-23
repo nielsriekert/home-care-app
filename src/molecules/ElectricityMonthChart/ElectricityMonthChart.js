@@ -8,7 +8,7 @@ import Message from '../../atoms/Message/Message';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-const ELECTRIC_USAGE = gql`
+const ELECTRIC_EXCHANGE_BY_MONTH = gql`
 	query electricityExchangeByMonth(
 		$startCurrentMonth: Int!
 		$endCurrentMonth: Int!
@@ -83,7 +83,7 @@ export default function ElectricityMonthChart() {
 	const startThreeMonthsAgo = new Date(date.getFullYear(), date.getMonth() - 3, 1, 0, 0, 0);
 	const endThreeMonthsAgo = new Date(date.getFullYear(), date.getMonth() - 2, 0, 23, 59, 59);
 
-	const { loading, error, data } = useQuery(ELECTRIC_USAGE, {
+	const { loading, error, data } = useQuery(ELECTRIC_EXCHANGE_BY_MONTH, {
 		variables: {
 			startCurrentMonth: startCurrentMonth.getTime() / 1000,
 			endCurrentMonth: endCurrentMonth.getTime() / 1000,
@@ -142,16 +142,30 @@ export default function ElectricityMonthChart() {
 						},
 						gridLineColor: 'var(--color-secondary-shade-2)',
 					},
+					plotOptions: {
+						series: {
+							stacking: 'normal'
+						}
+					},
 					time: {
 						useUTC: false
 					},
-					series: [{
-						name: 'kWh',
-						type: 'column',
-						showInLegend: false,
-						data: months.slice().map(monthUsage => [monthUsage.monthName, monthUsage.data.received]),
-						color: 'hsla(var(--color-electricity-received-h), var(--color-electricity-received-s), var(--color-electricity-received-l), .6)'
-					}]
+					series: [
+						{
+							name: 'kWh',
+							type: 'column',
+							showInLegend: false,
+							data: months.slice().map(monthUsage => [monthUsage.monthName, monthUsage.data.received * -1]),
+							color: 'hsla(var(--color-electricity-received-h), var(--color-electricity-received-s), var(--color-electricity-received-l), .6)'
+						},
+						{
+							name: 'kWh',
+							type: 'column',
+							showInLegend: false,
+							data: months.slice().map(monthUsage => [monthUsage.monthName, monthUsage.data.delivered]),
+							color: 'hsla(var(--color-electricity-delivered-h), var(--color-electricity-delivered-s), var(--color-electricity-delivered-l), .6)'
+						}
+					]
 				}}
 			/>
 		</div>
