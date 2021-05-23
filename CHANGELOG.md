@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - Electricity received to month chart.
+- Last updated time for current electricity delivered and received widgets.
 
 ### Removed
 - All widgets (except actual receiving and delivering widgets) on portal page (home page when logged out).
