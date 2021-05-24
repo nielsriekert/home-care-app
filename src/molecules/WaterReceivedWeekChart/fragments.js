@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
-export const CONSUMPTION = gql`
-	fragment WaterConsumption on WaterConsumption {
+export const EXCHANGE = gql`
+	fragment WaterExchange on WaterExchange {
 		received
 		period {
 			start

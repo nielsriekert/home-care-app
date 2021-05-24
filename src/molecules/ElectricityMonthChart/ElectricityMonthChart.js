@@ -19,7 +19,7 @@ const ELECTRIC_EXCHANGE_BY_MONTH = gql`
 		$startThreeMonthsAgo: Int!
 		$endThreeMonthsAgo: Int!
 	) {
-		consumptionCurrentMonth: electricityExchange(
+		exchangeCurrentMonth: electricityExchange(
 			start: $startCurrentMonth
 			end: $endCurrentMonth
 		) {
@@ -31,7 +31,7 @@ const ELECTRIC_EXCHANGE_BY_MONTH = gql`
 			}
 		}
 
-		consumptionPreviousMonth: electricityExchange(
+		exchangePreviousMonth: electricityExchange(
 			start: $startPreviousMonth
 			end: $endPreviousMonth
 		) {
@@ -43,7 +43,7 @@ const ELECTRIC_EXCHANGE_BY_MONTH = gql`
 			}
 		}
 
-		consumptionTwoMonthsAgo: electricityExchange(
+		exchangeTwoMonthsAgo: electricityExchange(
 			start: $startTwoMonthsAgo
 			end: $endTwoMonthsAgo
 		) {
@@ -55,7 +55,7 @@ const ELECTRIC_EXCHANGE_BY_MONTH = gql`
 			}
 		}
 
-		consumptionThreeMonthsAgo: electricityExchange(
+		exchangeThreeMonthsAgo: electricityExchange(
 			start: $startThreeMonthsAgo
 			end: $endThreeMonthsAgo
 		) {
@@ -102,19 +102,19 @@ export default function ElectricityMonthChart() {
 	// TODO: not in render method
 	const months = [
 		{
-			data: data.consumptionThreeMonthsAgo,
+			data: data.exchangeThreeMonthsAgo,
 			monthName: startThreeMonthsAgo.toLocaleString('default', { month: 'long' })
 		},
 		{
-			data: data.consumptionTwoMonthsAgo,
+			data: data.exchangeTwoMonthsAgo,
 			monthName: startTwoMonthsAgo.toLocaleString('default', { month: 'long' })
 		},
 		{
-			data: data.consumptionPreviousMonth,
+			data: data.exchangePreviousMonth,
 			monthName: startPreviousMonth.toLocaleString('default', { month: 'long' })
 		},
 		{
-			data: data.consumptionCurrentMonth,
+			data: data.exchangeCurrentMonth,
 			monthName: startCurrentMonth.toLocaleString('default', { month: 'long' })
 		},
 	].filter(monthData => monthData.data);

@@ -30,49 +30,49 @@ const GAS_RECEIVED_WEEK_CHART = gql`
 		$startSunday: Int!
 		$endSunday: Int!
 	) {
-		consumptionMonday: gasExchange(
+		exchangeMonday: gasExchange(
 			start: $startMonday
 			end: $endMonday
 		) {
 			...GasExchange
 		}
 
-		consumptionTuesday: gasExchange(
+		exchangeTuesday: gasExchange(
 			start: $startTuesday
 			end: $endTuesday
 		) {
 			...GasExchange
 		}
 
-		consumptionWednesday: gasExchange(
+		exchangeWednesday: gasExchange(
 			start: $startWednesday
 			end: $endWednesday
 		) {
 			...GasExchange
 		}
 
-		consumptionThursday: gasExchange(
+		exchangeThursday: gasExchange(
 			start: $startThursday
 			end: $endThursday
 		) {
 			...GasExchange
 		}
 
-		consumptionFriday: gasExchange(
+		exchangeFriday: gasExchange(
 			start: $startFriday
 			end: $endFriday
 		) {
 			...GasExchange
 		}
 
-		consumptionSaturday: gasExchange(
+		exchangeSaturday: gasExchange(
 			start: $startSaturday
 			end: $endSaturday
 		) {
 			...GasExchange
 		}
 
-		consumptionSunday: gasExchange(
+		exchangeSunday: gasExchange(
 			start: $startSunday
 			end: $endSunday
 		) {
@@ -114,31 +114,31 @@ export default function GasReceivedWeekChart() {
 
 	const weekDays = [
 		{
-			data: data.consumptionMonday,
+			data: data.exchangeMonday,
 			weekDay: startMonday
 		},
 		{
-			data: data.consumptionTuesday,
+			data: data.exchangeTuesday,
 			weekDay: startTuesday
 		},
 		{
-			data: data.consumptionWednesday,
+			data: data.exchangeWednesday,
 			weekDay: startWednesday
 		},
 		{
-			data: data.consumptionThursday,
+			data: data.exchangeThursday,
 			weekDay: startThursday
 		},
 		{
-			data: data.consumptionFriday,
+			data: data.exchangeFriday,
 			weekDay: startFriday
 		},
 		{
-			data: data.consumptionSaturday,
+			data: data.exchangeSaturday,
 			weekDay: startSaturday
 		},
 		{
-			data: data.consumptionSunday,
+			data: data.exchangeSunday,
 			weekDay: startSunday
 		}
 	].map(weekData => ({

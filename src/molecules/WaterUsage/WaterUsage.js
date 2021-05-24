@@ -7,9 +7,9 @@ import Message from '../../atoms/Message/Message';
 import { useQuery, gql } from '@apollo/client';
 import { FormattedNumber } from 'react-intl';
 
-const WATER_CONSUMPTION = gql`
-	query waterConsumption($start: Int! $end: Int!) {
-		waterConsumption(start: $start end: $end) {
+const WATER_EXCHANGE = gql`
+	query waterExchange($start: Int! $end: Int!) {
+		waterExchange(start: $start end: $end) {
 			received
 			period {
 				start
@@ -32,7 +32,7 @@ const getEndOfToday = () => {
 };
 
 export default function WaterUsage({ start, end }) {
-	const { loading, error, data } = useQuery(WATER_CONSUMPTION, {
+	const { loading, error, data } = useQuery(WATER_EXCHANGE, {
 		variables: {
 			start: start || getStartOfToday(),
 			end: end || getEndOfToday()
@@ -42,7 +42,7 @@ export default function WaterUsage({ start, end }) {
 	if (error) return <Message type="error">{error.message}</Message>;
 	return (
 		<div className={styles.container}>
-			{!loading ? data.waterConsumption ? <FormattedNumber value={data.waterConsumption.received} style="unit" unit="liter" /> : 0 + ' l' : <Skeleton width="3em" /> }
+			{!loading ? data.waterExchange ? <FormattedNumber value={data.waterExchange.received} style="unit" unit="liter" /> : 0 + ' l' : <Skeleton width="3em" /> }
 		</div>
 	);
 }
