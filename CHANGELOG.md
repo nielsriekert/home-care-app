@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [1.13.0] - 2021-05-24
 ### Changed
 - **Needs API version >= 2.0** Refactor for breaking changes on the API.
+- Updated Apollo Client.
 
 ## [1.12.0] - 2021-05-23
 ### Added
