@@ -19,7 +19,7 @@ const GAS_USAGE = gql`
 		$startThreeMonthsAgo: Int!
 		$endThreeMonthsAgo: Int!
 	) {
-		consumptionCurrentMonth: gasExchange(
+		exchangeCurrentMonth: gasExchange(
 			start: $startCurrentMonth
 			end: $endCurrentMonth
 		) {
@@ -30,7 +30,7 @@ const GAS_USAGE = gql`
 			}
 		}
 
-		consumptionPreviousMonth: gasExchange(
+		exchangePreviousMonth: gasExchange(
 			start: $startPreviousMonth
 			end: $endPreviousMonth
 		) {
@@ -41,7 +41,7 @@ const GAS_USAGE = gql`
 			}
 		}
 
-		consumptionTwoMonthsAgo: gasExchange(
+		exchangeTwoMonthsAgo: gasExchange(
 			start: $startTwoMonthsAgo
 			end: $endTwoMonthsAgo
 		) {
@@ -52,7 +52,7 @@ const GAS_USAGE = gql`
 			}
 		}
 
-		consumptionThreeMonthsAgo: gasExchange(
+		exchangeThreeMonthsAgo: gasExchange(
 			start: $startThreeMonthsAgo
 			end: $endThreeMonthsAgo
 		) {
@@ -98,19 +98,19 @@ export default function GasUsageMonth() {
 	// TODO: not in render method
 	const months = [
 		{
-			data: data.consumptionThreeMonthsAgo,
+			data: data.exchangeThreeMonthsAgo,
 			monthName: startThreeMonthsAgo.toLocaleString('default', { month: 'long' })
 		},
 		{
-			data: data.consumptionTwoMonthsAgo,
+			data: data.exchangeTwoMonthsAgo,
 			monthName: startTwoMonthsAgo.toLocaleString('default', { month: 'long' })
 		},
 		{
-			data: data.consumptionPreviousMonth,
+			data: data.exchangePreviousMonth,
 			monthName: startPreviousMonth.toLocaleString('default', { month: 'long' })
 		},
 		{
-			data: data.consumptionCurrentMonth,
+			data: data.exchangeCurrentMonth,
 			monthName: startCurrentMonth.toLocaleString('default', { month: 'long' })
 		},
 	].filter(monthData => monthData.data);

@@ -30,49 +30,49 @@ const ELECTRIC_RECEIVED_WEEK_CHART = gql`
 		$startSunday: Int!
 		$endSunday: Int!
 	) {
-		consumptionMonday: electricityExchange(
+		exchangeMonday: electricityExchange(
 			start: $startMonday
 			end: $endMonday
 		) {
 			...ElectricityExchange
 		}
 
-		consumptionTuesday: electricityExchange(
+		exchangeTuesday: electricityExchange(
 			start: $startTuesday
 			end: $endTuesday
 		) {
 			...ElectricityExchange
 		}
 
-		consumptionWednesday: electricityExchange(
+		exchangeWednesday: electricityExchange(
 			start: $startWednesday
 			end: $endWednesday
 		) {
 			...ElectricityExchange
 		}
 
-		consumptionThursday: electricityExchange(
+		exchangeThursday: electricityExchange(
 			start: $startThursday
 			end: $endThursday
 		) {
 			...ElectricityExchange
 		}
 
-		consumptionFriday: electricityExchange(
+		exchangeFriday: electricityExchange(
 			start: $startFriday
 			end: $endFriday
 		) {
 			...ElectricityExchange
 		}
 
-		consumptionSaturday: electricityExchange(
+		exchangeSaturday: electricityExchange(
 			start: $startSaturday
 			end: $endSaturday
 		) {
 			...ElectricityExchange
 		}
 
-		consumptionSunday: electricityExchange(
+		exchangeSunday: electricityExchange(
 			start: $startSunday
 			end: $endSunday
 		) {
@@ -114,31 +114,31 @@ export default function ElectricityReceivedWeekChart() {
 
 	const weekDays = [
 		{
-			data: data.consumptionMonday,
+			data: data.exchangeMonday,
 			weekDay: startMonday
 		},
 		{
-			data: data.consumptionTuesday,
+			data: data.exchangeTuesday,
 			weekDay: startTuesday
 		},
 		{
-			data: data.consumptionWednesday,
+			data: data.exchangeWednesday,
 			weekDay: startWednesday
 		},
 		{
-			data: data.consumptionThursday,
+			data: data.exchangeThursday,
 			weekDay: startThursday
 		},
 		{
-			data: data.consumptionFriday,
+			data: data.exchangeFriday,
 			weekDay: startFriday
 		},
 		{
-			data: data.consumptionSaturday,
+			data: data.exchangeSaturday,
 			weekDay: startSaturday
 		},
 		{
-			data: data.consumptionSunday,
+			data: data.exchangeSunday,
 			weekDay: startSunday
 		}
 	].map(weekData => ({

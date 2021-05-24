@@ -3,7 +3,7 @@ import React from 'react';
 import SkeletonChart from '../../molecules/SkeletonChart/SkeletonChart';
 import Message from '../../atoms/Message/Message';
 
-import { CONSUMPTION } from './fragments';
+import { EXCHANGE } from './fragments';
 
 import { useQuery, gql } from '@apollo/client';
 
@@ -13,7 +13,7 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
 const WATER_RECEIVED_WEEK_CHART = gql`
-	${CONSUMPTION}
+	${EXCHANGE}
 	query waterExchangeCurrentWeek(
 		$startMonday: Int!
 		$endMonday: Int!
@@ -30,53 +30,53 @@ const WATER_RECEIVED_WEEK_CHART = gql`
 		$startSunday: Int!
 		$endSunday: Int!
 	) {
-		consumptionMonday: waterConsumption(
+		exchangeMonday: waterExchange(
 			start: $startMonday
 			end: $endMonday
 		) {
-			...WaterConsumption
+			...WaterExchange
 		}
 
-		consumptionTuesday: waterConsumption(
+		exchangeTuesday: waterExchange(
 			start: $startTuesday
 			end: $endTuesday
 		) {
-			...WaterConsumption
+			...WaterExchange
 		}
 
-		consumptionWednesday: waterConsumption(
+		exchangeWednesday: waterExchange(
 			start: $startWednesday
 			end: $endWednesday
 		) {
-			...WaterConsumption
+			...WaterExchange
 		}
 
-		consumptionThursday: waterConsumption(
+		exchangeThursday: waterExchange(
 			start: $startThursday
 			end: $endThursday
 		) {
-			...WaterConsumption
+			...WaterExchange
 		}
 
-		consumptionFriday: waterConsumption(
+		exchangeFriday: waterExchange(
 			start: $startFriday
 			end: $endFriday
 		) {
-			...WaterConsumption
+			...WaterExchange
 		}
 
-		consumptionSaturday: waterConsumption(
+		exchangeSaturday: waterExchange(
 			start: $startSaturday
 			end: $endSaturday
 		) {
-			...WaterConsumption
+			...WaterExchange
 		}
 
-		consumptionSunday: waterConsumption(
+		exchangeSunday: waterExchange(
 			start: $startSunday
 			end: $endSunday
 		) {
-			...WaterConsumption
+			...WaterExchange
 		}
 	}
 `;
@@ -114,31 +114,31 @@ export default function WaterReceivedWeekChart() {
 
 	const weekDays = [
 		{
-			data: data.consumptionMonday,
+			data: data.exchangeMonday,
 			weekDay: startMonday
 		},
 		{
-			data: data.consumptionTuesday,
+			data: data.exchangeTuesday,
 			weekDay: startTuesday
 		},
 		{
-			data: data.consumptionWednesday,
+			data: data.exchangeWednesday,
 			weekDay: startWednesday
 		},
 		{
-			data: data.consumptionThursday,
+			data: data.exchangeThursday,
 			weekDay: startThursday
 		},
 		{
-			data: data.consumptionFriday,
+			data: data.exchangeFriday,
 			weekDay: startFriday
 		},
 		{
-			data: data.consumptionSaturday,
+			data: data.exchangeSaturday,
 			weekDay: startSaturday
 		},
 		{
-			data: data.consumptionSunday,
+			data: data.exchangeSunday,
 			weekDay: startSunday
 		}
 	].map(weekData => ({
