@@ -1,7 +1,7 @@
 import React from 'react';
 
-import SkeletonChart from '../../molecules/SkeletonChart/SkeletonChart';
-import Message from '../../atoms/Message/Message';
+import SkeletonChart from '../../molecules/SkeletonChart';
+import Message from '../../atoms/Message';
 
 import { EXCHANGE } from './fragments';
 

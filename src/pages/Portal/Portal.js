@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import LoggedOut from '../../templates/LoggedOut/LoggedOut';
 
-import Button from '../../atoms/Button/Button';
+import Button from '../../atoms/Button';
 
 import WidgetGrid from '../../organisms/WidgetGrid/WidgetGrid';
 

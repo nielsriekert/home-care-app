@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './ElectricityReceived.module.css';
 
 import Skeleton from '../../atoms/Skeleton/Skeleton';
-import Message from '../../atoms/Message/Message';
+import Message from '../../atoms/Message';
 
 import { useQuery, gql } from '@apollo/client';
 import { FormattedNumber } from 'react-intl';

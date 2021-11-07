@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './ElectricityDelivered.module.css';
 
-import Message from '../../atoms/Message/Message';
+import Message from '../../atoms/Message';
 import Skeleton from '../../atoms/Skeleton/Skeleton';
 
 import { useQuery, gql } from '@apollo/client';
