@@ -42,7 +42,7 @@ export default function Header() {
 	useEffect(() => {
 		document.addEventListener('click', onClick);
 		return () => document.removeEventListener('click', onClick);
-	}, []);
+	}, [onClick]);
 
 	return (
 		<header className={styles.container}>
