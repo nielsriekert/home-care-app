@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import styles from './CurrentElectricityReceived.module.css';
 
-import Skeleton from '../../atoms/Skeleton/Skeleton';
-import Message from '../../atoms/Message/Message';
+import Skeleton from '../../atoms/Skeleton';
+import Message from '../../atoms/Message';
 
 import { useQuery, gql } from '@apollo/client';
 import { FormattedNumber } from 'react-intl';

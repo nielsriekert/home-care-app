@@ -2,8 +2,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import Settings from '../../templates/Settings/Settings';
 
-import Skeleton from '../../atoms/Skeleton/Skeleton';
-import Message from '../../atoms/Message/Message';
+import Skeleton from '../../atoms/Skeleton';
+import Message from '../../atoms/Message';
 import Form from '../../organisms/Form/Form';
 import InputField from '../../molecules/InputField/InputField';
 

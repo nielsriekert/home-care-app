@@ -1,10 +1,10 @@
 import styles from './Form.module.css';
 import React, { useCallback } from 'react';
 
-import Button from '../../atoms/Button/Button';
-import Message from '../../atoms/Message/Message';
+import Button from '../../atoms/Button';
+import Message from '../../atoms/Message';
 
-export default function Form({ children, onSubmit, isLoading, error, successMessage, submitButtonText }) {
+export default function Form({ children, onSubmit, isLoading = false, isSubmitting = false, error, successMessage, submitButtonText }) {
 	const onFormSubmit = useCallback((event) => {
 		event.preventDefault();
 		if (typeof onSubmit === 'function') {
@@ -23,7 +23,7 @@ export default function Form({ children, onSubmit, isLoading, error, successMess
 					<div className={styles.footer}>
 						{error ?
 							<Message type="error" >{error.message}</Message> : ''}
-						<Button isSubmit isDisabled={isLoading} pending={isLoading}>{submitButtonText || 'Send'}</Button>
+						<Button isSubmit isDisabled={isLoading || isSubmitting} pending={isSubmitting}>{submitButtonText || 'Send'}</Button>
 					</div>
 				</form>}
 		</div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Default.module.css';
 
-import Header from '../../organisms/Header/Header';
+import Header from '../../organisms/Header';
 
 export default function Default({ children }) {
 	return (

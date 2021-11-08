@@ -16,6 +16,7 @@
 .widget-gas-usage-current-week,
 .widget-water-usage-current-week,
 .widget-electrical-usage-by-month,
+.widget-electrical-usage-by-year,
 .widget-gas-usage-by-month {
 	grid-column:  1/-1;
 }
@@ -25,6 +26,7 @@
 	.widget-gas-usage-current-week,
 	.widget-water-usage-current-week,
 	.widget-electrical-usage-by-month,
+	.widget-electrical-usage-by-year,
 	.widget-gas-usage-by-month {
 		grid-column: span 3;
 	}

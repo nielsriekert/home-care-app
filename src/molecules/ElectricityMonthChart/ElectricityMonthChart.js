@@ -2,8 +2,8 @@ import React from 'react';
 
 import { useQuery, gql } from '@apollo/client';
 
-import SkeletonChart from '../SkeletonChart/SkeletonChart';
-import Message from '../../atoms/Message/Message';
+import SkeletonChart from '../SkeletonChart';
+import Message from '../../atoms/Message';
 
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
