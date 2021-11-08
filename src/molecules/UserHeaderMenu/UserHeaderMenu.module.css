@@ -1,0 +1,25 @@
+.container > ul {
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+}
+
+.container li > a,
+.container li > button {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	min-width: 250px;
+	padding: .75em 1.25em;
+	box-sizing: border-box;
+	color: var(--color-secondary-shade-4);
+	text-align: left;
+	text-decoration: none;
+	background-color: transparent;
+	border: none;
+}
+
+.container li > a:hover,
+.container li > button:hover {
+	background-color: var(--color-secondary-shade-1);
+}

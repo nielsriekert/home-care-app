@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './WaterUsage.module.css';
 
-import Skeleton from '../../atoms/Skeleton/Skeleton';
+import Skeleton from '../../atoms/Skeleton';
 import Message from '../../atoms/Message';
 
 import { useQuery, gql } from '@apollo/client';

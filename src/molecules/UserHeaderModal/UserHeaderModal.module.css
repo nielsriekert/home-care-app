@@ -1,0 +1,21 @@
+.container {
+	max-height: 100vh;
+	width: 100%;
+	overflow: auto;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	box-sizing: border-box;
+	pointer-events: none;
+	opacity: 0;
+	transform: translateY(-20px);
+	transition: opacity .15s, transform .15s;
+	background-color: var(--color-secondary-shade-2);
+	border-radius: 3px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+}
+
+.container.isOpen {
+	pointer-events: auto;
+	opacity: 1;
+	transform: translateY(0);
+}

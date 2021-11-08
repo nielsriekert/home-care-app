@@ -6,7 +6,7 @@ import { useQuery, useMutation, gql } from '@apollo/client';
 
 import InputFieldCheckbox from '../../molecules/InputFieldCheckbox/InputFieldCheckbox';
 
-import Skeleton from '../../atoms/Skeleton/Skeleton';
+import Skeleton from '../../atoms/Skeleton';
 import Message from '../../atoms/Message';
 
 const IS_MINDER_GAS_SYNC_ACTIVE = gql`

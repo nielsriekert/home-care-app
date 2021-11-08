@@ -2,7 +2,7 @@ import React from 'react';
 
 import Settings from '../../templates/Settings/Settings';
 
-import Skeleton from '../../atoms/Skeleton/Skeleton';
+import Skeleton from '../../atoms/Skeleton';
 
 import { useQuery, gql } from '@apollo/client';
 
