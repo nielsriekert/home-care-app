@@ -83,6 +83,7 @@ export default function LoginForm() {
 			error={error}
 			onSubmit={onSubmit}
 			isLoading={loading}
+			isSubmitting={loading}
 			submitButtonText="Login"
 		>
 			{fields.map(field => (

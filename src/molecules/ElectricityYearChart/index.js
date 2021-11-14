@@ -1,66 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useQuery, gql } from '@apollo/client';
 
 import SkeletonChart from '../SkeletonChart';
 import Message from '../../atoms/Message';
 
+import { DateTime } from 'luxon';
+
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-const ELECTRIC_EXCHANGE_BY_YEAR = gql`
-	query electricityExchangeByYear(
-		$startCurrentYear: Int!
-		$endCurrentYear: Int!
-		$startPreviousYear: Int!
-		$endPreviousYear: Int!
-		$startTwoYearsAgo: Int!
-		$endTwoYearsAgo: Int!
-		$startThreeYearsAgo: Int!
-		$endThreeYearsAgo: Int!
+const ELECTRIC_EXCHANGES_BY_YEAR = gql`
+	query electricityExchangesByYear(
+		$timePeriod: TimePeriodInput!
+		$resolution: TimeSpan
 	) {
-		exchangeCurrentYear: electricityExchange(
-			start: $startCurrentYear
-			end: $endCurrentYear
+		electricityExchanges(
+			timePeriod: $timePeriod
+			resolution: $resolution
 		) {
 			received
 			delivered
-			period {
-				start
-				end
-			}
-		}
-
-		exchangePreviousYear: electricityExchange(
-			start: $startPreviousYear
-			end: $endPreviousYear
-		) {
-			received
-			delivered
-			period {
-				start
-				end
-			}
-		}
-
-		exchangeTwoYearsAgo: electricityExchange(
-			start: $startTwoYearsAgo
-			end: $endTwoYearsAgo
-		) {
-			received
-			delivered
-			period {
-				start
-				end
-			}
-		}
-
-		exchangeThreeYearsAgo: electricityExchange(
-			start: $startThreeYearsAgo
-			end: $endThreeYearsAgo
-		) {
-			received
-			delivered
+			dataPointsCount
 			period {
 				start
 				end
@@ -69,105 +30,81 @@ const ELECTRIC_EXCHANGE_BY_YEAR = gql`
 	}
 `;
 
-export default function ElectricityMonthChart() {
-	const date = new Date();
-	const startCurrentYear = new Date(date.getFullYear(), 1, 1, 0, 0, 0);
-	const endCurrentYear = new Date(date.getFullYear() + 1, 1 + 1, 0, 23, 59, 59);
-
-	const startPreviousYear = new Date(date.getFullYear() -1, 1 - 1, 1, 0, 0, 0);
-	const endPreviousYear = new Date(date.getFullYear(), 1, 0, 23, 59, 59);
-
-	const startTwoYearsAgo = new Date(date.getFullYear() - 2, 1 - 2, 1, 0, 0, 0);
-	const endTwoYearsAgo = new Date(date.getFullYear() - 2, 1 - 1, 0, 23, 59, 59);
-
-	const startThreeYearsAgo = new Date(date.getFullYear() - 3, 1 - 3, 1, 0, 0, 0);
-	const endThreeYearsAgo = new Date(date.getFullYear() - 2, 1 - 2, 0, 23, 59, 59);
-
-	const { loading, error, data } = useQuery(ELECTRIC_EXCHANGE_BY_YEAR, {
+export default function ElectricityYearChart({ yearsInThePast = 4 }) {
+	const [readings, setReadings] = useState([]);
+	const { loading, error, data } = useQuery(ELECTRIC_EXCHANGES_BY_YEAR, {
 		variables: {
-			startCurrentYear: startCurrentYear.getTime() / 1000,
-			endCurrentYear: endCurrentYear.getTime() / 1000,
-			startPreviousYear: startPreviousYear.getTime() / 1000,
-			endPreviousYear: endPreviousYear.getTime() / 1000,
-			startTwoYearsAgo: startTwoYearsAgo.getTime() / 1000,
-			endTwoYearsAgo: endTwoYearsAgo.getTime() / 1000,
-			startThreeYearsAgo: startThreeYearsAgo.getTime() / 1000,
-			endThreeYearsAgo: endThreeYearsAgo.getTime() / 1000,
+			resolution: 'YEAR',
+			timePeriod: {
+				start: Math.round(DateTime.now().minus({ year: yearsInThePast }).startOf('year').toSeconds()),
+				end: Math.round(DateTime.now().endOf('year').toSeconds())
+			},
 		}
 	});
+
+	useEffect(() => {
+		if (data) {
+			setReadings(data.electricityExchanges.map(exchange => ({
+				...exchange,
+				label: DateTime.fromSeconds(exchange.period.start).toLocaleString({ year: 'numeric' })
+			})));
+		}
+	}, [data, setReadings]);
 
 	if (loading) return <SkeletonChart />;
 	if (error) return <Message type="error">{error.message}</Message>;
 
-	// TODO: not in render method
-	const years = [
-		{
-			data: data.exchangeThreeYearsAgo,
-			yearName: startThreeYearsAgo.toLocaleString('default', { year: 'numeric' })
-		},
-		{
-			data: data.exchangeTwoYearsAgo,
-			yearName: startTwoYearsAgo.toLocaleString('default', { year: 'numeric' })
-		},
-		{
-			data: data.exchangePreviousYear,
-			yearName: startPreviousYear.toLocaleString('default', { year: 'numeric' })
-		},
-		{
-			data: data.exchangeCurrentYear,
-			yearName: startCurrentYear.toLocaleString('default', { year: 'numeric' })
-		},
-	].filter(monthData => monthData.data);
-
 	return (
 		<div className="electricy-usage-month-container">
-			<HighchartsReact
-				highcharts={Highcharts}
-				options={{
-					title: false,
-					chart: {
-						backgroundColor: 'transparent',
-					},
-					credits: {
-						enabled: false
-					},
-					xAxis: {
-						categories: years.slice().map(yearUsage => yearUsage.yearName),
-						lineColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)',
-						tickColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)'
-					},
-					yAxis: {
-						title: {
-							text: 'kWh'
+			{readings.length > 0 ?
+				<HighchartsReact
+					highcharts={Highcharts}
+					options={{
+						title: false,
+						chart: {
+							backgroundColor: 'transparent',
 						},
-						gridLineColor: 'var(--color-secondary-shade-2)',
-					},
-					plotOptions: {
-						series: {
-							stacking: 'normal'
-						}
-					},
-					time: {
-						useUTC: false
-					},
-					series: [
-						{
-							name: 'kWh',
-							type: 'column',
-							showInLegend: false,
-							data: years.slice().map(yearUsage => [yearUsage.yearName, yearUsage.data.received * -1]),
-							color: 'hsla(var(--color-electricity-received-h), var(--color-electricity-received-s), var(--color-electricity-received-l), .6)'
+						credits: {
+							enabled: false
 						},
-						{
-							name: 'kWh',
-							type: 'column',
-							showInLegend: false,
-							data: years.slice().map(yearUsage => [yearUsage.yearName, yearUsage.data.delivered]),
-							color: 'hsla(var(--color-electricity-delivered-h), var(--color-electricity-delivered-s), var(--color-electricity-delivered-l), .6)'
-						}
-					]
-				}}
-			/>
+						xAxis: {
+							categories: readings.map(reading => reading.label),
+							lineColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)',
+							tickColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)'
+						},
+						yAxis: {
+							title: {
+								text: 'kWh'
+							},
+							gridLineColor: 'var(--color-secondary-shade-2)',
+						},
+						plotOptions: {
+							series: {
+								stacking: 'normal'
+							}
+						},
+						time: {
+							useUTC: false
+						},
+						series: [
+							{
+								name: 'kWh',
+								type: 'column',
+								showInLegend: false,
+								data: readings.map(reading => [reading.label, reading.received * -1]),
+								color: 'hsla(var(--color-electricity-received-h), var(--color-electricity-received-s), var(--color-electricity-received-l), .6)'
+							},
+							{
+								name: 'kWh',
+								type: 'column',
+								showInLegend: false,
+								data: readings.map(readings => [readings.label, readings.delivered]),
+								color: 'hsla(var(--color-electricity-delivered-h), var(--color-electricity-delivered-s), var(--color-electricity-delivered-l), .6)'
+							}
+						]
+					}}
+				/>
+				: <Message>No data</Message>}
 		</div>
 	);
 }
