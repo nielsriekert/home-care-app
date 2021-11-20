@@ -50,7 +50,7 @@ export default function ElectricityMonthChart({ monthsInThePast = 12 }) {
 		if (!called && entry.intersectionRatio >= 0.5) {
 			loadReadings();
 		}
-	}, [entry]);
+	}, [entry, called, loadReadings]);
 
 	useEffect(() => {
 		if (data) {
