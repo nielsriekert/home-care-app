@@ -38,26 +38,34 @@
 }
 
 .modalWrapper {
-	position: fixed;
-	top: 50px;
+	position: absolute;
+	top: 60px;
 	left: 0;
 	right: 0;
-	bottom: 0;
 	z-index: 100;
 	pointer-events: none;
 	background-color: transparent;
 	transition: background-color .15s;
 }
 
-@media (min-width: 400px) {
-	.modalWrapper {
-		top: 60px;
-	}
+.modalWrapper::before {
+	content: "";
+	position: fixed;
+	top: 60px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: transparent;
+	transition: background-color .15s;
 }
 
 .modalWrapper.isOpen {
 	pointer-events: auto;
+}
+
+.modalWrapper.isOpen::before {
 	background-color: rgba(0, 0, 0, 0.5);
+
 }
 
 .modalContainer {

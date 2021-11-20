@@ -27,8 +27,9 @@ import CumulativeWaterUsageChart from '../../molecules/CumulativeWaterUsageChart
 import ElectricityWeekChart from '../../molecules/ElectricityWeekChart/ElectricityWeekChart';
 import GasReceivedWeekChart from '../../molecules/GasReceivedWeekChart/GasReceivedWeekChart';
 import WaterReceivedWeekChart from '../../molecules/WaterReceivedWeekChart/WaterReceivedWeekChart';
-import ElectricityMonthChart from '../../molecules/ElectricityMonthChart/ElectricityMonthChart';
+import ElectricityMonthChart from '../../molecules/ElectricityMonthChart';
 import GasMonthChart from '../../molecules/GasMonthChart/GasMonthChart';
+import ElectricityYearChart from '../../molecules/ElectricityYearChart';
 
 import Button from '../../atoms/Button';
 
@@ -135,6 +136,9 @@ export default function Dashboard() {
 				</Widget>
 				<Widget title="Month" name="gas-usage-by-month" icon={<FireIcon />}>
 					<GasMonthChart />
+				</Widget>
+				<Widget title="Year" name="electrical-usage-by-year" icon={<BoltIcon />}>
+					<ElectricityYearChart />
 				</Widget>
 			</WidgetGrid>
 		</Default>
