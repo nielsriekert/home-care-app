@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useLazyQuery, gql } from '@apollo/client';
 
@@ -13,8 +13,8 @@ import { DateTime } from 'luxon';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-const ELECTRIC_EXCHANGES_BY_YEAR = gql`
-	query electricityExchangesByYear(
+const ELECTRIC_EXCHANGES_BY_MONTH = gql`
+	query electricityExchangesByMonth(
 		$timePeriod: TimePeriodInput!
 		$resolution: TimeSpan
 	) {
@@ -33,15 +33,15 @@ const ELECTRIC_EXCHANGES_BY_YEAR = gql`
 	}
 `;
 
-export default function ElectricityYearChart({ yearsInThePast = 4 }) {
+export default function ElectricityMonthChart({ monthsInThePast = 12 }) {
 	const [setRefContainer, entry] = useIntersect({ threshold: [0.5] });
 	const [readings, setReadings] = useState([]);
-	const [ loadReadings, { called, loading, error, data }] = useLazyQuery(ELECTRIC_EXCHANGES_BY_YEAR, {
+	const [ loadReadings, { called, loading, error, data }] = useLazyQuery(ELECTRIC_EXCHANGES_BY_MONTH, {
 		variables: {
-			resolution: 'YEAR',
+			resolution: 'MONTH',
 			timePeriod: {
-				start: Math.round(DateTime.now().minus({ year: yearsInThePast }).startOf('year').toSeconds()),
-				end: Math.round(DateTime.now().endOf('year').toSeconds())
+				start: Math.round(DateTime.now().minus({ month: monthsInThePast }).startOf('month').toSeconds()),
+				end: Math.round(DateTime.now().endOf('month').toSeconds())
 			},
 		}
 	});
@@ -56,7 +56,7 @@ export default function ElectricityYearChart({ yearsInThePast = 4 }) {
 		if (data) {
 			setReadings(data.electricityExchanges.map(exchange => ({
 				...exchange,
-				label: DateTime.fromSeconds(exchange.period.start).toLocaleString({ year: 'numeric' })
+				label: DateTime.fromSeconds(exchange.period.start).toLocaleString({ month: 'long' })
 			})));
 		}
 	}, [data, setReadings]);
