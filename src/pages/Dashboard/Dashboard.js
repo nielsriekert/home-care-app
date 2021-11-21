@@ -21,15 +21,12 @@ import ElectricityReceived from '../../molecules/ElectricityReceived/Electricity
 import ElectricityDelivered from '../../molecules/ElectricityDelivered/ElectricityDelivered';
 import GasUsage from '../../molecules/GasUsage/GasUsage';
 import WaterUsage from '../../molecules/WaterUsage/WaterUsage';
-import ElectricityChart from '../../molecules/ElectricityChart/ElectricityChart';
+import ElectricityChart from '../../molecules/ElectricityChart';
 import GasReceivedChart from '../../molecules/GasReceivedChart/GasReceivedChart';
 import CumulativeWaterUsageChart from '../../molecules/CumulativeWaterUsageChart/CumulativeWaterUsageChart';
-import ElectricityWeekChart from '../../molecules/ElectricityWeekChart/ElectricityWeekChart';
 import GasReceivedWeekChart from '../../molecules/GasReceivedWeekChart/GasReceivedWeekChart';
 import WaterReceivedWeekChart from '../../molecules/WaterReceivedWeekChart/WaterReceivedWeekChart';
-import ElectricityMonthChart from '../../molecules/ElectricityMonthChart';
 import GasMonthChart from '../../molecules/GasMonthChart/GasMonthChart';
-import ElectricityYearChart from '../../molecules/ElectricityYearChart';
 
 import Button from '../../atoms/Button';
 
@@ -109,6 +106,8 @@ export default function Dashboard() {
 						resolution="FIVE_MINUTES"
 						start={Math.floor(DateTime.now().minus({ hours: 8 }).toSeconds())}
 						end={Math.floor(DateTime.now().toSeconds())}
+						unit="WATT_HOUR"
+						softMax={100}
 					/>
 				</Widget>
 				<Widget title="Last 4 days" name="gas-usage-chart" icon={<FireIcon />}>
@@ -123,7 +122,14 @@ export default function Dashboard() {
 					<CumulativeWaterUsageChart {...waterChartDay} />
 				</Widget>
 				<Widget title="Week" name="electrical-usage-current-week" icon={<BoltIcon />}>
-					<ElectricityWeekChart />
+					<ElectricityChart
+						resolution="DAY"
+						start={Math.floor(DateTime.now().startOf('week').toSeconds())}
+						end={Math.floor(DateTime.now().endOf('week').toSeconds())}
+						timeFormat={{ weekday: 'long' }}
+						chartType="column"
+						softMax={15}
+					/>
 				</Widget>
 				<Widget title="Week" name="gas-usage-current-week" icon={<FireIcon />}>
 					<GasReceivedWeekChart />
@@ -132,13 +138,27 @@ export default function Dashboard() {
 					<WaterReceivedWeekChart />
 				</Widget>
 				<Widget title="Month" name="electrical-usage-by-month" icon={<BoltIcon />}>
-					<ElectricityMonthChart />
+					<ElectricityChart
+						resolution="MONTH"
+						start={Math.floor(DateTime.now().minus({ month: 12 }).toSeconds())}
+						end={Math.floor(DateTime.now().toSeconds())}
+						timeFormat={{ month: 'long' }}
+						chartType="column"
+						softMax={200}
+					/>
 				</Widget>
 				<Widget title="Month" name="gas-usage-by-month" icon={<FireIcon />}>
 					<GasMonthChart />
 				</Widget>
 				<Widget title="Year" name="electrical-usage-by-year" icon={<BoltIcon />}>
-					<ElectricityYearChart />
+					<ElectricityChart
+						resolution="YEAR"
+						start={Math.floor(DateTime.now().minus({ years: 4 }).toSeconds())}
+						end={Math.floor(DateTime.now().toSeconds())}
+						timeFormat={{ year: 'numeric' }}
+						chartType="column"
+						softMax={1500}
+					/>
 				</Widget>
 			</WidgetGrid>
 		</Default>
