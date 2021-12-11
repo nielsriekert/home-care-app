@@ -17,8 +17,19 @@ const GAS_EXCHANGES_CHART = gql`
 	query gasExchangesChart(
 		$resolution: TimeSpan
 		$timePeriod: TimePeriodInput!
+		$timePeriodPrevious: TimePeriodInput!
+  		$includePrevious: Boolean!
 	) {
 		gasExchanges(resolution: $resolution, timePeriod: $timePeriod) {
+			received
+			dataPointsCount
+			period {
+				start
+				end
+			}
+		}
+
+		gasExchangesPrevious: gasExchanges(resolution: $resolution, timePeriod: $timePeriodPrevious) @include(if: $includePrevious) {
 			received
 			dataPointsCount
 			period {
@@ -35,10 +46,12 @@ export default function GasChart({
 	end,
 	chartType = 'line',
 	timeFormat = null,
+	includePrevious = false,
 	softMax = undefined
 }) {
 	const [setRefContainer, entry] = useIntersect({ threshold: [0.2] });
 	const [readings, setReadings] = useState([]);
+	const [readingsPrevious, setPreviousReadings] = useState([]);
 	const [loadReadings, { called, loading, error, data }] = useLazyQuery(GAS_EXCHANGES_CHART, {
 		variables: {
 			resolution,
@@ -46,6 +59,11 @@ export default function GasChart({
 				start,
 				end
 			},
+			includePrevious,
+			timePeriodPrevious: {
+				start: start - (end - start),
+				end: start
+			}
 		}
 	});
 
@@ -53,7 +71,7 @@ export default function GasChart({
 		if (!called && entry.intersectionRatio >= 0.2) {
 			loadReadings();
 		}
-	}, [entry, called, loadReadings]);
+	}, [entry, called]);
 
 	useEffect(() => {
 		if (data) {
@@ -61,6 +79,13 @@ export default function GasChart({
 				...exchange,
 				label: timeFormat ? DateTime.fromSeconds(exchange.period.start).toLocaleString(timeFormat) : null
 			})));
+
+			if (data.gasExchangesPrevious) {
+				setPreviousReadings(data.gasExchangesPrevious.map(exchange => ({
+					...exchange,
+					label: timeFormat ? DateTime.fromSeconds(exchange.period.start).toLocaleString(timeFormat) : null
+				})));
+			}
 		}
 	}, [data, setReadings, timeFormat]);
 
@@ -79,6 +104,11 @@ export default function GasChart({
 						title: false,
 						chart: {
 							backgroundColor: 'transparent',
+						},
+						legend: {
+							itemStyle: {
+								color: 'var(--color-secondary-shade-3)',
+							}
 						},
 						credits: {
 							enabled: false
@@ -106,11 +136,17 @@ export default function GasChart({
 						},
 						series: [{
 							name:  'm³',
-							showInLegend: false,
+							showInLegend: includePrevious,
 							type: chartType,
 							data: readings.map(usage => [timeFormat ? usage.label : usage.period.end * 1000, usage.received]),
-							color: 'hsla(var(--color-gas-h), var(--color-gas-s), var(--color-gas-l), .6)'
-						}]
+							color: 'hsla(var(--color-gas-h), var(--color-gas-s), var(--color-gas-l), .7)'
+						}].concat(readingsPrevious ? [{
+							name:  'm³ (previous)',
+							showInLegend: includePrevious,
+							type: chartType,
+							data: readingsPrevious.map(usage => [timeFormat ? usage.label : (usage.period.end + (end - start)) * 1000, usage.received]),
+							color: 'hsla(var(--color-gas-h), var(--color-gas-s), var(--color-gas-l), .3)'
+						}] : []).reverse()
 					}}
 				/>}
 			{called && !loading && readings.length <= 0 && <Message>No data</Message>}

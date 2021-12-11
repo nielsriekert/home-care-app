@@ -141,6 +141,7 @@ export default function Dashboard() {
 						end={Math.floor(DateTime.now().endOf('week').toSeconds())}
 						timeFormat={{ weekday: 'long' }}
 						chartType="column"
+						includePrevious
 						softMax={1}
 					/>
 				</Widget>

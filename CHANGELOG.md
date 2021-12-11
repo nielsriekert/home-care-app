@@ -4,12 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.17.0] - 2021-12-11
+### Added
+- Previous week reading for gas week chart.
+
 ## [1.16.0] - 2021-11-22
 ### Added
 - Gas usage year widget on dashboard.
 
 ### Changed
-- Lazy loading all electricity charts (intersections observer).
+- Lazy loading all charts (intersections observer).
 
 ## [1.15.0] - 2021-11-20
 ### Added
