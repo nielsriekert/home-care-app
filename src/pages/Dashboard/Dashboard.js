@@ -131,11 +131,13 @@ export default function Dashboard() {
 						end={Math.floor(DateTime.now().endOf('week').toSeconds())}
 						timeFormat={{ weekday: 'long' }}
 						chartType="column"
-						softMax={15}
+						includePrevious
+						softMax={10}
 					/>
 				</Widget>
 				<Widget title="Week" name="gas-usage-current-week" icon={<FireIcon />}>
 					<GasChart
+						title="Week"
 						resolution="DAY"
 						start={Math.floor(DateTime.now().startOf('week').toSeconds())}
 						end={Math.floor(DateTime.now().endOf('week').toSeconds())}

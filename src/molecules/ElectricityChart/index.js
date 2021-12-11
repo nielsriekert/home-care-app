@@ -17,9 +17,21 @@ const ELECTRIC_EXCHANGES_CHART = gql`
 	query electricityExchangesChart(
 		$resolution: TimeSpan
 		$timePeriod: TimePeriodInput!
+		$timePeriodPrevious: TimePeriodInput!
+		$includePrevious: Boolean!
 		$unit: ElectricEnergyOverTimeUnit
 	) {
 		electricityExchanges(resolution: $resolution, timePeriod: $timePeriod) {
+			received(unit: $unit)
+			delivered(unit: $unit)
+			dataPointsCount
+			period {
+				start
+				end
+			}
+		}
+
+		electricityExchangesPrevious: electricityExchanges(resolution: $resolution, timePeriod: $timePeriodPrevious) @include(if: $includePrevious) {
 			received(unit: $unit)
 			delivered(unit: $unit)
 			dataPointsCount
@@ -38,16 +50,23 @@ export default function ElectricityChart({
 	unit = 'KILOWATT_HOUR',
 	chartType = 'line',
 	timeFormat = null,
+	includePrevious = false,
 	softMax = undefined
 }) {
 	const [setRefContainer, entry] = useIntersect({ threshold: [0.2] });
 	const [readings, setReadings] = useState([]);
+	const [readingsPrevious, setPreviousReadings] = useState([]);
 	const [loadReadings, { called, loading, error, data }] = useLazyQuery(ELECTRIC_EXCHANGES_CHART, {
 		variables: {
 			resolution,
 			timePeriod: {
 				start,
 				end
+			},
+			includePrevious,
+			timePeriodPrevious: {
+				start: start - (end - start),
+				end: start
 			},
 			unit
 		}
@@ -65,6 +84,13 @@ export default function ElectricityChart({
 				...exchange,
 				label: timeFormat ? DateTime.fromSeconds(exchange.period.start).toLocaleString(timeFormat) : null
 			})));
+
+			if (data.electricityExchangesPrevious) {
+				setPreviousReadings(data.electricityExchangesPrevious.map(exchange => ({
+					...exchange,
+					label: timeFormat ? DateTime.fromSeconds(exchange.period.start).toLocaleString(timeFormat) : null
+				})));
+			}
 		}
 	}, [data, setReadings, timeFormat]);
 
@@ -83,6 +109,16 @@ export default function ElectricityChart({
 						title: false,
 						chart: {
 							backgroundColor: 'transparent',
+						},
+						legend: {
+							itemStyle: {
+								color: 'var(--color-secondary-shade-3)',
+							}
+						},
+						plotOptions: {
+							series: {
+								borderWidth: 0
+							}
 						},
 						credits: {
 							enabled: false
@@ -103,31 +139,36 @@ export default function ElectricityChart({
 								text: unit === 'WATT_HOUR' ? 'Wh' : 'kWh'
 							},
 							softMax,
-							softMin: softMax * -1,
 							gridLineColor: 'var(--color-secondary-shade-2)',
-						},
-						plotOptions: {
-							series: {
-								stacking: 'normal'
-							}
 						},
 						time: {
 							useUTC: false
 						},
 						series: [{
-							name: unit === 'WATT_HOUR' ? 'Wh' : 'kWh',
-							showInLegend: false,
+							name: 'Received',
 							type: chartType,
-							data: readings.map(usage => [timeFormat ? usage.label : usage.period.end * 1000, usage.received * -1]),
-							color: 'hsla(var(--color-electricity-received-h), var(--color-electricity-received-s), var(--color-electricity-received-l), .6)'
+							data: readings.map(usage => [timeFormat ? usage.label : usage.period.end * 1000, usage.received]),
+							color: 'hsla(var(--color-electricity-received-h), var(--color-electricity-received-s), var(--color-electricity-received-l), .8)'
 						},
 						{
-							name: unit === 'WATT_HOUR' ? 'Wh' : 'kWh',
-							showInLegend: false,
+							name: 'Delivered',
 							type: chartType,
 							data: readings.map(usage => [timeFormat ? usage.label : usage.period.end * 1000, usage.delivered]),
-							color: 'hsla(var(--color-electricity-delivered-h), var(--color-electricity-delivered-s), var(--color-electricity-delivered-l), .6)'
-						}]
+							color: 'hsla(var(--color-electricity-delivered-h), var(--color-electricity-delivered-s), var(--color-electricity-delivered-l), .8)'
+						}].concat(readingsPrevious ? [{
+							name: 'Previously received',
+							showInLegend: includePrevious,
+							type: chartType,
+							data: readingsPrevious.map(usage => [timeFormat ? usage.label : (usage.period.end + (end - start)) * 1000, usage.received]),
+							color: 'hsla(var(--color-electricity-received-h), var(--color-electricity-received-s), var(--color-electricity-received-l), .2)'
+						},
+						{
+							name: 'Previously delivered',
+							showInLegend: includePrevious,
+							type: chartType,
+							data: readingsPrevious.map(usage => [timeFormat ? usage.label : (usage.period.end + (end - start)) * 1000, usage.delivered]),
+							color: 'hsla(var(--color-electricity-delivered-h), var(--color-electricity-delivered-s), var(--color-electricity-delivered-l), .2)'
+						}] : []).reverse()
 					}}
 				/>}
 			{called && !loading && readings.length <= 0 && <Message>No data</Message>}

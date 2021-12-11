@@ -41,6 +41,7 @@ const GAS_EXCHANGES_CHART = gql`
 `;
 
 export default function GasChart({
+	title,
 	resolution,
 	start,
 	end,
@@ -110,6 +111,11 @@ export default function GasChart({
 								color: 'var(--color-secondary-shade-3)',
 							}
 						},
+						plotOptions: {
+							series: {
+								borderWidth: 0
+							}
+						},
 						credits: {
 							enabled: false
 						},
@@ -135,17 +141,17 @@ export default function GasChart({
 							useUTC: false
 						},
 						series: [{
-							name:  'm³',
+							name:  `Current${title ? ` ${title.toLowerCase()}` : ''}`,
 							showInLegend: includePrevious,
 							type: chartType,
 							data: readings.map(usage => [timeFormat ? usage.label : usage.period.end * 1000, usage.received]),
-							color: 'hsla(var(--color-gas-h), var(--color-gas-s), var(--color-gas-l), .7)'
+							color: 'hsla(var(--color-gas-h), var(--color-gas-s), var(--color-gas-l), .8)'
 						}].concat(readingsPrevious ? [{
-							name:  'm³ (previous)',
+							name:  `Previous${title ? ` ${title.toLowerCase()}` : ''}`,
 							showInLegend: includePrevious,
 							type: chartType,
 							data: readingsPrevious.map(usage => [timeFormat ? usage.label : (usage.period.end + (end - start)) * 1000, usage.received]),
-							color: 'hsla(var(--color-gas-h), var(--color-gas-s), var(--color-gas-l), .3)'
+							color: 'hsla(var(--color-gas-h), var(--color-gas-s), var(--color-gas-l), .2)'
 						}] : []).reverse()
 					}}
 				/>}
