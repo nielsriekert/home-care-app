@@ -103,6 +103,7 @@ export default function ElectricityChart({
 								text: unit === 'WATT_HOUR' ? 'Wh' : 'kWh'
 							},
 							softMax,
+							softMin: softMax * -1,
 							gridLineColor: 'var(--color-secondary-shade-2)',
 						},
 						plotOptions: {
