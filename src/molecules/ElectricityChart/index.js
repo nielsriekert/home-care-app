@@ -147,24 +147,26 @@ export default function ElectricityChart({
 						series: [{
 							name: 'Received',
 							type: chartType,
+							showInLegend: includePrevious,
 							data: readings.map(usage => [timeFormat ? usage.label : usage.period.end * 1000, usage.received]),
 							color: 'hsla(var(--color-electricity-received-h), var(--color-electricity-received-s), var(--color-electricity-received-l), .8)'
 						},
 						{
 							name: 'Delivered',
 							type: chartType,
+							showInLegend: includePrevious,
 							data: readings.map(usage => [timeFormat ? usage.label : usage.period.end * 1000, usage.delivered]),
 							color: 'hsla(var(--color-electricity-delivered-h), var(--color-electricity-delivered-s), var(--color-electricity-delivered-l), .8)'
-						}].concat(readingsPrevious ? [{
+						}].concat(readingsPrevious.length > 0 ? [{
 							name: 'Previously received',
-							showInLegend: includePrevious,
+							showInLegend: true,
 							type: chartType,
 							data: readingsPrevious.map(usage => [timeFormat ? usage.label : (usage.period.end + (end - start)) * 1000, usage.received]),
 							color: 'hsla(var(--color-electricity-received-h), var(--color-electricity-received-s), var(--color-electricity-received-l), .2)'
 						},
 						{
 							name: 'Previously delivered',
-							showInLegend: includePrevious,
+							showInLegend: true,
 							type: chartType,
 							data: readingsPrevious.map(usage => [timeFormat ? usage.label : (usage.period.end + (end - start)) * 1000, usage.delivered]),
 							color: 'hsla(var(--color-electricity-delivered-h), var(--color-electricity-delivered-s), var(--color-electricity-delivered-l), .2)'
