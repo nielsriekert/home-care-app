@@ -71,7 +71,7 @@ export default function GasChart({
 		if (!called && entry.intersectionRatio >= 0.2) {
 			loadReadings();
 		}
-	}, [entry, called]);
+	}, [entry, called, loadReadings]);
 
 	useEffect(() => {
 		if (data) {
