@@ -11,11 +11,11 @@ import WidgetGrid from '../../organisms/WidgetGrid/WidgetGrid';
 
 import Widget from '../../molecules/Widget/Widget';
 
-import BoltArrowUpIcon from '../../atoms/BoltArrowUpIcon/BoltArrowUpIcon';
-import BoltArrowDownIcon from '../../atoms/BoltArrowDownIcon/BoltArrowDownIcon';
+import BoltArrowUpIcon from '../../atoms/BoltArrowUpIcon';
+import BoltArrowDownIcon from '../../atoms/BoltArrowDownIcon';
 
-import CurrentElectricityReceived from '../../molecules/CurrentElectricityReceived/CurrentElectricityReceived';
-import CurrentElectricityDelivered from '../../molecules/CurrentElectricityDelivered/CurrentElectricityDelivered';
+import CurrentElectricityReceived from '../../molecules/CurrentElectricityReceived';
+import CurrentElectricityDelivered from '../../molecules/CurrentElectricityDelivered';
 
 export default function Portal() {
 	return (

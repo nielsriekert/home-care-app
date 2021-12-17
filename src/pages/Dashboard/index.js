@@ -10,15 +10,18 @@ import WidgetGrid from '../../organisms/WidgetGrid/WidgetGrid';
 import Widget from '../../molecules/Widget/Widget';
 
 import BoltIcon from '../../atoms/BoltIcon/BoltIcon';
-import BoltArrowUpIcon from '../../atoms/BoltArrowUpIcon/BoltArrowUpIcon';
-import BoltArrowDownIcon from '../../atoms/BoltArrowDownIcon/BoltArrowDownIcon';
+import BoltArrowUpIcon from '../../atoms/BoltArrowUpIcon';
+import BoltArrowDownIcon from '../../atoms/BoltArrowDownIcon';
+import SunIcon from '../../atoms/SunIcon';
 import WaterIcon from '../../atoms/WaterIcon/WaterIcon';
 import FireIcon from '../../atoms/FireIcon/FireIcon';
 
-import CurrentElectricityReceived from '../../molecules/CurrentElectricityReceived/CurrentElectricityReceived';
-import CurrentElectricityDelivered from '../../molecules/CurrentElectricityDelivered/CurrentElectricityDelivered';
-import ElectricityReceived from '../../molecules/ElectricityReceived/ElectricityReceived';
-import ElectricityDelivered from '../../molecules/ElectricityDelivered/ElectricityDelivered';
+import CurrentElectricityReceived from '../../molecules/CurrentElectricityReceived';
+import CurrentElectricityDelivered from '../../molecules/CurrentElectricityDelivered';
+import CurrentElectricityGenerating from '../../molecules/CurrentElectricityGenerating';
+import ElectricityReceived from '../../molecules/ElectricityReceived';
+import ElectricityDelivered from '../../molecules/ElectricityDelivered';
+import ElectricityGenerated from '../../molecules/ElectricityGenerated';
 import GasUsage from '../../molecules/GasUsage/GasUsage';
 import WaterUsage from '../../molecules/WaterUsage/WaterUsage';
 import ElectricityChart from '../../molecules/ElectricityChart';
@@ -43,6 +46,7 @@ const getEndOfToday = () => {
 export default function Dashboard() {
 	const [updatedCurrentElectricityReceived, setUpdatedCurrentElectricityReceived] = useState(null);
 	const [updatedCurrentElectricityDelivered, setUpdatedCurrentElectricityDelivered] = useState(null);
+	const [updatedCurrentElectricityGenerating, setUpdatedCurrentElectricityGenerating] = useState(null);
 
 	const [waterChartDay, setWaterChartDay] = useState({
 		start: getStartOfToday(),
@@ -78,6 +82,10 @@ export default function Dashboard() {
 		setUpdatedCurrentElectricityDelivered(timestamp);
 	};
 
+	const updatedAtCurrentElectricityGenerating = (timestamp) =>{
+		setUpdatedCurrentElectricityGenerating(timestamp);
+	};
+
 	return (
 		<Default>
 			<WidgetGrid>
@@ -87,11 +95,17 @@ export default function Dashboard() {
 				<Widget title="Delivering" name="current-electricity-delivered" updatedAt={updatedCurrentElectricityDelivered} icon={<BoltArrowUpIcon />}>
 					<CurrentElectricityDelivered updatedAt={updatedAtCurrentElectricityDelivered}  />
 				</Widget>
+				<Widget title="Generating" name="current-electricity-generating" updatedAt={updatedCurrentElectricityGenerating} icon={<SunIcon />}>
+					<CurrentElectricityGenerating updatedAt={updatedAtCurrentElectricityGenerating}  />
+				</Widget>
 				<Widget title="Today" name="electricity-usage" icon={<BoltArrowDownIcon />}>
 					<ElectricityReceived />
 				</Widget>
 				<Widget title="Today" name="electricity-delivered" icon={<BoltArrowUpIcon />}>
 					<ElectricityDelivered />
+				</Widget>
+				<Widget title="Today" name="electricity-generated" icon={<SunIcon />}>
+					<ElectricityGenerated />
 				</Widget>
 				<Widget title="Today" name="gas-usage" icon={<FireIcon />}>
 					<GasUsage />
