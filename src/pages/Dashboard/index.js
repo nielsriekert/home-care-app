@@ -12,7 +12,6 @@ import Widget from '../../molecules/Widget';
 import BoltIcon from '../../atoms/BoltIcon';
 import BoltArrowUpIcon from '../../atoms/BoltArrowUpIcon';
 import BoltArrowDownIcon from '../../atoms/BoltArrowDownIcon';
-import SunIcon from '../../atoms/SunIcon';
 import WaterIcon from '../../atoms/WaterIcon';
 import FireIcon from '../../atoms/FireIcon';
 
