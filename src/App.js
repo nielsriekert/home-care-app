@@ -7,7 +7,7 @@ import {
 	Switch,
 	Route,
 } from 'react-router-dom';
-import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import PrivateRoute from './components/PrivateRoute';
 
 import Cookies from 'cookies.js';
 

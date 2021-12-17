@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 import { useQuery, gql } from '@apollo/client';
 
-import EventCard from '../../molecules/EventCard/EventCard';
+import EventCard from '../../molecules/EventCard';
 import Message from '../../atoms/Message';
 
 import Skeleton from '../../atoms/Skeleton';

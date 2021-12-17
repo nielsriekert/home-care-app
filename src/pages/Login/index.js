@@ -1,9 +1,9 @@
 import styles from  './Login.module.css';
 import React from 'react';
 
-import LoggedOut from '../../templates/LoggedOut/LoggedOut';
+import LoggedOut from '../../templates/LoggedOut';
 
-import LoginForm from '../../organisms/LoginForm/LoginForm';
+import LoginForm from '../../organisms/LoginForm';
 
 export default function Login() {
 	return (

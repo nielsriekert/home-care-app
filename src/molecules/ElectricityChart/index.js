@@ -113,6 +113,9 @@ export default function ElectricityChart({
 						legend: {
 							itemStyle: {
 								color: 'var(--color-secondary-shade-3)',
+							},
+							itemHoverStyle: {
+								color: 'white',
 							}
 						},
 						plotOptions: {
@@ -149,27 +152,27 @@ export default function ElectricityChart({
 							type: chartType,
 							showInLegend: includePrevious,
 							data: readings.map(usage => [timeFormat ? usage.label : usage.period.end * 1000, usage.received]),
-							color: 'hsla(var(--color-electricity-received-h), var(--color-electricity-received-s), var(--color-electricity-received-l), .8)'
+							color: 'var(--color-electricity-received)'
 						},
 						{
 							name: 'Delivered',
 							type: chartType,
 							showInLegend: includePrevious,
 							data: readings.map(usage => [timeFormat ? usage.label : usage.period.end * 1000, usage.delivered]),
-							color: 'hsla(var(--color-electricity-delivered-h), var(--color-electricity-delivered-s), var(--color-electricity-delivered-l), .8)'
+							color: 'var(--color-electricity-delivered)'
 						}].concat(readingsPrevious.length > 0 ? [{
 							name: 'Previously received',
 							showInLegend: true,
 							type: chartType,
 							data: readingsPrevious.map(usage => [timeFormat ? usage.label : (usage.period.end + (end - start)) * 1000, usage.received]),
-							color: 'hsla(var(--color-electricity-received-h), var(--color-electricity-received-s), var(--color-electricity-received-l), .2)'
+							color: 'hsla(var(--color-electricity-received-h), var(--color-electricity-received-s), var(--color-electricity-received-l), .3)'
 						},
 						{
 							name: 'Previously delivered',
 							showInLegend: true,
 							type: chartType,
 							data: readingsPrevious.map(usage => [timeFormat ? usage.label : (usage.period.end + (end - start)) * 1000, usage.delivered]),
-							color: 'hsla(var(--color-electricity-delivered-h), var(--color-electricity-delivered-s), var(--color-electricity-delivered-l), .2)'
+							color: 'hsla(var(--color-electricity-delivered-h), var(--color-electricity-delivered-s), var(--color-electricity-delivered-l), .3)'
 						}] : []).reverse()
 					}}
 				/>}

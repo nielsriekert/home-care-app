@@ -3,31 +3,29 @@ import React, { useState, useCallback } from 'react';
 
 import { DateTime } from 'luxon';
 
-import Default from '../../templates/Default/Default';
+import Default from '../../templates/Default';
 
-import WidgetGrid from '../../organisms/WidgetGrid/WidgetGrid';
+import WidgetGrid from '../../organisms/WidgetGrid';
 
-import Widget from '../../molecules/Widget/Widget';
+import Widget from '../../molecules/Widget';
 
-import BoltIcon from '../../atoms/BoltIcon/BoltIcon';
+import BoltIcon from '../../atoms/BoltIcon';
 import BoltArrowUpIcon from '../../atoms/BoltArrowUpIcon';
 import BoltArrowDownIcon from '../../atoms/BoltArrowDownIcon';
 import SunIcon from '../../atoms/SunIcon';
-import WaterIcon from '../../atoms/WaterIcon/WaterIcon';
-import FireIcon from '../../atoms/FireIcon/FireIcon';
+import WaterIcon from '../../atoms/WaterIcon';
+import FireIcon from '../../atoms/FireIcon';
 
 import CurrentElectricityReceived from '../../molecules/CurrentElectricityReceived';
 import CurrentElectricityDelivered from '../../molecules/CurrentElectricityDelivered';
-import CurrentElectricityGenerating from '../../molecules/CurrentElectricityGenerating';
 import ElectricityReceived from '../../molecules/ElectricityReceived';
 import ElectricityDelivered from '../../molecules/ElectricityDelivered';
-import ElectricityGenerated from '../../molecules/ElectricityGenerated';
-import GasUsage from '../../molecules/GasUsage/GasUsage';
-import WaterUsage from '../../molecules/WaterUsage/WaterUsage';
+import GasUsage from '../../molecules/GasUsage';
+import WaterUsage from '../../molecules/WaterUsage';
 import ElectricityChart from '../../molecules/ElectricityChart';
 import GasChart from '../../molecules/GasChart';
-import CumulativeWaterUsageChart from '../../molecules/CumulativeWaterUsageChart/CumulativeWaterUsageChart';
-import WaterReceivedWeekChart from '../../molecules/WaterReceivedWeekChart/WaterReceivedWeekChart';
+import CumulativeWaterUsageChart from '../../molecules/CumulativeWaterUsageChart';
+import WaterReceivedWeekChart from '../../molecules/WaterReceivedWeekChart';
 
 import Button from '../../atoms/Button';
 
@@ -46,7 +44,6 @@ const getEndOfToday = () => {
 export default function Dashboard() {
 	const [updatedCurrentElectricityReceived, setUpdatedCurrentElectricityReceived] = useState(null);
 	const [updatedCurrentElectricityDelivered, setUpdatedCurrentElectricityDelivered] = useState(null);
-	const [updatedCurrentElectricityGenerating, setUpdatedCurrentElectricityGenerating] = useState(null);
 
 	const [waterChartDay, setWaterChartDay] = useState({
 		start: getStartOfToday(),
@@ -82,10 +79,6 @@ export default function Dashboard() {
 		setUpdatedCurrentElectricityDelivered(timestamp);
 	};
 
-	const updatedAtCurrentElectricityGenerating = (timestamp) =>{
-		setUpdatedCurrentElectricityGenerating(timestamp);
-	};
-
 	return (
 		<Default>
 			<WidgetGrid>
@@ -95,17 +88,11 @@ export default function Dashboard() {
 				<Widget title="Delivering" name="current-electricity-delivered" updatedAt={updatedCurrentElectricityDelivered} icon={<BoltArrowUpIcon />}>
 					<CurrentElectricityDelivered updatedAt={updatedAtCurrentElectricityDelivered}  />
 				</Widget>
-				<Widget title="Generating" name="current-electricity-generating" updatedAt={updatedCurrentElectricityGenerating} icon={<SunIcon />}>
-					<CurrentElectricityGenerating updatedAt={updatedAtCurrentElectricityGenerating}  />
-				</Widget>
 				<Widget title="Today" name="electricity-usage" icon={<BoltArrowDownIcon />}>
 					<ElectricityReceived />
 				</Widget>
 				<Widget title="Today" name="electricity-delivered" icon={<BoltArrowUpIcon />}>
 					<ElectricityDelivered />
-				</Widget>
-				<Widget title="Today" name="electricity-generated" icon={<SunIcon />}>
-					<ElectricityGenerated />
 				</Widget>
 				<Widget title="Today" name="gas-usage" icon={<FireIcon />}>
 					<GasUsage />

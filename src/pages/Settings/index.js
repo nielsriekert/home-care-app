@@ -1,13 +1,13 @@
 import React from 'react';
 import './Settings.module.css';
 
-import SettingsTemplate from '../../templates/Settings/Settings';
-import PageNav from '../../molecules/PageNav/PageNav';
+import SettingsTemplate from '../../templates/Settings';
+import PageNav from '../../molecules/PageNav';
 
-import FireIcon from '../../atoms/FireIcon/FireIcon';
-import PowerPlugIcon from '../../atoms/PowerPlugIcon/PowerPlugIcon';
-import WaterIcon from '../../atoms/WaterIcon/WaterIcon';
-import CogwheelIcon from '../../atoms/CogwheelIcon/CogwheelIcon';
+import FireIcon from '../../atoms/FireIcon';
+import PowerPlugIcon from '../../atoms/PowerPlugIcon';
+import WaterIcon from '../../atoms/WaterIcon';
+import CogwheelIcon from '../../atoms/CogwheelIcon';
 
 export default function Settings() {
 	return (

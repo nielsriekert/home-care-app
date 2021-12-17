@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-import Settings from '../../templates/Settings/Settings';
+import Settings from '../../templates/Settings';
 
 import { useQuery, useMutation, gql } from '@apollo/client';
 
-import InputFieldCheckbox from '../../molecules/InputFieldCheckbox/InputFieldCheckbox';
+import InputFieldCheckbox from '../../molecules/InputFieldCheckbox';
 
 import Skeleton from '../../atoms/Skeleton';
 import Message from '../../atoms/Message';

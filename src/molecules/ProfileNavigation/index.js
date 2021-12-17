@@ -6,7 +6,7 @@ import { useApolloClient } from '@apollo/client';
 
 import useCookie from '../../hooks/useCookie';
 
-export default function Navigation() {
+export default function ProfileNavigation() {
 	const history = useHistory();
 	const [accessToken, setCookie] = useCookie('authorization-token', null);
 	const client = useApolloClient();

@@ -1,11 +1,11 @@
 import React from 'react';
 import './ProfileDashboard.module.css';
 
-import Default from '../../templates/Default/Default';
+import Default from '../../templates/Default';
 
-import ProfileNavigation from '../../molecules/ProfileNavigation/ProfileNavigation';
+import ProfileNavigation from '../../molecules/ProfileNavigation';
 
-import EventList from '../../organisms/EventList/EventList';
+import EventList from '../../organisms/EventList';
 
 export default function Dashboard() {
 	return (

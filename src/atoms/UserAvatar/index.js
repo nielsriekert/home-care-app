@@ -10,7 +10,7 @@ export default function UserAvatar({ name, avatar, onClick = undefined, isLoadin
 	}
 
 	return (
-		<WrapperElement onClick={onClick} className={styles.container + (!avatar ? ' ' + styles.noImage : '')}>
+		<WrapperElement onClick={onClick} className={styles.container + (!avatar && !isLoading ? ' ' + styles.noImage : '')}>
 			{isLoading ?
 				<Skeleton shape="circle" width="50px" height="50px" /> :
 				avatar ? <img src={avatar} alt={name} /> : name}

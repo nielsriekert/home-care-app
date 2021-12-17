@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import UserAvatar from '../../atoms/UserAvatar';
 import UserHeaderModal from '../../molecules/UserHeaderModal';
 
-import CogwheelIcon from '../../atoms/CogwheelIcon/CogwheelIcon';
+import CogwheelIcon from '../../atoms/CogwheelIcon';
 
 import { USER } from '../../fragments';
 

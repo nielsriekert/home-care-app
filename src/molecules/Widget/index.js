@@ -1,7 +1,7 @@
 import styles from './Widget.module.css';
 import React from 'react';
 
-import LastUpdated from '../../atoms/LastUpdated/LastUpdated';
+import LastUpdated from '../../atoms/LastUpdated';
 
 export default function Widget({ children, title, name, icon, updatedAt }) {
 	return (
