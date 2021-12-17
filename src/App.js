@@ -44,11 +44,6 @@ const client = new ApolloClient({
 	link: authLink.concat(new HttpLink({
 		uri: process.env.REACT_APP_API_ENDPOINT,
 	})),
-	defaultOptions: {
-		watchQuery: {
-			fetchPolicy: 'no-cache',
-		},
-	},
 	connectToDevTools: process.env.NODE_ENV !== 'production'
 });
 
