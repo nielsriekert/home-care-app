@@ -2,9 +2,9 @@ import React from 'react';
 
 import styles from './InputFieldCheckbox.module.css';
 
-import FieldLabel from '../../atoms/FieldLabel/FieldLabel';
+import FieldLabel from '../../atoms/FieldLabel';
 
-export default function FormFieldCheckbox({ label, name, choices = [], onChange, isRequired, error }) {
+export default function InputFieldCheckbox({ label, name, choices = [], onChange, isRequired, error }) {
 	function onValueChange(event) {
 		if (typeof onChange === 'function') {
 			onChange(name, event.target.value);

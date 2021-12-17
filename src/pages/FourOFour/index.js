@@ -1,7 +1,7 @@
 import './four-o-four.css';
 import React from 'react';
 
-import LoggedOut from '../../templates/LoggedOut/LoggedOut';
+import LoggedOut from '../../templates/LoggedOut';
 
 // TODO: no 404 status http code yet
 function FourOFour() {

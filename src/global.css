@@ -59,9 +59,14 @@
 	--color-electricity-delivered-l: 82%;
 	--color-electricity-delivered: hsl(var(--color-electricity-delivered-h), var(--color-electricity-delivered-s), var(--color-electricity-delivered-l));
 
-	--color-gas-h: 38;
+	--color-electricity-solar-h: 50;
+	--color-electricity-solar-s: 100%;
+	--color-electricity-solar-l: 78%;
+	--color-electricity-solar: hsl(var(--color-electricity-solar-h), var(--color-electricity-solar-s), var(--color-electricity-solar-l));
+
+	--color-gas-h: 24;
 	--color-gas-s: 100%;
-	--color-gas-l: 89%;
+	--color-gas-l: 80%;
 	--color-gas: hsl(var(--color-gas-h), var(--color-gas-s), var(--color-gas-l));
 
 	--color-water-h: 189;

@@ -145,13 +145,13 @@ export default function GasChart({
 							showInLegend: includePrevious,
 							type: chartType,
 							data: readings.map(usage => [timeFormat ? usage.label : usage.period.end * 1000, usage.received]),
-							color: 'hsla(var(--color-gas-h), var(--color-gas-s), var(--color-gas-l), .8)'
+							color: 'var(--color-gas)'
 						}].concat(readingsPrevious.length > 0 ? [{
 							name:  `Previous${title ? ` ${title.toLowerCase()}` : ''}`,
 							showInLegend: includePrevious,
 							type: chartType,
 							data: readingsPrevious.map(usage => [timeFormat ? usage.label : (usage.period.end + (end - start)) * 1000, usage.received]),
-							color: 'hsla(var(--color-gas-h), var(--color-gas-s), var(--color-gas-l), .2)'
+							color: 'hsla(var(--color-gas-h), var(--color-gas-s), var(--color-gas-l), .4)'
 						}] : []).reverse()
 					}}
 				/>}

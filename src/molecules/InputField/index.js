@@ -1,9 +1,9 @@
 import styles from './InputField.module.css';
 import React, { useState, useCallback } from 'react';
 
-import FieldLabel from '../../atoms/FieldLabel/FieldLabel';
-import FieldDescription from '../../atoms/FieldDescription/FieldDescription';
-import FieldMessage from '../../atoms/FieldMessage/FieldMessage';
+import FieldLabel from '../../atoms/FieldLabel';
+import FieldDescription from '../../atoms/FieldDescription';
+import FieldMessage from '../../atoms/FieldMessage';
 
 export default function InputField({ type, label, name, value, description, onChange, isRequired, onFocus, state, isDisabled = false, message, containerClass }) {
 	const [isFocused, setFocus] = useState(false);

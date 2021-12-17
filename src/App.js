@@ -7,20 +7,20 @@ import {
 	Switch,
 	Route,
 } from 'react-router-dom';
-import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import PrivateRoute from './components/PrivateRoute';
 
 import Cookies from 'cookies.js';
 
-import Login from './pages/Login/Login';
-import Portal from './pages/Portal/Portal';
-import Dashboard from './pages/Dashboard/Dashboard';
-import Settings from './pages/Settings/Settings';
-import ProfileDashboard from './pages/ProfileDashboard/ProfileDashboard';
-import MinderGasNlSettings from './pages/MinderGasNlSettings/MinderGasNlSettings';
-import SmartMeterSettings from './pages/SmartMeterSettings/SmartMeterSettings';
-import WaterReaderSettings from './pages/WaterReaderSettings/WaterReaderSettings';
-import About from './pages/About/About';
-import FourOFour from './pages/FourOFour/FourOFour';
+import Login from './pages/Login';
+import Portal from './pages/Portal';
+import Dashboard from './pages/Dashboard';
+import Settings from './pages/Settings';
+import ProfileDashboard from './pages/ProfileDashboard';
+import MinderGasNlSettings from './pages/MinderGasNlSettings';
+import SmartMeterSettings from './pages/SmartMeterSettings';
+import WaterReaderSettings from './pages/WaterReaderSettings';
+import About from './pages/About';
+import FourOFour from './pages/FourOFour';
 
 // TODO: doesn't work after logging in
 const authLink = new ApolloLink((operation, forward) => {
@@ -44,11 +44,6 @@ const client = new ApolloClient({
 	link: authLink.concat(new HttpLink({
 		uri: process.env.REACT_APP_API_ENDPOINT,
 	})),
-	defaultOptions: {
-		watchQuery: {
-			fetchPolicy: 'no-cache',
-		},
-	},
 	connectToDevTools: process.env.NODE_ENV !== 'production'
 });
 

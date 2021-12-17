@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-import Settings from '../../templates/Settings/Settings';
+import Settings from '../../templates/Settings';
 
 import Skeleton from '../../atoms/Skeleton';
 import Message from '../../atoms/Message';
-import Form from '../../organisms/Form/Form';
-import InputField from '../../molecules/InputField/InputField';
+import Form from '../../organisms/Form';
+import InputField from '../../molecules/InputField';
 
 import { useMutation, gql, useQuery } from '@apollo/client';
 import { FormattedNumber } from 'react-intl';

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Settings from '../../templates/Settings/Settings';
+import Settings from '../../templates/Settings';
 
 import Skeleton from '../../atoms/Skeleton';
 import Message from '../../atoms/Message';

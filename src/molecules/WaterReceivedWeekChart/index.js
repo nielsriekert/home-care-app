@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SkeletonChart from '../../molecules/SkeletonChart';
+import SkeletonChart from '../SkeletonChart';
 import Message from '../../atoms/Message';
 
 import { EXCHANGE } from './fragments';

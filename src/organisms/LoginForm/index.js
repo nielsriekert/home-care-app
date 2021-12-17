@@ -7,8 +7,8 @@ import { useMutation, gql } from '@apollo/client';
 
 import useCookie from '../../hooks/useCookie';
 
-import Form from '../../organisms/Form/Form';
-import InputField from '../../molecules/InputField/InputField';
+import Form from '../Form';
+import InputField from '../../molecules/InputField';
 
 const LOGIN = gql`
 	mutation login($email: String! $password: String!) {

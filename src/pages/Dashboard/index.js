@@ -3,28 +3,29 @@ import React, { useState, useCallback } from 'react';
 
 import { DateTime } from 'luxon';
 
-import Default from '../../templates/Default/Default';
+import Default from '../../templates/Default';
 
-import WidgetGrid from '../../organisms/WidgetGrid/WidgetGrid';
+import WidgetGrid from '../../organisms/WidgetGrid';
 
-import Widget from '../../molecules/Widget/Widget';
+import Widget from '../../molecules/Widget';
 
-import BoltIcon from '../../atoms/BoltIcon/BoltIcon';
-import BoltArrowUpIcon from '../../atoms/BoltArrowUpIcon/BoltArrowUpIcon';
-import BoltArrowDownIcon from '../../atoms/BoltArrowDownIcon/BoltArrowDownIcon';
-import WaterIcon from '../../atoms/WaterIcon/WaterIcon';
-import FireIcon from '../../atoms/FireIcon/FireIcon';
+import BoltIcon from '../../atoms/BoltIcon';
+import BoltArrowUpIcon from '../../atoms/BoltArrowUpIcon';
+import BoltArrowDownIcon from '../../atoms/BoltArrowDownIcon';
+import SunIcon from '../../atoms/SunIcon';
+import WaterIcon from '../../atoms/WaterIcon';
+import FireIcon from '../../atoms/FireIcon';
 
-import CurrentElectricityReceived from '../../molecules/CurrentElectricityReceived/CurrentElectricityReceived';
-import CurrentElectricityDelivered from '../../molecules/CurrentElectricityDelivered/CurrentElectricityDelivered';
-import ElectricityReceived from '../../molecules/ElectricityReceived/ElectricityReceived';
-import ElectricityDelivered from '../../molecules/ElectricityDelivered/ElectricityDelivered';
-import GasUsage from '../../molecules/GasUsage/GasUsage';
-import WaterUsage from '../../molecules/WaterUsage/WaterUsage';
+import CurrentElectricityReceived from '../../molecules/CurrentElectricityReceived';
+import CurrentElectricityDelivered from '../../molecules/CurrentElectricityDelivered';
+import ElectricityReceived from '../../molecules/ElectricityReceived';
+import ElectricityDelivered from '../../molecules/ElectricityDelivered';
+import GasUsage from '../../molecules/GasUsage';
+import WaterUsage from '../../molecules/WaterUsage';
 import ElectricityChart from '../../molecules/ElectricityChart';
 import GasChart from '../../molecules/GasChart';
-import CumulativeWaterUsageChart from '../../molecules/CumulativeWaterUsageChart/CumulativeWaterUsageChart';
-import WaterReceivedWeekChart from '../../molecules/WaterReceivedWeekChart/WaterReceivedWeekChart';
+import CumulativeWaterUsageChart from '../../molecules/CumulativeWaterUsageChart';
+import WaterReceivedWeekChart from '../../molecules/WaterReceivedWeekChart';
 
 import Button from '../../atoms/Button';
 
