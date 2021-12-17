@@ -1,6 +1,6 @@
 {
   "name": "home-care-app",
-  "version": "1.19.0",
+  "version": "1.19.1",
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.5.6",
