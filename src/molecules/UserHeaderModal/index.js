@@ -1,31 +1,29 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './UserHeaderModal.module.css';
-import { useHistory } from 'react-router-dom';
-import { useApolloClient } from '@apollo/client';
+
+import { useMutation, gql } from '@apollo/client';
 
 import UserHeaderMenu from '../UserHeaderMenu';
 import UserProfileCard from '../UserProfileCard';
 
-import useCookie from '../../hooks/useCookie';
+import { USER } from '../../fragments';
+
+const LOGOUT = gql`
+	${USER}
+	mutation logout {
+		logout {
+			...UserFields
+		}
+	}
+`;
 
 export default function UserHeaderModal({ isOpen, name, email, avatar, role }) {
-	const history = useHistory();
-	const [accessToken, setCookie] = useCookie('authorization-token', null);
-	const client = useApolloClient();
+	const [logout] = useMutation(LOGOUT);
 
 	const onLogout = event => {
 		event.preventDefault();
-		setCookie(null, 0);
+		logout().then(() => window.location = '/');
 	};
-
-	useEffect(() => {
-		if (!accessToken) {
-			client.clearStore().then(() => {
-				// TODO: not the best solution...
-				window.location = '/';
-			});
-		}
-	}, [accessToken, client, history]);
 
 	return (
 		<div className={styles.container + (isOpen ? ` ${styles.isOpen}` : '')}>
