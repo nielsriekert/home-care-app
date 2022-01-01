@@ -17,7 +17,9 @@ const CURRENT_SOLAR_POWER_GENERATING = gql`
 `;
 
 export default function CurrentSolarPowerGenerating({ updatedAt }) {
-	const { loading, error, data } = useQuery(CURRENT_SOLAR_POWER_GENERATING);
+	const { loading, error, data } = useQuery(CURRENT_SOLAR_POWER_GENERATING, {
+		pollInterval: 10000
+	});
 
 	useEffect(() => {
 		if (data?.currentSolarPowerGenerating?.readingAt && typeof updatedAt === 'function') {
