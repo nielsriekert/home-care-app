@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Polling to current electricity and solar widgets.
 
+### Fixed
+- Login form redirect after login.
+
 ## [1.20.1] - 2022-01-01
 ### Fixed
 - Last updated for current solar power widget.
