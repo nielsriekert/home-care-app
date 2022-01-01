@@ -7,19 +7,19 @@ import Message from '../../atoms/Message';
 import { useQuery, gql } from '@apollo/client';
 import { FormattedNumber } from 'react-intl';
 
+import { ELECTRICITY_USAGE } from '../../fragments';
+
 const CURRENT_ELECTRIC_DELIVERED = gql`
+	${ELECTRICITY_USAGE}
 	query currentElectricityDelivered {
 		currentElectricityUsage {
-			delivered(unit: WATT),
-			readingAt
+			...ElectricityUsageFields
 		}
 	}
 `;
 
 export default function CurrentElectricityDelivered({ updatedAt }) {
-	const { loading, error, data } = useQuery(CURRENT_ELECTRIC_DELIVERED, {
-		pollInterval: 10000
-	});
+	const { loading, error, data } = useQuery(CURRENT_ELECTRIC_DELIVERED);
 
 	useEffect(() => {
 		if (data?.currentElectricityUsage?.readingAt && typeof updatedAt === 'function') {

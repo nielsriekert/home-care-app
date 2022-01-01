@@ -8,3 +8,12 @@ export const USER = gql`
 		avatar
 	}
 `;
+
+export const ELECTRICITY_USAGE = gql`
+	fragment ElectricityUsageFields on ElectricityUsage {
+		id
+		received(unit: WATT),
+		delivered(unit: WATT),
+		readingAt
+	}
+`;

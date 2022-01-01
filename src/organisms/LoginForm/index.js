@@ -52,7 +52,7 @@ export default function LoginForm() {
 
 	const [login, { data, loading, error } ] = useMutation(LOGIN, { errorPolicy: 'all' });
 
-	const onSubmit = (event) => {
+	const onSubmit = () => {
 		login({
 			variables: {
 				email: getFieldValueByName(fields, 'email'),
