@@ -15,25 +15,25 @@ export default function Settings() {
 			<PageNav menuItems={[
 				{
 					icon: FireIcon,
-					to: '/minder-gas-nl',
+					to: 'minder-gas-nl',
 					label: 'MinderGas.nl',
 					description: 'Monitor your natural gas consumption, by connecting to mindergas.nl'
 				},
 				{
 					icon: PowerPlugIcon,
-					to: '/smart-meter',
+					to: 'smart-meter',
 					label: 'Smart Meter',
 					description: 'Show information about your smart meter and gas meter'
 				},
 				{
 					icon: WaterIcon,
-					to: '/water-reader',
+					to: 'water-reader',
 					label: 'Water Reader',
 					description: 'Add verified water readings to reset your meters reading'
 				},
 				{
 					icon: CogwheelIcon,
-					to: '/about',
+					to: 'about',
 					label: 'About',
 					description: 'App and server version numbers'
 				}

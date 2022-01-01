@@ -8,7 +8,6 @@ import {
 } from 'react-router-dom';
 
 import Login from './pages/Login';
-import Portal from './pages/Portal';
 import Dashboard from './pages/Dashboard';
 import Settings from './pages/Settings';
 import ProfileDashboard from './pages/ProfileDashboard';
@@ -24,13 +23,13 @@ export default function App() {
 			<Router>
 				<Routes>
 					<Route path="/login" element={<Login />} />
-					<Route redirectComponents={<Portal />} exact path="/" element={<Dashboard />} />
-					<Route path="/settings" element={<Settings />} />
+					<Route exact path="/" element={<Dashboard />} />
 					<Route path="/profile" element={<ProfileDashboard />} />
-					<Route path="/minder-gas-nl" element={<MinderGasNlSettings />} />
-					<Route path="/smart-meter" element={<SmartMeterSettings />} />
-					<Route path="/water-reader" element={<WaterReaderSettings />} />
-					<Route path="/about" element={<About />} />
+					<Route path="settings" element={<Settings />} />
+					<Route path="/settings/minder-gas-nl" element={<MinderGasNlSettings />} />
+					<Route path="/settings/smart-meter" element={<SmartMeterSettings />} />
+					<Route path="/settings/water-reader" element={<WaterReaderSettings />} />
+					<Route path="/settings/about" element={<About />} />
 					<Route element={<FourOFour />} />
 				</Routes>
 			</Router>

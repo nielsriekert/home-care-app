@@ -47,6 +47,11 @@
 	background-color: var(--color-secondary-shade-4);
 }
 
+.container .icon svg {
+	width: 1.5rem;
+	aspect-ratio: 1/1;
+}
+
 .container .title,
 .container .description {
 	overflow: hidden;

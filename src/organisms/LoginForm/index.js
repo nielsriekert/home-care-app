@@ -11,7 +11,6 @@ const LOGIN = gql`
 	${USER}
 	mutation login($email: String! $password: String!) {
 		login(email: $email, password: $password) {
-			token
 			user {
 				...UserFields
 			}
