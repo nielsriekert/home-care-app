@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'normalize.css';
 import './global.css';
+import { ApolloProvider } from '@apollo/client';
+import client from './apolloClient';
 import App from './App';
 
 import Highcharts from 'highcharts';
@@ -14,7 +16,9 @@ Highcharts.setOptions({
 
 ReactDOM.render(
 	<React.StrictMode>
-		<App />
+		<ApolloProvider client={client}>
+			<App />
+		</ApolloProvider>
 	</React.StrictMode>,
 	document.getElementById('root')
 );

@@ -1,22 +1,18 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import {
-	Redirect
-} from 'react-router-dom';
 
 import { useMutation, gql } from '@apollo/client';
-
-import useCookie from '../../hooks/useCookie';
 
 import Form from '../Form';
 import InputField from '../../molecules/InputField';
 
+import { USER } from '../../fragments';
+
 const LOGIN = gql`
+	${USER}
 	mutation login($email: String! $password: String!) {
 		login(email: $email, password: $password) {
-			token
 			user {
-				email
-				name
+				...UserFields
 			}
 		}
 	}
@@ -28,7 +24,6 @@ const getFieldValueByName = (fields, name) => {
 };
 
 export default function LoginForm() {
-	const [accessToken, setCookie] = useCookie('authorization-token', null);
 	const [fields, setFields] = useState([
 		{
 			type: 'email',
@@ -55,7 +50,7 @@ export default function LoginForm() {
 		})));
 	}, [fields]);
 
-	const [login, { data, loading, error, client } ] = useMutation(LOGIN, { errorPolicy: 'all' });
+	const [login, { data, loading, error } ] = useMutation(LOGIN, { errorPolicy: 'all' });
 
 	const onSubmit = (event) => {
 		login({
@@ -67,16 +62,10 @@ export default function LoginForm() {
 	};
 
 	useEffect(() => {
-		if (data && data.login && data.login.token) {
-			setCookie(data.login.token, 720);
+		if (data && data.login && data.login.user.id) {
+			window.location = '/';
 		}
-	}, [data, client, setCookie]);
-
-	if (accessToken) {
-		return (
-			<Redirect to="/" />
-		);
-	};
+	}, [data]);
 
 	return (
 		<Form

@@ -11,14 +11,17 @@ import Widget from '../../molecules/Widget';
 
 import BoltIcon from '../../atoms/BoltIcon';
 import BoltArrowUpIcon from '../../atoms/BoltArrowUpIcon';
+import SunIcon from '../../atoms/SunIcon';
 import BoltArrowDownIcon from '../../atoms/BoltArrowDownIcon';
 import WaterIcon from '../../atoms/WaterIcon';
 import FireIcon from '../../atoms/FireIcon';
 
 import CurrentElectricityReceived from '../../molecules/CurrentElectricityReceived';
 import CurrentElectricityDelivered from '../../molecules/CurrentElectricityDelivered';
+import CurrentSolarPowerGenerating from '../../molecules/CurrentSolarPowerGenerating';
 import ElectricityReceived from '../../molecules/ElectricityReceived';
 import ElectricityDelivered from '../../molecules/ElectricityDelivered';
+import CurrentSolarPowerGenerated from '../../molecules/SolarPowerGenerated';
 import GasUsage from '../../molecules/GasUsage';
 import WaterUsage from '../../molecules/WaterUsage';
 import ElectricityChart from '../../molecules/ElectricityChart';
@@ -87,11 +90,17 @@ export default function Dashboard() {
 				<Widget title="Delivering" name="current-electricity-delivered" updatedAt={updatedCurrentElectricityDelivered} icon={<BoltArrowUpIcon />}>
 					<CurrentElectricityDelivered updatedAt={updatedAtCurrentElectricityDelivered}  />
 				</Widget>
+				<Widget title="Solar generating" name="current-solar-generating" updatedAt={updatedCurrentElectricityDelivered} icon={<SunIcon />}>
+					<CurrentSolarPowerGenerating updatedAt={updatedAtCurrentElectricityDelivered}  />
+				</Widget>
 				<Widget title="Today" name="electricity-usage" icon={<BoltArrowDownIcon />}>
 					<ElectricityReceived />
 				</Widget>
 				<Widget title="Today" name="electricity-delivered" icon={<BoltArrowUpIcon />}>
 					<ElectricityDelivered />
+				</Widget>
+				<Widget title="Today" name="solar-power-received" icon={<SunIcon />}>
+					<CurrentSolarPowerGenerated />
 				</Widget>
 				<Widget title="Today" name="gas-usage" icon={<FireIcon />}>
 					<GasUsage />
