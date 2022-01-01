@@ -8,7 +8,7 @@ export default function LastUpdated({ timestamp }) {
 
 	useInterval(() => {
 		setElapsedTime(DateTime.fromSeconds(timestamp).toRelative());
-	}, 5000);
+	}, 1000);
 
 	useEffect(() => {
 		setElapsedTime(DateTime.fromSeconds(timestamp).toRelative());
