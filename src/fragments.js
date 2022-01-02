@@ -17,3 +17,23 @@ export const ELECTRICITY_USAGE = gql`
 		readingAt
 	}
 `;
+
+export const WATER_EXCHANGE = gql`
+	fragment WaterExchangeFields on WaterExchange {
+		id
+		received
+		period {
+			start
+			end
+		}
+	}
+`;
+
+export const WATER_READING = gql`
+	fragment WaterReadingFields on WaterReading {
+		id
+		reading
+		readingAt
+		isVerified
+	}
+`;

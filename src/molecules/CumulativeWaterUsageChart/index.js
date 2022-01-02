@@ -10,14 +10,15 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import HighchartsAnnotations from 'highcharts/modules/annotations';
 
+import { WATER_READING } from '../../fragments';
+
 HighchartsAnnotations(Highcharts);
 
 const CUMULATIVE_WATER_USAGE = gql`
+	${WATER_READING}
 	query cumulativeWaterUsage($start: Int! $end: Int!) {
 		cumulativeWaterUsage(start: $start end: $end) {
-			reading
-			readingAt
-			isVerified
+			...WaterReadingFields
 		}
 	}
 `;
