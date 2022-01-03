@@ -18,6 +18,18 @@ export const ELECTRICITY_USAGE = gql`
 	}
 `;
 
+export const ELECTRICITY_EXCHANGE = gql`
+	fragment ElectricityExchangeFields on ElectricityExchange {
+		received(unit: $unit)
+		delivered(unit: $unit)
+		dataPointsCount
+		period {
+			start
+			end
+		}
+	}
+`;
+
 export const WATER_EXCHANGE = gql`
 	fragment WaterExchangeFields on WaterExchange {
 		id

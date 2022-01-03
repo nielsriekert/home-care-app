@@ -46,7 +46,28 @@ const getEndOfToday = () => {
 export default function Dashboard() {
 	const [updatedCurrentElectricityReceived, setUpdatedCurrentElectricityReceived] = useState(null);
 	const [updatedCurrentElectricityDelivered, setUpdatedCurrentElectricityDelivered] = useState(null);
-	const [updatedCurrentSolarPowerReceived, setUpdatedCurrentSolarPowerReceived] = useState(null);
+	const [updatedCurrentSolarPowerGenerated, setUpdatedCurrentSolarPowerGenerated] = useState(null);
+	// TODO: weird solution, DateTime in props causes rerenders
+	const [electricityEightHourStartEnd] = useState({
+		start: Math.floor(DateTime.now().minus({ hours: 8 }).toSeconds()),
+		end: Math.floor(DateTime.now().toSeconds())
+	});
+	const [gasFourDaysStartEnd] = useState({
+		start: Math.floor(DateTime.now().minus({ days: 4 }).toSeconds()),
+		end: Math.floor(DateTime.now().toSeconds())
+	});
+	const [weekStartEnd] = useState({
+		start: Math.floor(DateTime.now().startOf('week').toSeconds()),
+		end: Math.floor(DateTime.now().endOf('week').toSeconds())
+	});
+	const [twelveMonthStartEnd] = useState({
+		start: Math.floor(DateTime.now().minus({ month: 12 }).toSeconds()),
+		end: Math.floor(DateTime.now().toSeconds())
+	});
+	const [fourYearsStartEnd] = useState({
+		start: Math.floor(DateTime.now().minus({ years: 4 }).toSeconds()),
+		end: Math.floor(DateTime.now().toSeconds())
+	});
 
 	const [waterChartDay, setWaterChartDay] = useState({
 		start: getStartOfToday(),
@@ -82,8 +103,8 @@ export default function Dashboard() {
 		setUpdatedCurrentElectricityDelivered(timestamp);
 	};
 
-	const updatedAtCurrentSolarPowerReceived = (timestamp) =>{
-		setUpdatedCurrentSolarPowerReceived(timestamp);
+	const updatedAtCurrentSolarPowerGenerated = (timestamp) =>{
+		setUpdatedCurrentSolarPowerGenerated(timestamp);
 	};
 
 	return (
@@ -95,8 +116,8 @@ export default function Dashboard() {
 				<Widget title="Delivering" name="current-electricity-delivered" updatedAt={updatedCurrentElectricityDelivered} icon={<BoltArrowUpIcon />}>
 					<CurrentElectricityDelivered updatedAt={updatedAtCurrentElectricityDelivered}  />
 				</Widget>
-				<Widget title="Solar generating" name="current-solar-generating" updatedAt={updatedCurrentSolarPowerReceived} icon={<SunIcon />}>
-					<CurrentSolarPowerGenerating updatedAt={updatedAtCurrentSolarPowerReceived}  />
+				<Widget title="Solar generating" name="current-solar-generating" updatedAt={updatedCurrentSolarPowerGenerated} icon={<SunIcon />}>
+					<CurrentSolarPowerGenerating updatedAt={updatedAtCurrentSolarPowerGenerated}  />
 				</Widget>
 				<Widget title="Today" name="electricity-usage" icon={<BoltArrowDownIcon />}>
 					<ElectricityReceived />
@@ -116,8 +137,8 @@ export default function Dashboard() {
 				<Widget title="Last 8 hours" name="electricity-usage-chart" icon={<BoltIcon />}>
 					<ElectricityChart
 						resolution="FIVE_MINUTES"
-						start={Math.floor(DateTime.now().minus({ hours: 8 }).toSeconds())}
-						end={Math.floor(DateTime.now().toSeconds())}
+						start={electricityEightHourStartEnd.start}
+						end={electricityEightHourStartEnd.end}
 						unit="WATT_HOUR"
 						softMax={100}
 					/>
@@ -125,8 +146,8 @@ export default function Dashboard() {
 				<Widget title="Last 4 days" name="gas-usage-chart" icon={<FireIcon />}>
 					<GasChart
 						resolution="TWO_HOURS"
-						start={Math.floor(DateTime.now().minus({ days: 4 }).toSeconds())}
-						end={Math.floor(DateTime.now().toSeconds())}
+						start={gasFourDaysStartEnd.start}
+						end={gasFourDaysStartEnd.end}
 						chartType="column"
 					/>
 				</Widget>
@@ -141,8 +162,8 @@ export default function Dashboard() {
 				<Widget title="Week" name="electrical-usage-current-week" icon={<BoltIcon />}>
 					<ElectricityChart
 						resolution="DAY"
-						start={Math.floor(DateTime.now().startOf('week').toSeconds())}
-						end={Math.floor(DateTime.now().endOf('week').toSeconds())}
+						start={weekStartEnd.start}
+						end={weekStartEnd.end}
 						timeFormat={{ weekday: 'long' }}
 						chartType="column"
 						includePrevious
@@ -153,8 +174,8 @@ export default function Dashboard() {
 					<GasChart
 						title="Week"
 						resolution="DAY"
-						start={Math.floor(DateTime.now().startOf('week').toSeconds())}
-						end={Math.floor(DateTime.now().endOf('week').toSeconds())}
+						start={weekStartEnd.start}
+						end={weekStartEnd.end}
 						timeFormat={{ weekday: 'long' }}
 						chartType="column"
 						includePrevious
@@ -167,8 +188,8 @@ export default function Dashboard() {
 				<Widget title="Month" name="electrical-usage-by-month" icon={<BoltIcon />}>
 					<ElectricityChart
 						resolution="MONTH"
-						start={Math.floor(DateTime.now().minus({ month: 12 }).toSeconds())}
-						end={Math.floor(DateTime.now().toSeconds())}
+						start={twelveMonthStartEnd.start}
+						end={twelveMonthStartEnd.end}
 						timeFormat={{ month: 'long' }}
 						chartType="column"
 						softMax={200}
@@ -177,8 +198,8 @@ export default function Dashboard() {
 				<Widget title="Month" name="gas-usage-by-month" icon={<FireIcon />}>
 					<GasChart
 						resolution="MONTH"
-						start={Math.floor(DateTime.now().minus({ months: 12 }).toSeconds())}
-						end={Math.floor(DateTime.now().toSeconds())}
+						start={twelveMonthStartEnd.start}
+						end={twelveMonthStartEnd.end}
 						chartType="column"
 						timeFormat={{ month: 'long' }}
 						softMax={20}
@@ -187,8 +208,8 @@ export default function Dashboard() {
 				<Widget title="Year" name="electrical-usage-by-year" icon={<BoltIcon />}>
 					<ElectricityChart
 						resolution="YEAR"
-						start={Math.floor(DateTime.now().minus({ years: 4 }).toSeconds())}
-						end={Math.floor(DateTime.now().toSeconds())}
+						start={fourYearsStartEnd.start}
+						end={fourYearsStartEnd.end}
 						timeFormat={{ year: 'numeric' }}
 						chartType="column"
 						softMax={1500}
@@ -197,8 +218,8 @@ export default function Dashboard() {
 				<Widget title="Year" name="gas-usage-by-year" icon={<FireIcon />}>
 					<GasChart
 						resolution="YEAR"
-						start={Math.floor(DateTime.now().minus({ years: 4 }).toSeconds())}
-						end={Math.floor(DateTime.now().toSeconds())}
+						start={fourYearsStartEnd.start}
+						end={fourYearsStartEnd.end}
 						timeFormat={{ year: 'numeric' }}
 						chartType="column"
 						softMax={500}

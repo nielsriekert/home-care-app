@@ -13,7 +13,10 @@ import { DateTime } from 'luxon';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
+import { ELECTRICITY_EXCHANGE } from '../../fragments';
+
 const ELECTRIC_EXCHANGES_CHART = gql`
+	${ELECTRICITY_EXCHANGE}
 	query electricityExchangesChart(
 		$resolution: TimeSpan
 		$timePeriod: TimePeriodInput!
@@ -22,23 +25,11 @@ const ELECTRIC_EXCHANGES_CHART = gql`
 		$unit: ElectricEnergyOverTimeUnit
 	) {
 		electricityExchanges(resolution: $resolution, timePeriod: $timePeriod) {
-			received(unit: $unit)
-			delivered(unit: $unit)
-			dataPointsCount
-			period {
-				start
-				end
-			}
+			...ElectricityExchangeFields
 		}
 
 		electricityExchangesPrevious: electricityExchanges(resolution: $resolution, timePeriod: $timePeriodPrevious) @include(if: $includePrevious) {
-			received(unit: $unit)
-			delivered(unit: $unit)
-			dataPointsCount
-			period {
-				start
-				end
-			}
+			...ElectricityExchangeFields
 		}
 	}
 `;

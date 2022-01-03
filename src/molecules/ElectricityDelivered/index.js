@@ -7,35 +7,24 @@ import Skeleton from '../../atoms/Skeleton';
 import { useQuery, gql } from '@apollo/client';
 import { FormattedNumber } from 'react-intl';
 
+import { DateTime } from 'luxon';
+
+import { ELECTRICITY_EXCHANGE } from '../../fragments';
+
 const ELECTRICITY_DELIVERED = gql`
-	query electricityDelivered($start: Int! $end: Int!) {
+	${ELECTRICITY_EXCHANGE}
+	query electricityDelivered($start: Int! $end: Int! $unit: ElectricEnergyOverTimeUnit) {
 		electricityExchange(start: $start end: $end) {
-			delivered
-			period {
-				start
-				end
-			}
+			...ElectricityExchangeFields
 		}
 	}
 `;
 
-const getStartOfToday = () => {
-	const today = new Date();
-	today.setHours(0, 0, 0, 0);
-	return Math.round(today.getTime() / 1000);
-};
-
-const getEndOfToday = () => {
-	const today = new Date();
-	today.setHours(23, 59, 59, 999);
-	return Math.round(today.getTime() / 1000);
-};
-
 export default function ElectricityDelivered({ start, end }) {
 	const { loading, error, data } = useQuery(ELECTRICITY_DELIVERED, {
 		variables: {
-			start: start || getStartOfToday(),
-			end: end || getEndOfToday()
+			start: start || Math.round(DateTime.now().startOf('day').toSeconds()),
+			end: end || Math.floor(DateTime.now().endOf('day').toSeconds())
 		}
 	});
 
