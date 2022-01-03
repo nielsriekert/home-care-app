@@ -1,0 +1,61 @@
+.loaderContainer {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+}
+
+.iconContainer,
+.iconContainer::after {
+	border-radius: 50%;
+	width: 10em;
+	height: 10em;
+}
+
+.iconContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-top: 10px solid hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .5);
+	border-right: 10px solid hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .5);
+	border-bottom: 10px solid hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .5);
+	border-left: 10px solid var(--color-secondary-shade-4);
+	transform: translateZ(0);
+	animation: icon-container 1.5s infinite linear;
+}
+
+.loaderContainer > svg {
+	width: 40px;
+	height: 40px;
+	animation-name: icon-loader;
+	animation-duration: 1s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+	animation-timing-function: ease-in-out;
+}
+
+@keyframes icon-container {
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes icon-loader {
+	from {
+		transform:  scale(1);
+		opacity: .2;
+	}
+
+	to {
+		transform: scale(1.2);
+		opacity: 1;
+	}
+}

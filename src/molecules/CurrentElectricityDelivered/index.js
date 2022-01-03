@@ -19,7 +19,9 @@ const CURRENT_ELECTRIC_DELIVERED = gql`
 `;
 
 export default function CurrentElectricityDelivered({ updatedAt }) {
-	const { loading, error, data } = useQuery(CURRENT_ELECTRIC_DELIVERED);
+	const { loading, error, data } = useQuery(CURRENT_ELECTRIC_DELIVERED, {
+		pollInterval: 10000
+	});
 
 	useEffect(() => {
 		if (data?.currentElectricityUsage?.readingAt && typeof updatedAt === 'function') {
