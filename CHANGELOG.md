@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.23.0] - 2022-01-08
+### Added
+- Solar inverter settings page where you can add solar inverters and see current and total yield.
+
 ## [1.22.0] - 2022-01-03
 ### Added
 - Loading page.

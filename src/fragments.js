@@ -49,3 +49,14 @@ export const WATER_READING = gql`
 		isVerified
 	}
 `;
+
+export const SOLAR_INVERTER = gql`
+	fragment SolarInverterFields on SolarInverter {
+		id
+		name
+		ipAddress
+		type
+		currentPower
+		totalYield
+	}
+`;

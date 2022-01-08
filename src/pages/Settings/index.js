@@ -6,6 +6,7 @@ import PageNav from '../../molecules/PageNav';
 
 import FireIcon from '../../atoms/FireIcon';
 import PowerPlugIcon from '../../atoms/PowerPlugIcon';
+import SunIcon from '../../atoms/SunIcon';
 import WaterIcon from '../../atoms/WaterIcon';
 import CogwheelIcon from '../../atoms/CogwheelIcon';
 
@@ -24,6 +25,12 @@ export default function Settings() {
 					to: 'smart-meter',
 					label: 'Smart Meter',
 					description: 'Show information about your smart meter and gas meter'
+				},
+				{
+					icon: SunIcon,
+					to: 'solar-inverters',
+					label: 'Solar Inverters',
+					description: 'Configure your solar inverters'
 				},
 				{
 					icon: WaterIcon,

@@ -1,0 +1,9 @@
+.inverterGrid {
+	display: grid;
+	gap: 20px;
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+.addFormContainer:not(:first-child) {
+	margin-top: 30px;
+}

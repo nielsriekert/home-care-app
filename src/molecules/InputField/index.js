@@ -5,7 +5,7 @@ import FieldLabel from '../../atoms/FieldLabel';
 import FieldDescription from '../../atoms/FieldDescription';
 import FieldMessage from '../../atoms/FieldMessage';
 
-export default function InputField({ type, label, name, value, description, onChange, isRequired, onFocus, state, isDisabled = false, message, containerClass }) {
+export default function InputField({ type, label, name, value, description, onChange, isRequired = true, onFocus, state, isDisabled = false, message, containerClass }) {
 	const [isFocused, setFocus] = useState(false);
 
 	const onValueChange = useCallback((event) => {
