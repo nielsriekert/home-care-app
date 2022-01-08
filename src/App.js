@@ -17,6 +17,7 @@ import Settings from './pages/Settings';
 import ProfileDashboard from './pages/ProfileDashboard';
 import MinderGasNlSettings from './pages/MinderGasNlSettings';
 import SmartMeterSettings from './pages/SmartMeterSettings';
+import SolarInvertersSettings from './pages/SolarInvertersSettings';
 import WaterReaderSettings from './pages/WaterReaderSettings';
 import About from './pages/About';
 import FourOFour from './pages/FourOFour';
@@ -42,6 +43,7 @@ export default function App() {
 						<Route path="settings" element={<Settings />} />
 						<Route path="/settings/minder-gas-nl" element={<MinderGasNlSettings />} />
 						<Route path="/settings/smart-meter" element={<SmartMeterSettings />} />
+						<Route path="/settings/solar-inverters" element={<SolarInvertersSettings />} />
 						<Route path="/settings/water-reader" element={<WaterReaderSettings />} />
 						<Route path="/settings/about" element={<About />} />
 						<Route element={<FourOFour />} />

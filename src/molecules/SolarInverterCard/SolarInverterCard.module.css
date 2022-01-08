@@ -1,0 +1,41 @@
+.container {
+	padding: 20px;
+	border-radius: 6px;
+	background-color: hsla(var(--color-secondary-shade-1-h), var(--color-secondary-shade-1-s), var(--color-secondary-shade-1-l), .3);
+}
+
+.image {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	aspect-ratio: 5/4;
+}
+
+.image > img {
+	object-fit: contain;
+	width: 100%;
+	height: 100%;
+}
+
+.container h3 {
+	margin-bottom: .5em;
+}
+
+.ipAddress {
+	font-size: .875rem;
+	font-style: italic;
+	opacity: .7;
+}
+
+.power {
+	margin-top: .75em;
+	display: flex;
+	align-items: center;
+	gap: .5em;
+	height: 1.125em;
+	color: var(--color-electricity-solar);
+}
+
+.power > svg {
+	max-height: 100%;
+}
