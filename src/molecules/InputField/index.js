@@ -8,11 +8,11 @@ import FieldMessage from '../../atoms/FieldMessage';
 export default function InputField({ type, label, name, value, description, onChange, isRequired = true, onFocus, state, isDisabled = false, message, containerClass }) {
 	const [isFocused, setFocus] = useState(false);
 
-	const onValueChange = useCallback((event) => {
+	const onValueChange = (event) => {
 		if (typeof onChange === 'function') {
 			onChange(name, event.target.value);
 		}
-	}, [name, onChange]);
+	};
 
 	const handleFocusChange = useCallback(event => {
 		setFocus(event.type === 'focus');
@@ -26,7 +26,7 @@ export default function InputField({ type, label, name, value, description, onCh
 			<FieldLabel label={label} fieldIsRequired={isRequired} isFloating={isFocused || value} />
 			<div className={styles.inputContainer + (state ? ' ' + styles[state] : '')}>
 				<input
-					type={type}
+					type={type || 'text'}
 					name={name}
 					onFocus={handleFocusChange}
 					onBlur={handleFocusChange}
