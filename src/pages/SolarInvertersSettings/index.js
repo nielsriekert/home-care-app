@@ -114,7 +114,7 @@ export default function SolarInvertersSettings() {
 	return (
 		<Settings title="Solar Inverters">
 			<p>
-				You can add solar inverters here and view there statuses.
+				You can add solar inverters here and view their statuses.
 			</p>
 			{loadingInverters && <div className={styles.inverterGrid}>
 				<Skeleton width="100%" height="300px" />

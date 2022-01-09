@@ -1,9 +1,11 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 
 import { useMutation, gql } from '@apollo/client';
 
 import Form from '../Form';
 import InputField from '../../molecules/InputField';
+
+import useFormFields from '../../hooks/useFormFields';
 
 import { USER } from '../../fragments';
 
@@ -18,13 +20,11 @@ const LOGIN = gql`
 	}
 `;
 
-const getFieldValueByName = (fields, name) => {
-	const foundFields = fields.filter(field => field.name === name);
-	return foundFields.length === 1 ? foundFields[0].value : null;
-};
-
 export default function LoginForm() {
-	const [fields, setFields] = useState([
+	const [{
+		getFieldValueByName,
+		setFieldValueByName
+	}, fields, values] = useFormFields([
 		{
 			type: 'email',
 			label: 'E-mail',
@@ -43,23 +43,16 @@ export default function LoginForm() {
 		}
 	]);
 
-	const handleInputChange = useCallback((name, value) => {
-		setFields(fields.map(field => ({
-			...field,
-			value: name === field.name ? value : field.value
-		})));
-	}, [fields]);
-
 	const [login, { data, loading, error } ] = useMutation(LOGIN, { errorPolicy: 'all' });
 
-	const onSubmit = () => {
+	const onSubmit = useCallback(() => {
 		login({
 			variables: {
-				email: getFieldValueByName(fields, 'email'),
-				password: getFieldValueByName(fields, 'password'),
+				email: getFieldValueByName('email'),
+				password: getFieldValueByName('password'),
 			}
 		});
-	};
+	}, [values]);
 
 	useEffect(() => {
 		if (data && data.login && data.login.user.id) {
@@ -79,7 +72,8 @@ export default function LoginForm() {
 				<field.component
 					{...field}
 					key={field.name}
-					onChange={handleInputChange}
+					value={getFieldValueByName(field.name)}
+					onChange={setFieldValueByName}
 				/>
 			))}
 		</Form>

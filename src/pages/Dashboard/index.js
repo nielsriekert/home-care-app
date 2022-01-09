@@ -61,7 +61,7 @@ export default function Dashboard() {
 		end: Math.floor(DateTime.now().endOf('week').toSeconds())
 	});
 	const [twelveMonthStartEnd] = useState({
-		start: Math.floor(DateTime.now().minus({ month: 12 }).toSeconds()),
+		start: Math.floor(DateTime.now().minus({ month: 11 }).toSeconds()),
 		end: Math.floor(DateTime.now().toSeconds())
 	});
 	const [fourYearsStartEnd] = useState({
@@ -202,6 +202,7 @@ export default function Dashboard() {
 						end={twelveMonthStartEnd.end}
 						chartType="column"
 						timeFormat={{ month: 'long' }}
+						includePrevious
 						softMax={20}
 					/>
 				</Widget>
