@@ -52,7 +52,7 @@ export default function LoginForm() {
 				password: getFieldValueByName('password'),
 			}
 		});
-	}, [values]);
+	}, [getFieldValueByName, login]);
 
 	useEffect(() => {
 		if (data && data.login && data.login.user.id) {
