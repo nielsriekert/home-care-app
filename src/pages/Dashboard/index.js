@@ -61,8 +61,8 @@ export default function Dashboard() {
 		end: Math.floor(DateTime.now().endOf('week').toSeconds())
 	});
 	const [twelveMonthStartEnd] = useState({
-		start: Math.floor(DateTime.now().minus({ month: 11 }).toSeconds()),
-		end: Math.floor(DateTime.now().toSeconds())
+		start: Math.floor(DateTime.now().minus({ month: 11 }).startOf('month').toSeconds()),
+		end: Math.floor(DateTime.now().endOf('month').toSeconds())
 	});
 	const [fourYearsStartEnd] = useState({
 		start: Math.floor(DateTime.now().minus({ years: 4 }).toSeconds()),
