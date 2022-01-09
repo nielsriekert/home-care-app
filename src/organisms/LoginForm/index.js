@@ -24,7 +24,7 @@ export default function LoginForm() {
 	const [{
 		getFieldValueByName,
 		setFieldValueByName
-	}, fields, values] = useFormFields([
+	}, fields] = useFormFields([
 		{
 			type: 'email',
 			label: 'E-mail',
