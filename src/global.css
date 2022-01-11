@@ -59,6 +59,11 @@
 	--color-electricity-delivered-l: 82%;
 	--color-electricity-delivered: hsl(var(--color-electricity-delivered-h), var(--color-electricity-delivered-s), var(--color-electricity-delivered-l));
 
+	--color-electricity-used-h: 330;
+	--color-electricity-used-s: 100%;
+	--color-electricity-used-l: 80%;
+	--color-electricity-used: hsl(var(--color-electricity-used-h), var(--color-electricity-used-s), var(--color-electricity-used-l));
+
 	--color-electricity-solar-h: 50;
 	--color-electricity-solar-s: 100%;
 	--color-electricity-solar-l: 78%;

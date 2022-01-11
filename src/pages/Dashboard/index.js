@@ -11,6 +11,7 @@ import Widget from '../../molecules/Widget';
 
 import BoltIcon from '../../atoms/BoltIcon';
 import BoltArrowUpIcon from '../../atoms/BoltArrowUpIcon';
+import PowerPlugIcon from '../../atoms/PowerPlugIcon';
 import SunIcon from '../../atoms/SunIcon';
 import BoltArrowDownIcon from '../../atoms/BoltArrowDownIcon';
 import WaterIcon from '../../atoms/WaterIcon';
@@ -19,8 +20,10 @@ import FireIcon from '../../atoms/FireIcon';
 import CurrentElectricityReceived from '../../molecules/CurrentElectricityReceived';
 import CurrentElectricityDelivered from '../../molecules/CurrentElectricityDelivered';
 import CurrentSolarPowerGenerating from '../../molecules/CurrentSolarPowerGenerating';
+import CurrentElectricityUsing from '../../molecules/CurrentElectricityUsing';
 import ElectricityReceived from '../../molecules/ElectricityReceived';
 import ElectricityDelivered from '../../molecules/ElectricityDelivered';
+import ElectricityUsed from '../../molecules/ElectricityUsed';
 import CurrentSolarPowerGenerated from '../../molecules/SolarPowerGenerated';
 import GasUsage from '../../molecules/GasUsage';
 import WaterUsage from '../../molecules/WaterUsage';
@@ -47,6 +50,7 @@ export default function Dashboard() {
 	const [updatedCurrentElectricityReceived, setUpdatedCurrentElectricityReceived] = useState(null);
 	const [updatedCurrentElectricityDelivered, setUpdatedCurrentElectricityDelivered] = useState(null);
 	const [updatedCurrentSolarPowerGenerated, setUpdatedCurrentSolarPowerGenerated] = useState(null);
+	const [updatedCurrentElectricityUsing, setUpdatedCurrentElectricityUsing] = useState(null);
 	// TODO: weird solution, DateTime in props causes rerenders
 	const [electricityEightHourStartEnd] = useState({
 		start: Math.floor(DateTime.now().minus({ hours: 8 }).toSeconds()),
@@ -107,6 +111,10 @@ export default function Dashboard() {
 		setUpdatedCurrentSolarPowerGenerated(timestamp);
 	};
 
+	const updatedAtCurrentElectricityUsing = (timestamp) =>{
+		setUpdatedCurrentElectricityUsing(timestamp);
+	};
+
 	return (
 		<Default>
 			<WidgetGrid>
@@ -119,6 +127,9 @@ export default function Dashboard() {
 				<Widget title="Solar generating" name="current-solar-generating" updatedAt={updatedCurrentSolarPowerGenerated} icon={<SunIcon />}>
 					<CurrentSolarPowerGenerating updatedAt={updatedAtCurrentSolarPowerGenerated}  />
 				</Widget>
+				<Widget title="Using" name="current-electricity-using" updatedAt={updatedCurrentElectricityUsing} icon={<PowerPlugIcon />}>
+					<CurrentElectricityUsing updatedAt={updatedAtCurrentElectricityUsing}  />
+				</Widget>
 				<Widget title="Today" name="electricity-usage" icon={<BoltArrowDownIcon />}>
 					<ElectricityReceived />
 				</Widget>
@@ -127,6 +138,9 @@ export default function Dashboard() {
 				</Widget>
 				<Widget title="Today" name="solar-power-received" icon={<SunIcon />}>
 					<CurrentSolarPowerGenerated />
+				</Widget>
+				<Widget title="Today" name="electricity-used" icon={<PowerPlugIcon />}>
+					<ElectricityUsed />
 				</Widget>
 				<Widget title="Today" name="gas-usage" icon={<FireIcon />}>
 					<GasUsage />
@@ -167,7 +181,7 @@ export default function Dashboard() {
 						timeFormat={{ weekday: 'long' }}
 						chartType="column"
 						includePrevious
-						softMax={10}
+						softMax={6}
 					/>
 				</Widget>
 				<Widget title="Week" name="gas-usage-current-week" icon={<FireIcon />}>
