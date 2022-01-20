@@ -181,7 +181,7 @@ export default function Dashboard() {
 						timeFormat={{ weekday: 'long' }}
 						chartType="column"
 						includePrevious
-						softMax={6}
+						softMax={2}
 					/>
 				</Widget>
 				<Widget title="Week" name="gas-usage-current-week" icon={<FireIcon />}>
