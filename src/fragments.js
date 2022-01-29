@@ -69,6 +69,7 @@ export const SOLAR_INVERTER = gql`
 		name
 		ipAddress
 		type
+		isOnline
 		currentPower
 		totalYield
 	}

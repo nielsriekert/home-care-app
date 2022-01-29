@@ -22,14 +22,15 @@ import WaterReaderSettings from './pages/WaterReaderSettings';
 import About from './pages/About';
 import FourOFour from './pages/FourOFour';
 
-const LOGGED_IN = gql`
-	query isLoggedIn {
+const INIT = gql`
+	query init {
 		isLoggedIn
+		hasSolarInverters
 	}
 `;
 
 export default function App() {
-	const { data, loading } = useQuery(LOGGED_IN);
+	const { data, loading } = useQuery(INIT);
 
 	return (
 		<IntlProvider locale={navigator.language}>
@@ -38,7 +39,7 @@ export default function App() {
 				<Router>
 					<Routes>
 						<Route path="/login" element={<Login />} />
-						<Route exact path="/" element={data && data.isLoggedIn ? <Dashboard /> : <Portal />} />
+						<Route exact path="/" element={data && data.isLoggedIn ? <Dashboard hasSolarInverts={data.hasSolarInverters}/> : <Portal />} />
 						<Route path="/profile" element={<ProfileDashboard />} />
 						<Route path="settings" element={<Settings />} />
 						<Route path="/settings/minder-gas-nl" element={<MinderGasNlSettings />} />

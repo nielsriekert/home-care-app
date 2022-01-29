@@ -121,7 +121,9 @@ export default function SolarInvertersSettings() {
 				<Skeleton width="100%" height="300px" />
 			</div>}
 			{!loadingInverters && invertersData?.solarInverters && <div className={styles.inverterGrid}>
-				{invertersData.solarInverters.map(inverter => (<SolarInverterCard key={inverter.id} {...inverter} />))}
+				{invertersData.solarInverters.length > 0 ? invertersData.solarInverters.map(inverter => (<SolarInverterCard key={inverter.id} {...inverter} />)) :
+					<Message>No solar inverters found</Message>
+				}
 			</div>}
 			{errorInverters && <Message type="error">{errorInverters.message}</Message>}
 			<div className={styles.addFormContainer}>

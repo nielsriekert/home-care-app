@@ -46,7 +46,7 @@ const getEndOfToday = () => {
 	return Math.round(today.getTime() / 1000);
 };
 
-export default function Dashboard() {
+export default function Dashboard({ hasSolarInverts = false }) {
 	const [updatedCurrentElectricityReceived, setUpdatedCurrentElectricityReceived] = useState(null);
 	const [updatedCurrentElectricityDelivered, setUpdatedCurrentElectricityDelivered] = useState(null);
 	const [updatedCurrentSolarPowerGenerated, setUpdatedCurrentSolarPowerGenerated] = useState(null);
@@ -124,9 +124,9 @@ export default function Dashboard() {
 				<Widget title="Delivering" name="current-electricity-delivered" updatedAt={updatedCurrentElectricityDelivered} icon={<BoltArrowUpIcon />}>
 					<CurrentElectricityDelivered updatedAt={updatedAtCurrentElectricityDelivered}  />
 				</Widget>
-				<Widget title="Solar generating" name="current-solar-generating" updatedAt={updatedCurrentSolarPowerGenerated} icon={<SunIcon />}>
+				{hasSolarInverts && <Widget title="Solar generating" name="current-solar-generating" updatedAt={updatedCurrentSolarPowerGenerated} icon={<SunIcon />}>
 					<CurrentSolarPowerGenerating updatedAt={updatedAtCurrentSolarPowerGenerated}  />
-				</Widget>
+				</Widget>}
 				<Widget title="Using" name="current-electricity-using" updatedAt={updatedCurrentElectricityUsing} icon={<PowerPlugIcon />}>
 					<CurrentElectricityUsing updatedAt={updatedAtCurrentElectricityUsing}  />
 				</Widget>
@@ -136,9 +136,9 @@ export default function Dashboard() {
 				<Widget title="Today" name="electricity-delivered" icon={<BoltArrowUpIcon />}>
 					<ElectricityDelivered />
 				</Widget>
-				<Widget title="Today" name="solar-power-received" icon={<SunIcon />}>
+				{hasSolarInverts && <Widget title="Today" name="solar-power-received" icon={<SunIcon />}>
 					<CurrentSolarPowerGenerated />
-				</Widget>
+				</Widget>}
 				<Widget title="Today" name="electricity-used" icon={<PowerPlugIcon />}>
 					<ElectricityUsed />
 				</Widget>
