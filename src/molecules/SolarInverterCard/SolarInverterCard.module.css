@@ -1,7 +1,22 @@
 .container {
+	position: relative;
 	padding: 20px;
 	border-radius: 6px;
 	background-color: hsla(var(--color-secondary-shade-1-h), var(--color-secondary-shade-1-s), var(--color-secondary-shade-1-l), .3);
+}
+
+.container:not(.isOnline) {
+	filter: grayscale(100%);
+}
+
+.offlineLabel {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 1;
+	padding: .25em .5em;
+	color: var(--color-secondary-shade-3);
+	background-color: hsla(var(--color-secondary-shade-1-h), var(--color-secondary-shade-1-s), var(--color-secondary-shade-1-l), .7);
 }
 
 .image {

@@ -8,7 +8,7 @@ import SunIcon from '../../atoms/SunIcon';
 import smaSunnyBoyImage from './sma-sunny-boy.png';
 import omnik4000Image from './omnik-4000.png';
 
-export default function SolarInverterCard({ name, ipAddress, type, currentPower = null, totalYield = null }) {
+export default function SolarInverterCard({ name, ipAddress, isOnline, type, currentPower = null, totalYield = null }) {
 	const getImage = type => {
 		switch (type) {
 		case 'SMA_SUNNY_BOY':
@@ -21,7 +21,8 @@ export default function SolarInverterCard({ name, ipAddress, type, currentPower 
 	};
 
 	return (
-		<div className={styles.container}>
+		<div className={`${styles.container}${isOnline ? ` ${styles.isOnline}` : ''}`}>
+			{!isOnline && <span className={styles.offlineLabel}>offline</span>}
 			{getImage(type) && <div className={styles.image}>
 				{getImage(type)}
 			</div>}
