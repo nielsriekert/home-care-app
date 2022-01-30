@@ -24,7 +24,7 @@ export default function ElectricityUsed({ start, end }) {
 	if (error) return <Message type="error">{error.message}</Message>;
 	return (
 		<div className={styles.container}>
-			{!loading ? data && data.todayElectricityExchange ? <span><FormattedNumber value={data.todayElectricityExchange.used} /> kWh</span> : '-' : <Skeleton width="3em" /> }
+			{!loading ? data && data?.todayElectricityExchange?.used !== null ? <span><FormattedNumber value={data.todayElectricityExchange.used} /> kWh</span> : '-' : <Skeleton width="3em" /> }
 		</div>
 	);
 }
