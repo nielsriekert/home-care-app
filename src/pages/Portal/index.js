@@ -21,7 +21,7 @@ import CurrentElectricityDelivered from '../../molecules/CurrentElectricityDeliv
 import CurrentSolarPowerGenerating from '../../molecules/CurrentSolarPowerGenerating';
 import CurrentElectricityUsing from '../../molecules/CurrentElectricityUsing';
 
-export default function Portal() {
+export default function Portal({ hasSolarInvert = false }) {
 	return (
 		<LoggedOut>
 			<h1 style={{ textAlign: 'center' }}>Home Care</h1>
@@ -35,9 +35,9 @@ export default function Portal() {
 				<Widget title="Delivering" name="current-electricity-delivered" icon={<BoltArrowUpIcon />}>
 					<CurrentElectricityDelivered />
 				</Widget>
-				<Widget title="Solar generating" name="current-solar-generating" icon={<SunIcon />}>
+				{hasSolarInvert && <Widget title="Solar generating" name="current-solar-generating" icon={<SunIcon />}>
 					<CurrentSolarPowerGenerating />
-				</Widget>
+				</Widget>}
 				<Widget title="Using" name="current-electricity-using" icon={<PowerPlugIcon />}>
 					<CurrentElectricityUsing />
 				</Widget>

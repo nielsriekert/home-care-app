@@ -39,7 +39,7 @@ export default function App() {
 				<Router>
 					<Routes>
 						<Route path="/login" element={<Login />} />
-						<Route exact path="/" element={data && data.isLoggedIn ? <Dashboard hasSolarInverts={data.hasSolarInverters}/> : <Portal />} />
+						<Route exact path="/" element={data && data.isLoggedIn ? <Dashboard hasSolarInvert={data.hasSolarInverters} /> : <Portal hasSolarInvert={data && data.hasSolarInverters} />} />
 						<Route path="/profile" element={<ProfileDashboard />} />
 						<Route path="settings" element={<Settings />} />
 						<Route path="/settings/minder-gas-nl" element={<MinderGasNlSettings />} />
