@@ -34,6 +34,18 @@ const ELECTRIC_EXCHANGES_CHART = gql`
 	}
 `;
 
+const SOLAR_POWER_EXCHANGES_CHART = gql`
+	query solarExchangesLastEightHoursChart($unit: ElectricEnergyOverTimeUnit) {
+		solarExchangesLastEightHours {
+			received(unit: $unit)
+			period {
+				start
+				end
+			}
+		}
+	}
+`;
+
 export default function ElectricityChart({
 	resolution,
 	start,
@@ -42,11 +54,13 @@ export default function ElectricityChart({
 	chartType = 'line',
 	timeFormat = null,
 	includePrevious = false,
-	softMax = undefined
+	softMax = undefined,
+	includeSolarPower = false
 }) {
 	const [setRefContainer, entry] = useIntersect({ threshold: [0.2] });
 	const [readings, setReadings] = useState([]);
 	const [readingsPrevious, setPreviousReadings] = useState([]);
+	const [readingsSolar, setReadingsSolar] = useState([]);
 	const [loadReadings, { called, loading, error, data }] = useLazyQuery(ELECTRIC_EXCHANGES_CHART, {
 		variables: {
 			resolution,
@@ -62,12 +76,20 @@ export default function ElectricityChart({
 			unit
 		}
 	});
+	const [loadSolarReadings, { loading: loadingSolar, error: errorSolar, data: dataSolar }] = useLazyQuery(SOLAR_POWER_EXCHANGES_CHART, {
+		variables: {
+			unit
+		}
+	});
 
 	useEffect(() => {
 		if (!called && entry.intersectionRatio >= 0.2) {
 			loadReadings();
+			if (includeSolarPower) {
+				loadSolarReadings();
+			}
 		}
-	}, [entry, called, loadReadings]);
+	}, [entry, called, loadReadings, includeSolarPower, loadSolarReadings]);
 
 	useEffect(() => {
 		if (data) {
@@ -85,15 +107,24 @@ export default function ElectricityChart({
 		}
 	}, [data, setReadings, timeFormat]);
 
+	useEffect(() => {
+		if (dataSolar) {
+			setReadingsSolar(dataSolar.solarExchangesLastEightHours.map(exchange => ({
+				...exchange,
+				label: timeFormat ? DateTime.fromSeconds(exchange.period.start).toLocaleString(timeFormat) : null
+			})));
+		}
+	}, [dataSolar, setReadingsSolar, timeFormat]);
+
 	if (loading) return <SkeletonChart />;
 	if (error) return <Message type="error">{error.message}</Message>;
 
 	return (
 		<div ref={setRefContainer}>
 			{!called && <Button onClick={loadReadings}>Load chart</Button>}
-			{loading && <SkeletonChart />}
-			{error && <Message type="error">{error.message}</Message>}
-			{readings.length > 0 &&
+			{loading && (!includeSolarPower || loadingSolar) && <SkeletonChart />}
+			{(error || errorSolar) && <Message type="error">{error ? error.message : errorSolar.message}</Message>}
+			{readings.length > 0 && (!includeSolarPower || !loadingSolar) &&
 				<HighchartsReact
 					highcharts={Highcharts}
 					options={{
@@ -141,14 +172,14 @@ export default function ElectricityChart({
 						series: [{
 							name: 'Received',
 							type: chartType,
-							showInLegend: includePrevious,
+							showInLegend: includePrevious || includeSolarPower,
 							data: readings.map(usage => [timeFormat ? usage.label : usage.period.end * 1000, usage.received]),
 							color: 'var(--color-electricity-received)'
 						},
 						{
 							name: 'Delivered',
 							type: chartType,
-							showInLegend: includePrevious,
+							showInLegend: includePrevious || includeSolarPower,
 							data: readings.map(usage => [timeFormat ? usage.label : usage.period.end * 1000, usage.delivered]),
 							color: 'var(--color-electricity-delivered)'
 						}].concat(readingsPrevious.length > 0 ? [{
@@ -164,7 +195,15 @@ export default function ElectricityChart({
 							type: chartType,
 							data: readingsPrevious.map(usage => [timeFormat ? usage.label : (usage.period.end + (end - start)) * 1000, usage.delivered]),
 							color: 'hsla(var(--color-electricity-delivered-h), var(--color-electricity-delivered-s), var(--color-electricity-delivered-l), .3)'
-						}] : []).reverse()
+						}] : []).concat(
+							readingsSolar.length > 0 ? [{
+								name: 'Solar',
+								showInLegend: true,
+								type: chartType,
+								data: readingsSolar.map(usage => [timeFormat ? usage.label : usage.period.end * 1000, usage.received]),
+								color: 'hsla(var(--color-electricity-solar-h), var(--color-electricity-solar-s), var(--color-electricity-solar-l), .3)'
+							}] : []
+						).reverse()
 					}}
 				/>}
 			{called && !loading && readings.length <= 0 && <Message>No data</Message>}
