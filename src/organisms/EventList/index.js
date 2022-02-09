@@ -18,7 +18,6 @@ const EVENTS = gql`
 			cursor
 			hasMore
     		eventResults {
-				id
       			date
       			type
       			message
@@ -36,7 +35,7 @@ export default function EventList() {
 
 	return (
 		<div className={styles.container}>
-			{!loading && data.getEvents.eventResults.length > 0 ?
+			{!loading && data?.getEvents?.eventResults && data.getEvents.eventResults.length > 0 ?
 				<ul className={styles.cardsContainer}>
 					{data.getEvents.eventResults.map(event => (
 						<li key={event.id}><EventCard {...event} /></li>
@@ -59,7 +58,7 @@ export default function EventList() {
 					</ul>
 					: error ?
 						<Message type="error">{error.message}</Message>	: <Message>No events found</Message>}
-			{!loading && data.getEvents.hasMore && <div className={styles.cardsFooter}>
+			{!loading && data?.getEvents && data.getEvents.hasMore && <div className={styles.cardsFooter}>
 				<Button onClick={() => fetchMore({
 					variables: {
 						after: data.getEvents.cursor
