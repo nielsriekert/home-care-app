@@ -1,5 +1,6 @@
 import { ApolloClient, HttpLink, InMemoryCache, from } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
+import { relayStylePagination } from '@apollo/client/utilities';
 
 const errorLink = onError(({ graphQLErrors }) => {
 	if (graphQLErrors) {
@@ -17,7 +18,28 @@ const httpLink = new HttpLink({
 });
 
 export default new ApolloClient({
-	cache: new InMemoryCache(),
+	cache: new InMemoryCache({
+		typePolicies: {
+			Query: {
+				fields: {
+					getEvents: {
+						// Don't cache separate results based on
+						// any of this field's arguments.
+						keyArgs: false,
+						// Concatenate the incoming list items with
+						// the existing list items.
+						merge(existing = [], incoming) {
+							const existingEventResults = Array.isArray(existing.eventResults) ? existing.eventResults : [];
+							return {
+								...incoming,
+								eventResults: [...existingEventResults, ...incoming.eventResults]
+							};
+						},
+					}
+				}
+			}
+		  }
+	}),
 	link: from([errorLink, httpLink]),
 	connectToDevTools: process.env.NODE_ENV !== 'production'
 });

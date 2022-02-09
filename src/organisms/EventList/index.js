@@ -1,10 +1,11 @@
 import styles from './EventList.module.css';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { useQuery, gql } from '@apollo/client';
 
 import EventCard from '../../molecules/EventCard';
 import Message from '../../atoms/Message';
+import Button from '../../atoms/Button';
 
 import Skeleton from '../../atoms/Skeleton';
 
@@ -14,7 +15,10 @@ const EVENTS = gql`
 		$pageSize: Int
 	) {
 		getEvents(after: $after pageSize: $pageSize) {
+			cursor
+			hasMore
     		eventResults {
+				id
       			date
       			type
       			message
@@ -24,36 +28,18 @@ const EVENTS = gql`
 `;
 
 export default function EventList() {
-	const [events, setEvents] = useState([]);
-	const { loading, error, data } = useQuery(EVENTS, {
+	const { loading, error, data, fetchMore } = useQuery(EVENTS, {
 		variables: {
 			pageSize: 24
 		}
 	});
 
-	useEffect(() => {
-		if (!data) {
-			return;
-		}
-		setEvents(data.getEvents.eventResults.map(event => ({
-			...event,
-			type: event.type.toLowerCase(),
-			timeStamp: event.date,
-			date: new Date(event.date * 1000).toLocaleDateString('nl-NL', {
-				month: 'short',
-				day: 'numeric',
-				hour: 'numeric',
-				minute: 'numeric'
-			})
-		})));
-	}, [data]);
-
 	return (
 		<div className={styles.container}>
-			{!loading && events.length > 0 ?
+			{!loading && data.getEvents.eventResults.length > 0 ?
 				<ul className={styles.cardsContainer}>
-					{events.map(event => (
-						<li key={event.timeStamp}><EventCard  {...event} /></li>
+					{data.getEvents.eventResults.map(event => (
+						<li key={event.id}><EventCard {...event} /></li>
 					))}
 				</ul>
 				: loading ?
@@ -73,6 +59,15 @@ export default function EventList() {
 					</ul>
 					: error ?
 						<Message type="error">{error.message}</Message>	: <Message>No events found</Message>}
+			{!loading && data.getEvents.hasMore && <div className={styles.cardsFooter}>
+				<Button onClick={() => fetchMore({
+					variables: {
+						after: data.getEvents.cursor
+					}
+				})}>
+					Load more
+				</Button>
+			</div>}
 		</div>
 	);
 }
