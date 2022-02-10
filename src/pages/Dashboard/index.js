@@ -122,10 +122,10 @@ export default function Dashboard({ hasSolarInverter = false }) {
 					<CurrentElectricityReceived updatedAt={updatedAtCurrentElectricityReceived} />
 				</Widget>
 				<Widget title="Delivering" name="current-electricity-delivered" updatedAt={updatedCurrentElectricityDelivered} icon={<BoltArrowUpIcon />}>
-					<CurrentElectricityDelivered updatedAt={updatedAtCurrentElectricityDelivered}  />
+					<CurrentElectricityDelivered updatedAt={updatedAtCurrentElectricityDelivered} />
 				</Widget>
 				{hasSolarInverter && <Widget title="Solar generating" name="current-solar-generating" updatedAt={updatedCurrentSolarPowerGenerated} icon={<SunIcon />}>
-					<CurrentSolarPowerGenerating updatedAt={updatedAtCurrentSolarPowerGenerated}  />
+					<CurrentSolarPowerGenerating updatedAt={updatedAtCurrentSolarPowerGenerated} />
 				</Widget>}
 				<Widget title="Using" name="current-electricity-using" updatedAt={updatedCurrentElectricityUsing} icon={<PowerPlugIcon />}>
 					<CurrentElectricityUsing updatedAt={updatedAtCurrentElectricityUsing}  />
