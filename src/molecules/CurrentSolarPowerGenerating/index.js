@@ -31,7 +31,7 @@ export default function CurrentSolarPowerGenerating({ updatedAt }) {
 	return (
 		<div className={styles.container}>
 			{!loading ? data?.currentSolarPowerGenerating?.received ?
-				<span><FormattedNumber value={data.currentSolarPowerGenerating.received} /> W </span> : 0 + ' W' : <Skeleton width="3em" /> }
+				<span><FormattedNumber value={data.currentSolarPowerGenerating.received} /> W </span> : '-' : <Skeleton width="3em" /> }
 		</div>
 	);
 }

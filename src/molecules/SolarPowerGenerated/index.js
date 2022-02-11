@@ -33,7 +33,7 @@ export default function SolarPowerGenerated({ start, end }) {
 	if (error) return <Message type="error">{error.message}</Message>;
 	return (
 		<div className={styles.container}>
-			{networkStatus !== NetworkStatus.loading ? data && data.solarPowerExchange ? <span><FormattedNumber value={data.solarPowerExchange.received} /> kWh</span> : 0 + ' kWh' : <Skeleton width="3em" /> }
+			{networkStatus !== NetworkStatus.loading ? data && data.solarPowerExchange ? <span><FormattedNumber value={data.solarPowerExchange.received} /> kWh</span> : '-' : <Skeleton width="3em" /> }
 			<LoadingSpinner isHidden={networkStatus !== NetworkStatus.poll} diameter="16px" borderWidth="3px" />
 		</div>
 	);
