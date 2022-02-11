@@ -108,7 +108,7 @@ export default function ElectricityChart({
 	}, [data, setReadings, timeFormat]);
 
 	useEffect(() => {
-		if (dataSolar) {
+		if (dataSolar && dataSolar.solarExchangesLastEightHours) {
 			setReadingsSolar(dataSolar.solarExchangesLastEightHours.map(exchange => ({
 				...exchange,
 				label: timeFormat ? DateTime.fromSeconds(exchange.period.start).toLocaleString(timeFormat) : null
