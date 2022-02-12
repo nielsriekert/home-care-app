@@ -17,7 +17,12 @@
 }
 
 .button.secondary {
-	color: white;
+	color: var(--color-secondary-shade-4);
+	border: 1px solid var(--color-secondary-shade-3);
+}
+
+.button.secondary:hover {
+	color: var(--color-secondary-shade-1);
 	background-color: var(--color-secondary-shade-3);
 }
 

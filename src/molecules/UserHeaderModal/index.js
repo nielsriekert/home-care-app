@@ -32,11 +32,17 @@ export default function UserHeaderModal({ isOpen, name, email, avatar, role }) {
 				{
 					id: 1,
 					url: '/profile/',
+					label: 'Profile',
+					access: []
+				},
+				{
+					id: 2,
+					url: '/events/',
 					label: 'Events',
 					access: []
 				},
 				{
-					id: 5,
+					id: 3,
 					onClick: onLogout,
 					label: 'Uitloggen',
 					access: []

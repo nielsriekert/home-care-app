@@ -1,0 +1,27 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	gap: 20px;
+	padding: 20px;
+	background-color: hsla(var(--color-secondary-shade-1-h), var(--color-secondary-shade-1-s), var(--color-secondary-shade-1-l), .2);
+}
+
+@media(min-width: 600px) {
+	.container {
+		flex-direction: row;
+		justify-content: space-between;
+	}
+}
+
+.content h2 {
+	margin: 0;
+	font-size: 1.125rem;
+	font-weight: 700;
+}
+
+.value {
+	margin-top: .25em;
+	font-size: 1rem;
+	opacity: .75;
+}

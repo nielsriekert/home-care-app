@@ -47,7 +47,7 @@ export default function SmartMeterSettings() {
 						{loading ? <Skeleton /> : data && data.smartMeterStatistics.longPowerFailureLog ?
 							data.smartMeterStatistics.longPowerFailureLog.length > 0 ?
 								data.smartMeterStatistics.longPowerFailureLog.map(log => (
-									<p>
+									<p key={log.start}>
 										<strong>Start</strong> {DateTime.fromSeconds(log.start).toLocaleString(DateTime.DATETIME_FULL)}<br />
 										<strong>Duration</strong> {log.duration} seconds<br />
 										<strong>End</strong> {DateTime.fromSeconds(log.end).toLocaleString(DateTime.DATETIME_FULL)}
