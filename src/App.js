@@ -15,6 +15,7 @@ import Portal from './pages/Portal';
 import Dashboard from './pages/Dashboard';
 import Settings from './pages/Settings';
 import ProfileDashboard from './pages/ProfileDashboard';
+import Events from './pages/Events';
 import MinderGasNlSettings from './pages/MinderGasNlSettings';
 import SmartMeterSettings from './pages/SmartMeterSettings';
 import SolarInvertersSettings from './pages/SolarInvertersSettings';
@@ -41,6 +42,7 @@ export default function App() {
 						<Route path="/login" element={<Login />} />
 						<Route exact path="/" element={data && data.isLoggedIn ? <Dashboard hasSolarInverter={data.hasSolarInverters} /> : <Portal hasSolarInverter={data && data.hasSolarInverters} />} />
 						<Route path="/profile" element={<ProfileDashboard />} />
+						<Route path="/events" element={<Events />} />
 						<Route path="settings" element={<Settings />} />
 						<Route path="/settings/minder-gas-nl" element={<MinderGasNlSettings />} />
 						<Route path="/settings/smart-meter" element={<SmartMeterSettings />} />

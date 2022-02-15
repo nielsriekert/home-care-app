@@ -30,7 +30,7 @@ export default function CurrentSolarPowerGenerating({ updatedAt }) {
 	if (error) return <Message type="error">{error.message}</Message>;
 	return (
 		<div className={styles.container}>
-			{!loading ? data?.currentSolarPowerGenerating?.received ?
+			{!loading ? data?.currentSolarPowerGenerating?.received && data.currentSolarPowerGenerating.received !== null ?
 				<span><FormattedNumber value={data.currentSolarPowerGenerating.received} /> W </span> : '-' : <Skeleton width="3em" /> }
 		</div>
 	);

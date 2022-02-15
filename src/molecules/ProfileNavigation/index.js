@@ -7,6 +7,7 @@ export default function ProfileNavigation() {
 		<nav className={styles.container}>
 			<ul>
 				<li><Link to="/profile">Profile</Link></li>
+				<li><Link to="/events">Events</Link></li>
 			</ul>
 		</nav>
 	);

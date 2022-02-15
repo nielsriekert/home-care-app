@@ -4,14 +4,14 @@ import Default from '../../templates/Default';
 
 import ProfileNavigation from '../../molecules/ProfileNavigation';
 
-import ProfileSettingGroups from '../../organisms/ProfileSettingGroups';
+import EventList from '../../organisms/EventList';
 
 export default function Dashboard() {
 	return (
 		<Default>
 			<ProfileNavigation />
-			<h1>Profile</h1>
-			<ProfileSettingGroups />
+			<h1>Events</h1>
+			<EventList />
 		</Default>
 	);
 }
