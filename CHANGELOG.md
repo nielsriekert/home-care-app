@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 - Used and solar colors for light theme.
+- Show 0 for CurrentSolarPowerGenerating when 0 is returned from api.
 
 ## [1.30.1] - 2022-02-11
 ### Fixed
