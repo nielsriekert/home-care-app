@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 const getFieldValuesFromFields = (fields) => fields.map(field => ({
 	name: field.name,
@@ -27,10 +27,10 @@ export default function useFormFields(initialFieldsState) {
 		return foundFields.length === 1 ? foundFields[0].value : null;
 	};
 
-	const getDefaultFieldValueByName = (name) => {
+	const getDefaultFieldValueByName = useCallback((name) => {
 		const foundFields = fields.filter(field => field.name === name);
 		return foundFields.length === 1 ? foundFields[0].value : null;
-	};
+	}, [fields]);
 
 	const setFieldValueByName = (name, value) => setFieldValues(prevFields => prevFields.map(field => ({
 		...field,
