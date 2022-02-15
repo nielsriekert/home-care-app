@@ -66,6 +66,7 @@ export default function UpdateNameSettingGroup({ name }) {
 
 	useEffect(() => {
 		setDefaultFieldValueByName('name', name);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [name]);
 
 	useEffect(() => {
@@ -74,6 +75,7 @@ export default function UpdateNameSettingGroup({ name }) {
 			setMessage(null);
 			setUpdatedName(null);
 		}, 200);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isModalOpen]);
 
 	useEffect(() => {
