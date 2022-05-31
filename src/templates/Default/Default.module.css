@@ -2,6 +2,22 @@
 	background-color: var(--color-secondary-shade-2);
 }
 
+.pageWrapper {
+	margin-left: 220px;
+}
+
+@media (max-width: 960px) {
+	.pageWrapper {
+		margin-left: 4.5rem;
+	}
+}
+
+@media (max-width: 512px) {
+	.pageWrapper {
+		margin-left: 0;
+	}
+}
+
 .pageContainer {
 	color: var(--color-secondary-shade-4);
 	padding: 20px var(--content-padding-horizontal);
