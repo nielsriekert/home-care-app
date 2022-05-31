@@ -1,11 +1,11 @@
 .container {
 	position: relative;
-	box-shadow: 0 0 4px rgba(0, 0, 0, .2);
 }
 
 .main {
 	display: grid;
 	grid-template-columns: auto min-content min-content;
+	grid-template-areas: 'title settings nav';
 	gap: 30px;
 	align-items: center;
 	height: 60px;
@@ -14,17 +14,41 @@
 	background-color: var(--color-secondary-shade-2);
 }
 
+.navButton {
+	width: 2rem;
+	height: 2rem;
+	border: none;
+	color: var(--color-secondary-shade-4);
+	background-color: transparent;
+	grid-area: nav-button;
+}
+
 .main a {
 	color: var(--color-secondary-shade-4);
 	text-decoration: none;
 }
 
-.appName {
+.titleContainer {
+	grid-area: title;
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+
+.title {
 	display: flex;
 	align-items: center;
 	padding: 10px 0;
 	font-size: 2em;
 	font-weight: 700;
+}
+
+.settings {
+	grid-area: settings;
+}
+
+.nav {
+	grid-area: nav;
 }
 
 .main a:hover {

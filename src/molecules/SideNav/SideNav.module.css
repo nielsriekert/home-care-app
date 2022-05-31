@@ -1,0 +1,120 @@
+.wrapper {
+	position: fixed;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 99;
+	background-color: rgba(0, 0, 0, .6);
+	pointer-events: none;
+	opacity: 0;
+	transition: opacity .2s;
+}
+
+.wrapper.isOpen {
+	opacity: 1;
+}
+
+.container {
+	--content-padding-horizontal: 1.5rem;
+	position: fixed;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	z-index: 100;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 220px;
+	border-right: 4px solid hsla(var(--color-secondary-shade-1-h), var(--color-secondary-shade-1-s), var(--color-secondary-shade-1-l), .3);
+	color: var(--color-secondary-shade-4);
+	background-color: hsla(var(--color-primary-shade-1-h), var(--color-primary-shade-1-s), var(--color-primary-shade-1-l), .1);
+	background-color: var(--color-secondary-shade-2);
+	pointer-events: auto;
+}
+
+@media (min-width: 512px) and (max-width: 960px) {
+	.container {
+		width: 4.5rem;
+	}
+}
+
+@media (max-width: 512px) {
+	.container {
+		opacity: 0;
+		transform: translateX(-160px);
+		transition: transform .2s, opacity .2s;
+		pointer-events: none;
+	}
+
+	.container.isOpen {
+		opacity: 1;
+		transform: translateX(0);
+		pointer-events: auto;
+	}
+}
+
+.titleContainer {
+	padding: 0 var(--content-padding-horizontal) 20px;
+}
+
+.appName {
+	display: flex;
+	align-items: center;
+	padding: 10px 0;
+	font-size: 2em;
+	font-weight: 700;
+}
+
+a.appName {
+	color: var(--color-secondary-shade-3);
+	text-decoration: none;
+}
+
+a.appName:hover {
+	color: var(--color-secondary-shade-4);
+	color: hsl(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), calc(1.2 * var(--color-secondary-shade-3-l)));
+}
+
+.container nav {
+	display: flex;
+	flex-direction: column;
+}
+
+.container nav a {
+	flex-basis: 3rem;
+	display: flex;
+	gap: .75rem;
+	align-items: center;
+	font-size: 1.125rem;
+	font-weight: 700;
+	color: var(--color-secondary-shade-3);
+	transition: color .15s;
+	line-height: 3rem;
+	text-decoration: none;
+	padding-left: var(--content-padding-horizontal);
+	padding-right: var(--content-padding-horizontal);
+}
+
+.container nav a:hover {
+	color: var(--color-secondary-shade-4);
+}
+
+.container nav a.isActive {
+	color: var(--color-secondary-shade-4);
+	background-color: hsla(var(--color-secondary-shade-1-h), var(--color-secondary-shade-1-s), var(--color-secondary-shade-1-l), .3);
+}
+
+.container nav a > svg {
+	width: 1.125rem;
+	height: 1.125rem;
+}
+
+@media (min-width: 512px) and (max-width: 960px) {
+	.container nav a span {
+		display: none;
+	}
+}
+
+.container nav a.isActive > svg {
+	color: var(--color-secondary-shade-4);
+}

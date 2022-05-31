@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import UserAvatar from '../../atoms/UserAvatar';
 import UserHeaderModal from '../../molecules/UserHeaderModal';
 
+import MenuIcon from '../../atoms/MenuIcon';
 import CogwheelIcon from '../../atoms/CogwheelIcon';
 
 import { USER } from '../../fragments';
@@ -19,7 +20,7 @@ const ME = gql`
 	}
 `;
 
-export default function Header() {
+export default function Header({ title, onOpen }) {
 	const { data, loading } = useQuery(ME);
 	const navContainer = useRef(null);
 	const modalContainer = useRef(null);
@@ -46,11 +47,14 @@ export default function Header() {
 
 	return (
 		<header className={styles.container}>
-			<div className={styles.main}>
-				<div>
-					<Link to="/" className={styles.appName}>Home Care</Link>
-				</div>
-				<Link to="/settings"><CogwheelIcon /></Link>
+			<div className={`${styles.main}${typeof onOpen === 'function' ? ` ${styles.hasNavButton}` : ''}`}>
+				{(title || typeof onOpen === 'function') && <div className={styles.titleContainer}>
+					{typeof onOpen === 'function' && <button className={styles.navButton} onClick={onOpen}>
+						<MenuIcon />
+					</button>}
+					{title && <Link to="/" className={styles.title}>{title}</Link>}
+				</div>}
+				<Link to="/settings" className={styles.settings}><CogwheelIcon /></Link>
 				<div ref={navContainer} className={styles.nav}>
 					<UserAvatar
 						name={data ? data.me.name : ''}
@@ -60,10 +64,6 @@ export default function Header() {
 					/>
 				</div>
 			</div>
-			{/* <div className="header-navigation-container">
-				<Navigation />
-			</div> */}
-
 			<div className={styles.modalWrapper + (isHeaderModalOpen ? ` ${styles.isOpen}` : '')}>
 				<div ref={modalContainer} className={styles.modalContainer}>
 					<UserHeaderModal
