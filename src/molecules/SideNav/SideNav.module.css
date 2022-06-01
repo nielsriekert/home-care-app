@@ -5,10 +5,15 @@
 	bottom: 0;
 	right: 0;
 	z-index: 99;
-	background-color: rgba(0, 0, 0, .6);
 	pointer-events: none;
-	opacity: 0;
 	transition: opacity .2s;
+}
+
+@media (max-width: 512px) {
+	.wrapper {
+		opacity: 0;
+		background-color: rgba(0, 0, 0, .6);
+	}
 }
 
 .wrapper.isOpen {

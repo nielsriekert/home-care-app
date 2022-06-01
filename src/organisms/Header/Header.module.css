@@ -23,6 +23,12 @@
 	grid-area: nav-button;
 }
 
+@media (min-width: 512px) {
+	.navButton {
+		display: none;
+	}
+}
+
 .main a {
 	color: var(--color-secondary-shade-4);
 	text-decoration: none;
