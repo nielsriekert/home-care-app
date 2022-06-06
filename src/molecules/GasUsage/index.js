@@ -35,7 +35,7 @@ export default function GasUsage({ start, end }) {
 	if (error) return <Message type="error">{error.message}</Message>;
 	return (
 		<div className={styles.container}>
-			{networkStatus !== NetworkStatus.loading ? data.gasExchange ? <span><FormattedNumber value={data.gasExchange.received} /> m³</span> : 0 + ' m³' : <Skeleton width="3em" /> }
+			{networkStatus !== NetworkStatus.loading ? data?.gasExchange ? <span><FormattedNumber value={data.gasExchange.received} /> m³</span> : 0 + ' m³' : <Skeleton width="3em" /> }
 			<LoadingSpinner isHidden={networkStatus !== NetworkStatus.poll} diameter="16px" borderWidth="3px" />
 		</div>
 	);
