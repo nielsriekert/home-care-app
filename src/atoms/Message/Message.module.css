@@ -6,6 +6,7 @@
 }
 
 .container.error {
+	color: var(--color-secondary-shade-4);
 	background-color: rgba(255, 0, 0, .5);
 	border-color: rgba(255, 0, 0, .8);
 }
