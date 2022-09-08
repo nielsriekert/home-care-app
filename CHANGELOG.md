@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.33.0] - 2022-09-08
+### Changed
+- Events paging.
+- When api is down on initial loading application shows error message.
+
 ## [1.32.1] - 2022-06-01
 ### Fixed
 - Side Nav for non mobile screen sizes.
