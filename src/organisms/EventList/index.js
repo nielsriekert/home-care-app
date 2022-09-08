@@ -18,7 +18,7 @@ const EVENTS = gql`
 		$after: String
 		$before: String
 	) {
-		events(first: 4 last: 4 after: $after before: $before) {
+		events(after: $after before: $before) {
 			totalCount
     		edges {
 				node {
