@@ -73,6 +73,7 @@ export default function Electricity({ hasSolarInverter = false }) {
 						chartType="column"
 						includePrevious
 						softMax={2}
+						includeSolarPower={hasSolarInverter}
 					/>
 				</Widget>
 				<Widget title="Month" name="electrical-usage-by-month" icon={<BoltIcon />}>
