@@ -35,8 +35,22 @@ const ELECTRIC_EXCHANGES_CHART = gql`
 `;
 
 const SOLAR_POWER_EXCHANGES_CHART = gql`
-	query solarExchangesLastEightHoursChart($unit: ElectricEnergyOverTimeUnit) {
-		solarExchangesLastEightHours {
+	query solarExchangesChart(
+		$resolution: TimeSpan
+		$timePeriod: TimePeriodInput!
+		$timePeriodPrevious: TimePeriodInput!
+		$unit: ElectricEnergyOverTimeUnit
+		$includePrevious: Boolean!
+	) {
+		solarExchanges(resolution: $resolution, timePeriod: $timePeriod) {
+			received(unit: $unit)
+			period {
+				start
+				end
+			}
+		}
+
+		solarExchangesPrevious: solarExchanges(resolution: $resolution, timePeriod: $timePeriodPrevious) @include(if: $includePrevious) {
 			received(unit: $unit)
 			period {
 				start
@@ -61,6 +75,7 @@ export default function ElectricityChart({
 	const [readings, setReadings] = useState([]);
 	const [readingsPrevious, setPreviousReadings] = useState([]);
 	const [readingsSolar, setReadingsSolar] = useState([]);
+	const [readingsSolarPrevious, setReadingsSolarPrevious] = useState([]);
 	const [loadReadings, { called, loading, error, data }] = useLazyQuery(ELECTRIC_EXCHANGES_CHART, {
 		variables: {
 			resolution,
@@ -78,6 +93,16 @@ export default function ElectricityChart({
 	});
 	const [loadSolarReadings, { loading: loadingSolar, error: errorSolar, data: dataSolar }] = useLazyQuery(SOLAR_POWER_EXCHANGES_CHART, {
 		variables: {
+			resolution,
+			timePeriod: {
+				start,
+				end
+			},
+			includePrevious,
+			timePeriodPrevious: {
+				start: start - (end - start),
+				end: start
+			},
 			unit
 		}
 	});
@@ -108,13 +133,20 @@ export default function ElectricityChart({
 	}, [data, setReadings, timeFormat]);
 
 	useEffect(() => {
-		if (dataSolar && dataSolar.solarExchangesLastEightHours) {
-			setReadingsSolar(dataSolar.solarExchangesLastEightHours.map(exchange => ({
+		if (dataSolar && dataSolar.solarExchanges) {
+			setReadingsSolar(dataSolar.solarExchanges.map(exchange => ({
 				...exchange,
 				label: timeFormat ? DateTime.fromSeconds(exchange.period.start).toLocaleString(timeFormat) : null
 			})));
+
+			if (dataSolar.solarExchangesPrevious) {
+				setReadingsSolarPrevious(dataSolar.solarExchangesPrevious.map(exchange => ({
+					...exchange,
+					label: timeFormat ? DateTime.fromSeconds(exchange.period.start).toLocaleString(timeFormat) : null
+				})));
+			}
 		}
-	}, [dataSolar, setReadingsSolar, timeFormat]);
+	}, [dataSolar, setReadingsSolar, setReadingsSolarPrevious, timeFormat]);
 
 	if (loading) return <SkeletonChart />;
 	if (error) return <Message type="error">{error.message}</Message>;
@@ -182,7 +214,15 @@ export default function ElectricityChart({
 							showInLegend: includePrevious || includeSolarPower,
 							data: readings.map(usage => [timeFormat ? usage.label : usage.period.end * 1000, usage.delivered]),
 							color: 'var(--color-electricity-delivered)'
-						}].concat(readingsPrevious.length > 0 ? [{
+						}].concat(
+							readingsSolar.length > 0 ? [{
+								name: 'Solar',
+								showInLegend: true,
+								type: chartType,
+								data: readingsSolar.map(usage => [timeFormat ? usage.label : usage.period.end * 1000, usage.received]),
+								color: 'var(--color-electricity-solar)'
+							}] : []
+						).concat(readingsPrevious.length > 0 ? [{
 							name: 'Previously received',
 							showInLegend: true,
 							type: chartType,
@@ -196,11 +236,11 @@ export default function ElectricityChart({
 							data: readingsPrevious.map(usage => [timeFormat ? usage.label : (usage.period.end + (end - start)) * 1000, usage.delivered]),
 							color: 'hsla(var(--color-electricity-delivered-h), var(--color-electricity-delivered-s), var(--color-electricity-delivered-l), .3)'
 						}] : []).concat(
-							readingsSolar.length > 0 ? [{
+							readingsSolarPrevious.length > 0 ? [{
 								name: 'Solar',
 								showInLegend: true,
 								type: chartType,
-								data: readingsSolar.map(usage => [timeFormat ? usage.label : usage.period.end * 1000, usage.received]),
+								data: readingsSolarPrevious.map(usage => [timeFormat ? usage.label : usage.period.end * 1000, usage.received]),
 								color: 'hsla(var(--color-electricity-solar-h), var(--color-electricity-solar-s), var(--color-electricity-solar-l), .3)'
 							}] : []
 						).reverse()
