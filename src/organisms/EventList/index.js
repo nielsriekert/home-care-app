@@ -1,8 +1,8 @@
 // @ts-check
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styles from './EventList.module.css';
 
-import { gql, useQuery } from '@apollo/client';
+import { gql, useQuery, useMutation } from '@apollo/client';
 
 import { useSearchParams } from 'react-router-dom';
 
@@ -13,7 +13,10 @@ import Paging from '../../molecules/Paging';
 
 import Skeleton from '../../atoms/Skeleton';
 
+import { EVENT } from '../../fragments';
+
 const EVENTS = gql`
+	${EVENT}
 	query events (
 		$after: String
 		$before: String
@@ -22,10 +25,7 @@ const EVENTS = gql`
 			totalCount
     		edges {
 				node {
-					id
-					date
-					type
-					message
+					...EventFields
 				}
 			}
 			pageInfo {
@@ -34,6 +34,15 @@ const EVENTS = gql`
 				hasNextPage
 				hasPreviousPage
 			}
+		}
+	}
+`;
+
+const ARCHIVE_EVENT = gql`
+	${EVENT}
+	mutation archiveEvent($id: ID!) {
+		archiveEvent(id: $id) {
+			...EventFields
 		}
 	}
 `;
@@ -53,6 +62,10 @@ export default function EventList() {
     	nextFetchPolicy: 'cache-first',
 	});
 
+	const [archiveEvent] = useMutation(ARCHIVE_EVENT, {
+		refetchQueries: [EVENTS]
+	});
+
 	useEffect(() => {
 		if (!called) {
 			return;
@@ -70,6 +83,14 @@ export default function EventList() {
 		});
 	}, [called, after, before, fetchMore]);
 
+	const onArchive = useCallback((id) => {
+		archiveEvent({
+			variables: {
+				id
+			}
+		});
+	}, [archiveEvent]);
+
 	return (
 		<div className={styles.container}>
 			{data && <Paging
@@ -80,7 +101,13 @@ export default function EventList() {
 			{data?.events?.edges &&
 				<ul className={styles.cardsContainer}>
 					{data.events.edges.map(edge => (
-						<li key={edge.node.id}><EventCard {...edge.node} /></li>
+						<li key={edge.node.id}>
+							<EventCard
+								{...edge.node}
+								onArchive={onArchive}
+
+							/>
+						</li>
 					))}
 				</ul>}
 			{loading &&

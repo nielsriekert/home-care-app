@@ -32,7 +32,8 @@ export default function CurrentElectricityUsing({ updatedAt }) {
 	if (error) return <Message type="error">{error.message}</Message>;
 	return (
 		<div className={styles.container}>
-			{!loading ? data?.currentElectricityUsage?.using !== null ? <span><FormattedNumber value={data.currentElectricityUsage.using} /> W</span> : '-' : <Skeleton width="3em" /> }
+			{loading && <Skeleton width="3em" />}
+			{typeof data?.currentElectricityUsage?.using === 'number' ? <span><FormattedNumber value={data.currentElectricityUsage.using} /> W</span> : '-'}
 		</div>
 	);
 }
