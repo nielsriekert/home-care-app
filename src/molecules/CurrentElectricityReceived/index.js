@@ -33,7 +33,7 @@ export default function CurrentElectricityReceived({ updatedAt }) {
 	return (
 		<div className={styles.container}>
 			{loading && <Skeleton width="3em" />}
-			{typeof data?.currentElectricityUsage?.received === 'number' ? <span><FormattedNumber value={data.currentElectricityUsage.received} /> W</span> : '-'}
+			{typeof data?.currentElectricityUsage?.received === 'number' ? <span><FormattedNumber value={data.currentElectricityUsage.received} /> W</span> : !loading ? '-' : ''}
 		</div>
 	);
 }
