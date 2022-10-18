@@ -89,7 +89,8 @@ export default function ElectricityChart({
 				end: start
 			},
 			unit
-		}
+		},
+		fetchPolicy: 'cache-and-network'
 	});
 	const [loadSolarReadings, { loading: loadingSolar, error: errorSolar, data: dataSolar }] = useLazyQuery(SOLAR_POWER_EXCHANGES_CHART, {
 		variables: {
@@ -104,7 +105,8 @@ export default function ElectricityChart({
 				end: start
 			},
 			unit
-		}
+		},
+		fetchPolicy: 'cache-and-network'
 	});
 
 	useEffect(() => {
