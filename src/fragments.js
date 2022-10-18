@@ -74,3 +74,12 @@ export const SOLAR_INVERTER = gql`
 		totalYield
 	}
 `;
+
+export const EVENT = gql`
+	fragment EventFields on Event {
+		id
+		date
+		type
+		message
+	}
+`;
