@@ -1,3 +1,4 @@
+// @ts-check
 import React from 'react';
 
 import Settings from '../../templates/Settings';
@@ -15,7 +16,9 @@ const ABOUT = gql`
 `;
 
 export default function About() {
-	const { loading, data } = useQuery(ABOUT);
+	const { loading, data } = useQuery(ABOUT, {
+		fetchPolicy: 'cache-and-network'
+	});
 
 	return (
 		<Settings title="About">

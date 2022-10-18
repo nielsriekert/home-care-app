@@ -32,7 +32,8 @@ export default function CurrentElectricityDelivered({ updatedAt }) {
 	if (error) return <Message type="error">{error.message}</Message>;
 	return (
 		<div className={styles.container}>
-			{!loading ? data?.currentElectricityUsage?.delivered ? <span><FormattedNumber value={data.currentElectricityUsage.delivered} /> W</span> : 0 + ' W' : <Skeleton width="3em" /> }
+			{loading && <Skeleton width="3em" />}
+			{typeof data?.currentElectricityUsage?.delivered === 'number' ? <span><FormattedNumber value={data.currentElectricityUsage.delivered} /> W</span> : '-'}
 		</div>
 	);
 }

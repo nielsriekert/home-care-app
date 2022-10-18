@@ -216,7 +216,7 @@ export default function ElectricityChart({
 							color: 'var(--color-electricity-delivered)'
 						}].concat(
 							readingsSolar.length > 0 ? [{
-								name: 'Solar',
+								name: 'Solar received',
 								showInLegend: true,
 								type: chartType,
 								data: readingsSolar.map(usage => [timeFormat ? usage.label : usage.period.end * 1000, usage.received]),
@@ -237,7 +237,7 @@ export default function ElectricityChart({
 							color: 'hsla(var(--color-electricity-delivered-h), var(--color-electricity-delivered-s), var(--color-electricity-delivered-l), .3)'
 						}] : []).concat(
 							readingsSolarPrevious.length > 0 ? [{
-								name: 'Solar',
+								name: 'Previously solar received',
 								showInLegend: true,
 								type: chartType,
 								data: readingsSolarPrevious.map(usage => [timeFormat ? usage.label : usage.period.end * 1000, usage.received]),
