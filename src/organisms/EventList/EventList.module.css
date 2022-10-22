@@ -1,6 +1,23 @@
 .cardsContainer {
 	display: grid;
 	gap: 15px;
+	transition: opacity .5s;
+}
+
+.isRefetching {
+	pointer-events: none;
+	animation: loading .5s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+
+@keyframes loading {
+	from {
+		opacity: 0.3;
+	}
+	to {
+		opacity: 0.5;
+	}
 }
 
 ul.cardsContainer {

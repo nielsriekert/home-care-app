@@ -19,7 +19,7 @@ const TODAY_ELECTRICITY_RECEIVED = gql`
 	}
 `;
 
-export default function ElectricityReceived({ start, end }) {
+export default function ElectricityReceived() {
 	const { error, data, networkStatus } = useQuery(TODAY_ELECTRICITY_RECEIVED, {
 		pollInterval: 60000 * 5,
 		notifyOnNetworkStatusChange: true,
@@ -28,7 +28,7 @@ export default function ElectricityReceived({ start, end }) {
 	if (error) return <Message type="error">{error.message}</Message>;
 	return (
 		<div className={styles.container}>
-			{networkStatus !== NetworkStatus.loading ? data && data.todayElectricityExchange ? <span><FormattedNumber value={data.todayElectricityExchange.received} /> kWh</span> : 0 + ' kWh' : <Skeleton width="3em" /> }
+			{networkStatus !== NetworkStatus.loading ? data?.todayElectricityExchange ? <span><FormattedNumber value={data.todayElectricityExchange.received} /> kWh</span> : 0 + ' kWh' : <Skeleton width="3em" /> }
 			<LoadingSpinner isHidden={networkStatus !== NetworkStatus.poll} diameter="16px" borderWidth="3px" />
 		</div>
 	);
