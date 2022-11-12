@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Changed
 - Improved loading states for event list.
+- Swapped water week widget for an updated one with previous week results.
 
 ## [1.36.0] - 2022-10-22
 ### Changed

@@ -45,7 +45,6 @@ export const ELECTRICITY_EXCHANGE_OVER_TIME = gql`
 
 export const WATER_EXCHANGE = gql`
 	fragment WaterExchangeFields on WaterExchange {
-		id
 		received
 		period {
 			start
