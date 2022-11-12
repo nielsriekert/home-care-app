@@ -81,16 +81,6 @@ export default function Water() {
 						softMax={2}
 					/>
 				</Widget>
-				<Widget title="Month" name="water-usage-current-by-month" icon={<WaterIcon />}>
-					<WaterChart
-						resolution="MONTH"
-						start={Math.floor(DateTime.now().minus({ month: 11 }).startOf('month').toSeconds())}
-						end={Math.floor(DateTime.now().endOf('month').toSeconds())}
-						timeFormat={{ month: 'long' }}
-						chartType="column"
-						softMax={200}
-					/>
-				</Widget>
 			</WidgetGrid>
 		</Default>
 	);
