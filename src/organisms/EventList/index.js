@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect } from 'react';
 import styles from './EventList.module.css';
 
-import { gql, useQuery, useMutation } from '@apollo/client';
+import { gql, useQuery, useMutation, NetworkStatus } from '@apollo/client';
 
 import { useSearchParams } from 'react-router-dom';
 
@@ -52,7 +52,7 @@ export default function EventList() {
 	const after = searchParams.get('after');
 	const before = searchParams.get('before');
 
-	const { loading, error, data, called, fetchMore } = useQuery(EVENTS, {
+	const { error, data, called, fetchMore, networkStatus } = useQuery(EVENTS, {
 		variables: {
 			after,
 			before
@@ -83,7 +83,7 @@ export default function EventList() {
 		});
 	}, [called, after, before, fetchMore]);
 
-	const onArchive = useCallback((id) => {
+	const onArchive = useCallback(id => {
 		archiveEvent({
 			variables: {
 				id
@@ -99,7 +99,7 @@ export default function EventList() {
 				pageInfo={data.events.pageInfo}
 			/>}
 			{data?.events?.edges &&
-				<ul className={styles.cardsContainer}>
+				<ul className={`${styles.cardsContainer}${NetworkStatus[networkStatus] === 'refetch'  ? ` ${styles.isRefetching}` : ''}`}>
 					{data.events.edges.map(edge => (
 						<li key={edge.node.id}>
 							<EventCard
@@ -110,7 +110,7 @@ export default function EventList() {
 						</li>
 					))}
 				</ul>}
-			{loading &&
+			{NetworkStatus[networkStatus] !== 'ready' && NetworkStatus[networkStatus] !== 'refetch' &&
 				<ul className={styles.cardsContainer}>
 					<li>
 						<Skeleton height="26px" width="100%" />

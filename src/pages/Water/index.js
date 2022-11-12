@@ -1,6 +1,8 @@
 import './dashboard.css';
 import React, { useState, useCallback } from 'react';
 
+import { DateTime } from 'luxon';
+
 import Default from '../../templates/Default';
 
 import WidgetGrid from '../../organisms/WidgetGrid';
@@ -11,7 +13,7 @@ import WaterIcon from '../../atoms/WaterIcon';
 
 import WaterUsage from '../../molecules/WaterUsage';
 import CumulativeWaterUsageChart from '../../molecules/CumulativeWaterUsageChart';
-import WaterReceivedWeekChart from '../../molecules/WaterReceivedWeekChart';
+import WaterChart from '../../molecules/WaterChart';
 
 import Button from '../../atoms/Button';
 
@@ -69,7 +71,15 @@ export default function Water() {
 					<CumulativeWaterUsageChart {...waterChartDay} />
 				</Widget>
 				<Widget title="Week" name="water-usage-current-week" icon={<WaterIcon />}>
-					<WaterReceivedWeekChart />
+					<WaterChart
+						resolution="DAY"
+						start={Math.floor(DateTime.now().startOf('week').toSeconds())}
+						end={Math.floor(DateTime.now().endOf('week').toSeconds())}
+						timeFormat={{ weekday: 'long' }}
+						chartType="column"
+						includePrevious
+						softMax={2}
+					/>
 				</Widget>
 			</WidgetGrid>
 		</Default>

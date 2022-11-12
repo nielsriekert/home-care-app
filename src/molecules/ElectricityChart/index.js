@@ -60,6 +60,14 @@ const SOLAR_POWER_EXCHANGES_CHART = gql`
 	}
 `;
 
+/**
+ * @param {object} props
+ * @param {'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'TWO_HOURS' | 'HOUR' | 'TEN_MINUTES' | 'FIVE_MINUTES' | 'MINUTE'} props.resolution
+ * @param {number} props.start
+ * @param {number} props.end
+ * @param {'KILOWATT_HOUR' | 'WATT_HOUR'} [props.unit=KILOWATT_HOUR]
+ * @returns
+ */
 export default function ElectricityChart({
 	resolution,
 	start,
