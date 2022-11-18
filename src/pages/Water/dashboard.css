@@ -1,35 +1,13 @@
-.widget-electricity-usage-chart,
-.widget-cumulative-water-usage-chart,
-.widget-gas-usage-chart {
-	grid-column: 1/-1;
-}
-
-@media(min-width: 1550px) {
-	.widget-electricity-usage-chart,
-	.widget-cumulative-water-usage-chart,
-	.widget-gas-usage-chart {
-		grid-column: span 5;
-	}
-}
-
-.widget-electrical-usage-current-week,
-.widget-gas-usage-current-week,
 .widget-water-usage-current-week,
-.widget-electrical-usage-by-month,
-.widget-electrical-usage-by-year,
-.widget-gas-usage-by-year,
-.widget-gas-usage-by-month {
+.widget-water-usage-current-month,
+.widget-water-usage-current-year {
 	grid-column:  1/-1;
 }
 
 @media(min-width: 1000px) {
-	.widget-electrical-usage-current-week,
-	.widget-gas-usage-current-week,
 	.widget-water-usage-current-week,
-	.widget-electrical-usage-by-month,
-	.widget-electrical-usage-by-year,
-	.widget-gas-usage-by-year,
-	.widget-gas-usage-by-month {
+	.widget-water-usage-current-month,
+	.widget-water-usage-current-year {
 		grid-column: span 3;
 	}
 }
