@@ -84,6 +84,7 @@ export default function Electricity({ hasSolarInverter = false }) {
 						timeFormat={{ month: 'long' }}
 						chartType="column"
 						softMax={200}
+						includeSolarPower={hasSolarInverter}
 					/>
 				</Widget>
 				<Widget title="Year" name="electrical-usage-by-year" icon={<BoltIcon />}>
@@ -94,6 +95,7 @@ export default function Electricity({ hasSolarInverter = false }) {
 						timeFormat={{ year: 'numeric' }}
 						chartType="column"
 						softMax={1500}
+						includeSolarPower={hasSolarInverter}
 					/>
 				</Widget>
 			</WidgetGrid>

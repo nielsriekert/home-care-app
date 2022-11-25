@@ -137,7 +137,7 @@ export default function WaterChart({
 						},
 						yAxis: {
 							title: {
-								text: unit === 'LITER' ? 'l' : ''
+								text: unit === 'LITER' ? 'liter' : ''
 							},
 							softMax,
 							gridLineColor: 'var(--color-secondary-shade-2)',
