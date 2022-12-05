@@ -12,6 +12,8 @@ RUN npm ci
 # Set the env to "production"
 ENV NODE_ENV production
 
+ENV REACT_APP_API_ENDPOINT=http://localhost:4000
+
 # Expose the port on which the app will be running (3000 is the default that `serve` uses)
 EXPOSE 3000
 
