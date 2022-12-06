@@ -2,6 +2,8 @@ FROM node:14-alpine
 
 ARG REACT_APP_API_ENDPOINT=http://localhost:4000
 
+RUN echo "-> $REACT_APP_API_ENDPOINT"
+
 # Set the working directory to /app inside the container
 WORKDIR /app
 
@@ -10,6 +12,8 @@ COPY . .
 
 # Install dependencies (npm ci makes sure the exact versions in the lockfile gets installed)
 RUN npm ci
+
+ENV REACT_APP_API_ENDPOINT=$REACT_APP_API_ENDPOINT
 
 RUN npm run build
 
