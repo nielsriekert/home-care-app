@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.40.6] - 2022-12-06
+### Fixed
+- Docker: removing args (not useable on Docker hub) and build in CMD step.
+
 ## [1.40.5] - 2022-12-06
 ### Fixed
 - Removed Dockerfile from .dockerignore for `REACT_APP_API_ENDPOINT` build ARG to ENV (potential fix).
