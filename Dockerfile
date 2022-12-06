@@ -13,8 +13,6 @@ COPY . .
 # Install dependencies (npm ci makes sure the exact versions in the lockfile gets installed)
 RUN npm ci
 
-ENV REACT_APP_API_ENDPOINT=$REACT_APP_API_ENDPOINT
-
 RUN npm run build
 
 # Expose the port on which the app will be running (3000 is the default that `serve` uses)
