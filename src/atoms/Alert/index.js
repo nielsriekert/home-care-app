@@ -1,3 +1,5 @@
+// @ts-check
+import React from 'react';
 import styles from './Alert.module.css';
 
 import InfoIcon from '../InfoIcon';
@@ -14,8 +16,9 @@ const icons = {
 
 /**
  * @param {object} props
- * @param {'info' | 'warning' | 'error' | 'success'} props.severity
- * @returns
+ * @param {import('react').ReactNode} props.children
+ * @param {'info' | 'warning' | 'error' | 'success'} [props.severity=info]
+ * @returns {import('react').ReactElement}
  */
 export default function Alert({ children, severity = 'info' }) {
 	return (

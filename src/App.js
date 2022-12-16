@@ -1,3 +1,4 @@
+// @ts-check
 import React from 'react';
 import styles from './App.module.css';
 
@@ -46,7 +47,7 @@ export default function App() {
 			{data && <Router>
 				<Routes>
 					<Route path="/login" element={<Login />} />
-					<Route exact path="/" element={data && data.isLoggedIn ? <Dashboard hasSolarInverter={data.hasSolarInverters} /> : <Portal hasSolarInverter={data && data.hasSolarInverters} />} />
+					<Route path="/" element={data && data.isLoggedIn ? <Dashboard hasSolarInverter={data.hasSolarInverters} /> : <Portal hasSolarInverter={data && data.hasSolarInverters} />} />
 					<Route path="/electricity" element={<Electricity hasSolarInverter={data.hasSolarInverters} />} />
 					<Route path="/gas" element={<Gas />} />
 					<Route path="/water" element={<Water />} />
@@ -58,7 +59,7 @@ export default function App() {
 					<Route path="/settings/solar-inverters" element={<SolarInvertersSettings />} />
 					<Route path="/settings/water-reader" element={<WaterReaderSettings />} />
 					<Route path="/settings/about" element={<About />} />
-					<Route element={<FourOFour />} />
+					<Route path="*" element={<FourOFour />} />
 				</Routes>
 			</Router>}
 		</IntlProvider>

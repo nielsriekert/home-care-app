@@ -1,5 +1,10 @@
 import styles from './ErrorIcon.module.css';
 
+/**
+ * @param {object} props
+ * @param {string=} props.title
+ * @returns {import('react').ReactElement}
+ */
 export default function ErrorIcon({ title }) {
 	return (
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
