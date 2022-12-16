@@ -6,7 +6,7 @@ import { gql, useQuery, useMutation, NetworkStatus } from '@apollo/client';
 
 import { useSearchParams } from 'react-router-dom';
 
-import Message from '../../atoms/Message';
+import Alert from '../../atoms/Alert';
 
 import EventCard from '../../molecules/EventCard';
 import Paging from '../../molecules/Paging';
@@ -125,8 +125,8 @@ export default function EventList() {
 						<Skeleton height="32px" width="100%" />
 					</li>
 				</ul>}
-			{error && <Message type="error">{error.message}</Message>}
-			{data?.events?.totalCount === 0 && <Message>No events found</Message>}
+			{error && <Alert severity="error">{error.message}</Alert>}
+			{data?.events?.totalCount === 0 && <Alert>No events found</Alert>}
 			{data && <Paging
 				currentCount={data?.events.edges.length || 0}
 				totalCount={data.events.totalCount}

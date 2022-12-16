@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './WaterUsage.module.css';
 
 import Skeleton from '../../atoms/Skeleton';
-import Message from '../../atoms/Message';
+import Alert from '../../atoms/Alert';
 import LoadingSpinner from '../../atoms/LoadingSpinner';
 
 import { useQuery, gql, NetworkStatus } from '@apollo/client';
@@ -31,7 +31,7 @@ export default function WaterUsage({ start, end }) {
 		}
 	});
 
-	if (error) return <Message type="error">{error.message}</Message>;
+	if (error) return <Alert severity="error">{error.message}</Alert>;
 	return (
 		<div className={styles.container}>
 			{networkStatus !== NetworkStatus.loading ? data.waterExchange ? <FormattedNumber value={data.waterExchange.received} style="unit" unit="liter" /> : 0 + ' l' : <Skeleton width="3em" /> }

@@ -1,3 +1,4 @@
+// @ts-check
 import React from 'react';
 import styles from './App.module.css';
 
@@ -10,7 +11,7 @@ import {
 	Route,
 } from 'react-router-dom';
 
-import Message from './atoms/Message';
+import Alert from './atoms/Alert';
 
 import Loading from './pages/Loading';
 import Login from './pages/Login';
@@ -41,12 +42,12 @@ export default function App() {
 
 	return (
 		<IntlProvider locale={navigator.language}>
-			{error && <div className={styles.errorContainer}><Message type="error">{error.message}</Message></div>}
+			{error && <div className={styles.errorContainer}><Alert severity="error">{error.message}</Alert></div>}
 			{loading && <Loading />}
 			{data && <Router>
 				<Routes>
 					<Route path="/login" element={<Login />} />
-					<Route exact path="/" element={data && data.isLoggedIn ? <Dashboard hasSolarInverter={data.hasSolarInverters} /> : <Portal hasSolarInverter={data && data.hasSolarInverters} />} />
+					<Route path="/" element={data && data.isLoggedIn ? <Dashboard hasSolarInverter={data.hasSolarInverters} /> : <Portal hasSolarInverter={data && data.hasSolarInverters} />} />
 					<Route path="/electricity" element={<Electricity hasSolarInverter={data.hasSolarInverters} />} />
 					<Route path="/gas" element={<Gas />} />
 					<Route path="/water" element={<Water />} />
@@ -58,7 +59,7 @@ export default function App() {
 					<Route path="/settings/solar-inverters" element={<SolarInvertersSettings />} />
 					<Route path="/settings/water-reader" element={<WaterReaderSettings />} />
 					<Route path="/settings/about" element={<About />} />
-					<Route element={<FourOFour />} />
+					<Route path="*" element={<FourOFour />} />
 				</Routes>
 			</Router>}
 		</IntlProvider>

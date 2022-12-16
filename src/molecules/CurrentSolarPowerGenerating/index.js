@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styles from './CurrentSolarPowerGenerating.module.css';
 
 import Skeleton from '../../atoms/Skeleton';
-import Message from '../../atoms/Message';
+import Alert from '../../atoms/Alert';
 
 import { useQuery, gql } from '@apollo/client';
 import { FormattedNumber } from 'react-intl';
@@ -27,7 +27,7 @@ export default function CurrentSolarPowerGenerating({ updatedAt }) {
 		}
 	}, [data, updatedAt]);
 
-	if (error) return <Message type="error">{error.message}</Message>;
+	if (error) return <Alert severity="error">{error.message}</Alert>;
 	return (
 		<div className={styles.container}>
 			{!loading ? data?.currentSolarPowerGenerating?.received && data.currentSolarPowerGenerating.received !== null ?

@@ -3,7 +3,7 @@ import React from 'react';
 import Settings from '../../templates/Settings';
 
 import Skeleton from '../../atoms/Skeleton';
-import Message from '../../atoms/Message';
+import Alert from '../../atoms/Alert';
 
 import { DateTime } from 'luxon';
 
@@ -31,7 +31,7 @@ export default function SmartMeterSettings() {
 	return (
 		<Settings title="Smart Meter">
 			{error ?
-				<Message type="error">{error.message}</Message> :
+				<Alert severity="error">{error.message}</Alert> :
 				<div>
 					<p>
 						<strong>DSMR version</strong><br />{loading ? <Skeleton /> : data && data.smartMeterStatistics.dsmrVersion ? data.smartMeterStatistics.dsmrVersion : '-'}

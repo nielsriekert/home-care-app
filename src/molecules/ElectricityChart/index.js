@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useLazyQuery, gql } from '@apollo/client';
 
 import SkeletonChart from '../SkeletonChart';
-import Message from '../../atoms/Message';
+import Alert from '../../atoms/Alert';
 import Button from '../../atoms/Button';
 
 import useIntersect from '../../hooks/useIntersect';
@@ -159,13 +159,13 @@ export default function ElectricityChart({
 	}, [dataSolar, setReadingsSolar, setReadingsSolarPrevious, timeFormat]);
 
 	if (loading) return <SkeletonChart />;
-	if (error) return <Message type="error">{error.message}</Message>;
+	if (error) return <Alert severity="error">{error.message}</Alert>;
 
 	return (
 		<div ref={setRefContainer}>
 			{!called && <Button onClick={loadReadings}>Load chart</Button>}
 			{loading && (!includeSolarPower || loadingSolar) && <SkeletonChart />}
-			{(error || errorSolar) && <Message type="error">{error ? error.message : errorSolar.message}</Message>}
+			{(error || errorSolar) && <Alert severity="error">{error ? error.message : errorSolar.message}</Alert>}
 			{readings.length > 0 && (!includeSolarPower || !loadingSolar) &&
 				<HighchartsReact
 					highcharts={Highcharts}
@@ -256,7 +256,7 @@ export default function ElectricityChart({
 						).reverse()
 					}}
 				/>}
-			{called && !loading && readings.length <= 0 && <Message>No data</Message>}
+			{called && !loading && readings.length <= 0 && <Alert>No data</Alert>}
 		</div>
 	);
 }

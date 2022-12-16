@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './ElectricityReceived.module.css';
 
 import Skeleton from '../../atoms/Skeleton';
-import Message from '../../atoms/Message';
+import Alert from '../../atoms/Alert';
 import LoadingSpinner from '../../atoms/LoadingSpinner';
 
 import { useQuery, gql, NetworkStatus } from '@apollo/client';
@@ -25,7 +25,7 @@ export default function ElectricityReceived() {
 		notifyOnNetworkStatusChange: true,
 	});
 
-	if (error) return <Message type="error">{error.message}</Message>;
+	if (error) return <Alert severity="error">{error.message}</Alert>;
 	return (
 		<div className={styles.container}>
 			{networkStatus !== NetworkStatus.loading ? data?.todayElectricityExchange ? <span><FormattedNumber value={data.todayElectricityExchange.received} /> kWh</span> : 0 + ' kWh' : <Skeleton width="3em" /> }

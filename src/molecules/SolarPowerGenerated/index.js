@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './SolarPowerGenerated.module.css';
 
-import Message from '../../atoms/Message';
+import Alert from '../../atoms/Alert';
 import Skeleton from '../../atoms/Skeleton';
 import LoadingSpinner from '../../atoms/LoadingSpinner';
 
@@ -30,7 +30,7 @@ export default function SolarPowerGenerated({ start, end }) {
 		}
 	});
 
-	if (error) return <Message type="error">{error.message}</Message>;
+	if (error) return <Alert severity="error">{error.message}</Alert>;
 	return (
 		<div className={styles.container}>
 			{networkStatus !== NetworkStatus.loading ? data && data.solarPowerExchange ? <span><FormattedNumber value={data.solarPowerExchange.received} /> kWh</span> : '-' : <Skeleton width="3em" /> }

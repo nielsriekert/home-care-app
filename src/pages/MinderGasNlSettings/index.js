@@ -7,7 +7,7 @@ import { useQuery, useMutation, gql } from '@apollo/client';
 import InputFieldCheckbox from '../../molecules/InputFieldCheckbox';
 
 import Skeleton from '../../atoms/Skeleton';
-import Message from '../../atoms/Message';
+import Alert from '../../atoms/Alert';
 
 const IS_MINDER_GAS_SYNC_ACTIVE = gql`
 	query isMinderGasNlSynchronizationActive {
@@ -82,7 +82,7 @@ export default function MinderGasNlSettings() {
 				The backend server needs to be configured with the api key from mindergas.nl to activate this feature.
 			</p>
 			{errorToDisplay ?
-				<Message type="error" >{errorToDisplay.message}</Message> : ''}
+				<Alert severity="error" >{errorToDisplay.message}</Alert> : ''}
 			{!loading ?
 				<InputFieldCheckbox
 					{...field}
