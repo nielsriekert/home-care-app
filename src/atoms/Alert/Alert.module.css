@@ -1,0 +1,54 @@
+.container {
+	display: flex;
+	gap: .75rem;
+	position: relative;
+	padding: .5em 1em;
+	max-width: max-content;
+	line-height: 1.8;
+	color: var(--color-secondary-shade-4);
+	border-radius: 4px;
+}
+
+.container.error {
+	background-color: rgba(255, 0, 0, .5);
+}
+
+.container.warning {
+	background-color: rgba(255, 140, 0, .5);
+}
+
+.container.info {
+	background-color: rgba(255, 255, 255, .2);
+}
+
+.container.success {
+	background-color: rgba(0, 255, 0, .5);
+}
+
+.icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 1.5rem;
+	height: 1.875rem;
+	line-height: 1.8;
+}
+
+.icon > svg {
+	width: 1.5rem;
+	height: 1.5rem;
+	object-fit: contain;
+}
+
+.container p:first-child {
+	margin-top: 0;
+}
+
+.container p:last-child {
+	margin-bottom: 0;
+}
+
+.container p a {
+	color: inherit;
+	text-decoration: underline;
+}

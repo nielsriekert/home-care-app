@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import Settings from '../../templates/Settings';
 
 import Skeleton from '../../atoms/Skeleton';
-import Message from '../../atoms/Message';
+import Alert from '../../atoms/Alert';
 import Form from '../../organisms/Form';
 import InputField from '../../molecules/InputField';
 
@@ -26,7 +26,9 @@ const CURRENT_WATER_METER_READING = gql`
 
 export default function WaterReaderSettings() {
 	const { loading: readingLoading, error: readingError, data: readingData } = useQuery(CURRENT_WATER_METER_READING);
-	const [addReading, { data, error, loading }] = useMutation(ADD_VERIFIED_WATER_READING);
+	const [addReading, { data, error, loading }] = useMutation(ADD_VERIFIED_WATER_READING, {
+		refetchQueries: [CURRENT_WATER_METER_READING]
+	});
 	const [fieldValue, setFieldValue] = useState('');
 	const [fieldError, setFieldError] = useState('');
 	const [successMessage, setSuccessMessage] = useState(null);
@@ -63,14 +65,14 @@ export default function WaterReaderSettings() {
 			<p>
 				{!readingLoading && readingData ?
 					typeof readingData.currentWaterMeterReading === 'number' ?
-						<Message>
+						<Alert>
 							The current water meter reading is <strong><FormattedNumber value={readingData.currentWaterMeterReading} style="unit" unit="liter" unitDisplay="long" /></strong>
-						</Message> :
-						<Message>
-							No actual water reading found for the water meter
-						</Message> :
+						</Alert> :
+						<Alert>
+							No water reading found for the water meter
+						</Alert> :
 					readingError ?
-						<Message type="error">{readingError.message}</Message> :
+						<Alert severity="error">{readingError.message}</Alert> :
 						<Skeleton />}
 			</p>
 			<Form

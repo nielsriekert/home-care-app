@@ -5,7 +5,7 @@ import { useMutation, gql } from '@apollo/client';
 import SettingsGroup from '../SettingGroup';
 import Modal from '../Modal';
 import Form from '../../organisms/Form';
-import Message from '../../atoms/Message';
+import Alert from '../../atoms/Alert';
 import InputField from '../InputField';
 
 import useFormFields from '../../hooks/useFormFields';
@@ -118,7 +118,7 @@ export default function UpdateNameSettingGroup({ name }) {
 				]}
 			>
 				{message &&
-					<Message type={message.type}>{message.content}</Message>}
+					<Alert severity={message.type}>{message.content}</Alert>}
 				{!updatedName && <Form
 					submitButtonText="Update"
 					isLoading={loading}

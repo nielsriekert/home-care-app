@@ -10,7 +10,7 @@ import {
 	Route,
 } from 'react-router-dom';
 
-import Message from './atoms/Message';
+import Alert from './atoms/Alert';
 
 import Loading from './pages/Loading';
 import Login from './pages/Login';
@@ -41,7 +41,7 @@ export default function App() {
 
 	return (
 		<IntlProvider locale={navigator.language}>
-			{error && <div className={styles.errorContainer}><Message type="error">{error.message}</Message></div>}
+			{error && <div className={styles.errorContainer}><Alert severity="error">{error.message}</Alert></div>}
 			{loading && <Loading />}
 			{data && <Router>
 				<Routes>

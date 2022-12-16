@@ -134,3 +134,7 @@ img,
 video {
 	max-width: 100%;
 }
+
+strong {
+	font-weight: 700;
+}

@@ -5,7 +5,7 @@ import { useQuery, gql } from '@apollo/client';
 import { USER } from '../../fragments';
 
 import Skeleton from '../../atoms/Skeleton';
-import Message from '../../atoms/Message';
+import Alert from '../../atoms/Alert';
 
 import UpdateNameSettingGroup from '../../molecules/UpdateNameSettingGroup';
 
@@ -22,7 +22,7 @@ export default function ProfileSettingGroups() {
 	const { data, loading, error } = useQuery(ME_PROFILE);
 
 	if (error) {
-		return <Message type="error" >{error.message}</Message>;
+		return <Alert severity="error" >{error.message}</Alert>;
 	}
 
 	return (

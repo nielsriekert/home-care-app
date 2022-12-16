@@ -4,7 +4,7 @@ import styles from './SolarInvertersSettings.module.css';
 import Settings from '../../templates/Settings';
 
 import Skeleton from '../../atoms/Skeleton';
-import Message from '../../atoms/Message';
+import Alert from '../../atoms/Alert';
 
 import SolarInverterCard from '../../molecules/SolarInverterCard';
 
@@ -122,10 +122,10 @@ export default function SolarInvertersSettings() {
 			</div>}
 			{!loadingInverters && invertersData?.solarInverters && <div className={styles.inverterGrid}>
 				{invertersData.solarInverters.length > 0 ? invertersData.solarInverters.map(inverter => (<SolarInverterCard key={inverter.id} {...inverter} />)) :
-					<Message>No solar inverters found</Message>
+					<Alert>No solar inverters found</Alert>
 				}
 			</div>}
-			{errorInverters && <Message type="error">{errorInverters.message}</Message>}
+			{errorInverters && <Alert severity="error">{errorInverters.message}</Alert>}
 			<div className={styles.addFormContainer}>
 				<h2>Add Solar Inverter</h2>
 				<Form

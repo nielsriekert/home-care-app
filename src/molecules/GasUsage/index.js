@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './GasUsage.module.css';
 
 import Skeleton from '../../atoms/Skeleton';
-import Message from '../../atoms/Message';
+import Alert from '../../atoms/Alert';
 import LoadingSpinner from '../../atoms/LoadingSpinner';
 
 import { useQuery, gql, NetworkStatus } from '@apollo/client';
@@ -32,7 +32,7 @@ export default function GasUsage({ start, end }) {
 		}
 	});
 
-	if (error) return <Message type="error">{error.message}</Message>;
+	if (error) return <Alert severity="error">{error.message}</Alert>;
 	return (
 		<div className={styles.container}>
 			{networkStatus !== NetworkStatus.loading ? data?.gasExchange ? <span><FormattedNumber value={data.gasExchange.received} /> m³</span> : 0 + ' m³' : <Skeleton width="3em" /> }

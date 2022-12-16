@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styles from './CurrentElectricityDelivered.module.css';
 
 import Skeleton from '../../atoms/Skeleton';
-import Message from '../../atoms/Message';
+import Alert from '../../atoms/Alert';
 
 import { useQuery, gql } from '@apollo/client';
 import { FormattedNumber } from 'react-intl';
@@ -29,7 +29,7 @@ export default function CurrentElectricityDelivered({ updatedAt }) {
 		}
 	}, [data, updatedAt]);
 
-	if (error) return <Message type="error">{error.message}</Message>;
+	if (error) return <Alert severity="error">{error.message}</Alert>;
 	return (
 		<div className={styles.container}>
 			{loading && <Skeleton width="3em" />}
