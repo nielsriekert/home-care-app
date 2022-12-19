@@ -1,0 +1,32 @@
+.container {
+	display: inline-block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 200;
+	padding: .5rem;
+	margin-top: 15px;
+	opacity: 0;
+	transition: opacity .2s;
+	font-size: .875rem;
+	color: var(--color-secondary-shade-3);
+	background-color: var(--color-secondary-shade-1);
+	border-radius: 4px;
+}
+
+.container.active {
+	opacity: 1;
+}
+
+.container::before {
+	content: "";
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	top: -8px;
+	width: 0;
+	height: 0;
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+	border-bottom: 8px solid var(--color-secondary-shade-1);
+}

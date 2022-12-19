@@ -3,6 +3,7 @@ import styles from './SolarPowerGenerated.module.css';
 
 import Alert from '../../atoms/Alert';
 import Skeleton from '../../atoms/Skeleton';
+import ToolTip from '../../atoms/ToolTip';
 import LoadingSpinner from '../../atoms/LoadingSpinner';
 
 import { useQuery, gql, NetworkStatus } from '@apollo/client';
@@ -33,7 +34,7 @@ export default function SolarPowerGenerated({ start, end }) {
 	if (error) return <Alert severity="error">{error.message}</Alert>;
 	return (
 		<div className={styles.container}>
-			{networkStatus !== NetworkStatus.loading ? data && data.solarPowerExchange ? <span><FormattedNumber value={data.solarPowerExchange.received} /> kWh</span> : '-' : <Skeleton width="3em" /> }
+			{networkStatus !== NetworkStatus.loading ? data && data.solarPowerExchange ? <ToolTip title="Electricity from the sun"><span><FormattedNumber value={data.solarPowerExchange.received} /> kWh</span></ToolTip> : '-' : <Skeleton width="3em" /> }
 			<LoadingSpinner isHidden={networkStatus !== NetworkStatus.poll} diameter="16px" borderWidth="3px" />
 		</div>
 	);
