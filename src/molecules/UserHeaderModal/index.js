@@ -44,7 +44,7 @@ export default function UserHeaderModal({ isOpen, name, email, avatar, role }) {
 				{
 					id: 3,
 					onClick: onLogout,
-					label: 'Uitloggen',
+					label: 'Log out',
 					access: []
 				}
 			].filter(item => item.access.indexOf(role) >= 0 || item.access.length <= 0)}
