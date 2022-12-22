@@ -29,7 +29,11 @@ export default function ElectricityUsed() {
 	if (error) return <Alert severity="error">{error.message}</Alert>;
 	return (
 		<div className={styles.container}>
-			{networkStatus !== NetworkStatus.loading ? data?.todayElectricityExchange?.used !== null ? <ToolTip title="Electricity used at home"><span><FormattedNumber value={data.todayElectricityExchange.used} /> kWh</span></ToolTip> : '-' : <Skeleton width="3em" /> }
+			{networkStatus !== NetworkStatus.loading ?
+				data?.todayElectricityExchange?.used !== null ?
+					<ToolTip title="Electricity used at home"><span><FormattedNumber value={data.todayElectricityExchange.used} /> kWh</span></ToolTip> :
+					<ToolTip title="Cannot determinate electricity used at home"><span>-</span></ToolTip> :
+				<Skeleton width="3em" /> }
 			<LoadingSpinner isHidden={networkStatus !== NetworkStatus.poll} diameter="16px" borderWidth="3px" />
 		</div>
 	);

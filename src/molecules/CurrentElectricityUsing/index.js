@@ -34,7 +34,11 @@ export default function CurrentElectricityUsing({ updatedAt }) {
 	return (
 		<div className={styles.container}>
 			{loading && <Skeleton width="3em" />}
-			{typeof data?.currentElectricityUsage?.using === 'number' ? <ToolTip title="Actual power using at home"><span><FormattedNumber value={data.currentElectricityUsage.using} /> W</span></ToolTip> : !loading ? '-' : ''}
+			{typeof data?.currentElectricityUsage?.using === 'number' ?
+				<ToolTip title="Actual power using at home"><span><FormattedNumber value={data.currentElectricityUsage.using} /> W</span></ToolTip> :
+				!loading ?
+					<ToolTip title="Cannot determinate electricity used at home"><span>-</span></ToolTip> :
+					''}
 		</div>
 	);
 }

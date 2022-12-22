@@ -29,7 +29,11 @@ export default function ElectricityDelivered() {
 	if (error) return <Alert severity="error">{error.message}</Alert>;
 	return (
 		<div className={styles.container}>
-			{networkStatus !== NetworkStatus.loading ? data && data.todayElectricityExchange ? <ToolTip title="Electricity delivered to the grid"><span><FormattedNumber value={data.todayElectricityExchange.delivered} /> kWh</span></ToolTip> : 0 + ' kWh' : <Skeleton width="3em" />}
+			{networkStatus !== NetworkStatus.loading ?
+				data && data.todayElectricityExchange ?
+					<ToolTip title="Electricity delivered to the grid"><span><FormattedNumber value={data.todayElectricityExchange.delivered} /> kWh</span></ToolTip> :
+					0 + ' kWh' :
+				<Skeleton width="3em" />}
 			<LoadingSpinner isHidden={networkStatus !== NetworkStatus.poll} diameter="16px" borderWidth="3px" />
 		</div>
 	);
