@@ -3,6 +3,7 @@ import styles from './CurrentElectricityDelivered.module.css';
 
 import Skeleton from '../../atoms/Skeleton';
 import Alert from '../../atoms/Alert';
+import ToolTip from '../../atoms/ToolTip';
 
 import { useQuery, gql } from '@apollo/client';
 import { FormattedNumber } from 'react-intl';
@@ -33,7 +34,7 @@ export default function CurrentElectricityDelivered({ updatedAt }) {
 	return (
 		<div className={styles.container}>
 			{loading && <Skeleton width="3em" />}
-			{typeof data?.currentElectricityUsage?.delivered === 'number' ? <span><FormattedNumber value={data.currentElectricityUsage.delivered} /> W</span> : !loading ? '-' : ''}
+			{typeof data?.currentElectricityUsage?.delivered === 'number' ? <ToolTip title="Actual power delivering to the grid"><span><FormattedNumber value={data.currentElectricityUsage.delivered} /> W</span></ToolTip> : !loading ? '-' : ''}
 		</div>
 	);
 }

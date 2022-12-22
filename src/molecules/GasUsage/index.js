@@ -3,6 +3,7 @@ import styles from './GasUsage.module.css';
 
 import Skeleton from '../../atoms/Skeleton';
 import Alert from '../../atoms/Alert';
+import ToolTip from '../../atoms/ToolTip';
 import LoadingSpinner from '../../atoms/LoadingSpinner';
 
 import { useQuery, gql, NetworkStatus } from '@apollo/client';
@@ -35,7 +36,7 @@ export default function GasUsage({ start, end }) {
 	if (error) return <Alert severity="error">{error.message}</Alert>;
 	return (
 		<div className={styles.container}>
-			{networkStatus !== NetworkStatus.loading ? data?.gasExchange ? <span><FormattedNumber value={data.gasExchange.received} /> m³</span> : 0 + ' m³' : <Skeleton width="3em" /> }
+			{networkStatus !== NetworkStatus.loading ? data?.gasExchange ? <ToolTip title="Gas usage"><span><FormattedNumber value={data.gasExchange.received} /> m³</span></ToolTip> : 0 + ' m³' : <Skeleton width="3em" /> }
 			<LoadingSpinner isHidden={networkStatus !== NetworkStatus.poll} diameter="16px" borderWidth="3px" />
 		</div>
 	);

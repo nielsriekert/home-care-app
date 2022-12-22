@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import styles from './CurrentElectricityUsing.module.css';
 
 import Skeleton from '../../atoms/Skeleton';
-import Message from '../../atoms/Message';
+import Alert from '../../atoms/Alert';
+import ToolTip from '../../atoms/ToolTip';
 
 import { useQuery, gql } from '@apollo/client';
 import { FormattedNumber } from 'react-intl';
@@ -29,11 +30,15 @@ export default function CurrentElectricityUsing({ updatedAt }) {
 		}
 	}, [data, updatedAt]);
 
-	if (error) return <Message type="error">{error.message}</Message>;
+	if (error) return <Alert type="error">{error.message}</Alert>;
 	return (
 		<div className={styles.container}>
 			{loading && <Skeleton width="3em" />}
-			{typeof data?.currentElectricityUsage?.using === 'number' ? <span><FormattedNumber value={data.currentElectricityUsage.using} /> W</span> : !loading ? '-' : ''}
+			{typeof data?.currentElectricityUsage?.using === 'number' ?
+				<ToolTip title="Actual power using at home"><span><FormattedNumber value={data.currentElectricityUsage.using} /> W</span></ToolTip> :
+				!loading ?
+					<ToolTip title="Cannot determinate electricity used at home"><span>-</span></ToolTip> :
+					''}
 		</div>
 	);
 }

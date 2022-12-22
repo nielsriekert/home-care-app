@@ -3,6 +3,7 @@ import styles from './ElectricityDelivered.module.css';
 
 import Skeleton from '../../atoms/Skeleton';
 import Alert from '../../atoms/Alert';
+import ToolTip from '../../atoms/ToolTip';
 import LoadingSpinner from '../../atoms/LoadingSpinner';
 
 import { useQuery, gql, NetworkStatus } from '@apollo/client';
@@ -28,7 +29,11 @@ export default function ElectricityDelivered() {
 	if (error) return <Alert severity="error">{error.message}</Alert>;
 	return (
 		<div className={styles.container}>
-			{networkStatus !== NetworkStatus.loading ? data && data.todayElectricityExchange ? <span><FormattedNumber value={data.todayElectricityExchange.delivered} /> kWh</span> : 0 + ' kWh' : <Skeleton width="3em" />}
+			{networkStatus !== NetworkStatus.loading ?
+				data && data.todayElectricityExchange ?
+					<ToolTip title="Electricity delivered to the grid"><span><FormattedNumber value={data.todayElectricityExchange.delivered} /> kWh</span></ToolTip> :
+					0 + ' kWh' :
+				<Skeleton width="3em" />}
 			<LoadingSpinner isHidden={networkStatus !== NetworkStatus.poll} diameter="16px" borderWidth="3px" />
 		</div>
 	);

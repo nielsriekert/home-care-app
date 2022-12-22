@@ -10,6 +10,7 @@ import MenuIcon from '../../atoms/MenuIcon';
 import CogwheelIcon from '../../atoms/CogwheelIcon';
 
 import { USER } from '../../fragments';
+import ToolTip from '../../atoms/ToolTip';
 
 const ME = gql`
 	${USER}
@@ -54,7 +55,9 @@ export default function Header({ title, onOpen }) {
 					</button>}
 					{title && <Link to="/" className={styles.title}>{title}</Link>}
 				</div>}
-				<Link to="/settings" className={styles.settings}><CogwheelIcon /></Link>
+				<ToolTip title="Settings" arrow={false}>
+					<Link to="/settings" className={styles.settings}><CogwheelIcon /></Link>
+				</ToolTip>
 				<div ref={navContainer} className={styles.nav}>
 					<UserAvatar
 						name={data ? data.me.name : ''}

@@ -1,0 +1,37 @@
+.container {
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 200;
+	padding: .25rem .5rem;
+	margin-top: 10px;
+	max-width: 26em;
+	opacity: 0;
+	transition: opacity .2s;
+	font-size: .875rem;
+	line-height: 1.8;
+	color: var(--color-secondary-shade-3);
+	background-color: var(--color-secondary-shade-1);
+	border-radius: 4px;
+}
+
+.container:has(.arrow) {
+	margin-top: 20px;
+}
+
+.container.active {
+	opacity: 1;
+}
+
+.container .arrow {
+	content: "";
+	position: absolute;
+	transform: translateX(-50%);
+	top: -8px;
+	width: 0;
+	height: 0;
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+	border-bottom: 8px solid var(--color-secondary-shade-1);
+}
