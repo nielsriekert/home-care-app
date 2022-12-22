@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [1.42.0] - 2022-12-22
 ### Added
 - Tooltips for single value widgets and settings header button.
+- Docker `latest` tag for docker deploy.
 
 ### Fixed
 - Smart Meter settings page when no data.
