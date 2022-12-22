@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Tooltips for single value widgets and settings header button.
 
+### Fixed
+- Smart Meter settings page when no data.
+
 ## [1.41.0] - 2022-12-16
 ### Changed
 - Improved message or alert boxes.

@@ -34,17 +34,17 @@ export default function SmartMeterSettings() {
 				<Alert severity="error">{error.message}</Alert> :
 				<div>
 					<p>
-						<strong>DSMR version</strong><br />{loading ? <Skeleton /> : data && data.smartMeterStatistics.dsmrVersion ? data.smartMeterStatistics.dsmrVersion : '-'}
+						<strong>DSMR version</strong><br />{loading ? <Skeleton /> : data?.smartMeterStatistics?.dsmrVersion ?? '-'}
 					</p>
 					<p>
-						<strong>Equipment identifier</strong><br />{loading ? <Skeleton /> : data && data.smartMeterStatistics.equipmentId ? data.smartMeterStatistics.equipmentId: '-'}<br />
+						<strong>Equipment identifier</strong><br />{loading ? <Skeleton /> : data?.smartMeterStatistics?.equipmentId ?? '-'}<br />
 					</p>
 					<p>
-						<strong>Tariff indicator</strong><br /> {loading ? <Skeleton /> : data && data.smartMeterStatistics.tariffIndicator ? data.smartMeterStatistics.tariffIndicator : '-'}
+						<strong>Tariff indicator</strong><br /> {loading ? <Skeleton /> : data?.smartMeterStatistics?.tariffIndicator ?? '-'}
 					</p>
 					<p>
 						<strong>Long power failure log</strong><br />
-						{loading ? <Skeleton /> : data && data.smartMeterStatistics.longPowerFailureLog ?
+						{loading ? <Skeleton /> : data?.smartMeterStatistics?.longPowerFailureLog ?
 							data.smartMeterStatistics.longPowerFailureLog.length > 0 ?
 								data.smartMeterStatistics.longPowerFailureLog.map(log => (
 									<p key={log.start}>
@@ -57,7 +57,7 @@ export default function SmartMeterSettings() {
 							: '-'}
 					</p>
 					<p>
-						<strong>Gas equipment identifier</strong><br /> {loading ? <Skeleton /> : data && data.smartMeterStatistics.gasMeterEquipmentId ? data.smartMeterStatistics.gasMeterEquipmentId : '-'}
+						<strong>Gas equipment identifier</strong><br /> {loading ? <Skeleton /> : data?.smartMeterStatistics?.gasMeterEquipmentId ?? '-'}
 					</p>
 				</div>}
 		</Settings>
