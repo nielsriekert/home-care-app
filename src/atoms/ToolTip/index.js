@@ -19,7 +19,7 @@ const calcPosition = (childRect, toolTipRect, windowSize) => {
 
 	return {
 		x,
-		y: childRect.y + childRect.height,
+		y: childRect.y + + document.documentElement.scrollTop + childRect.height,
 		offset: initialX - x
 	};
 };
