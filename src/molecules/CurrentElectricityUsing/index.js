@@ -30,7 +30,7 @@ export default function CurrentElectricityUsing({ updatedAt }) {
 		}
 	}, [data, updatedAt]);
 
-	if (error) return <Alert type="error">{error.message}</Alert>;
+	if (error) return <Alert severity="error">{error.message}</Alert>;
 	return (
 		<div className={styles.container}>
 			{loading && <Skeleton width="3em" />}
