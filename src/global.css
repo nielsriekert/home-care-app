@@ -96,6 +96,10 @@
 		--color-gas-l: 35%;
 		--color-water-l: 34%;
 	}
+
+	html {
+		color-scheme: dark;
+	}
 }
 
 @media(min-width: 34em) {
