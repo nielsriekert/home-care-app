@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { useLazyQuery, gql } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 
 import SkeletonChart from '../SkeletonChart';
 import Alert from '../../atoms/Alert';
@@ -8,12 +8,15 @@ import Button from '../../atoms/Button';
 
 import useIntersect from '../../hooks/useIntersect';
 
-import { DateTime } from 'luxon';
+import { DateTime, DateTimeFormatOptions, Duration } from 'luxon';
 
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-const GAS_EXCHANGES_CHART = gql`
+import { graphql } from '../../types/graphql/gql.ts';
+import { TimeSpan } from '../../types/graphql/graphql.ts';
+
+const GasExchangesChart_Query = graphql(`
 	query gasExchangesChart(
 		$resolution: TimeSpan
 		$timePeriod: TimePeriodInput!
@@ -38,32 +41,41 @@ const GAS_EXCHANGES_CHART = gql`
 			}
 		}
 	}
-`;
+`);
 
 export default function GasChart({
 	title,
 	resolution,
-	start,
 	end,
+	duration,
 	chartType = 'line',
 	timeFormat = null,
 	includePrevious = false,
-	softMax = undefined
+	softMax = undefined,
+}: {
+	title?: string,
+	resolution: TimeSpan,
+	end: DateTime,
+	duration: Duration,
+	chartType?: 'line' | 'column',
+	timeFormat?: DateTimeFormatOptions | null,
+	includePrevious?: boolean,
+	softMax?: number,
 }) {
 	const [setRefContainer, entry] = useIntersect({ threshold: [0.2] });
 	const [readings, setReadings] = useState([]);
 	const [readingsPrevious, setPreviousReadings] = useState([]);
-	const [loadReadings, { called, loading, error, data }] = useLazyQuery(GAS_EXCHANGES_CHART, {
+	const [loadReadings, { called, loading, error, data }] = useLazyQuery(GasExchangesChart_Query, {
 		variables: {
 			resolution,
 			timePeriod: {
-				start,
-				end
+				start: end.minus(duration).toUnixInteger(),
+				end: end.toUnixInteger()
 			},
 			includePrevious,
 			timePeriodPrevious: {
-				start: start - (end - start),
-				end: start
+				start: end.minus(duration).minus(duration).toUnixInteger(),
+				end: end.minus(duration).toUnixInteger()
 			}
 		}
 	});

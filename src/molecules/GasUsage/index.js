@@ -23,7 +23,7 @@ const GAS_CONSUMPTION = gql`
 	}
 `;
 
-export default function GasUsage({ start, end }) {
+export default function GasUsage({ start = undefined, end = undefined }) {
 	const { error, data, networkStatus } = useQuery(GAS_CONSUMPTION, {
 		pollInterval: 60000 * 5,
 		notifyOnNetworkStatusChange: true,

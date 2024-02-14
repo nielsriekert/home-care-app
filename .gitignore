@@ -92,3 +92,6 @@ Thumbs.db
 .vscode
 *.sublime-project
 *.sublime-workspace
+
+# typescript
+/src/types/graphql
