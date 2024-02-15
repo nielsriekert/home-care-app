@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './SolarPowerGenerated.module.css';
 
 import Alert from '../../atoms/Alert';
@@ -21,7 +20,13 @@ const SOLAR_POWER_RECEIVED = gql`
 	}
 `;
 
-export default function SolarPowerGenerated({ start, end }) {
+export default function SolarPowerGenerated({
+	start,
+	end,
+}: {
+	start?: number,
+	end?: Number,
+}) {
 	const { error, data, networkStatus } = useQuery(SOLAR_POWER_RECEIVED, {
 		pollInterval: 60000 * 5,
 		notifyOnNetworkStatusChange: true,

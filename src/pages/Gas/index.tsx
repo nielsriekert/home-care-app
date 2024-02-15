@@ -1,20 +1,17 @@
-// @ts-check
-import React from 'react';
-
 import { DateTime, Duration } from 'luxon';
 
-import Default from '../../templates/Default/index.js';
+import Default from '../../templates/Default';
 
-import WidgetGrid from '../../organisms/WidgetGrid/index.js';
+import WidgetGrid from '../../organisms/WidgetGrid';
 
-import Widget from '../../molecules/Widget/index.js';
+import Widget from '../../molecules/Widget';
 
-import FireIcon from '../../atoms/FireIcon/index.js';
+import FireIcon from '../../atoms/FireIcon';
 
-import GasUsage from '../../molecules/GasUsage/index.js';
+import GasUsage from '../../molecules/GasUsage';
 import GasChart from '../../molecules/GasChart';
 
-import { TimeSpan } from '../../types/graphql/graphql.ts';
+import { TimeSpan } from '../../types/graphql/graphql';
 
 export default function Dashboard() {
 	return (

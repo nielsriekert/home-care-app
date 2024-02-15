@@ -1,7 +1,7 @@
 import './dashboard.css';
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
-import { DateTime } from 'luxon';
+import { DateTime, Duration } from 'luxon';
 
 import Default from '../../templates/Default';
 
@@ -16,6 +16,8 @@ import CumulativeWaterUsageChart from '../../molecules/CumulativeWaterUsageChart
 import WaterChart from '../../molecules/WaterChart';
 
 import Button from '../../atoms/Button';
+
+import { TimeSpan } from '../../types/graphql/graphql';
 
 const getStartOfToday = () => {
 	const today = new Date();
@@ -72,9 +74,9 @@ export default function Water() {
 				</Widget>
 				<Widget title="Week" name="water-usage-current-week" icon={<WaterIcon />}>
 					<WaterChart
-						resolution="DAY"
-						start={Math.floor(DateTime.now().startOf('week').toSeconds())}
-						end={Math.floor(DateTime.now().endOf('week').toSeconds())}
+						resolution={TimeSpan.Day}
+						end={DateTime.now().endOf('week')}
+						duration={Duration.fromDurationLike({ week: 1 })}
 						timeFormat={{ weekday: 'long' }}
 						chartType="column"
 						includePrevious
@@ -83,9 +85,9 @@ export default function Water() {
 				</Widget>
 				<Widget title="Month" name="water-usage-current-month" icon={<WaterIcon />}>
 					<WaterChart
-						resolution="MONTH"
-						start={Math.floor(DateTime.now().minus({ month: 11 }).startOf('month').toSeconds())}
-						end={Math.floor(DateTime.now().endOf('month').toSeconds())}
+						resolution={TimeSpan.Month}
+						end={DateTime.now().endOf('month')}
+						duration={Duration.fromDurationLike({ year: 1 })}
 						timeFormat={{ month: 'long' }}
 						chartType="column"
 						includePrevious
@@ -94,9 +96,9 @@ export default function Water() {
 				</Widget>
 				<Widget title="Year" name="water-usage-current-year" icon={<WaterIcon />}>
 					<WaterChart
-						resolution="YEAR"
-						start={Math.floor(DateTime.now().minus({ years: 4 }).toSeconds())}
-						end={Math.floor(DateTime.now().endOf('year').toSeconds())}
+						resolution={TimeSpan.Year}
+						duration={Duration.fromDurationLike({ year: 5 })}
+						end={DateTime.now().endOf('year')}
 						timeFormat={{ year: 'numeric' }}
 						chartType="column"
 						softMax={2}

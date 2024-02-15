@@ -14,7 +14,7 @@ export default function Default({ title, children }) {
 	};
 
 	const setClose = (e) => {
-		if (sideNav.current.contains(e.target)) {
+		if (sideNav && sideNav.current.contains(e.target)) {
 			return;
 		}
 		setIsOpen(false);

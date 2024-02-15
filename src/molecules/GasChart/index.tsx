@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { useLazyQuery } from '@apollo/client';
 
@@ -13,8 +13,8 @@ import { DateTime, DateTimeFormatOptions, Duration } from 'luxon';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-import { graphql } from '../../types/graphql/gql.ts';
-import { TimeSpan } from '../../types/graphql/graphql.ts';
+import { graphql } from '../../types/graphql';
+import { TimeSpan, GasExchangesChartQuery } from '../../types/graphql/graphql';
 
 const GasExchangesChart_Query = graphql(`
 	query gasExchangesChart(
@@ -43,6 +43,10 @@ const GasExchangesChart_Query = graphql(`
 	}
 `);
 
+const getExchangeLabel = (exchange: GasExchangesChartQuery['gasExchanges'][0], timeFormat: DateTimeFormatOptions) => {
+	return DateTime.fromSeconds(exchange?.period.start).toLocaleString(timeFormat);
+};
+
 export default function GasChart({
 	title,
 	resolution,
@@ -63,8 +67,6 @@ export default function GasChart({
 	softMax?: number,
 }) {
 	const [setRefContainer, entry] = useIntersect({ threshold: [0.2] });
-	const [readings, setReadings] = useState([]);
-	const [readingsPrevious, setPreviousReadings] = useState([]);
 	const [loadReadings, { called, loading, error, data }] = useLazyQuery(GasExchangesChart_Query, {
 		variables: {
 			resolution,
@@ -81,36 +83,19 @@ export default function GasChart({
 	});
 
 	useEffect(() => {
-		if (!called && entry.intersectionRatio >= 0.2) {
+		if (!called && entry && entry.intersectionRatio >= 0.2) {
 			loadReadings();
 		}
 	}, [entry, called, loadReadings]);
 
-	useEffect(() => {
-		if (data) {
-			setReadings(data.gasExchanges.map(exchange => ({
-				...exchange,
-				label: timeFormat ? DateTime.fromSeconds(exchange.period.start).toLocaleString(timeFormat) : null
-			})));
-
-			if (data.gasExchangesPrevious) {
-				setPreviousReadings(data.gasExchangesPrevious.map(exchange => ({
-					...exchange,
-					label: timeFormat ? DateTime.fromSeconds(exchange.period.start).toLocaleString(timeFormat) : null
-				})));
-			}
-		}
-	}, [data, setReadings, timeFormat]);
-
 	if (loading) return <SkeletonChart />;
-	if (error) return <Alert severity="error">{error.message}</Alert>;
 
 	return (
 		<div ref={setRefContainer}>
 			{!called && <Button onClick={loadReadings}>Load chart</Button>}
 			{loading && <SkeletonChart />}
 			{error && <Alert severity="error">{error.message}</Alert>}
-			{readings.length > 0 &&
+			{data && data.gasExchanges.length > 0 &&
 				<HighchartsReact
 					highcharts={Highcharts}
 					options={{
@@ -133,10 +118,10 @@ export default function GasChart({
 						},
 						xAxis: {
 							type: !timeFormat ? 'datetime' : undefined,
-							categories: timeFormat ? readings.map(reading => reading.label) : undefined,
+							categories: timeFormat ? data.gasExchanges.map(reading => getExchangeLabel(reading, timeFormat)) : undefined,
 							lineColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)',
 							tickColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)',
-							plotBands: readings.filter(reading => reading.dataPointsCount === 0).map(reading => ({
+							plotBands: data.gasExchanges.filter(reading => reading.dataPointsCount === 0).map(reading => ({
 								color: 'hsla(var(--color-secondary-shade-1-h), var(--color-secondary-shade-1-s), var(--color-secondary-shade-1-l), 0.2)',
 								from: reading.period.start * 1000,
 								to: reading.period.end * 1000
@@ -156,18 +141,18 @@ export default function GasChart({
 							name:  `Current${title ? ` ${title.toLowerCase()}` : ''}`,
 							showInLegend: includePrevious,
 							type: chartType,
-							data: readings.map(usage => [timeFormat ? usage.label : usage.period.end * 1000, usage.received]),
+							data: data.gasExchanges.map(usage => [timeFormat ? getExchangeLabel(usage, timeFormat) : usage.period.end * 1000, usage.received]),
 							color: 'var(--color-gas)'
-						}].concat(readingsPrevious.length > 0 ? [{
+						}].concat(data.gasExchangesPrevious && data.gasExchangesPrevious.length > 0 ? [{
 							name:  `Previous${title ? ` ${title.toLowerCase()}` : ''}`,
 							showInLegend: includePrevious,
 							type: chartType,
-							data: readingsPrevious.map(usage => [timeFormat ? usage.label : (usage.period.end + (end - start)) * 1000, usage.received]),
+							data: data.gasExchangesPrevious.map(usage => [timeFormat ? getExchangeLabel(usage, timeFormat) : usage.period.start, usage.received]),
 							color: 'hsla(var(--color-gas-h), var(--color-gas-s), var(--color-gas-l), .4)'
 						}] : []).reverse()
 					}}
 				/>}
-			{called && !loading && readings.length <= 0 && <Alert>No data</Alert>}
+			{called && !loading && data && data.gasExchanges.length <= 0 && <Alert>No data</Alert>}
 		</div>
 	);
 }

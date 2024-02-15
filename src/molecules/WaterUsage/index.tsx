@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './WaterUsage.module.css';
 
 import Skeleton from '../../atoms/Skeleton';
@@ -22,7 +21,13 @@ const WATER_USAGE = gql`
 	}
 `;
 
-export default function WaterUsage({ start, end }) {
+export default function WaterUsage({
+	start,
+	end,
+} : {
+	start?: number,
+	end?: number,
+}) {
 	const { error, data, networkStatus } = useQuery(WATER_USAGE, {
 		pollInterval: 60000 * 5,
 		notifyOnNetworkStatusChange: true,
