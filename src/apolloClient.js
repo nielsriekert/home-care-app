@@ -16,8 +16,11 @@ const httpLink = new HttpLink({
 	credentials: 'include'
 });
 
-export default new ApolloClient({
+const apolloClient = new ApolloClient({
 	cache: new InMemoryCache(),
 	link: from([errorLink, httpLink]),
 	connectToDevTools: process.env.NODE_ENV !== 'production'
 });
+
+
+export default apolloClient;
