@@ -1,13 +1,10 @@
-// @ts-check
-import React from 'react';
 import styles from './InfoIcon.module.css';
 
-/**
- * @param {object} props
- * @param {string=} props.title
- * @returns {import('react').ReactElement}
- */
-export default function InfoIcon({ title }) {
+export default function InfoIcon({
+	title,
+}: {
+	title?: string,
+}) {
 	return (
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
 			{title && <title>{title}</title>}

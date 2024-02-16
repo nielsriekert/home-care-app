@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import styles from './Default.module.css';
 
 import Header from '../../organisms/Header';
@@ -14,7 +14,7 @@ export default function Default({ title, children }) {
 	};
 
 	const setClose = (e) => {
-		if (sideNav && sideNav.current.contains(e.target)) {
+		if (sideNav?.current && sideNav.current.contains(e.target)) {
 			return;
 		}
 		setIsOpen(false);

@@ -1,22 +1,21 @@
-// @ts-check
-import React from 'react';
-
 import Settings from '../../templates/Settings';
 
 import Skeleton from '../../atoms/Skeleton';
 
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 
-const ABOUT = gql`
+import { graphql } from '../../types/graphql';
+
+const About_Query = graphql(`
 	query about {
 		about {
 			version
 		}
 	}
-`;
+`);
 
 export default function About() {
-	const { loading, data } = useQuery(ABOUT, {
+	const { loading, data } = useQuery(About_Query, {
 		fetchPolicy: 'cache-and-network'
 	});
 
