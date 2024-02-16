@@ -42,7 +42,7 @@ export default function Electricity({ hasSolarInverter = false }) {
 						end={DateTime.now()}
 						duration={Duration.fromDurationLike({ hours: 8 })}
 						unit={ElectricEnergyOverTimeUnit.WattHour}
-						chartType="area"
+						chartType="line"
 						softMax={100}
 						includeSolarPower={hasSolarInverter}
 					/>
