@@ -176,6 +176,11 @@ export default function ElectricityChart({
 							enabled: false
 						},
 						xAxis: {
+							labels: {
+								style: {
+									color: 'var(--color-secondary-shade-3)'
+								}
+							},
 							type: !timeFormat ? 'datetime' : undefined,
 							categories: timeFormat ? data.electricityExchanges.map(reading => getExchangeLabel(reading, timeFormat)) : undefined,
 							lineColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)',
@@ -189,6 +194,11 @@ export default function ElectricityChart({
 						yAxis: {
 							title: {
 								text: unit === 'WATT_HOUR' ? 'Wh' : 'kWh'
+							},
+							labels: {
+								style: {
+									color: 'var(--color-secondary-shade-3)'
+								}
 							},
 							softMax,
 							gridLineColor: 'var(--color-secondary-shade-2)',

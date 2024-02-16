@@ -73,6 +73,11 @@ export default function CumulativeWaterUsageChart({ start, end }) {
 						}))
 					}],
 					xAxis: {
+						labels: {
+							style: {
+								color: 'var(--color-secondary-shade-3)'
+							}
+						},
 						type: 'datetime',
 						lineColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)',
 						tickColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)',
@@ -82,6 +87,11 @@ export default function CumulativeWaterUsageChart({ start, end }) {
 					yAxis: {
 						title: {
 							text: 'liter'
+						},
+						labels: {
+							style: {
+								color: 'var(--color-secondary-shade-3)'
+							}
 						},
 						gridLineColor: 'var(--color-secondary-shade-2)',
 					},
