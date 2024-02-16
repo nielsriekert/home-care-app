@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-
-import { DateTime } from 'luxon';
+import { DateTime, Duration } from 'luxon';
 
 import Default from '../../templates/Default';
 
@@ -13,25 +11,9 @@ import FireIcon from '../../atoms/FireIcon';
 import GasUsage from '../../molecules/GasUsage';
 import GasChart from '../../molecules/GasChart';
 
-export default function Dashboard() {
-	// TODO: weird solution, DateTime in props causes rerenders
-	const [gasFourDaysStartEnd] = useState({
-		start: Math.floor(DateTime.now().minus({ days: 4 }).toSeconds()),
-		end: Math.floor(DateTime.now().toSeconds())
-	});
-	const [weekStartEnd] = useState({
-		start: Math.floor(DateTime.now().startOf('week').toSeconds()),
-		end: Math.floor(DateTime.now().endOf('week').toSeconds())
-	});
-	const [twelveMonthStartEnd] = useState({
-		start: Math.floor(DateTime.now().minus({ month: 11 }).startOf('month').toSeconds()),
-		end: Math.floor(DateTime.now().endOf('month').toSeconds())
-	});
-	const [fourYearsStartEnd] = useState({
-		start: Math.floor(DateTime.now().minus({ years: 4 }).toSeconds()),
-		end: Math.floor(DateTime.now().toSeconds())
-	});
+import { TimeSpan } from '../../types/graphql/graphql';
 
+export default function Dashboard() {
 	return (
 		<Default title="Gas">
 			<WidgetGrid>
@@ -40,18 +22,18 @@ export default function Dashboard() {
 				</Widget>
 				<Widget title="Last 4 days" name="gas-usage-chart" icon={<FireIcon />}>
 					<GasChart
-						resolution="TWO_HOURS"
-						start={gasFourDaysStartEnd.start}
-						end={gasFourDaysStartEnd.end}
+						resolution={TimeSpan.TwoHours}
+						duration={Duration.fromDurationLike({ days: 4 })}
+						end={DateTime.now()}
 						chartType="column"
 					/>
 				</Widget>
 				<Widget title="Week" name="gas-usage-current-week" icon={<FireIcon />}>
 					<GasChart
 						title="Week"
-						resolution="DAY"
-						start={weekStartEnd.start}
-						end={weekStartEnd.end}
+						resolution={TimeSpan.Day}
+						duration={Duration.fromDurationLike({ week: 1 })}
+						end={DateTime.now().endOf('week')}
 						timeFormat={{ weekday: 'long' }}
 						chartType="column"
 						includePrevious
@@ -60,9 +42,9 @@ export default function Dashboard() {
 				</Widget>
 				<Widget title="Month" name="gas-usage-by-month" icon={<FireIcon />}>
 					<GasChart
-						resolution="MONTH"
-						start={twelveMonthStartEnd.start}
-						end={twelveMonthStartEnd.end}
+						resolution={TimeSpan.Month}
+						duration={Duration.fromDurationLike({ year: 1 })}
+						end={DateTime.now().endOf('month')}
 						chartType="column"
 						timeFormat={{ month: 'long' }}
 						includePrevious
@@ -71,9 +53,9 @@ export default function Dashboard() {
 				</Widget>
 				<Widget title="Year" name="gas-usage-by-year" icon={<FireIcon />}>
 					<GasChart
-						resolution="YEAR"
-						start={fourYearsStartEnd.start}
-						end={fourYearsStartEnd.end}
+						resolution={TimeSpan.Year}
+						duration={Duration.fromDurationLike({ year: 5 })}
+						end={DateTime.now()}
 						timeFormat={{ year: 'numeric' }}
 						chartType="column"
 						softMax={500}

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
-import { useLazyQuery, gql } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 
 import SkeletonChart from '../SkeletonChart';
 import Alert from '../../atoms/Alert';
@@ -8,15 +8,15 @@ import Button from '../../atoms/Button';
 
 import useIntersect from '../../hooks/useIntersect';
 
-import { DateTime } from 'luxon';
+import { DateTime, DateTimeFormatOptions, Duration } from 'luxon';
 
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-import { WATER_EXCHANGE } from '../../fragments';
+import { graphql } from '../../types/graphql';
+import { TimeSpan, WaterExchangesChartQuery, WaterQuantityUnit } from '../../types/graphql/graphql';
 
-const WATER_EXCHANGES_CHART = gql`
-	${WATER_EXCHANGE}
+const WaterExchangesChart_Query = graphql(`
 	query waterExchangesChart(
 		$resolution: TimeSpan
 		$timePeriod: TimePeriodInput!
@@ -24,83 +24,79 @@ const WATER_EXCHANGES_CHART = gql`
 		$includePrevious: Boolean!
 	) {
 		waterExchanges(resolution: $resolution, timePeriod: $timePeriod) {
-			...WaterExchangeFields
+			received
+			dataPointsCount
+			period {
+				start
+				end
+			}
 		}
 
 		waterExchangesPrevious: waterExchanges(resolution: $resolution, timePeriod: $timePeriodPrevious) @include(if: $includePrevious) {
-			...WaterExchangeFields
+			received
+			dataPointsCount
+			period {
+				start
+				end
+			}
 		}
 	}
-`;
+`);
 
-/**
- * @param {object} props
- * @param {'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'TWO_HOURS' | 'HOUR' | 'TEN_MINUTES' | 'FIVE_MINUTES' | 'MINUTE'} props.resolution
- * @param {number} props.start
- * @param {number} props.end
- * @param {'LITER'} [props.unit=LITER]
- * @returns
- */
+const getExchangeLabel = (exchange: WaterExchangesChartQuery['waterExchanges'][0], timeFormat: DateTimeFormatOptions) => {
+	return DateTime.fromSeconds(exchange?.period.start).toLocaleString(timeFormat);
+};
+
 export default function WaterChart({
 	resolution,
-	start,
 	end,
-	unit = 'LITER',
+	duration,
+	unit = WaterQuantityUnit.Liter,
 	chartType = 'line',
 	timeFormat = null,
 	includePrevious = false,
 	softMax = undefined
+}: {
+	resolution: TimeSpan,
+	end: DateTime,
+	duration: Duration,
+	unit?: WaterQuantityUnit,
+	chartType?: 'line' | 'column',
+	timeFormat?: DateTimeFormatOptions | null,
+	includePrevious?: boolean,
+	softMax?: number,
 }) {
 	const [setRefContainer, entry] = useIntersect({ threshold: [0.2] });
-	const [readings, setReadings] = useState([]);
-	const [readingsPrevious, setPreviousReadings] = useState([]);
-	const [loadReadings, { called, loading, error, data }] = useLazyQuery(WATER_EXCHANGES_CHART, {
+	const [loadReadings, { called, loading, error, data }] = useLazyQuery(WaterExchangesChart_Query, {
 		variables: {
 			resolution,
 			timePeriod: {
-				start,
-				end
+				start: end.minus(duration).toUnixInteger(),
+				end: end.toUnixInteger()
 			},
 			includePrevious,
 			timePeriodPrevious: {
-				start: start - (end - start),
-				end: start
+				start: end.minus(duration).minus(duration).toUnixInteger(),
+				end: end.minus(duration).toUnixInteger()
 			}
 		},
 		fetchPolicy: 'cache-and-network'
 	});
 
 	useEffect(() => {
-		if (!called && entry.intersectionRatio >= 0.2) {
+		if (!called && entry && entry.intersectionRatio >= 0.2) {
 			loadReadings();
 		}
 	}, [entry, called, loadReadings]);
 
-	useEffect(() => {
-		if (data) {
-			setReadings(data.waterExchanges.map(exchange => ({
-				...exchange,
-				label: timeFormat ? DateTime.fromSeconds(exchange.period.start).toLocaleString(timeFormat) : null
-			})));
-
-			if (data.waterExchangesPrevious) {
-				setPreviousReadings(data.waterExchangesPrevious.map(exchange => ({
-					...exchange,
-					label: timeFormat ? DateTime.fromSeconds(exchange.period.start).toLocaleString(timeFormat) : null
-				})));
-			}
-		}
-	}, [data, setReadings, timeFormat]);
-
 	if (loading) return <SkeletonChart />;
-	if (error) return <Alert severity="error">{error.message}</Alert>;
 
 	return (
 		<div ref={setRefContainer}>
 			{!called && <Button onClick={loadReadings}>Load chart</Button>}
 			{loading && <SkeletonChart />}
 			{error && <Alert severity="error">{error.message}</Alert>}
-			{readings.length > 0 &&
+			{data && data.waterExchanges.length > 0 &&
 				<HighchartsReact
 					highcharts={Highcharts}
 					options={{
@@ -126,10 +122,10 @@ export default function WaterChart({
 						},
 						xAxis: {
 							type: !timeFormat ? 'datetime' : undefined,
-							categories: timeFormat ? readings.map(reading => reading.label) : undefined,
+							categories: timeFormat ? data.waterExchanges.map(reading => getExchangeLabel(reading, timeFormat)) : undefined,
 							lineColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)',
 							tickColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)',
-							plotBands: readings.filter(reading => reading.dataPointsCount === 0).map(reading => ({
+							plotBands: data.waterExchanges.filter(reading => reading.dataPointsCount === 0).map(reading => ({
 								color: 'hsla(var(--color-secondary-shade-1-h), var(--color-secondary-shade-1-s), var(--color-secondary-shade-1-l), 0.2)',
 								from: reading.period.start * 1000,
 								to: reading.period.end * 1000
@@ -149,19 +145,19 @@ export default function WaterChart({
 							name: 'Received',
 							type: chartType,
 							showInLegend: includePrevious,
-							data: readings.map(usage => [timeFormat ? usage.label : usage.period.end * 1000, usage.received]),
+							data: data.waterExchanges.map(usage => [timeFormat ? getExchangeLabel(usage, timeFormat) : usage.period.end * 1000, usage.received]),
 							color: 'var(--color-water)'
 						},
-						].concat(readingsPrevious.length > 0 ? [{
+						].concat(data.waterExchangesPrevious && data.waterExchangesPrevious.length > 0 ? [{
 							name: 'Previously received',
 							showInLegend: true,
 							type: chartType,
-							data: readingsPrevious.map(usage => [timeFormat ? usage.label : (usage.period.end + (end - start)) * 1000, usage.received]),
+							data: data.waterExchangesPrevious.map(usage => [timeFormat ? getExchangeLabel(usage, timeFormat) : usage.period.start, usage.received]),
 							color: 'hsla(var(--color-water-h), var(--color-water-s), var(--color-water-l), .3)'
 						}] : []).reverse()
 					}}
 				/>}
-			{called && !loading && readings.length <= 0 && <Alert>No data</Alert>}
+			{called && !loading && data && data.waterExchanges.length <= 0 && <Alert>No data</Alert>}
 		</div>
 	);
 }

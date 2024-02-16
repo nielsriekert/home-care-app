@@ -3,7 +3,7 @@ import React from 'react';
 
 import LastUpdated from '../../atoms/LastUpdated';
 
-export default function Widget({ children, title, name, icon, updatedAt }) {
+export default function Widget({ children, title, name, icon, updatedAt = undefined }) {
 	return (
 		<div className={styles.container + (name ? ' widget-' + name : '')}>
 			{icon || title ?
