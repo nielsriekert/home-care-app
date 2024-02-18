@@ -1,0 +1,12 @@
+.container {
+	position: relative;
+	max-width: 30em;
+}
+
+.container:has(label) {
+	margin-top: 2.25em;
+}
+
+.fieldMessageContainer {
+	margin-top: 10px;
+}

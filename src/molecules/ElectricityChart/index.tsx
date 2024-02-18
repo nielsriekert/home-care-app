@@ -16,7 +16,7 @@ import HighchartsReact from 'highcharts-react-official';
 import { graphql } from '../../types/graphql';
 import { TimeSpan, ElectricEnergyOverTimeUnit, ElectricityExchangesChartQuery, SolarExchangesChartQuery } from '../../types/graphql/graphql';
 
-const ElectricExchangesChart_Query = graphql(`
+const ElectricExchangesChart_Query = graphql(`#graphql
 	query electricityExchangesChart(
 		$resolution: TimeSpan
 		$timePeriod: TimePeriodInput!
@@ -46,7 +46,7 @@ const ElectricExchangesChart_Query = graphql(`
 	}
 `);
 
-const SolarPowerExchangesChart_Query = graphql(`
+const SolarPowerExchangesChart_Query = graphql(`#graphql
 	query solarExchangesChart(
 		$resolution: TimeSpan
 		$timePeriod: TimePeriodInput!
@@ -176,6 +176,11 @@ export default function ElectricityChart({
 							enabled: false
 						},
 						xAxis: {
+							labels: {
+								style: {
+									color: 'var(--color-secondary-shade-3)'
+								}
+							},
 							type: !timeFormat ? 'datetime' : undefined,
 							categories: timeFormat ? data.electricityExchanges.map(reading => getExchangeLabel(reading, timeFormat)) : undefined,
 							lineColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)',
@@ -189,6 +194,11 @@ export default function ElectricityChart({
 						yAxis: {
 							title: {
 								text: unit === 'WATT_HOUR' ? 'Wh' : 'kWh'
+							},
+							labels: {
+								style: {
+									color: 'var(--color-secondary-shade-3)'
+								}
 							},
 							softMax,
 							gridLineColor: 'var(--color-secondary-shade-2)',

@@ -121,6 +121,11 @@ export default function WaterChart({
 							enabled: false
 						},
 						xAxis: {
+							labels: {
+								style: {
+									color: 'var(--color-secondary-shade-3)'
+								}
+							},
 							type: !timeFormat ? 'datetime' : undefined,
 							categories: timeFormat ? data.waterExchanges.map(reading => getExchangeLabel(reading, timeFormat)) : undefined,
 							lineColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)',
@@ -134,6 +139,11 @@ export default function WaterChart({
 						yAxis: {
 							title: {
 								text: unit === 'LITER' ? 'liter' : ''
+							},
+							labels: {
+								style: {
+									color: 'var(--color-secondary-shade-3)'
+								}
 							},
 							softMax,
 							gridLineColor: 'var(--color-secondary-shade-2)',

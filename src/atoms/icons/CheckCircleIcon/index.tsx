@@ -1,11 +1,10 @@
 import styles from './CheckCircleIcon.module.css';
 
-/**
- * @param {object} props
- * @param {string=} props.title
- * @returns {import('react').ReactElement}
- */
-export default function CheckCircleIcon({ title }) {
+export default function CheckCircleIcon({
+	title,
+}: {
+	title?: string
+}) {
 	return (
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
 			{title && <title>{title}</title>}
