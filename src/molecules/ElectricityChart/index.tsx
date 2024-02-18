@@ -16,7 +16,7 @@ import HighchartsReact from 'highcharts-react-official';
 import { graphql } from '../../types/graphql';
 import { TimeSpan, ElectricEnergyOverTimeUnit, ElectricityExchangesChartQuery, SolarExchangesChartQuery } from '../../types/graphql/graphql';
 
-const ElectricExchangesChart_Query = graphql(`
+const ElectricExchangesChart_Query = graphql(`#graphql
 	query electricityExchangesChart(
 		$resolution: TimeSpan
 		$timePeriod: TimePeriodInput!
@@ -46,7 +46,7 @@ const ElectricExchangesChart_Query = graphql(`
 	}
 `);
 
-const SolarPowerExchangesChart_Query = graphql(`
+const SolarPowerExchangesChart_Query = graphql(`#graphql
 	query solarExchangesChart(
 		$resolution: TimeSpan
 		$timePeriod: TimePeriodInput!
