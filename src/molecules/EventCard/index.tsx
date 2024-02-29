@@ -1,16 +1,27 @@
 import styles from './EventCard.module.css';
 import React, { useCallback } from 'react';
 
-/**
- * @param {object} props
- * @param {number} props.id
- * @param {number} props.date unix timestamp in seconds
- * @param {'ERROR' | 'NOTICE'} props.type
- * @param {string} props.message
- * @param {(id: number) => void} props.onArchive
- * @returns
- */
-export default function EventCard({ id, date, type, message, onArchive }) {
+import { FragmentType, useFragment } from '../../types/graphql/fragment-masking';
+import { graphql } from '../../types/graphql/gql';
+
+const EventCardFragment = graphql(`#graphql
+	fragment EventCardFragment on Event {
+		id
+		type
+		date
+		message
+	}
+`);
+
+export default function EventCard({
+	event,
+	onArchive
+} : {
+	event: FragmentType<typeof EventCardFragment>,
+	onArchive: (id: string)  => void,
+}) {
+	const { id, type, date, message } = useFragment(EventCardFragment, event);
+
 	const onArchiveHandler = useCallback(() => {
 		if (typeof onArchive === 'function') {
 			onArchive(id);

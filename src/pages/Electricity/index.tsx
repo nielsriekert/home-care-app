@@ -6,11 +6,11 @@ import WidgetGrid from '../../organisms/WidgetGrid';
 
 import Widget from '../../molecules/Widget';
 
-import BoltIcon from '../../atoms/BoltIcon';
-import BoltArrowUpIcon from '../../atoms/BoltArrowUpIcon';
-import PowerPlugIcon from '../../atoms/PowerPlugIcon';
-import BoltArrowDownIcon from '../../atoms/BoltArrowDownIcon';
-import SunIcon from '../../atoms/SunIcon';
+import BoltIcon from '../../atoms/icons/BoltIcon';
+import BoltArrowUpIcon from '../../atoms/icons/BoltArrowUpIcon';
+import PowerPlugIcon from '../../atoms/icons/PowerPlugIcon';
+import BoltArrowDownIcon from '../../atoms/icons/BoltArrowDownIcon';
+import SunIcon from '../../atoms/icons/SunIcon';
 
 import ElectricityReceived from '../../molecules/ElectricityReceived';
 import ElectricityDelivered from '../../molecules/ElectricityDelivered';
@@ -63,7 +63,7 @@ export default function Electricity({ hasSolarInverter = false }) {
 					<ElectricityChart
 						resolution={TimeSpan.Month}
 						end={DateTime.now().endOf('month')}
-						duration={Duration.fromDurationLike({ year: 1 })}
+						duration={Duration.fromDurationLike({ year: 1 }).minus({ month: 1 })}
 						timeFormat={{ month: 'long' }}
 						chartType="column"
 						softMax={200}

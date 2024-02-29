@@ -6,7 +6,7 @@ import WidgetGrid from '../../organisms/WidgetGrid';
 
 import Widget from '../../molecules/Widget';
 
-import FireIcon from '../../atoms/FireIcon';
+import FireIcon from '../../atoms/icons/FireIcon';
 
 import GasUsage from '../../molecules/GasUsage';
 import GasChart from '../../molecules/GasChart';

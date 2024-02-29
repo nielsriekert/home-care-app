@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 import UserAvatar from '../../atoms/UserAvatar';
 import UserHeaderModal from '../../molecules/UserHeaderModal';
 
-import MenuIcon from '../../atoms/MenuIcon';
-import CogwheelIcon from '../../atoms/CogwheelIcon';
+import MenuIcon from '../../atoms/icons/MenuIcon';
+import CogwheelIcon from '../../atoms/icons/CogwheelIcon';
 
 import ToolTip from '../../atoms/ToolTip';
 

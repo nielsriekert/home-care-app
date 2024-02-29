@@ -1,7 +1,7 @@
 import styles from './InputFieldToggle.module.css';
 
 import FieldLabel from '../../atoms/FieldLabel';
-import FieldMessage from '../../atoms/FieldMessage';
+import FieldMessage, { StyleType } from '../../atoms/FieldMessage';
 import FieldDescription from '../../atoms/FieldDescription';
 import ToggleButton from '../../atoms/ToggleButton';
 
@@ -28,7 +28,7 @@ export default function InputFieldToggle({
 	isDisabled?: boolean,
 	message?: {
 		content: string,
-		type?: 'isError' | 'isValidated',
+		type?: StyleType,
 	}
 }) {
 	function onValueChange() {

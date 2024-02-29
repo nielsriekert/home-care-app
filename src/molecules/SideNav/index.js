@@ -3,9 +3,9 @@ import styles from './SideNav.module.css';
 import { NavLink, useLocation } from 'react-router-dom';
 
 import DashboardIcon from '../../atoms/DashboardIcon';
-import BoltIcon from '../../atoms/BoltIcon';
-import FireIcon from '../../atoms/FireIcon';
-import WaterIcon from '../../atoms/WaterIcon';
+import BoltIcon from '../../atoms/icons/BoltIcon';
+import FireIcon from '../../atoms/icons/FireIcon';
+import WaterIcon from '../../atoms/icons/WaterIcon';
 
 const activeClass = ({ isActive }) => isActive ? styles.isActive : undefined;
 

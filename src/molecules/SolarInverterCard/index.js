@@ -3,7 +3,7 @@ import styles from './SolarInverterCard.module.css';
 
 import { FormattedNumber } from 'react-intl';
 
-import SunIcon from '../../atoms/SunIcon';
+import SunIcon from '../../atoms/icons/SunIcon';
 
 import smaSunnyBoyImage from './sma-sunny-boy.png';
 import omnik4000Image from './omnik-4000.png';

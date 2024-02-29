@@ -4,11 +4,11 @@ import './Settings.module.css';
 import SettingsTemplate from '../../templates/Settings';
 import PageNav from '../../molecules/PageNav';
 
-import FireIcon from '../../atoms/FireIcon';
-import PowerPlugIcon from '../../atoms/PowerPlugIcon';
-import SunIcon from '../../atoms/SunIcon';
-import WaterIcon from '../../atoms/WaterIcon';
-import CogwheelIcon from '../../atoms/CogwheelIcon';
+import FireIcon from '../../atoms/icons/FireIcon';
+import PowerPlugIcon from '../../atoms/icons/PowerPlugIcon';
+import SunIcon from '../../atoms/icons/SunIcon';
+import WaterIcon from '../../atoms/icons/WaterIcon';
+import CogwheelIcon from '../../atoms/icons/CogwheelIcon';
 
 export default function Settings() {
 	return (

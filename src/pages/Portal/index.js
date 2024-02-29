@@ -11,10 +11,10 @@ import WidgetGrid from '../../organisms/WidgetGrid';
 
 import Widget from '../../molecules/Widget';
 
-import BoltArrowUpIcon from '../../atoms/BoltArrowUpIcon';
-import BoltArrowDownIcon from '../../atoms/BoltArrowDownIcon';
-import SunIcon from '../../atoms/SunIcon';
-import PowerPlugIcon from '../../atoms/PowerPlugIcon';
+import BoltArrowUpIcon from '../../atoms/icons/BoltArrowUpIcon';
+import BoltArrowDownIcon from '../../atoms/icons/BoltArrowDownIcon';
+import SunIcon from '../../atoms/icons/SunIcon';
+import PowerPlugIcon from '../../atoms/icons/PowerPlugIcon';
 
 import CurrentElectricityReceived from '../../molecules/CurrentElectricityReceived';
 import CurrentElectricityDelivered from '../../molecules/CurrentElectricityDelivered';
