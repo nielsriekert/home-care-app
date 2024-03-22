@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.43.1] - 2024-03-22
+### Added
+- SolarInverter api breading change, from ipAddress to url.
+
 ## [1.43.0] - 2024-02-18
 ### Added
 - Data retention settings for removing old data on Smart meter settings page.

@@ -17,7 +17,13 @@ const httpLink = new HttpLink({
 });
 
 const apolloClient = new ApolloClient({
-	cache: new InMemoryCache(),
+	cache: new InMemoryCache({
+		possibleTypes: {
+			ConnectionRelay: [
+				'EventConnectionRelay',
+			],
+		},
+	}),
 	link: from([errorLink, httpLink]),
 	connectToDevTools: process.env.NODE_ENV !== 'production'
 });

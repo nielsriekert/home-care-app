@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './SettingsHeader.module.css';
 import { useNavigate } from 'react-router-dom';
 
-import ArrowLeftIcon from '../../atoms/ArrowLeftIcon';
+import ArrowLeftIcon from '../../atoms/icons/ArrowLeftIcon';
 
 export default function SettingsHeader({ title, backButton = true }) {
 	const navigate = useNavigate();

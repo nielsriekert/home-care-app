@@ -1,8 +1,7 @@
-// @ts-check
 import React, { useCallback, useEffect } from 'react';
 import styles from './EventList.module.css';
 
-import { gql, useQuery, useMutation, NetworkStatus } from '@apollo/client';
+import { useQuery, useMutation, NetworkStatus } from '@apollo/client';
 
 import { useSearchParams } from 'react-router-dom';
 
@@ -13,10 +12,9 @@ import Paging from '../../molecules/Paging';
 
 import Skeleton from '../../atoms/Skeleton';
 
-import { EVENT } from '../../fragments';
+import { graphql } from '../../types/graphql/gql';
 
-const EVENTS = gql`
-	${EVENT}
+const Events_Query = graphql(`#graphql
 	query events (
 		$after: String
 		$before: String
@@ -25,34 +23,29 @@ const EVENTS = gql`
 			totalCount
     		edges {
 				node {
-					...EventFields
+					id
+					...EventCardFragment
 				}
 			}
-			pageInfo {
-				startCursor
-				endCursor
-				hasNextPage
-				hasPreviousPage
-			}
+			...PagingFragment
 		}
 	}
-`;
+`);
 
-const ARCHIVE_EVENT = gql`
-	${EVENT}
+const ArchiveEvent_Mutation = graphql(`#graphql
 	mutation archiveEvent($id: ID!) {
 		archiveEvent(id: $id) {
 			...EventFields
 		}
 	}
-`;
+`);
 
 export default function EventList() {
 	const [searchParams] = useSearchParams();
 	const after = searchParams.get('after');
 	const before = searchParams.get('before');
 
-	const { error, data, called, fetchMore, networkStatus } = useQuery(EVENTS, {
+	const { error, data, called, fetchMore, networkStatus } = useQuery(Events_Query, {
 		variables: {
 			after,
 			before
@@ -62,8 +55,8 @@ export default function EventList() {
     	nextFetchPolicy: 'cache-first',
 	});
 
-	const [archiveEvent] = useMutation(ARCHIVE_EVENT, {
-		refetchQueries: [EVENTS]
+	const [archiveEvent] = useMutation(ArchiveEvent_Mutation, {
+		refetchQueries: [Events_Query]
 	});
 
 	useEffect(() => {
@@ -83,7 +76,7 @@ export default function EventList() {
 		});
 	}, [called, after, before, fetchMore]);
 
-	const onArchive = useCallback(id => {
+	const onArchive = useCallback((id: string) => {
 		archiveEvent({
 			variables: {
 				id
@@ -95,17 +88,15 @@ export default function EventList() {
 		<div className={styles.container}>
 			{data && <Paging
 				currentCount={data?.events.edges.length || 0}
-				totalCount={data.events.totalCount}
-				pageInfo={data.events.pageInfo}
+				connection={data.events}
 			/>}
 			{data?.events?.edges &&
 				<ul className={`${styles.cardsContainer}${NetworkStatus[networkStatus] === 'refetch'  ? ` ${styles.isRefetching}` : ''}`}>
 					{data.events.edges.map(edge => (
 						<li key={edge.node.id}>
 							<EventCard
-								{...edge.node}
+								event={edge.node}
 								onArchive={onArchive}
-
 							/>
 						</li>
 					))}
@@ -129,8 +120,7 @@ export default function EventList() {
 			{data?.events?.totalCount === 0 && <Alert>No events found</Alert>}
 			{data && <Paging
 				currentCount={data?.events.edges.length || 0}
-				totalCount={data.events.totalCount}
-				pageInfo={data.events.pageInfo}
+				connection={data.events}
 			/>}
 		</div>
 	);

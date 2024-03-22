@@ -111,6 +111,7 @@
 body {
 	margin: 0;
 	font-family: 'Andika New Basic', sans-serif;
+	color: var(--color-secondary-shade-4);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	background-color: var(--color-secondary-shade-2);

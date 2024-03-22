@@ -1,17 +1,10 @@
-// @ts-check
 import styles from './ToolTip.module.css';
 import React, { Children, cloneElement, useRef, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
 import useWindowSize from '../../hooks/useWindowSize';
 
-/**
- * @param {DOMRect} childRect
- * @param {DOMRect} toolTipRect
- * @param {{ width: number, height: number }} windowSize
- * @returns {{ x: number, y: number, offset: number }}
-*/
-const calcPosition = (childRect, toolTipRect, windowSize) => {
+const calcPosition = (childRect: DOMRect, toolTipRect: DOMRect, windowSize: { width: number, height: number }): { x: number, y: number, offset: number } => {
 	const offset = 15;
 	const initialX = childRect.x + childRect.width / 2 - toolTipRect.width / 2;
 	let x = Math.min(initialX, windowSize.width - toolTipRect.width - offset);
@@ -24,18 +17,19 @@ const calcPosition = (childRect, toolTipRect, windowSize) => {
 	};
 };
 
-/**
- * @param {object} props
- * @param {import('React').Children} props.children
- * @param {string} props.title
- * @param {boolean=} props.arrow
- * @returns
- */
-export default function ToolTip({ children, title, arrow = true }) {
+export default function ToolTip({
+	children,
+	title,
+	arrow = true
+}: {
+	children: React.ReactElement,
+	title: string,
+	arrow?: boolean,
+}) {
 	const windowSize = useWindowSize();
-	const toolTipRef = useRef(null);
-	const childrenRef = useRef([]);
-	const [transform, setTransform] = useState(null);
+	const toolTipRef = useRef<HTMLSpanElement | null>(null);
+	const childrenRef = useRef<Element[]>([]);
+	const [transform, setTransform] = useState<string | null>(null);
 	const [over, onOver] = useState(false);
 	const [arrowOffset, setArrowOffset] = useState(0);
 
@@ -54,16 +48,16 @@ export default function ToolTip({ children, title, arrow = true }) {
 		setTransform(`translate(${x}px, ${y}px)`);
 	}, [childrenRef, toolTipRef, windowSize]);
 
-	const onMouseEnter = () => onOver(true);
-	const onMouseLeave = () => onOver(false);
+	const onPointerEnter = () => onOver(true);
+	const onPointerLeave = () => onOver(false);
 
 	return (
 		<>
 			{Children.map(children, (child, index) =>
 				cloneElement(child, {
-					onMouseEnter,
-					onMouseLeave,
-					ref: (ref) => (childrenRef.current[index] = ref)
+					onPointerEnter,
+					onPointerLeave,
+					ref: (ref: Element) => (childrenRef.current[index] = ref)
 				})
 			)}
 			{createPortal(

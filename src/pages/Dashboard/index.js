@@ -7,12 +7,12 @@ import WidgetGrid from '../../organisms/WidgetGrid';
 
 import Widget from '../../molecules/Widget';
 
-import BoltArrowUpIcon from '../../atoms/BoltArrowUpIcon';
-import PowerPlugIcon from '../../atoms/PowerPlugIcon';
-import SunIcon from '../../atoms/SunIcon';
-import BoltArrowDownIcon from '../../atoms/BoltArrowDownIcon';
-import WaterIcon from '../../atoms/WaterIcon';
-import FireIcon from '../../atoms/FireIcon';
+import BoltArrowUpIcon from '../../atoms/icons/BoltArrowUpIcon';
+import PowerPlugIcon from '../../atoms/icons/PowerPlugIcon';
+import SunIcon from '../../atoms/icons/SunIcon';
+import BoltArrowDownIcon from '../../atoms/icons/BoltArrowDownIcon';
+import WaterIcon from '../../atoms/icons/WaterIcon';
+import FireIcon from '../../atoms/icons/FireIcon';
 
 import CurrentElectricityReceived from '../../molecules/CurrentElectricityReceived';
 import CurrentElectricityDelivered from '../../molecules/CurrentElectricityDelivered';

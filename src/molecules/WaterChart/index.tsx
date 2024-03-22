@@ -93,7 +93,7 @@ export default function WaterChart({
 
 	return (
 		<div ref={setRefContainer}>
-			{!called && <Button onClick={loadReadings}>Load chart</Button>}
+			{!called && <Button onClick={() => loadReadings()}>Load chart</Button>}
 			{loading && <SkeletonChart />}
 			{error && <Alert severity="error">{error.message}</Alert>}
 			{data && data.waterExchanges.length > 0 &&

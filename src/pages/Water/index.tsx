@@ -9,7 +9,7 @@ import WidgetGrid from '../../organisms/WidgetGrid';
 
 import Widget from '../../molecules/Widget';
 
-import WaterIcon from '../../atoms/WaterIcon';
+import WaterIcon from '../../atoms/icons/WaterIcon';
 
 import WaterUsage from '../../molecules/WaterUsage';
 import CumulativeWaterUsageChart from '../../molecules/CumulativeWaterUsageChart';

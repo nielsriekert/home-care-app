@@ -6,7 +6,7 @@ import WidgetGrid from '../../organisms/WidgetGrid';
 
 import Widget from '../../molecules/Widget';
 
-import FireIcon from '../../atoms/FireIcon';
+import FireIcon from '../../atoms/icons/FireIcon';
 
 import GasUsage from '../../molecules/GasUsage';
 import GasChart from '../../molecules/GasChart';
@@ -30,7 +30,6 @@ export default function Dashboard() {
 				</Widget>
 				<Widget title="Week" name="gas-usage-current-week" icon={<FireIcon />}>
 					<GasChart
-						title="Week"
 						resolution={TimeSpan.Day}
 						duration={Duration.fromDurationLike({ week: 1 })}
 						end={DateTime.now().endOf('week')}

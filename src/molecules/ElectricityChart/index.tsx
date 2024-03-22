@@ -147,7 +147,7 @@ export default function ElectricityChart({
 
 	return (
 		<div ref={setRefContainer}>
-			{!called && <Button onClick={loadReadings}>Load chart</Button>}
+			{!called && <Button onClick={() => loadReadings()}>Load chart</Button>}
 			{loading && (!includeSolarPower || loadingSolar) && <SkeletonChart />}
 			{error && <Alert severity="error">{error.message}</Alert>}
 			{errorSolar && <Alert severity="error">{errorSolar.message}</Alert>}

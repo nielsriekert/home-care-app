@@ -5,7 +5,7 @@ import UserAvatar from '../../atoms/UserAvatar';
 import { FragmentType, useFragment } from '../../types/graphql/fragment-masking';
 import { graphql } from '../../types/graphql/gql';
 
-const UserProfileCardFragment = graphql(`
+const UserProfileCardFragment = graphql(`#graphql
 	fragment UserProfileCardFragment on User {
 		...UserAvatarFragment
 		avatar

@@ -6,7 +6,7 @@ import ConditionalButton from '../ConditionalButton';
 import { FragmentType, useFragment } from '../../types/graphql/fragment-masking';
 import { graphql } from '../../types/graphql/gql';
 
-const UserAvatarFragment = graphql(`
+const UserAvatarFragment = graphql(`#graphql
 	fragment UserAvatarFragment on User {
 		name
 		avatar

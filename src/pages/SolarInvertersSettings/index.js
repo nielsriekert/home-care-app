@@ -12,35 +12,33 @@ import Form from '../../organisms/Form';
 import InputField from '../../molecules/InputField';
 import SelectField from '../../molecules/SelectField';
 
-import { useMutation, gql, useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 
 import useFormFields from '../../hooks/useFormFields';
 
-import { SOLAR_INVERTER } from '../../fragments';
+import { graphql } from '../../types/graphql';
 
-const SOLAR_INVERTERS = gql`
-	${SOLAR_INVERTER}
+const SolarInverters_Query = graphql(`#graphql
 	query solarInverters {
 		solarInverters {
-			...SolarInverterFields
+			...SolarInverterCardFragment
 		}
 	}
-`;
+`);
 
-const ADD_SOLAR_INVERTER = gql`
-	${SOLAR_INVERTER}
+const AddSolarInverter_Mutation = graphql(`#graphql
 	mutation addSolarInverter($solarInverter: SolarInverterInput!) {
 		addSolarInverter(solarInverter: $solarInverter) {
-			...SolarInverterFields
+			name
 		}
 	}
-`;
+`);
 
 export default function SolarInvertersSettings() {
-	const { data: invertersData, loading: loadingInverters, error: errorInverters, refetch } = useQuery(SOLAR_INVERTERS, {
+	const { data: invertersData, loading: loadingInverters, error: errorInverters, refetch } = useQuery(SolarInverters_Query, {
 		pollInterval: 30000
 	});
-	const [addInverter, { data: inverterData, error: inverterError, loading: inverterLoading }] = useMutation(ADD_SOLAR_INVERTER);
+	const [addInverter, { data: inverterData, error: inverterError, loading: inverterLoading }] = useMutation(AddSolarInverter_Mutation);
 	const [successMessage, setSuccessMessage] = useState(null);
 	const [error, setError] = useState(null);
 
@@ -76,10 +74,10 @@ export default function SolarInvertersSettings() {
 			component: SelectField
 		},
 		{
-			label: 'IP address',
-			name: 'ip-address',
+			label: 'Url',
+			name: 'url',
 			value: '',
-			description: 'The local ip address from the solar inverter, without http.',
+			description: 'The url from the solar inverter',
 			component: InputField
 		}
 	]);
@@ -104,7 +102,7 @@ export default function SolarInvertersSettings() {
 			variables: {
 				solarInverter: {
 					name: getFieldValueByName('name'),
-					ipAddress: getFieldValueByName('ip-address'),
+					url: getFieldValueByName('url'),
 					type: getFieldValueByName('type') || null
 				}
 			}
@@ -121,7 +119,9 @@ export default function SolarInvertersSettings() {
 				<Skeleton width="100%" height="300px" />
 			</div>}
 			{!loadingInverters && invertersData?.solarInverters && <div className={styles.inverterGrid}>
-				{invertersData.solarInverters.length > 0 ? invertersData.solarInverters.map(inverter => (<SolarInverterCard key={inverter.id} {...inverter} />)) :
+				{invertersData.solarInverters.length > 0 ? invertersData.solarInverters.map(inverter => (
+					<SolarInverterCard key={inverter.id} solarInverter={inverter} />
+				)) :
 					<Alert>No solar inverters found</Alert>
 				}
 			</div>}

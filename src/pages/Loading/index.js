@@ -3,9 +3,9 @@ import React from 'react';
 
 import LoggedOut from '../../templates/LoggedOut';
 
-import BoltIcon from '../../atoms/BoltIcon';
-import FireIcon from '../../atoms/FireIcon';
-import SunIcon from '../../atoms/SunIcon';
+import BoltIcon from '../../atoms/icons/BoltIcon';
+import FireIcon from '../../atoms/icons/FireIcon';
+import SunIcon from '../../atoms/icons/SunIcon';
 
 export default function Loading() {
 	const random = Math.random() * 3;

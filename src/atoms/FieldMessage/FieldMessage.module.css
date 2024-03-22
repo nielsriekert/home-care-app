@@ -4,12 +4,12 @@
 	border-top: 2px solid rgba(0, 0, 0, .5);
 }
 
-.container.isError {
+.container.error {
 	color: red;
 	border-top: 2px solid red;
 }
 
-.container.isValidated {
+.container.validated {
 	color: green;
 	border-top: 2px solid green;
 }

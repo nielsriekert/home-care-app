@@ -2,7 +2,7 @@
 import React from 'react';
 import styles from './App.module.css';
 
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 
 import { IntlProvider } from 'react-intl';
 import {
@@ -30,15 +30,17 @@ import WaterReaderSettings from './pages/WaterReaderSettings';
 import About from './pages/About';
 import FourOFour from './pages/FourOFour';
 
-const INIT = gql`
+import { graphql } from './types/graphql/gql';
+
+const Init_Query = graphql(`
 	query init {
 		isLoggedIn
 		hasSolarInverters
 	}
-`;
+`);
 
 export default function App() {
-	const { data, loading, error } = useQuery(INIT);
+	const { data, loading, error } = useQuery(Init_Query);
 
 	return (
 		<IntlProvider locale={navigator.language}>

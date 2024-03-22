@@ -62,18 +62,6 @@ export const WATER_READING = gql`
 	}
 `;
 
-export const SOLAR_INVERTER = gql`
-	fragment SolarInverterFields on SolarInverter {
-		id
-		name
-		ipAddress
-		type
-		isOnline
-		currentPower
-		totalYield
-	}
-`;
-
 export const EVENT = gql`
 	fragment EventFields on Event {
 		id

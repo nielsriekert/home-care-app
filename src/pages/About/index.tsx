@@ -6,7 +6,7 @@ import { useQuery } from '@apollo/client';
 
 import { graphql } from '../../types/graphql';
 
-const About_Query = graphql(`
+const About_Query = graphql(`#graphql
 	query about {
 		about {
 			version
