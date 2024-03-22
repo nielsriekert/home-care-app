@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, MouseEventHandler } from 'react';
 import styles from './Header.module.css';
 import { useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
@@ -13,7 +13,7 @@ import ToolTip from '../../atoms/ToolTip';
 
 import { graphql } from '../../types/graphql/gql';
 
-const Me_Query = graphql(`
+export const Me_Query = graphql(`#graphql
 	query me {
 		me {
 			...UserHeaderModalFragment
@@ -22,7 +22,13 @@ const Me_Query = graphql(`
 	}
 `);
 
-export default function Header({ title, onOpen }) {
+export default function Header({
+	title,
+	onOpen,
+}: {
+	title?: string,
+	onOpen?: MouseEventHandler<HTMLButtonElement>
+}) {
 	const { data, loading } = useQuery(Me_Query);
 	const navContainer = useRef<HTMLDivElement | null>(null);
 	const modalContainer = useRef<HTMLDivElement | null>(null);

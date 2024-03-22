@@ -8,13 +8,13 @@ import UserProfileCard from '../UserProfileCard';
 import { FragmentType, useFragment } from '../../types/graphql/fragment-masking';
 import { graphql } from '../../types/graphql/gql';
 
-const UserHeaderModalFragment = graphql(`
+const UserHeaderModalFragment = graphql(`#graphql
 	fragment UserHeaderModalFragment on User {
 		...UserProfileCardFragment
 	}
 `);
 
-const Logout_Mutation = graphql(`
+const Logout_Mutation = graphql(`#graphql
 	mutation logout {
 		logout {
 			id

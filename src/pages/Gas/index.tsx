@@ -30,7 +30,6 @@ export default function Dashboard() {
 				</Widget>
 				<Widget title="Week" name="gas-usage-current-week" icon={<FireIcon />}>
 					<GasChart
-						title="Week"
 						resolution={TimeSpan.Day}
 						duration={Duration.fromDurationLike({ week: 1 })}
 						end={DateTime.now().endOf('week')}

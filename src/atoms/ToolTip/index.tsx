@@ -1,5 +1,5 @@
 import styles from './ToolTip.module.css';
-import React, { Children, cloneElement, useRef, useState, useEffect, LegacyRef } from 'react';
+import React, { Children, cloneElement, useRef, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
 import useWindowSize from '../../hooks/useWindowSize';
