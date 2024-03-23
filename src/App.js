@@ -20,6 +20,7 @@ import Dashboard from './pages/Dashboard';
 import Electricity from './pages/Electricity';
 import Gas from './pages/Gas';
 import Water from './pages/Water';
+import PeriodComparator from './pages/PeriodComparator';
 import Settings from './pages/Settings';
 import ProfileDashboard from './pages/ProfileDashboard';
 import Events from './pages/Events';
@@ -32,7 +33,7 @@ import FourOFour from './pages/FourOFour';
 
 import { graphql } from './types/graphql/gql';
 
-const Init_Query = graphql(`
+const Init_Query = graphql(`#graphql
 	query init {
 		isLoggedIn
 		hasSolarInverters
@@ -53,6 +54,7 @@ export default function App() {
 					<Route path="/electricity" element={<Electricity hasSolarInverter={data.hasSolarInverters} />} />
 					<Route path="/gas" element={<Gas />} />
 					<Route path="/water" element={<Water />} />
+					<Route path="/period-comparator" element={<PeriodComparator hasSolarInverter={data.hasSolarInverters} />} />
 					<Route path="/profile" element={<ProfileDashboard />} />
 					<Route path="/events" element={<Events />} />
 					<Route path="settings" element={<Settings />} />

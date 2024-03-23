@@ -96,8 +96,8 @@ a.appName:hover {
 	transition: color .15s;
 	line-height: 3rem;
 	text-decoration: none;
-	padding-left: var(--content-padding-horizontal);
-	padding-right: var(--content-padding-horizontal);
+	padding-left: 1rem;
+	padding-right: 1rem;
 }
 
 .container nav a:hover {
@@ -112,6 +112,13 @@ a.appName:hover {
 .container nav a > svg {
 	width: 1.125rem;
 	height: 1.125rem;
+	flex: 0 0 1.125rem;
+}
+
+.container nav a span {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 @media (min-width: 512px) and (max-width: 960px) {
