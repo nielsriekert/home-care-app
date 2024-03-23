@@ -1,0 +1,44 @@
+.table {
+	border-collapse: collapse;
+}
+
+.table tr {
+	border-bottom: 1px solid hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .3);
+}
+
+.table tr.tableReceived {
+	color: var(--color-electricity-received);
+}
+
+.table tr.tableDelivered {
+	color: var(--color-electricity-delivered);
+}
+
+.table tr.tableSolar {
+	color: var(--color-electricity-solar);
+}
+
+.table th,
+.table td {
+	padding-top: .75rem;
+	padding-bottom: .75rem;
+}
+
+.table th {
+	font-weight: 400;
+	text-align: left;
+}
+
+.table td {
+	font-weight: 700;
+}
+
+.table td:not(:first-child),
+.table th:not(:first-child) {
+	padding-right: 1rem;
+}
+
+.table td:not(:last-child),
+.table th:not(:last-child) {
+	padding-left: 1rem;
+}

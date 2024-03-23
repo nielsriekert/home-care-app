@@ -5,10 +5,12 @@ import Skeleton from '../../atoms/Skeleton';
 import ToolTip from '../../atoms/ToolTip';
 import LoadingSpinner from '../../atoms/LoadingSpinner';
 
-import { useQuery, gql, NetworkStatus } from '@apollo/client';
+import { useQuery, NetworkStatus } from '@apollo/client';
 import { FormattedNumber } from 'react-intl';
 
-const SOLAR_POWER_RECEIVED = gql`
+import { graphql } from '../../types/graphql';
+
+const SolarPowerReceived_Query = graphql(`#graphql
 	query solarPowerReceived($start: Int! $end: Int!) {
 		solarPowerExchange(start: $start end: $end) {
 			received
@@ -18,16 +20,16 @@ const SOLAR_POWER_RECEIVED = gql`
 			}
 		}
 	}
-`;
+`);
 
 export default function SolarPowerGenerated({
 	start,
 	end,
 }: {
 	start?: number,
-	end?: Number,
+	end?: number,
 }) {
-	const { error, data, networkStatus } = useQuery(SOLAR_POWER_RECEIVED, {
+	const { error, data, networkStatus } = useQuery(SolarPowerReceived_Query, {
 		pollInterval: 60000 * 5,
 		notifyOnNetworkStatusChange: true,
 		variables: {
