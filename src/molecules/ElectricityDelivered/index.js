@@ -13,7 +13,7 @@ import { ELECTRICITY_EXCHANGE_OVER_TIME } from '../../fragments';
 
 const TODAY_ELECTRICITY_DELIVERED = gql`
 	${ELECTRICITY_EXCHANGE_OVER_TIME}
-	query todayElectricityExchangeReceived($unit: ElectricEnergyOverTimeUnit) {
+	query todayElectricityExchangeDelivered($unit: ElectricEnergyOverTimeUnit) {
 		todayElectricityExchange {
 			...ElectricityExchangeOverTimeFields
 		}

@@ -26,15 +26,15 @@ export default function SolarPowerGenerated({
 	start,
 	end,
 }: {
-	start?: number,
-	end?: number,
+	start: number,
+	end: number,
 }) {
 	const { error, data, networkStatus } = useQuery(SolarPowerReceived_Query, {
 		pollInterval: 60000 * 5,
 		notifyOnNetworkStatusChange: true,
 		variables: {
-			start: start || 0,
-			end: end || 0
+			start,
+			end
 		}
 	});
 
