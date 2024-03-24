@@ -1,4 +1,3 @@
-import React from 'react';
 import './Settings.module.css';
 
 import SettingsTemplate from '../../templates/Settings';

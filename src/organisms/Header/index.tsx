@@ -55,7 +55,7 @@ export default function Header({
 
 	return (
 		<header className={styles.container}>
-			<div className={`${styles.main}${typeof onOpen === 'function' ? ` ${styles.hasNavButton}` : ''}`}>
+			<div className={styles.main}>
 				{(title || typeof onOpen === 'function') && <div className={styles.titleContainer}>
 					{typeof onOpen === 'function' && <button className={styles.navButton} onClick={onOpen}>
 						<MenuIcon />
