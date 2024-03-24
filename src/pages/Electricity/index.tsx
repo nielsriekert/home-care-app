@@ -16,7 +16,7 @@ import ElectricityReceived from '../../molecules/ElectricityReceived';
 import ElectricityDelivered from '../../molecules/ElectricityDelivered';
 import ElectricityUsed from '../../molecules/ElectricityUsed';
 import ElectricityChart from '../../molecules/ElectricityChart';
-import CurrentSolarPowerGenerated from '../../molecules/SolarPowerGenerated';
+import SolarPowerGenerated from '../../molecules/SolarPowerGenerated';
 
 import { TimeSpan, ElectricEnergyOverTimeUnit } from '../../types/graphql/graphql';
 
@@ -34,7 +34,10 @@ export default function Electricity({ hasSolarInverter = false }) {
 					<ElectricityUsed />
 				</Widget>
 				{hasSolarInverter && <Widget title="Today" name="solar-power-received" icon={<SunIcon />}>
-					<CurrentSolarPowerGenerated />
+					<SolarPowerGenerated
+						start={DateTime.now().startOf('day').toUnixInteger()}
+						end={DateTime.now().toUnixInteger()}
+					/>
 				</Widget>}
 				<Widget title="Last 8 hours" name="electricity-usage-chart" icon={<BoltIcon />}>
 					<ElectricityChart

@@ -1,6 +1,8 @@
 import './dashboard.css';
 import React, { useState } from 'react';
 
+import { DateTime } from 'luxon';
+
 import Default from '../../templates/Default';
 
 import WidgetGrid from '../../organisms/WidgetGrid';
@@ -21,7 +23,7 @@ import CurrentElectricityUsing from '../../molecules/CurrentElectricityUsing';
 import ElectricityReceived from '../../molecules/ElectricityReceived';
 import ElectricityDelivered from '../../molecules/ElectricityDelivered';
 import ElectricityUsed from '../../molecules/ElectricityUsed';
-import CurrentSolarPowerGenerated from '../../molecules/SolarPowerGenerated';
+import SolarPowerGenerated from '../../molecules/SolarPowerGenerated';
 import GasUsage from '../../molecules/GasUsage';
 import WaterUsage from '../../molecules/WaterUsage';
 
@@ -69,7 +71,10 @@ export default function Dashboard({ hasSolarInverter = false }) {
 					<ElectricityDelivered />
 				</Widget>
 				{hasSolarInverter && <Widget title="Today" name="solar-power-received" icon={<SunIcon />}>
-					<CurrentSolarPowerGenerated />
+					<SolarPowerGenerated
+						start={DateTime.now().startOf('day').toUnixInteger()}
+						end={DateTime.now().toUnixInteger()}
+					/>
 				</Widget>}
 				<Widget title="Today" name="electricity-used" icon={<PowerPlugIcon />}>
 					<ElectricityUsed />
