@@ -2,15 +2,14 @@ import styles from './PeriodComparator.module.css';
 import { DateTime } from 'luxon';
 
 import { useQuery } from '@apollo/client';
-
 import { FormattedNumber } from 'react-intl';
 
 import Default from '../../templates/Default';
 
 import Alert from '../../atoms/Alert';
+import LoadingSpinner from '../../atoms/LoadingSpinner';
 
 import { graphql } from '../../types/graphql';
-import LoadingSpinner from '../../atoms/LoadingSpinner';
 
 export const ElectricityPeriodComparator_Query = graphql(`#graphql
 	query electricityPeriodComparator(
@@ -38,6 +37,26 @@ export const ElectricityPeriodComparator_Query = graphql(`#graphql
 			}
 		}
 
+		gasExchange(start: $start end: $end) {
+			received
+			delivered
+			dataPointsCount
+			period {
+				start
+				end
+			}
+		}
+
+		waterExchange(start: $start end: $end) {
+			received
+			delivered
+			dataPointsCount
+			period {
+				start
+				end
+			}
+		}
+
 		electricityExchangePrevious: electricityExchange(start: $startPrevious end: $endPrevious) {
 			received
 			delivered
@@ -50,6 +69,26 @@ export const ElectricityPeriodComparator_Query = graphql(`#graphql
 
 		solarPowerExchangePrevious: solarPowerExchange(start: $startPrevious end: $endPrevious) @include(if: $includeSolar) {
 			received
+			period {
+				start
+				end
+			}
+		}
+
+		gasExchangePrevious: gasExchange(start: $startPrevious end: $endPrevious) {
+			received
+			delivered
+			dataPointsCount
+			period {
+				start
+				end
+			}
+		}
+
+		waterExchangePrevious: waterExchange(start: $startPrevious end: $endPrevious) {
+			received
+			delivered
+			dataPointsCount
 			period {
 				start
 				end
@@ -73,6 +112,10 @@ export default function PeriodComparator({ hasSolarInverter = false }) {
 	const previousYear = data?.electricityExchangePrevious ?? null;
 	const currentYearSolar = data?.solarPowerExchange ?? null;
 	const previousYearSolar = data?.solarPowerExchangePrevious ?? null;
+	const currentYearGas = data?.gasExchange ?? null;
+	const previousYearGas = data?.gasExchangePrevious ?? null;
+	const currentYearWater = data?.waterExchange ?? null;
+	const previousYearWater = data?.waterExchangePrevious ?? null;
 
 	return (
 		<Default title="Period comparator">
@@ -101,7 +144,7 @@ export default function PeriodComparator({ hasSolarInverter = false }) {
 				</thead>
 				<tbody>
 					<tr className={styles.tableReceived}>
-						<th>Received</th>
+						<th>Electricity received</th>
 						<td>
 							{previousYear && <>
 								<FormattedNumber value={previousYear.received} /> kWh
@@ -114,7 +157,7 @@ export default function PeriodComparator({ hasSolarInverter = false }) {
 						</td>
 					</tr>
 					<tr className={styles.tableDelivered}>
-						<th>Delivered</th>
+						<th>Electricity delivered</th>
 						<td>
 							{previousYear && <>
 								<FormattedNumber value={previousYear.delivered} /> kWh
@@ -127,7 +170,7 @@ export default function PeriodComparator({ hasSolarInverter = false }) {
 						</td>
 					</tr>
 					{hasSolarInverter && <tr className={styles.tableSolar}>
-						<th>Solar received</th>
+						<th>Solar</th>
 						<td>
 							{previousYearSolar && <>
 								<FormattedNumber value={previousYearSolar.received} /> kWh
@@ -139,6 +182,32 @@ export default function PeriodComparator({ hasSolarInverter = false }) {
 							</>}
 						</td>
 					</tr>}
+					<tr className={styles.tableGas}>
+						<th>Gas</th>
+						<td>
+							{previousYearGas && <>
+								<FormattedNumber value={previousYearGas.received} /> m³
+							</>}
+						</td>
+						<td>
+							{currentYearGas && <>
+								<FormattedNumber value={currentYearGas.received} /> m³
+							</>}
+						</td>
+					</tr>
+					<tr className={styles.tableWater}>
+						<th>Water</th>
+						<td>
+							{previousYearWater && <>
+								<FormattedNumber value={previousYearWater.received} /> l
+							</>}
+						</td>
+						<td>
+							{currentYearWater && <>
+								<FormattedNumber value={currentYearWater.received} /> l
+							</>}
+						</td>
+					</tr>
 				</tbody>
 			</table>}
 		</Default>
