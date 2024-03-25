@@ -11,8 +11,8 @@ import LoadingSpinner from '../../atoms/LoadingSpinner';
 
 import { graphql } from '../../types/graphql';
 
-export const ElectricityPeriodComparator_Query = graphql(`#graphql
-	query electricityPeriodComparator(
+export const PeriodComparator_Query = graphql(`#graphql
+	query periodComparator(
 		$start: Int!
 		$end: Int!
 		$startPrevious: Int!
@@ -20,9 +20,9 @@ export const ElectricityPeriodComparator_Query = graphql(`#graphql
 		$includeSolar: Boolean!
 	) {
 		electricityExchange(start: $start end: $end) {
+			id
 			received
 			delivered
-			dataPointsCount
 			period {
 				start
 				end
@@ -30,6 +30,7 @@ export const ElectricityPeriodComparator_Query = graphql(`#graphql
 		}
 
 		solarPowerExchange(start: $start end: $end) @include(if: $includeSolar) {
+			id
 			received
 			period {
 				start
@@ -38,9 +39,8 @@ export const ElectricityPeriodComparator_Query = graphql(`#graphql
 		}
 
 		gasExchange(start: $start end: $end) {
+			id
 			received
-			delivered
-			dataPointsCount
 			period {
 				start
 				end
@@ -48,9 +48,9 @@ export const ElectricityPeriodComparator_Query = graphql(`#graphql
 		}
 
 		waterExchange(start: $start end: $end) {
+			id
 			received
 			delivered
-			dataPointsCount
 			period {
 				start
 				end
@@ -58,9 +58,9 @@ export const ElectricityPeriodComparator_Query = graphql(`#graphql
 		}
 
 		electricityExchangePrevious: electricityExchange(start: $startPrevious end: $endPrevious) {
+			id
 			received
 			delivered
-			dataPointsCount
 			period {
 				start
 				end
@@ -68,6 +68,7 @@ export const ElectricityPeriodComparator_Query = graphql(`#graphql
 		}
 
 		solarPowerExchangePrevious: solarPowerExchange(start: $startPrevious end: $endPrevious) @include(if: $includeSolar) {
+			id
 			received
 			period {
 				start
@@ -76,9 +77,8 @@ export const ElectricityPeriodComparator_Query = graphql(`#graphql
 		}
 
 		gasExchangePrevious: gasExchange(start: $startPrevious end: $endPrevious) {
+			id
 			received
-			delivered
-			dataPointsCount
 			period {
 				start
 				end
@@ -86,9 +86,8 @@ export const ElectricityPeriodComparator_Query = graphql(`#graphql
 		}
 
 		waterExchangePrevious: waterExchange(start: $startPrevious end: $endPrevious) {
+			id
 			received
-			delivered
-			dataPointsCount
 			period {
 				start
 				end
@@ -98,7 +97,7 @@ export const ElectricityPeriodComparator_Query = graphql(`#graphql
 `);
 
 export default function PeriodComparator({ hasSolarInverter = false }) {
-	const { data, loading, error } = useQuery(ElectricityPeriodComparator_Query, {
+	const { data, loading, error } = useQuery(PeriodComparator_Query, {
 		variables: {
 			start: DateTime.now().startOf('year').toUnixInteger(),
 			end: DateTime.now().toUnixInteger(),
