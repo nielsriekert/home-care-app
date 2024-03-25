@@ -18,6 +18,14 @@
 	color: var(--color-electricity-solar);
 }
 
+.table tr.tableGas {
+	color: var(--color-gas);
+}
+
+.table tr.tableWater {
+	color: var(--color-water);
+}
+
 .table th,
 .table td {
 	padding-top: .75rem;

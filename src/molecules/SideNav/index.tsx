@@ -6,6 +6,7 @@ import DashboardIcon from '../../atoms/DashboardIcon';
 import BoltIcon from '../../atoms/icons/BoltIcon';
 import FireIcon from '../../atoms/icons/FireIcon';
 import WaterIcon from '../../atoms/icons/WaterIcon';
+import ArrowsIcon from '../../atoms/icons/ArrowsIcon';
 
 const activeClass = ({ isActive }) => isActive ? styles.isActive : undefined;
 
@@ -20,7 +21,7 @@ const SideNav = ({ isOpen = false }, ref: LegacyRef<HTMLDivElement>) => {
 					<NavLink to="/electricity" title="Electricity" className={activeClass}><BoltIcon /><span>Electricity</span></NavLink>
 					<NavLink to="/gas" title="Gas" className={activeClass}><FireIcon /><span>Gas</span></NavLink>
 					<NavLink to="/water" title="Water" className={activeClass}><WaterIcon /><span>Water</span></NavLink>
-					<NavLink to="/period-comparator" title="Period comparator" className={activeClass}><WaterIcon /><span>Period comparator</span></NavLink>
+					<NavLink to="/period-comparator" title="Period comparator" className={activeClass}><ArrowsIcon /><span>Period comparator</span></NavLink>
 				</nav>
 			</div>
 		</div>
