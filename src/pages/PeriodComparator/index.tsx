@@ -1,7 +1,9 @@
 import styles from './PeriodComparator.module.css';
+import { useEffect } from 'react';
+
 import { DateTime } from 'luxon';
 
-import { useQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { FormattedNumber } from 'react-intl';
 
 import Default from '../../templates/Default';
@@ -97,15 +99,19 @@ export const PeriodComparator_Query = graphql(`#graphql
 `);
 
 export default function PeriodComparator({ hasSolarInverter = false }) {
-	const { data, loading, error } = useQuery(PeriodComparator_Query, {
-		variables: {
-			start: DateTime.now().startOf('year').toUnixInteger(),
-			end: DateTime.now().toUnixInteger(),
-			startPrevious: DateTime.now().minus({ year: 1 }).startOf('year').toUnixInteger(),
-			endPrevious: DateTime.now().minus({ year: 1 }).toUnixInteger(),
-			includeSolar: hasSolarInverter,
-		}
-	});
+	const [fetch, { data, loading, error }] = useLazyQuery(PeriodComparator_Query);
+
+	useEffect(() => {
+		fetch({
+			variables: {
+				start: DateTime.now().startOf('year').toUnixInteger(),
+				end: DateTime.now().toUnixInteger(),
+				startPrevious: DateTime.now().minus({ year: 1 }).startOf('year').toUnixInteger(),
+				endPrevious: DateTime.now().minus({ year: 1 }).toUnixInteger(),
+				includeSolar: hasSolarInverter,
+			}
+		});
+	}, [fetch, hasSolarInverter]);
 
 	const currentYear = data?.electricityExchange ?? null;
 	const previousYear = data?.electricityExchangePrevious ?? null;
@@ -126,17 +132,17 @@ export default function PeriodComparator({ hasSolarInverter = false }) {
 					<tr>
 						<th></th>
 						<th>
-							{previousYearSolar && <>
-								{DateTime.fromSeconds(previousYearSolar.period.start).year}
+							{previousYear && <>
+								{DateTime.fromSeconds(previousYear.period.start).year}
 								<br />
-								{DateTime.fromSeconds(previousYearSolar.period.start).toLocaleString({ day: 'numeric', month: 'short' })} to {DateTime.fromSeconds(previousYearSolar.period.end).toLocaleString({ day: 'numeric', month: 'short' })}
+								{DateTime.fromSeconds(previousYear.period.start).toLocaleString({ day: 'numeric', month: 'short' })} to {DateTime.fromSeconds(previousYear.period.end).toLocaleString({ day: 'numeric', month: 'short' })}
 							</>}
 						</th>
 						<th>
-							{currentYearSolar && <>
-								{DateTime.fromSeconds(currentYearSolar.period.start).year}
+							{currentYear && <>
+								{DateTime.fromSeconds(currentYear.period.start).year}
 								<br />
-								{DateTime.fromSeconds(currentYearSolar.period.start).toLocaleString({ day: 'numeric', month: 'short' })} to {DateTime.fromSeconds(currentYearSolar.period.end).toLocaleString({ day: 'numeric', month: 'short' })}
+								{DateTime.fromSeconds(currentYear.period.start).toLocaleString({ day: 'numeric', month: 'short' })} to {DateTime.fromSeconds(currentYear.period.end).toLocaleString({ day: 'numeric', month: 'short' })}
 							</>}
 						</th>
 					</tr>
