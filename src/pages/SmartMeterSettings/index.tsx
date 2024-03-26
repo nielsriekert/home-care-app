@@ -11,7 +11,7 @@ import { DateTime } from 'luxon';
 
 import { useQuery, useMutation } from '@apollo/client';
 
-import { graphql } from '../../types/graphql/gql';
+import { graphql } from '../../types/graphql';
 import { SmartMeterStatisticsAndIsRemoveOldDataQuery, SetRemoveOldDataMutation } from '../../types/graphql/graphql';
 
 const SmartMeter_Query = graphql(`#graphql

@@ -1,5 +1,5 @@
 import './dashboard.css';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { DateTime } from 'luxon';
 
@@ -28,24 +28,24 @@ import GasUsage from '../../molecules/GasUsage';
 import WaterUsage from '../../molecules/WaterUsage';
 
 export default function Dashboard({ hasSolarInverter = false }) {
-	const [updatedCurrentElectricityReceived, setUpdatedCurrentElectricityReceived] = useState(null);
-	const [updatedCurrentElectricityDelivered, setUpdatedCurrentElectricityDelivered] = useState(null);
-	const [updatedCurrentSolarPowerGenerated, setUpdatedCurrentSolarPowerGenerated] = useState(null);
-	const [updatedCurrentElectricityUsing, setUpdatedCurrentElectricityUsing] = useState(null);
+	const [updatedCurrentElectricityReceived, setUpdatedCurrentElectricityReceived] = useState<number | null>(null);
+	const [updatedCurrentElectricityDelivered, setUpdatedCurrentElectricityDelivered] = useState<number | null>(null);
+	const [updatedCurrentSolarPowerGenerated, setUpdatedCurrentSolarPowerGenerated] = useState<number | null>(null);
+	const [updatedCurrentElectricityUsing, setUpdatedCurrentElectricityUsing] = useState<number | null>(null);
 	// TODO: weird solution, DateTime in props causes rerenders
-	const updatedAtCurrentElectricityReceived = (timestamp) =>{
+	const updatedAtCurrentElectricityReceived = (timestamp: number) =>{
 		setUpdatedCurrentElectricityReceived(timestamp);
 	};
 
-	const updatedAtCurrentElectricityDelivered = (timestamp) =>{
+	const updatedAtCurrentElectricityDelivered = (timestamp: number) =>{
 		setUpdatedCurrentElectricityDelivered(timestamp);
 	};
 
-	const updatedAtCurrentSolarPowerGenerated = (timestamp) =>{
+	const updatedAtCurrentSolarPowerGenerated = (timestamp: number) =>{
 		setUpdatedCurrentSolarPowerGenerated(timestamp);
 	};
 
-	const updatedAtCurrentElectricityUsing = (timestamp) =>{
+	const updatedAtCurrentElectricityUsing = (timestamp: number) =>{
 		setUpdatedCurrentElectricityUsing(timestamp);
 	};
 

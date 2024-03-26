@@ -6,7 +6,7 @@ import UserHeaderMenu from '../UserHeaderMenu';
 import UserProfileCard from '../UserProfileCard';
 
 import { FragmentType, useFragment } from '../../types/graphql/fragment-masking';
-import { graphql } from '../../types/graphql/gql';
+import { graphql } from '../../types/graphql';
 
 const UserHeaderModalFragment = graphql(`#graphql
 	fragment UserHeaderModalFragment on User {

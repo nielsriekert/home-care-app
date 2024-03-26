@@ -1,8 +1,8 @@
 import styles from './EventCard.module.css';
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 
 import { FragmentType, useFragment } from '../../types/graphql/fragment-masking';
-import { graphql } from '../../types/graphql/gql';
+import { graphql } from '../../types/graphql';
 
 const EventCardFragment = graphql(`#graphql
 	fragment EventCardFragment on Event {

@@ -10,7 +10,7 @@ import smaSunnyBoyImage from './sma-sunny-boy.png';
 import omnik4000Image from './omnik-4000.png';
 
 import { FragmentType, useFragment } from '../../types/graphql/fragment-masking';
-import { graphql } from '../../types/graphql/gql';
+import { graphql } from '../../types/graphql';
 
 const SolarInverterCardFragment = graphql(`#graphql
 	fragment SolarInverterCardFragment on SolarInverter {

@@ -4,7 +4,7 @@ import styles from './Paging.module.css';
 import { Link } from 'react-router-dom';
 
 import { FragmentType, useFragment } from '../../types/graphql/fragment-masking';
-import { graphql } from '../../types/graphql/gql';
+import { graphql } from '../../types/graphql';
 
 const PagingFragment = graphql(`#graphql
 	fragment PagingFragment on ConnectionRelay {

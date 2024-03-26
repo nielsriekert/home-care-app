@@ -61,12 +61,3 @@ export const WATER_READING = gql`
 		isVerified
 	}
 `;
-
-export const EVENT = gql`
-	fragment EventFields on Event {
-		id
-		date
-		type
-		message
-	}
-`;

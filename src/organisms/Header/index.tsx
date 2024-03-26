@@ -11,7 +11,7 @@ import CogwheelIcon from '../../atoms/icons/CogwheelIcon';
 
 import ToolTip from '../../atoms/ToolTip';
 
-import { graphql } from '../../types/graphql/gql';
+import { graphql } from '../../types/graphql';
 
 export const Me_Query = graphql(`#graphql
 	query me {
