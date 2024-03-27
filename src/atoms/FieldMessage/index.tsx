@@ -1,5 +1,5 @@
 import styles from './FieldMessage.module.css';
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 export type StyleType = 'error' | 'validated';
 
