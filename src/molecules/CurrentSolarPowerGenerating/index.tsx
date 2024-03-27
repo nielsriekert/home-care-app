@@ -1,24 +1,30 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import styles from './CurrentSolarPowerGenerating.module.css';
 
 import Skeleton from '../../atoms/Skeleton';
 import Alert from '../../atoms/Alert';
 import ToolTip from '../../atoms/ToolTip';
 
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { FormattedNumber } from 'react-intl';
 
-const CURRENT_SOLAR_POWER_GENERATING = gql`
+import { graphql } from '../../types/graphql';
+
+const CurrentSolarPowerGenerating_Query = graphql(`#graphql
 	query solarPowerGenerated {
 		currentSolarPowerGenerating {
 			received(unit: WATT),
 			readingAt
 		}
 	}
-`;
+`);
 
-export default function CurrentSolarPowerGenerating({ updatedAt }) {
-	const { loading, error, data } = useQuery(CURRENT_SOLAR_POWER_GENERATING, {
+export default function CurrentSolarPowerGenerating({
+	updatedAt,
+}: {
+	updatedAt: (value: number) => void
+}) {
+	const { data, loading, error } = useQuery(CurrentSolarPowerGenerating_Query, {
 		pollInterval: 10000
 	});
 
@@ -33,7 +39,9 @@ export default function CurrentSolarPowerGenerating({ updatedAt }) {
 		<div className={styles.container}>
 			{!loading ?
 				data?.currentSolarPowerGenerating?.received && data.currentSolarPowerGenerating.received !== null ?
-					<ToolTip title="Actual power from the sun"><span><FormattedNumber value={data.currentSolarPowerGenerating.received} /> W </span></ToolTip> :
+					<ToolTip title="Actual power from the sun">
+						<span><FormattedNumber value={data.currentSolarPowerGenerating.received} /> W </span>
+					</ToolTip> :
 					<ToolTip title="No solar power generating"><span>-</span></ToolTip> :
 				<Skeleton width="3em" /> }
 		</div>

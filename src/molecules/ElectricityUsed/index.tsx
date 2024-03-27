@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './ElectricityUsed.module.css';
 
 import Skeleton from '../../atoms/Skeleton';
@@ -6,22 +5,25 @@ import Alert from '../../atoms/Alert';
 import ToolTip from '../../atoms/ToolTip';
 import LoadingSpinner from '../../atoms/LoadingSpinner';
 
-import { useQuery, gql, NetworkStatus } from '@apollo/client';
+import { useQuery, NetworkStatus } from '@apollo/client';
 import { FormattedNumber } from 'react-intl';
 
-import { ELECTRICITY_EXCHANGE_OVER_TIME } from '../../fragments';
+import { graphql } from '../../types/graphql';
 
-const TODAY_ELECTRICITY_RECEIVED_USED = gql`
-	${ELECTRICITY_EXCHANGE_OVER_TIME}
-	query todayElectricityExchange($unit: ElectricEnergyOverTimeUnit) {
+const TodayElectricityReceivedUsed_Query = graphql(`#graphql
+	query todayElectricityExchange {
 		todayElectricityExchange {
-			...ElectricityExchangeOverTimeFields
+			used
+			period {
+				start
+				end
+			}
 		}
 	}
-`;
+`);
 
 export default function ElectricityUsed() {
-	const { error, data, networkStatus } = useQuery(TODAY_ELECTRICITY_RECEIVED_USED, {
+	const { data, error , networkStatus } = useQuery(TodayElectricityReceivedUsed_Query, {
 		pollInterval: 60000 * 5,
 		notifyOnNetworkStatusChange: true,
 	});
@@ -30,7 +32,7 @@ export default function ElectricityUsed() {
 	return (
 		<div className={styles.container}>
 			{networkStatus !== NetworkStatus.loading ?
-				data?.todayElectricityExchange?.used !== null ?
+				typeof data?.todayElectricityExchange?.used === 'number' ?
 					<ToolTip title="Electricity used at home"><span><FormattedNumber value={data.todayElectricityExchange.used} /> kWh</span></ToolTip> :
 					<ToolTip title="Cannot determinate electricity used at home"><span>-</span></ToolTip> :
 				<Skeleton width="3em" /> }

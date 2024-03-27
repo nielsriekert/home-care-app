@@ -1,4 +1,4 @@
-FROM node:14-alpine
+FROM node:18-alpine
 
 ENV REACT_APP_API_ENDPOINT=http://localhost:4000
 

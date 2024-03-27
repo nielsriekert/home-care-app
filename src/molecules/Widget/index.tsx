@@ -14,7 +14,7 @@ export default function Widget({
 	title?: string,
 	name?: string,
 	icon?: ReactNode,
-	updatedAt?: number,
+	updatedAt?: number | null,
 }) {
 	return (
 		<div className={styles.container + (name ? ' widget-' + name : '')}>

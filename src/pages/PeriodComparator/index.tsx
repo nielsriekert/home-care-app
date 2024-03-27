@@ -1,12 +1,14 @@
 import styles from './PeriodComparator.module.css';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-import { DateTime } from 'luxon';
+import { DateTime, DateTimeUnit } from 'luxon';
 
 import { useLazyQuery } from '@apollo/client';
 import { FormattedNumber } from 'react-intl';
 
 import Default from '../../templates/Default';
+
+import SelectField from '../../molecules/SelectField';
 
 import Alert from '../../atoms/Alert';
 import LoadingSpinner from '../../atoms/LoadingSpinner';
@@ -99,7 +101,8 @@ export const PeriodComparator_Query = graphql(`#graphql
 `);
 
 export default function PeriodComparator({ hasSolarInverter = false }) {
-	const [fetch, { data, loading, error }] = useLazyQuery(PeriodComparator_Query);
+	const [fetch, { data, loading, error, refetch }] = useLazyQuery(PeriodComparator_Query);
+	const [period, setPeriod] = useState<DateTimeUnit>('year');
 
 	useEffect(() => {
 		fetch({
@@ -113,6 +116,15 @@ export default function PeriodComparator({ hasSolarInverter = false }) {
 		});
 	}, [fetch, hasSolarInverter]);
 
+	useEffect(() => {
+		refetch({
+			start: DateTime.now().startOf(period).toUnixInteger(),
+			end: DateTime.now().toUnixInteger(),
+			startPrevious: DateTime.now().minus({ year: 1 }).startOf(period).toUnixInteger(),
+			endPrevious: DateTime.now().minus({ year: 1 }).toUnixInteger(),
+		});
+	}, [period, refetch]);
+
 	const currentYear = data?.electricityExchange ?? null;
 	const previousYear = data?.electricityExchangePrevious ?? null;
 	const currentYearSolar = data?.solarPowerExchange ?? null;
@@ -124,6 +136,27 @@ export default function PeriodComparator({ hasSolarInverter = false }) {
 
 	return (
 		<Default title="Period comparator">
+			<SelectField
+				label="Period to compare"
+				name="period"
+				value={period}
+				choices={[
+					{
+						label: 'Year',
+						value: 'year'
+					},
+					{
+						label: 'Quarter',
+						value: 'quarter'
+					},
+					{
+						label: 'Month',
+						value: 'month'
+					}
+				]}
+				onChange={(name, value) => setPeriod(value as DateTimeUnit)}
+				description="Compare the selected period for the current year with the previous year starting from today."
+			/>
 			{error && <Alert severity="error">{error.message}</Alert>}
 			{!loading && !data && <Alert>No data found</Alert>}
 			{loading && <LoadingSpinner />}

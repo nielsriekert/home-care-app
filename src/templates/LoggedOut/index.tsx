@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './LoggedOut.module.css';
 
 export default function LoggedOut({ children }) {

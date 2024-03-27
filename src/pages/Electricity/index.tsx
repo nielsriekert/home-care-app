@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+
 import { DateTime, Duration } from 'luxon';
 
 import Default from '../../templates/Default';
@@ -21,6 +23,15 @@ import SolarPowerGenerated from '../../molecules/SolarPowerGenerated';
 import { TimeSpan, ElectricEnergyOverTimeUnit } from '../../types/graphql/graphql';
 
 export default function Electricity({ hasSolarInverter = false }) {
+	const [today, setToday] = useState<{ start: number, end: number } | null>();
+
+	useEffect(() => {
+		setToday({
+			start: DateTime.now().startOf('day').toUnixInteger(),
+			end: DateTime.now().endOf('day').toUnixInteger(),
+		});
+	}, []);
+
 	return (
 		<Default title="Electricity">
 			<WidgetGrid>
@@ -34,10 +45,10 @@ export default function Electricity({ hasSolarInverter = false }) {
 					<ElectricityUsed />
 				</Widget>
 				{hasSolarInverter && <Widget title="Today" name="solar-power-received" icon={<SunIcon />}>
-					<SolarPowerGenerated
-						start={DateTime.now().startOf('day').toUnixInteger()}
-						end={DateTime.now().toUnixInteger()}
-					/>
+					{today && <SolarPowerGenerated
+						start={today.start}
+						end={today.end}
+					/>}
 				</Widget>}
 				<Widget title="Last 8 hours" name="electricity-usage-chart" icon={<BoltIcon />}>
 					<ElectricityChart

@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.46.0] - 2024-03-27
+### Added
+- Period compare selector (year, quarter and month).
+
+### Fixed
+- Docker build (updated node from version 14 to 18).
+- Solar today widget doesn't refetching every second anymore.
+
 ## [1.45.2] - 2024-03-26
 ### Fixed
 - `/period-comparator` data now always loads.

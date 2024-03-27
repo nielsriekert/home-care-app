@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import styles from './EventList.module.css';
 
 import { useQuery, useMutation, NetworkStatus } from '@apollo/client';
@@ -12,7 +12,7 @@ import Paging from '../../molecules/Paging';
 
 import Skeleton from '../../atoms/Skeleton';
 
-import { graphql } from '../../types/graphql/gql';
+import { graphql } from '../../types/graphql';
 
 const Events_Query = graphql(`#graphql
 	query events (
@@ -35,7 +35,7 @@ const Events_Query = graphql(`#graphql
 const ArchiveEvent_Mutation = graphql(`#graphql
 	mutation archiveEvent($id: ID!) {
 		archiveEvent(id: $id) {
-			...EventFields
+			...EventCardFragment
 		}
 	}
 `);
