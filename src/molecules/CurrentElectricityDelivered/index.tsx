@@ -13,8 +13,8 @@ import { graphql } from '../../types/graphql';
 const CurrentElectricityDelivered_Query = graphql(`#graphql
 	query currentElectricityDelivered {
 		currentElectricityUsage {
-			delivered
 			readingAt
+			delivered(unit: WATT)
 		}
 	}
 `);

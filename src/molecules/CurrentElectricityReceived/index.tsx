@@ -14,7 +14,7 @@ const CurrentElectricityReceived_Query = graphql(`#graphql
 	query currentElectricityReceived {
 		currentElectricityUsage {
 			readingAt
-			received
+			received(unit: WATT)
 		}
 	}
 `);
