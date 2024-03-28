@@ -11,7 +11,7 @@ import { FormattedNumber } from 'react-intl';
 import { graphql } from '../../types/graphql';
 
 const TodayElectricityDelivered_Query = graphql(`#graphql
-	query todayElectricityExchangeDelivered($unit: ElectricEnergyOverTimeUnit) {
+	query todayElectricityExchangeDelivered {
 		todayElectricityExchange {
 			delivered
 		}
