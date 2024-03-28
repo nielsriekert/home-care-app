@@ -1,11 +1,17 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, ReactNode } from 'react';
 import styles from './Default.module.css';
 
 import Header from '../../organisms/Header';
 import SideNav from '../../molecules/SideNav';
 
-export default function Default({ title, children }) {
-	const sideNav = useRef();
+export default function Default({
+	title,
+	children,
+}: {
+	title?: string,
+	children: ReactNode,
+}) {
+	const sideNav = useRef<HTMLDivElement | null>(null);
 	const [isOpen, setIsOpen] = useState(false);
 
 	const setOpen = (e) => {
@@ -29,7 +35,7 @@ export default function Default({ title, children }) {
 		<div className={styles.default}>
 			<SideNav ref={sideNav} isOpen={isOpen} />
 			<div className={styles.pageWrapper}>
-				<Header title={title} isOpen={isOpen} onOpen={setOpen} />
+				<Header title={title} onOpen={setOpen} />
 				<main className={styles.pageContainer}>
 					{children}
 				</main>

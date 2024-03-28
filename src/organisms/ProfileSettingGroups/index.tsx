@@ -2,24 +2,23 @@ import styles from './ProfileSettingGroups.module.css';
 
 import { useQuery, gql } from '@apollo/client';
 
-import { USER } from '../../fragments';
-
 import Skeleton from '../../atoms/Skeleton';
 import Alert from '../../atoms/Alert';
 
 import UpdateNameSettingGroup from '../../molecules/UpdateNameSettingGroup';
 
-const ME_PROFILE = gql`
-	${USER}
+import { graphql } from '../../types/graphql';
+
+const MeProfile_Query = graphql(`#graphql
 	query meProfile {
 		me {
-			...UserFields
+			name
 		}
 	}
-`;
+`);
 
 export default function ProfileSettingGroups() {
-	const { data, loading, error } = useQuery(ME_PROFILE);
+	const { data, loading, error } = useQuery(MeProfile_Query);
 
 	if (error) {
 		return <Alert severity="error" >{error.message}</Alert>;
@@ -28,7 +27,7 @@ export default function ProfileSettingGroups() {
 	return (
 		<div className={styles.container}>
 			{loading && <Skeleton width="100%" height="60px" />}
-			{!loading && <UpdateNameSettingGroup name={data.me.name} />}
+			{data?.me && <UpdateNameSettingGroup name={data.me.name} />}
 		</div>
 	);
 }

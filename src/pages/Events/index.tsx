@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Default from '../../templates/Default';
 
 import ProfileNavigation from '../../molecules/ProfileNavigation';
