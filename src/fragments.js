@@ -31,18 +31,6 @@ export const ELECTRICITY_EXCHANGE = gql`
 	}
 `;
 
-export const ELECTRICITY_EXCHANGE_OVER_TIME = gql`
-	fragment ElectricityExchangeOverTimeFields on ElectricityExchangeOverTime {
-		received(unit: $unit)
-		delivered(unit: $unit)
-		used(unit: $unit)
-		period {
-			start
-			end
-		}
-	}
-`;
-
 export const WATER_EXCHANGE = gql`
 	fragment WaterExchangeFields on WaterExchange {
 		received
