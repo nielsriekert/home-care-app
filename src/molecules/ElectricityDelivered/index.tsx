@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './ElectricityDelivered.module.css';
 
 import Skeleton from '../../atoms/Skeleton';
@@ -6,22 +5,21 @@ import Alert from '../../atoms/Alert';
 import ToolTip from '../../atoms/ToolTip';
 import LoadingSpinner from '../../atoms/LoadingSpinner';
 
-import { useQuery, gql, NetworkStatus } from '@apollo/client';
+import { useQuery, NetworkStatus } from '@apollo/client';
 import { FormattedNumber } from 'react-intl';
 
-import { ELECTRICITY_EXCHANGE_OVER_TIME } from '../../fragments';
+import { graphql } from '../../types/graphql';
 
-const TODAY_ELECTRICITY_DELIVERED = gql`
-	${ELECTRICITY_EXCHANGE_OVER_TIME}
+const TodayElectricityDelivered_Query = graphql(`#graphql
 	query todayElectricityExchangeDelivered($unit: ElectricEnergyOverTimeUnit) {
 		todayElectricityExchange {
-			...ElectricityExchangeOverTimeFields
+			delivered
 		}
 	}
-`;
+`);
 
 export default function ElectricityDelivered() {
-	const { error, data, networkStatus } = useQuery(TODAY_ELECTRICITY_DELIVERED, {
+	const { data, error, networkStatus } = useQuery(TodayElectricityDelivered_Query, {
 		pollInterval: 60000 * 5,
 		notifyOnNetworkStatusChange: true,
 	});

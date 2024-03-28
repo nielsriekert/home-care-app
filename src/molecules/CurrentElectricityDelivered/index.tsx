@@ -1,26 +1,26 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import styles from './CurrentElectricityDelivered.module.css';
 
 import Skeleton from '../../atoms/Skeleton';
 import Alert from '../../atoms/Alert';
 import ToolTip from '../../atoms/ToolTip';
 
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { FormattedNumber } from 'react-intl';
 
-import { ELECTRICITY_USAGE } from '../../fragments';
+import { graphql } from '../../types/graphql';
 
-const CURRENT_ELECTRIC_DELIVERED = gql`
-	${ELECTRICITY_USAGE}
+const CurrentElectricityDelivered_Query = graphql(`#graphql
 	query currentElectricityDelivered {
 		currentElectricityUsage {
-			...ElectricityUsageFields
+			delivered
+			readingAt
 		}
 	}
-`;
+`);
 
 export default function CurrentElectricityDelivered({ updatedAt }) {
-	const { loading, error, data } = useQuery(CURRENT_ELECTRIC_DELIVERED, {
+	const { loading, error, data } = useQuery(CurrentElectricityDelivered_Query, {
 		pollInterval: 10000
 	});
 
