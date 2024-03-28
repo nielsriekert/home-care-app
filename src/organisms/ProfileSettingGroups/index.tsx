@@ -1,6 +1,6 @@
 import styles from './ProfileSettingGroups.module.css';
 
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 
 import Skeleton from '../../atoms/Skeleton';
 import Alert from '../../atoms/Alert';
