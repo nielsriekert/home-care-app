@@ -10,9 +10,9 @@ import { FormattedNumber } from 'react-intl';
 
 import { graphql } from '../../types/graphql';
 
-const TodayElectricityReceivedUsed_Query = graphql(`#graphql
-	query todayElectricityExchange {
-		todayElectricityExchange {
+const ElectricityUsed_Query = graphql(`#graphql
+	query electricityUsed($start: Int! $end: Int!) {
+		electricityExchange(start: $start end: $end) {
 			used
 			period {
 				start
@@ -22,18 +22,28 @@ const TodayElectricityReceivedUsed_Query = graphql(`#graphql
 	}
 `);
 
-export default function ElectricityUsed() {
-	const { data, error , networkStatus } = useQuery(TodayElectricityReceivedUsed_Query, {
+export default function ElectricityUsed({
+	start,
+	end,
+}: {
+	start: number,
+	end: number,
+}) {
+	const { data, error , networkStatus } = useQuery(ElectricityUsed_Query, {
 		pollInterval: 60000 * 5,
 		notifyOnNetworkStatusChange: true,
+		variables: {
+			start,
+			end
+		}
 	});
 
 	if (error) return <Alert severity="error">{error.message}</Alert>;
 	return (
 		<div className={styles.container}>
 			{networkStatus !== NetworkStatus.loading ?
-				typeof data?.todayElectricityExchange?.used === 'number' ?
-					<ToolTip title="Electricity used at home"><span><FormattedNumber value={data.todayElectricityExchange.used} /> kWh</span></ToolTip> :
+				typeof data?.electricityExchange?.used === 'number' ?
+					<ToolTip title="Electricity used at home"><span><FormattedNumber value={data.electricityExchange.used} /> kWh</span></ToolTip> :
 					<ToolTip title="Cannot determinate electricity used at home"><span>-</span></ToolTip> :
 				<Skeleton width="3em" /> }
 			<LoadingSpinner isHidden={networkStatus !== NetworkStatus.poll} diameter="16px" borderWidth="3px" />

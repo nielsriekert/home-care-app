@@ -14,6 +14,10 @@
 	color: var(--color-electricity-delivered);
 }
 
+.table tr.tableUsed {
+	color: var(--color-electricity-used);
+}
+
 .table tr.tableSolar {
 	color: var(--color-electricity-solar);
 }

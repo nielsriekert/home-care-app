@@ -42,7 +42,10 @@ export default function Electricity({ hasSolarInverter = false }) {
 					<ElectricityDelivered />
 				</Widget>
 				<Widget title="Today" name="electricity-used" icon={<PowerPlugIcon />}>
-					<ElectricityUsed />
+					{today && <ElectricityUsed
+						start={today.start}
+						end={today.end}
+					/>}
 				</Widget>
 				{hasSolarInverter && <Widget title="Today" name="solar-power-received" icon={<SunIcon />}>
 					{today && <SolarPowerGenerated
