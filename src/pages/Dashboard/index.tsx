@@ -86,7 +86,10 @@ export default function Dashboard({ hasSolarInverter = false }) {
 					/>}
 				</Widget>}
 				<Widget title="Today" name="electricity-used" icon={<PowerPlugIcon />}>
-					<ElectricityUsed />
+					{today && <ElectricityUsed
+						start={today.start}
+						end={today.end}
+					/>}
 				</Widget>
 				<Widget title="Today" name="gas-usage" icon={<FireIcon />}>
 					<GasUsage />

@@ -27,6 +27,7 @@ export const PeriodComparator_Query = graphql(`#graphql
 			id
 			received
 			delivered
+			used
 			period {
 				start
 				end
@@ -65,6 +66,7 @@ export const PeriodComparator_Query = graphql(`#graphql
 			id
 			received
 			delivered
+			used
 			period {
 				start
 				end
@@ -101,29 +103,20 @@ export const PeriodComparator_Query = graphql(`#graphql
 `);
 
 export default function PeriodComparator({ hasSolarInverter = false }) {
-	const [fetch, { data, loading, error, refetch }] = useLazyQuery(PeriodComparator_Query);
+	const [fetch, { data, loading, error }] = useLazyQuery(PeriodComparator_Query);
 	const [period, setPeriod] = useState<DateTimeUnit>('year');
 
 	useEffect(() => {
 		fetch({
 			variables: {
-				start: DateTime.now().startOf('year').toUnixInteger(),
-				end: DateTime.now().toUnixInteger(),
-				startPrevious: DateTime.now().minus({ year: 1 }).startOf('year').toUnixInteger(),
-				endPrevious: DateTime.now().minus({ year: 1 }).toUnixInteger(),
+				start: DateTime.now().startOf(period).toUnixInteger(),
+				end: DateTime.now().endOf('day').toUnixInteger(),
+				startPrevious: DateTime.now().minus({ year: 1 }).startOf(period).toUnixInteger(),
+				endPrevious: DateTime.now().minus({ year: 1 }).endOf('day').toUnixInteger(),
 				includeSolar: hasSolarInverter,
 			}
 		});
-	}, [fetch, hasSolarInverter]);
-
-	useEffect(() => {
-		refetch({
-			start: DateTime.now().startOf(period).toUnixInteger(),
-			end: DateTime.now().toUnixInteger(),
-			startPrevious: DateTime.now().minus({ year: 1 }).startOf(period).toUnixInteger(),
-			endPrevious: DateTime.now().minus({ year: 1 }).toUnixInteger(),
-		});
-	}, [period, refetch]);
+	}, [fetch, period, hasSolarInverter]);
 
 	const currentYear = data?.electricityExchange ?? null;
 	const previousYear = data?.electricityExchangePrevious ?? null;
@@ -204,6 +197,19 @@ export default function PeriodComparator({ hasSolarInverter = false }) {
 						<td>
 							{currentYear && <>
 								<FormattedNumber value={currentYear.delivered} /> kWh
+							</>}
+						</td>
+					</tr>
+					<tr className={styles.tableUsed}>
+						<th>Electricity used</th>
+						<td>
+							{previousYear && <>
+								<FormattedNumber value={previousYear.used} /> kWh
+							</>}
+						</td>
+						<td>
+							{currentYear && <>
+								<FormattedNumber value={currentYear.used} /> kWh
 							</>}
 						</td>
 					</tr>

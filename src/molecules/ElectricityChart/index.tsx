@@ -27,6 +27,7 @@ const ElectricExchangesChart_Query = graphql(`#graphql
 		electricityExchanges(resolution: $resolution, timePeriod: $timePeriod) {
 			received(unit: $unit)
 			delivered(unit: $unit)
+			used(unit: $unit)
 			dataPointsCount
 			period {
 				start
@@ -37,6 +38,7 @@ const ElectricExchangesChart_Query = graphql(`#graphql
 		electricityExchangesPrevious: electricityExchanges(resolution: $resolution, timePeriod: $timePeriodPrevious) @include(if: $includePrevious) {
 			received(unit: $unit)
 			delivered(unit: $unit)
+			used(unit: $unit)
 			dataPointsCount
 			period {
 				start
@@ -206,20 +208,29 @@ export default function ElectricityChart({
 						time: {
 							useUTC: false
 						},
-						series: [{
-							name: 'Received',
-							type: chartType,
-							showInLegend: includePrevious || includeSolarPower,
-							data: data.electricityExchanges.map(usage => [timeFormat ? getExchangeLabel(usage, timeFormat) : usage.period.end * 1000, usage.received]),
-							color: 'var(--color-electricity-received)'
-						},
-						{
-							name: 'Delivered',
-							type: chartType,
-							showInLegend: includePrevious || includeSolarPower,
-							data: data.electricityExchanges.map(usage => [timeFormat ? getExchangeLabel(usage, timeFormat) : usage.period.end * 1000, usage.delivered]),
-							color: 'var(--color-electricity-delivered)'
-						}].concat(
+						series: [
+							{
+								name: 'Received',
+								type: chartType,
+								showInLegend: includePrevious || includeSolarPower,
+								data: data.electricityExchanges.map(usage => [timeFormat ? getExchangeLabel(usage, timeFormat) : usage.period.end * 1000, usage.received]),
+								color: 'var(--color-electricity-received)'
+							},
+							{
+								name: 'Delivered',
+								type: chartType,
+								showInLegend: includePrevious || includeSolarPower,
+								data: data.electricityExchanges.map(usage => [timeFormat ? getExchangeLabel(usage, timeFormat) : usage.period.end * 1000, usage.delivered]),
+								color: 'var(--color-electricity-delivered)'
+							},
+							{
+								name: 'Used',
+								type: chartType,
+								showInLegend: includePrevious || includeSolarPower,
+								data: data.electricityExchanges.map(usage => [timeFormat ? getExchangeLabel(usage, timeFormat) : usage.period.end * 1000, usage.used]),
+								color: 'var(--color-electricity-used)'
+							},
+						].concat(
 							dataSolar && dataSolar.solarExchanges.length > 0 ? [{
 								name: 'Solar received',
 								showInLegend: true,
@@ -227,20 +238,29 @@ export default function ElectricityChart({
 								data: dataSolar.solarExchanges.map(usage => [timeFormat ? getExchangeLabel(usage, timeFormat) : usage.period.end * 1000, usage.received]),
 								color: 'var(--color-electricity-solar)'
 							}] : []
-						).concat(data.electricityExchangesPrevious && data.electricityExchangesPrevious.length > 0 ? [{
-							name: 'Previously received',
-							showInLegend: true,
-							type: chartType,
-							data: data.electricityExchangesPrevious.map(usage => [timeFormat ? getExchangeLabel(usage, timeFormat) : usage.period.start, usage.received]),
-							color: 'hsla(var(--color-electricity-received-h), var(--color-electricity-received-s), var(--color-electricity-received-l), .3)'
-						},
-						{
-							name: 'Previously delivered',
-							showInLegend: true,
-							type: chartType,
-							data: data.electricityExchangesPrevious.map(usage => [timeFormat ? getExchangeLabel(usage, timeFormat) : usage.period.start, usage.delivered]),
-							color: 'hsla(var(--color-electricity-delivered-h), var(--color-electricity-delivered-s), var(--color-electricity-delivered-l), .3)'
-						}] : []).concat(
+						).concat(data.electricityExchangesPrevious && data.electricityExchangesPrevious.length > 0 ? [
+							{
+								name: 'Previously received',
+								showInLegend: true,
+								type: chartType,
+								data: data.electricityExchangesPrevious.map(usage => [timeFormat ? getExchangeLabel(usage, timeFormat) : usage.period.start, usage.received]),
+								color: 'hsla(var(--color-electricity-received-h), var(--color-electricity-received-s), var(--color-electricity-received-l), .3)'
+							},
+							{
+								name: 'Previously delivered',
+								showInLegend: true,
+								type: chartType,
+								data: data.electricityExchangesPrevious.map(usage => [timeFormat ? getExchangeLabel(usage, timeFormat) : usage.period.start, usage.delivered]),
+								color: 'hsla(var(--color-electricity-delivered-h), var(--color-electricity-delivered-s), var(--color-electricity-delivered-l), .3)'
+							},
+							{
+								name: 'Previously used',
+								showInLegend: true,
+								type: chartType,
+								data: data.electricityExchangesPrevious.map(usage => [timeFormat ? getExchangeLabel(usage, timeFormat) : usage.period.start, usage.used]),
+								color: 'hsla(var(--color-electricity-used-h), var(--color-electricity-used-s), var(--color-electricity-used-l), .3)'
+							},
+						] : []).concat(
 							dataSolar?.solarExchangesPrevious && dataSolar.solarExchangesPrevious.length > 0 ? [{
 								name: 'Previously solar received',
 								showInLegend: true,
