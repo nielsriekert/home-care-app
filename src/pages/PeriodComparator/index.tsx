@@ -110,9 +110,9 @@ export default function PeriodComparator({ hasSolarInverter = false }) {
 		fetch({
 			variables: {
 				start: DateTime.now().startOf(period).toUnixInteger(),
-				end: DateTime.now().endOf('day').toUnixInteger(),
+				end: DateTime.now().endOf('hour').toUnixInteger(),
 				startPrevious: DateTime.now().minus({ year: 1 }).startOf(period).toUnixInteger(),
-				endPrevious: DateTime.now().minus({ year: 1 }).endOf('day').toUnixInteger(),
+				endPrevious: DateTime.now().minus({ year: 1 }).endOf('hour').toUnixInteger(),
 				includeSolar: hasSolarInverter,
 			}
 		});
