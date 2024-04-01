@@ -104,6 +104,7 @@ export const PeriodComparator_Query = graphql(`#graphql
 
 export default function PeriodComparator({ hasSolarInverter = false }) {
 	const [fetch, { data, loading, error }] = useLazyQuery(PeriodComparator_Query);
+	const [yearsInThePast, setYearsInThePast] = useState<number>(1);
 	const [period, setPeriod] = useState<DateTimeUnit>('year');
 
 	useEffect(() => {
@@ -111,12 +112,12 @@ export default function PeriodComparator({ hasSolarInverter = false }) {
 			variables: {
 				start: DateTime.now().startOf(period).toUnixInteger(),
 				end: DateTime.now().endOf('hour').toUnixInteger(),
-				startPrevious: DateTime.now().minus({ year: 1 }).startOf(period).toUnixInteger(),
-				endPrevious: DateTime.now().minus({ year: 1 }).endOf('hour').toUnixInteger(),
+				startPrevious: DateTime.now().minus({ year: yearsInThePast }).startOf(period).toUnixInteger(),
+				endPrevious: DateTime.now().minus({ year: yearsInThePast }).endOf('hour').toUnixInteger(),
 				includeSolar: hasSolarInverter,
 			}
 		});
-	}, [fetch, period, hasSolarInverter]);
+	}, [fetch, period, yearsInThePast, hasSolarInverter]);
 
 	const currentYear = data?.electricityExchange ?? null;
 	const previousYear = data?.electricityExchangePrevious ?? null;
@@ -129,27 +130,57 @@ export default function PeriodComparator({ hasSolarInverter = false }) {
 
 	return (
 		<Default title="Period comparator">
-			<SelectField
-				label="Period to compare"
-				name="period"
-				value={period}
-				choices={[
-					{
-						label: 'Year',
-						value: 'year'
-					},
-					{
-						label: 'Quarter',
-						value: 'quarter'
-					},
-					{
-						label: 'Month',
-						value: 'month'
-					}
-				]}
-				onChange={(name, value) => setPeriod(value as DateTimeUnit)}
-				description="Compare the selected period for the current year with the previous year starting from today."
-			/>
+			<div className={styles.settings}>
+				<SelectField
+					label="Previous year to compare"
+					name="compare-year"
+					value={yearsInThePast.toString()}
+					choices={[// should be dynamic, based on available data
+						{
+							label: DateTime.now().minus({ year: 1 }).year.toString(),
+							value: '1'
+						},
+						{
+							label: DateTime.now().minus({ year: 2 }).year.toString(),
+							value: '2'
+						},
+						{
+							label: DateTime.now().minus({ year: 3 }).year.toString(),
+							value: '3'
+						},
+						{
+							label: DateTime.now().minus({ year: 4 }).year.toString(),
+							value: '4'
+						}
+					]}
+					onChange={(name, value) => setYearsInThePast(parseInt(value))}
+				/>
+				<SelectField
+					label="Period to compare"
+					name="period"
+					value={period}
+					choices={[
+						{
+							label: 'Year',
+							value: 'year'
+						},
+						{
+							label: 'Quarter',
+							value: 'quarter'
+						},
+						{
+							label: 'Month',
+							value: 'month'
+						},
+						{
+							label: 'Day',
+							value: 'day'
+						}
+					]}
+					onChange={(name, value) => setPeriod(value as DateTimeUnit)}
+					description="Compare the selected period for the current year with a previous year starting from today."
+				/>
+			</div>
 			{error && <Alert severity="error">{error.message}</Alert>}
 			{!loading && !data && <Alert>No data found</Alert>}
 			{loading && <LoadingSpinner />}
