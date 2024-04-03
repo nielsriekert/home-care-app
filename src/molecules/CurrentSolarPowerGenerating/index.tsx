@@ -22,7 +22,7 @@ const CurrentSolarPowerGenerating_Query = graphql(`#graphql
 export default function CurrentSolarPowerGenerating({
 	updatedAt,
 }: {
-	updatedAt: (value: number) => void
+	updatedAt?: (timestamp: number) => void
 }) {
 	const { data, loading, error } = useQuery(CurrentSolarPowerGenerating_Query, {
 		pollInterval: 10000

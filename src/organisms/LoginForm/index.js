@@ -64,7 +64,7 @@ export default function LoginForm() {
 		<Form
 			error={error}
 			onSubmit={onSubmit}
-			isLoading={loading}
+			loading={loading}
 			isSubmitting={loading}
 			submitButtonText="Login"
 		>

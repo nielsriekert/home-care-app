@@ -1,4 +1,6 @@
 .widget-electricity-usage-chart,
+.widget-electrical-usage-current-week,
+.widget-electrical-usage-by-month,
 .widget-cumulative-water-usage-chart,
 .widget-gas-usage-chart {
 	grid-column: 1/-1;
@@ -6,16 +8,16 @@
 
 @media(min-width: 1550px) {
 	.widget-electricity-usage-chart,
+	.widget-electrical-usage-current-week,
+	.widget-electrical-usage-by-month,
 	.widget-cumulative-water-usage-chart,
 	.widget-gas-usage-chart {
 		grid-column: span 5;
 	}
 }
 
-.widget-electrical-usage-current-week,
 .widget-gas-usage-current-week,
 .widget-water-usage-current-week,
-.widget-electrical-usage-by-month,
 .widget-electrical-usage-by-year,
 .widget-gas-usage-by-year,
 .widget-gas-usage-by-month {
@@ -23,10 +25,8 @@
 }
 
 @media(min-width: 1000px) {
-	.widget-electrical-usage-current-week,
 	.widget-gas-usage-current-week,
 	.widget-water-usage-current-week,
-	.widget-electrical-usage-by-month,
 	.widget-electrical-usage-by-year,
 	.widget-gas-usage-by-year,
 	.widget-gas-usage-by-month {

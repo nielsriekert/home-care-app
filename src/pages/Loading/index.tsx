@@ -1,5 +1,4 @@
 import styles from  './Loading.module.css';
-import React from 'react';
 
 import LoggedOut from '../../templates/LoggedOut';
 
@@ -12,8 +11,7 @@ export default function Loading() {
 	return (
 		<LoggedOut>
 			<div className={styles.loaderContainer}>
-				<div className={styles.iconContainer}>
-				</div>
+				<div className={styles.iconContainer} />
 			</div>
 			<div className={styles.loaderContainer}>
 				{random < 1 ? <BoltIcon /> : random < 2 ? <FireIcon /> : <SunIcon />}

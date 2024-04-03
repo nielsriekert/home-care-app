@@ -19,7 +19,11 @@ const CurrentElectricityDelivered_Query = graphql(`#graphql
 	}
 `);
 
-export default function CurrentElectricityDelivered({ updatedAt }) {
+export default function CurrentElectricityDelivered({
+	updatedAt,
+}: {
+	updatedAt?: (timestamp: number) => void
+}) {
 	const { loading, error, data } = useQuery(CurrentElectricityDelivered_Query, {
 		pollInterval: 10000
 	});

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, ReactNode } from 'react';
 import styles from './SolarInvertersSettings.module.css';
 
 import Settings from '../../templates/Settings';
@@ -21,6 +21,7 @@ import { graphql } from '../../types/graphql';
 const SolarInverters_Query = graphql(`#graphql
 	query solarInverters {
 		solarInverters {
+			id
 			...SolarInverterCardFragment
 		}
 	}
@@ -39,8 +40,8 @@ export default function SolarInvertersSettings() {
 		pollInterval: 30000
 	});
 	const [addInverter, { data: inverterData, error: inverterError, loading: inverterLoading }] = useMutation(AddSolarInverter_Mutation);
-	const [successMessage, setSuccessMessage] = useState(null);
-	const [error, setError] = useState(null);
+	const [successMessage, setSuccessMessage] = useState<ReactNode | null>(null);
+	const [error, setError] = useState<Error | null>(null);
 
 	const [{
 		getFieldValueByName,
@@ -129,8 +130,7 @@ export default function SolarInvertersSettings() {
 			<div className={styles.addFormContainer}>
 				<h2>Add Solar Inverter</h2>
 				<Form
-					title="Add Solar Inverter"
-					isLoading={inverterLoading}
+					loading={inverterLoading}
 					isSubmitting={inverterLoading}
 					successMessage={successMessage}
 					error={inverterError || error}
