@@ -4,7 +4,13 @@ import { useNavigate } from 'react-router-dom';
 
 import ArrowLeftIcon from '../../atoms/icons/ArrowLeftIcon';
 
-export default function SettingsHeader({ title, backButton = true }) {
+export default function SettingsHeader({
+	title,
+	backButton = true,
+}: {
+	title: string,
+	backButton?: boolean,
+}) {
 	const navigate = useNavigate();
 
 	const goBack = () => {
