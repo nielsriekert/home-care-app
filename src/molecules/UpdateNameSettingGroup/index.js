@@ -121,7 +121,7 @@ export default function UpdateNameSettingGroup({ name }) {
 					<Alert severity={message.type}>{message.content}</Alert>}
 				{!updatedName && <Form
 					submitButtonText="Update"
-					isLoading={loading}
+					loading={loading}
 					isSubmitting={loading}
 					onSubmit={onSubmit}
 				>

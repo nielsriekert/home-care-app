@@ -22,7 +22,7 @@ const CurrentElectricDelivered_Query = graphql(`#graphql
 export default function CurrentElectricityUsing({
 	updatedAt,
 }: {
-	updatedAt: (value: number) => void
+	updatedAt?: (timestamp: number) => void
 }) {
 	const { data, loading, error } = useQuery(CurrentElectricDelivered_Query, {
 		pollInterval: 10000

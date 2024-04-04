@@ -1,18 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Settings from '../../templates/Settings';
 
 import Skeleton from '../../atoms/Skeleton';
-import Alert from '../../atoms/Alert';
 
 import InputFieldToggle from '../../molecules/InputFieldToggle';
 
 import { DateTime } from 'luxon';
 
-import { useQuery, useMutation } from '@apollo/client';
+import { useQuery, useMutation, ApolloError } from '@apollo/client';
 
 import { graphql } from '../../types/graphql';
-import { SmartMeterStatisticsAndIsRemoveOldDataQuery, SetRemoveOldDataMutation } from '../../types/graphql/graphql';
 
 const SmartMeter_Query = graphql(`#graphql
 	query smartMeterStatisticsAndIsRemoveOldData {
@@ -38,34 +36,36 @@ const SmartMeter_Query = graphql(`#graphql
 const RemoveOldData_Mutation = graphql(`#graphql
 	mutation setRemoveOldData($settings: SettingsInput!) {
 		setSettings(settings: $settings) {
+			id
 			removeHighResolutionElectricityReadingsOlderThenOneYear
 		}
 	}
 `);
 
-const getSyncStateFromApi = (queryData?: SmartMeterStatisticsAndIsRemoveOldDataQuery, mutateData?: SetRemoveOldDataMutation | null) => (
-	typeof mutateData === 'undefined' ? (queryData && queryData.settings.removeHighResolutionElectricityReadingsOlderThenOneYear) === true : mutateData?.setSettings?.removeHighResolutionElectricityReadingsOlderThenOneYear === true
-);
-
 export default function SmartMeterSettings() {
-	const { loading, error, data } = useQuery(SmartMeter_Query);
-	const [isChecked, setChecked] = useState(false);
-	const [setRemoving, { loading: loadingSet, error: errorSet, data: dataSet }] = useMutation(RemoveOldData_Mutation);
+	const { loading, error: errorGet, data } = useQuery(SmartMeter_Query, {
+		fetchPolicy: 'cache-and-network'
+	});
+	const [setRemoving, { loading: loadingSet, error: errorSet }] = useMutation(RemoveOldData_Mutation);
+	const [error, setError] = useState<ApolloError | undefined>(undefined);
 
 	useEffect(() => {
-		setChecked(getSyncStateFromApi(data, dataSet));
-	}, [data, dataSet]);
+		setError(errorSet || errorGet);
+	}, [errorGet, errorSet]);
 
 	return (
 		<Settings title="Smart Meter">
 			<h2>Data retention</h2>
-			{error && <Alert severity="error">{error?.message}</Alert>}
-			{errorSet && <Alert severity="error">{errorSet?.message}</Alert>}
 			<InputFieldToggle
 				label="Remove one year old reading data"
 				name="remove-one-year-old-reading-data"
-				checked={isChecked}
-				loading={loadingSet}
+				isDisabled={!data}
+				checked={data?.settings.removeHighResolutionElectricityReadingsOlderThenOneYear ?? false}
+				loading={loading || loadingSet}
+				message={error ? {
+					type: 'error',
+					content: error.message
+				} : undefined}
 				description="High resolution data older than 1 year is stripped, this has no effect on statistics, but could have an effect on future features."
 				onChange={(name, value) => setRemoving({
 					variables: {

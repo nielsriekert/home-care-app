@@ -1,5 +1,4 @@
 import styles from  './Login.module.css';
-import React from 'react';
 
 import LoggedOut from '../../templates/LoggedOut';
 
