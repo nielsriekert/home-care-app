@@ -1,4 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, ReactNode } from 'react';
+
+import { DateTime } from 'luxon';
 
 import Settings from '../../templates/Settings';
 
@@ -7,31 +9,37 @@ import Alert from '../../atoms/Alert';
 import Form from '../../organisms/Form';
 import InputField from '../../molecules/InputField';
 
-import { useMutation, gql, useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { FormattedNumber } from 'react-intl';
 
 import Sensus620Image from './sensus-620.jpg';
 
-const ADD_VERIFIED_WATER_READING = gql`
+import { graphql } from '../../types/graphql';
+
+const AddVerifiedWaterReading_Mutation = graphql(`#graphql
 	mutation addVerifiedWaterReading($reading: Int!) {
 		addVerifiedWaterReading(reading: $reading)
 	}
-`;
+`);
 
-const CURRENT_WATER_METER_READING = gql`
+const CurrentAndLastVerifiedWaterMeterReading_Query = graphql(`#graphql
 	query currentWaterMeterReading {
 		currentWaterMeterReading
+		lastVerifiedWaterReading {
+			readingAt
+			reading
+		}
 	}
-`;
+`);
 
 export default function WaterReaderSettings() {
-	const { loading: readingLoading, error: readingError, data: readingData } = useQuery(CURRENT_WATER_METER_READING);
-	const [addReading, { data, error, loading }] = useMutation(ADD_VERIFIED_WATER_READING, {
-		refetchQueries: [CURRENT_WATER_METER_READING]
+	const { loading: readingLoading, error: readingError, data: readingData } = useQuery(CurrentAndLastVerifiedWaterMeterReading_Query);
+	const [addReading, { data, error, loading }] = useMutation(AddVerifiedWaterReading_Mutation, {
+		refetchQueries: [CurrentAndLastVerifiedWaterMeterReading_Query]
 	});
 	const [fieldValue, setFieldValue] = useState('');
 	const [fieldError, setFieldError] = useState('');
-	const [successMessage, setSuccessMessage] = useState(null);
+	const [successMessage, setSuccessMessage] = useState<ReactNode | null>(null);
 
 	const onChange = useCallback((name, value) => {
 		setFieldValue(value);
@@ -63,22 +71,27 @@ export default function WaterReaderSettings() {
 				add a reading manually. The next reading will count up from the added manual reading.
 			</p>
 			<p>
-				{!readingLoading && readingData ?
-					typeof readingData.currentWaterMeterReading === 'number' ?
-						<Alert>
-							The current water meter reading is <strong><FormattedNumber value={readingData.currentWaterMeterReading} style="unit" unit="liter" unitDisplay="long" /></strong>
-						</Alert> :
-						<Alert>
-							No water reading found for the water meter
-						</Alert> :
-					readingError ?
-						<Alert severity="error">{readingError.message}</Alert> :
-						<Skeleton />}
+				{readingLoading && <Skeleton />}
+				{readingData && typeof readingData.currentWaterMeterReading === 'number' ?
+					<Alert>
+						The current water meter reading is <strong><FormattedNumber value={readingData.currentWaterMeterReading} style="unit" unit="liter" unitDisplay="long" /></strong>
+					</Alert> :
+					<Alert>
+						No water reading found for the water meter
+					</Alert>}
+				{readingError &&
+					<Alert severity="error">{readingError.message}</Alert>}
 			</p>
+			{readingData && readingData.lastVerifiedWaterReading &&
+				<p>
+					<Alert>
+						The last verified water meter reading was at <strong>{DateTime.fromSeconds(readingData.lastVerifiedWaterReading.readingAt).toLocaleString(DateTime.DATE_FULL)}</strong> with a value of <strong><FormattedNumber value={readingData.lastVerifiedWaterReading.reading} style="unit" unit="liter" unitDisplay="long" /></strong>
+					</Alert>
+				</p>}
 			<Form
 				error={error}
 				onSubmit={onSubmit}
-				isLoading={loading}
+				loading={loading}
 				successMessage={successMessage}
 				submitButtonText="Add"
 			>
@@ -90,9 +103,9 @@ export default function WaterReaderSettings() {
 					value={fieldValue}
 					isRequired
 					message={fieldError ? {
-						type: 'isError',
+						type: 'error',
 						content: fieldError
-					} : false}
+					} : undefined}
 					description={
 						<div>
 							<p>
