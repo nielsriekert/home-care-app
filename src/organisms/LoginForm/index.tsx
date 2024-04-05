@@ -1,24 +1,23 @@
-import React, { useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
-import { useMutation, gql } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 
 import Form from '../Form';
 import InputField from '../../molecules/InputField';
 
 import useFormFields from '../../hooks/useFormFields';
 
-import { USER } from '../../fragments';
+import { graphql } from '../../types/graphql';
 
-const LOGIN = gql`
-	${USER}
+const Login_Mutation = graphql(`#graphql
 	mutation login($email: String! $password: String!) {
 		login(email: $email, password: $password) {
 			user {
-				...UserFields
+				id
 			}
 		}
 	}
-`;
+`);
 
 export default function LoginForm() {
 	const [{
@@ -43,7 +42,7 @@ export default function LoginForm() {
 		}
 	]);
 
-	const [login, { data, loading, error } ] = useMutation(LOGIN, { errorPolicy: 'all' });
+	const [login, { data, loading, error } ] = useMutation(Login_Mutation, { errorPolicy: 'all' });
 
 	const onSubmit = useCallback(() => {
 		login({
@@ -56,7 +55,7 @@ export default function LoginForm() {
 
 	useEffect(() => {
 		if (data && data.login && data.login.user.id) {
-			window.location = '/';
+			window.location.href = '/';
 		}
 	}, [data]);
 

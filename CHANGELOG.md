@@ -35,7 +35,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [1.46.1] - 2024-03-28
 ### Fixed
-- Minor inconsistencies and potential bugs and som refactors.
+- Minor inconsistencies and potential bugs and some refactors.
 
 ## [1.46.0] - 2024-03-27
 ### Added
@@ -66,15 +66,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [1.44.1] - 2024-03-24
 ### Fixed
-- Todays solar received widget correct value (api now supports start and and values).
+- Todays solar received widget correct value (api now supports start and end values).
 
 ## [1.44.0] - 2024-03-23
 ### Added
-- Simle period comparator page. To compare previous and current year electricity values.
+- Simple period comparator page. To compare previous and current year electricity values.
 
 ## [1.43.1] - 2024-03-22
 ### Added
-- SolarInverter api breading change, from ipAddress to url.
+- SolarInverter api breaking change, from ipAddress to url.
 
 ## [1.43.0] - 2024-02-18
 ### Added
