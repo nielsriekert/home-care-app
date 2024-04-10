@@ -92,10 +92,16 @@ export default function Dashboard({ hasSolarInverter = false }) {
 					/>}
 				</Widget>
 				<Widget title="Today" name="gas-usage" icon={<FireIcon />}>
-					<GasUsage />
+					{today && <GasUsage
+						start={today.start}
+						end={today.end}
+					/>}
 				</Widget>
 				<Widget title="Today" name="water-usage" icon={<WaterIcon />}>
-					<WaterUsage />
+					{today && <WaterUsage
+						start={today.start}
+						end={today.end}
+					/>}
 				</Widget>
 			</WidgetGrid>
 		</Default>

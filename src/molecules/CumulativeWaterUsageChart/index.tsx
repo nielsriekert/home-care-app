@@ -1,47 +1,42 @@
-import React from 'react';
 import styles from './CumulativeWaterUsageChart.module.css';
 
 import SkeletonChart from '../SkeletonChart';
 import Alert from '../../atoms/Alert';
 
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import HighchartsAnnotations from 'highcharts/modules/annotations';
 
-import { WATER_READING } from '../../fragments';
+import { graphql } from '../../types/graphql';
+
+const CumulativeWaterUsage_Query = graphql(`#graphql
+	query cumulativeWaterUsage($start: Int! $end: Int!) {
+		cumulativeWaterUsage(start: $start end: $end) {
+			reading
+			readingAt
+			isVerified
+		}
+	}
+`);
 
 HighchartsAnnotations(Highcharts);
 
-const CUMULATIVE_WATER_USAGE = gql`
-	${WATER_READING}
-	query cumulativeWaterUsage($start: Int! $end: Int!) {
-		cumulativeWaterUsage(start: $start end: $end) {
-			...WaterReadingFields
-		}
-	}
-`;
-
-const getStartOfToday = () => {
-	const today = new Date();
-	today.setHours(0, 0, 0, 0);
-	return Math.round(today.getTime() / 1000);
-};
-
-const getEndOfToday = () => {
-	const today = new Date();
-	today.setHours(23, 59, 59, 999);
-	return Math.round(today.getTime() / 1000);
-};
-
-export default function CumulativeWaterUsageChart({ start, end }) {
-	const { loading, error, data } = useQuery(CUMULATIVE_WATER_USAGE, {
+export default function CumulativeWaterUsageChart({
+	start,
+	end,
+}: {
+	start: number,
+	end: number,
+}) {
+	const { data, loading, error } = useQuery(CumulativeWaterUsage_Query, {
 		variables: {
-			start: start || getStartOfToday(),
-			end: end || getEndOfToday()
+			start,
+			end,
 		}
 	});
+
 	if (loading) return <SkeletonChart />;
 	if (error) return <Alert severity="error">{error.message}</Alert>;
 
@@ -62,7 +57,7 @@ export default function CumulativeWaterUsageChart({ start, end }) {
 						labelOptions: {
 							backgroundColor: 'rgba(0,0,0,0.5)'
 						},
-						labels: data.cumulativeWaterUsage.filter(reading => reading.isVerified).map(({ reading, readingAt }) => ({
+						labels: data?.cumulativeWaterUsage.filter(reading => reading.isVerified).map(({ reading, readingAt }) => ({
 							point: {
 								xAxis: 0,
 								yAxis: 0,
@@ -81,8 +76,8 @@ export default function CumulativeWaterUsageChart({ start, end }) {
 						type: 'datetime',
 						lineColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)',
 						tickColor: 'hsla(var(--color-secondary-shade-3-h), var(--color-secondary-shade-3-s), var(--color-secondary-shade-3-l), .4)',
-						min: (start || getStartOfToday()) * 1000,
-						max: (end || getEndOfToday()) * 1000
+						min: start * 1000,
+						max: end * 1000
 					},
 					yAxis: {
 						title: {
@@ -101,7 +96,7 @@ export default function CumulativeWaterUsageChart({ start, end }) {
 					series: [{
 						name: 'liter',
 						showInLegend: false,
-						data: data.cumulativeWaterUsage.map(usage => [usage.readingAt * 1000, usage.reading]),
+						data: data?.cumulativeWaterUsage.map(usage => [usage.readingAt * 1000, usage.reading]),
 						color: 'hsla(var(--color-water-h), var(--color-water-s), var(--color-water-l), .6)'
 					}]
 				}}

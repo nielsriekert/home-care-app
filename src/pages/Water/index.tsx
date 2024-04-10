@@ -1,5 +1,5 @@
 import './dashboard.css';
-import { useState, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 import { DateTime, Duration } from 'luxon';
 
@@ -32,10 +32,18 @@ const getEndOfToday = () => {
 };
 
 export default function Water() {
+	const [today, setToday] = useState<{ start: number, end: number } | null>();
 	const [waterChartDay, setWaterChartDay] = useState({
 		start: getStartOfToday(),
 		end: getEndOfToday()
 	});
+
+	useEffect(() => {
+		setToday({
+			start: DateTime.now().startOf('day').toUnixInteger(),
+			end: DateTime.now().endOf('day').toUnixInteger(),
+		});
+	}, []);
 
 	const setMinus2 = useCallback(() => {
 		setWaterChartDay({
@@ -51,7 +59,7 @@ export default function Water() {
 		});
 	}, [setWaterChartDay]);
 
-	const setToday = useCallback(() => {
+	const setTodayWater = useCallback(() => {
 		setWaterChartDay({
 			start: getStartOfToday(),
 			end: getEndOfToday()
@@ -62,13 +70,16 @@ export default function Water() {
 		<Default title="Water">
 			<WidgetGrid>
 				<Widget title="Today" name="water-usage" icon={<WaterIcon />}>
-					<WaterUsage />
+					{today && <WaterUsage
+						start={today.start}
+						end={today.end}
+					/>}
 				</Widget>
 				<Widget title="Today" name="cumulative-water-usage-chart" icon={<WaterIcon />}>
 					<ul style={{ display: 'flex', gap: '10px', listStyleType: 'none', padding: '0' }}>
 						<li><Button onClick={setMinus2} type="primary">-2</Button></li>
 						<li><Button onClick={setYesterday} type="primary">Yesterday</Button></li>
-						<li><Button onClick={setToday} type="primary">Today</Button></li>
+						<li><Button onClick={setTodayWater} type="primary">Today</Button></li>
 					</ul>
 					<CumulativeWaterUsageChart {...waterChartDay} />
 				</Widget>

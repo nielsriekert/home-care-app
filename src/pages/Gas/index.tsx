@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import { DateTime, Duration } from 'luxon';
 
 import Default from '../../templates/Default';
@@ -14,11 +16,23 @@ import GasChart from '../../molecules/GasChart';
 import { TimeSpan } from '../../types/graphql/graphql';
 
 export default function Dashboard() {
+	const [today, setToday] = useState<{ start: number, end: number } | null>();
+
+	useEffect(() => {
+		setToday({
+			start: DateTime.now().startOf('day').toUnixInteger(),
+			end: DateTime.now().endOf('day').toUnixInteger(),
+		});
+	}, []);
+
 	return (
 		<Default title="Gas">
 			<WidgetGrid>
 				<Widget title="Today" name="gas-usage" icon={<FireIcon />}>
-					<GasUsage />
+					{today && <GasUsage
+						start={today.start}
+						end={today.end}
+					/>}
 				</Widget>
 				<Widget title="Last 4 days" name="gas-usage-chart" icon={<FireIcon />}>
 					<GasChart
