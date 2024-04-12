@@ -5,30 +5,29 @@ import Alert from '../../atoms/Alert';
 import ToolTip from '../../atoms/ToolTip';
 import LoadingSpinner from '../../atoms/LoadingSpinner';
 
-import { useQuery, gql, NetworkStatus } from '@apollo/client';
+import { useQuery, NetworkStatus } from '@apollo/client';
 import { FormattedNumber } from 'react-intl';
 
 import { DateTime } from 'luxon';
 
-import { WATER_EXCHANGE } from '../../fragments';
+import { graphql } from '../../types/graphql';
 
-const WATER_USAGE = gql`
-	${WATER_EXCHANGE}
+const WaterUsage_Query = graphql(`#graphql
 	query waterExchange($start: Int! $end: Int!) {
 		waterExchange(start: $start end: $end) {
-			...WaterExchangeFields
+			received
 		}
 	}
-`;
+`);
 
 export default function WaterUsage({
 	start,
 	end,
 } : {
-	start?: number,
-	end?: number,
+	start: number,
+	end: number,
 }) {
-	const { error, data, networkStatus } = useQuery(WATER_USAGE, {
+	const { data, error, networkStatus } = useQuery(WaterUsage_Query, {
 		pollInterval: 60000 * 5,
 		notifyOnNetworkStatusChange: true,
 		variables: {
@@ -38,9 +37,15 @@ export default function WaterUsage({
 	});
 
 	if (error) return <Alert severity="error">{error.message}</Alert>;
+
 	return (
 		<div className={styles.container}>
-			{networkStatus !== NetworkStatus.loading ? data.waterExchange ? <ToolTip title="Water usage"><span><FormattedNumber value={data.waterExchange.received} style="unit" unit="liter" /></span></ToolTip> : 0 + ' l' : <Skeleton width="3em" /> }
+			{NetworkStatus[networkStatus] === 'loading' && <Skeleton width="3em" />}
+			{data && <ToolTip title="Water usage">
+				<span>
+					<FormattedNumber value={data.waterExchange?.received || 0} style="unit" unit="liter" />
+				</span>
+			</ToolTip>}
 			<LoadingSpinner isHidden={networkStatus !== NetworkStatus.poll} diameter="16px" borderWidth="3px" />
 		</div>
 	);

@@ -51,17 +51,16 @@ export default function InputFieldToggle({
 					onChange={onValueChange}
 				/>
 			</ToggleButton>
-			{message ?
+			{message &&
 				<div className={styles.fieldMessageContainer}>
 					<FieldMessage styleType={message.type}>
 						{message.content}
 					</FieldMessage>
-				</div> : ''}
-			{description ?
+				</div>}
+			{description &&
 				<FieldDescription>
 					{description}
-				</FieldDescription>
-				: ''}
+				</FieldDescription>}
 		</div>
 	);
 }

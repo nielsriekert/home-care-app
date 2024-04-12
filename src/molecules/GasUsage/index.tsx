@@ -8,8 +8,6 @@ import LoadingSpinner from '../../atoms/LoadingSpinner';
 import { useQuery, NetworkStatus } from '@apollo/client';
 import { FormattedNumber } from 'react-intl';
 
-import { DateTime } from 'luxon';
-
 import { graphql } from '../../types/graphql';
 
 const GasConsumption_Query = graphql(`#graphql
@@ -24,13 +22,19 @@ const GasConsumption_Query = graphql(`#graphql
 	}
 `);
 
-export default function GasUsage({ start = undefined, end = undefined }) {
+export default function GasUsage({
+	start,
+	end,
+}: {
+	start: number,
+	end: number,
+}) {
 	const { data, error, networkStatus } = useQuery(GasConsumption_Query, {
 		pollInterval: 60000 * 5,
 		notifyOnNetworkStatusChange: true,
 		variables: {
-			start: start || Math.round(DateTime.now().startOf('day').toSeconds()),
-			end: end || Math.floor(DateTime.now().endOf('day').toSeconds())
+			start,
+			end,
 		}
 	});
 
@@ -38,16 +42,12 @@ export default function GasUsage({ start = undefined, end = undefined }) {
 
 	return (
 		<div className={styles.container}>
-			{networkStatus !== NetworkStatus.loading ?
-				data?.gasExchange ?
-					<ToolTip title="Gas usage">
-						<span>
-							<FormattedNumber value={data.gasExchange.received} /> m³
-						</span>
-					</ToolTip> :
-					0 + ' m³' :
-				<Skeleton width="3em" />
-			}
+			{NetworkStatus[networkStatus] === 'loading' && <Skeleton width="3em" />}
+			{data && <ToolTip title="Gas usage">
+				<span>
+					<FormattedNumber value={data.gasExchange.received} /> m³
+				</span>
+			</ToolTip>}
 			<LoadingSpinner isHidden={networkStatus !== NetworkStatus.poll} diameter="16px" borderWidth="3px" />
 		</div>
 	);

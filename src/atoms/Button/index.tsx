@@ -1,5 +1,14 @@
 import styles from './Button.module.css';
-import React, { ReactNode, MouseEventHandler } from 'react';
+import { ReactNode, MouseEventHandler } from 'react';
+
+export interface ButtonProps {
+	children: ReactNode,
+	type?: 'primary' | 'secondary',
+	isDisabled?: boolean,
+	pending?: boolean,
+	isSubmit?: boolean,
+	onClick?: MouseEventHandler<HTMLButtonElement>,
+}
 
 export default function Button({
 	children,
@@ -8,14 +17,7 @@ export default function Button({
 	pending = false,
 	isSubmit = false,
 	onClick
-}: {
-	children: ReactNode,
-	type?: 'primary' | 'secondary',
-	isDisabled?: boolean,
-	pending?: boolean,
-	isSubmit?: boolean,
-	onClick?: MouseEventHandler<HTMLButtonElement>,
-}) {
+}: ButtonProps) {
 	return (
 		<button
 			type={!isSubmit ? 'button' : 'submit'}

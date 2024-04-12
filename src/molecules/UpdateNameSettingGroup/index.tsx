@@ -1,28 +1,28 @@
 import { useState, useCallback, useEffect } from 'react';
 
-import { useMutation, gql } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 
 import SettingsGroup from '../SettingGroup';
 import Modal from '../Modal';
 import Form from '../../organisms/Form';
-import Alert from '../../atoms/Alert';
+import Alert, { Severity } from '../../atoms/Alert';
 import InputField from '../InputField';
 
 import useFormFields from '../../hooks/useFormFields';
 
-import { USER } from '../../fragments';
+import { graphql } from '../../types/graphql';
+import { UpdateNameMutation } from '../../types/graphql/graphql';
 
-const UPDATE_NAME = gql`
-	${USER}
+const UpdateName_Query = graphql(`#graphql
 	mutation updateName($name: String) {
 		updateName(name: $name) {
-			...UserFields
+			id
 		}
 	}
-`;
+`);
 
 export default function UpdateNameSettingGroup({ name }) {
-	const [updateName, { data, loading }] = useMutation(UPDATE_NAME, {
+	const [updateName, { data, loading }] = useMutation(UpdateName_Query, {
 		onError: (error) => {
 			if (error.message.startsWith('Name is required')) {
 				setFieldMessageByName('name', 'This field is required', 'isError');
@@ -30,12 +30,12 @@ export default function UpdateNameSettingGroup({ name }) {
 			}
 
 			setMessage({
-				type: 'error',
+				severity: 'error',
 				content: error.message
 			});
 		}
 	});
-	const [updatedName, setUpdatedName] = useState(null);
+	const [updatedName, setUpdatedName] = useState<UpdateNameMutation['updateName'] | null>(null);
 
 	const [isModalOpen, setModalOpen] = useState(false);
 	const [{
@@ -54,7 +54,7 @@ export default function UpdateNameSettingGroup({ name }) {
 			component: InputField
 		}
 	]);
-	const [message, setMessage] = useState(null);
+	const [message, setMessage] = useState<{ severity: Severity, content: string } | null>(null);
 
 	const openModal = () => {
 		setModalOpen(true);
@@ -87,7 +87,7 @@ export default function UpdateNameSettingGroup({ name }) {
 	useEffect(() => {
 		if (updatedName) {
 			setMessage({
-				type: 'success',
+				severity: 'success',
 				content: 'Your name has been changed'
 			});
 		}
@@ -108,7 +108,6 @@ export default function UpdateNameSettingGroup({ name }) {
 				title="Update name"
 				isOpen={isModalOpen}
 				onHide={closeModal}
-				isBodyBackgroundColorGray
 				buttons={[
 					{
 						label: 'Close',
@@ -118,7 +117,7 @@ export default function UpdateNameSettingGroup({ name }) {
 				]}
 			>
 				{message &&
-					<Alert severity={message.type}>{message.content}</Alert>}
+					<Alert severity={message.severity}>{message.content}</Alert>}
 				{!updatedName && <Form
 					submitButtonText="Update"
 					loading={loading}

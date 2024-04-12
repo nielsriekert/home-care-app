@@ -1,5 +1,3 @@
-// @ts-check
-import React from 'react';
 import styles from './App.module.css';
 
 import { useQuery } from '@apollo/client';
@@ -31,7 +29,7 @@ import WaterReaderSettings from './pages/WaterReaderSettings';
 import About from './pages/About';
 import FourOFour from './pages/FourOFour';
 
-import { graphql } from './types/graphql/gql';
+import { graphql } from './types/graphql';
 
 const Init_Query = graphql(`#graphql
 	query init {

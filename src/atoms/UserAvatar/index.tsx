@@ -4,7 +4,7 @@ import Skeleton from '../Skeleton';
 import ConditionalButton from '../ConditionalButton';
 
 import { FragmentType, useFragment } from '../../types/graphql/fragment-masking';
-import { graphql } from '../../types/graphql/gql';
+import { graphql } from '../../types/graphql';
 
 const UserAvatarFragment = graphql(`#graphql
 	fragment UserAvatarFragment on User {
