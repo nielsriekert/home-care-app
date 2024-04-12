@@ -2,8 +2,10 @@ import styles from './UserHeaderModal.module.css';
 
 import { useMutation } from '@apollo/client';
 
-import UserHeaderMenu from '../UserHeaderMenu';
+import Menu from '../Menu';
 import UserProfileCard from '../UserProfileCard';
+
+import MenuItem from '../../atoms/MenuItem';
 
 import { FragmentType, useFragment } from '../../types/graphql/fragment-masking';
 import { graphql } from '../../types/graphql';
@@ -41,27 +43,17 @@ export default function UserHeaderModal({
 	return (
 		<div className={styles.container + (isOpen ? ` ${styles.isOpen}` : '')}>
 			<UserProfileCard user={userHeader} />
-			<UserHeaderMenu items={[
-				{
-					id: 1,
-					url: '/profile/',
-					label: 'Profile',
-					access: []
-				},
-				{
-					id: 2,
-					url: '/events/',
-					label: 'Events',
-					access: []
-				},
-				{
-					id: 3,
-					onClick: onLogout,
-					label: 'Log out',
-					access: []
-				}
-			]}
-			/>
+			<Menu>
+				<MenuItem href="/profile/">
+					Profile
+				</MenuItem>
+				<MenuItem href="/events/">
+					Events
+				</MenuItem>
+				<MenuItem onClick={onLogout}>
+					Log out
+				</MenuItem>
+			</Menu>
 		</div>
 	);
 }

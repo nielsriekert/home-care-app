@@ -1,0 +1,21 @@
+.container {
+	display: block;
+	width: 100%;
+	padding: .75em 1.25em;
+	color: var(--color-secondary-shade-4);
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	text-align: left;
+	border: none;
+	background-color: transparent;
+	transition: background-color .15s;
+	cursor: pointer;
+}
+
+a.container {
+	text-decoration: none;
+}
+
+.container:hover:not(:disabled) {
+	background-color: var(--color-secondary-shade-1);
+}

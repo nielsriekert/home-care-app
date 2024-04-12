@@ -5,7 +5,7 @@ import Settings from '../../templates/Settings';
 
 import InputFieldToggle from '../../molecules/InputFieldToggle';
 
-import { graphql } from '../../types/graphql/gql';
+import { graphql } from '../../types/graphql';
 
 const IsMinderGasSyncActive_Query = graphql(`#graphql
 	query isMinderGasNlSynchronizationActive {
