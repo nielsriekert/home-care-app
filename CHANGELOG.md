@@ -4,12 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.49.1] - 2024-04-13
+### Fixed
+- Current electricity using in Watt instead of Kilowatt.
+
 ## [1.49.0] - 2024-04-12
 ### Added
 - Last verified water reading message.
 
 ## [1.48.1] - 2024-04-04
-### Changed
+### Fixed
 - Improved toggle input settings reliability.
 
 ## [1.48.0] - 2024-04-01
