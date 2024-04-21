@@ -53,11 +53,11 @@ export default function Electricity({ hasSolarInverter = false }) {
 						end={today.end}
 					/>}
 				</Widget>}
-				<Widget title="Last 8 hours" name="electricity-usage-chart" icon={<BoltIcon />}>
+				<Widget title="Last 10 hours" name="electricity-usage-chart" icon={<BoltIcon />}>
 					<ElectricityChart
 						resolution={TimeSpan.FiveMinutes}
 						end={DateTime.now()}
-						duration={Duration.fromDurationLike({ hours: 8 })}
+						duration={Duration.fromDurationLike({ hours: 10 })}
 						unit={ElectricEnergyOverTimeUnit.WattHour}
 						chartType="line"
 						softMax={100}
