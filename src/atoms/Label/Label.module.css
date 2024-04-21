@@ -1,0 +1,26 @@
+.container {
+	display: inline-flex;
+	gap: .5em;
+	padding: .375em .675em;
+	font-size: .875em;
+	color: white;
+	border-radius: 2px;
+	background-color: var(--color-secondary-shade-1);
+}
+
+.container.electricity {
+	color: var(--color-electricity-received);
+}
+
+.container.solar {
+	color: var(--color-electricity-solar);
+}
+
+.container.gas {
+	color: var(--color-electricity-gas);
+}
+
+.icon {
+	height: 1.25em;
+	width: 1.25em;
+}

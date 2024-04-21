@@ -4,13 +4,14 @@ import { useState, useEffect } from 'react';
 import { DateTime, DateTimeUnit } from 'luxon';
 
 import { useLazyQuery } from '@apollo/client';
-import { FormattedNumber } from 'react-intl';
+import { useIntl, FormattedNumber } from 'react-intl';
 
 import Default from '../../templates/Default';
 
 import SelectField from '../../molecules/SelectField';
 
 import Alert from '../../atoms/Alert';
+import Label from '../../atoms/Label';
 import LoadingSpinner from '../../atoms/LoadingSpinner';
 
 import { graphql } from '../../types/graphql';
@@ -28,6 +29,8 @@ export const PeriodComparator_Query = graphql(`#graphql
 			received
 			delivered
 			used
+			ofUsedIsSolar
+			percentageOfUsedIsSolar
 			period {
 				start
 				end
@@ -67,6 +70,8 @@ export const PeriodComparator_Query = graphql(`#graphql
 			received
 			delivered
 			used
+			ofUsedIsSolar
+			percentageOfUsedIsSolar
 			period {
 				start
 				end
@@ -106,6 +111,7 @@ export default function PeriodComparator({ hasSolarInverter = false }) {
 	const [fetch, { data, loading, error }] = useLazyQuery(PeriodComparator_Query);
 	const [yearsInThePast, setYearsInThePast] = useState<number>(1);
 	const [period, setPeriod] = useState<DateTimeUnit>('year');
+	const intl = useIntl();
 
 	useEffect(() => {
 		fetch({
@@ -235,12 +241,12 @@ export default function PeriodComparator({ hasSolarInverter = false }) {
 						<th>Electricity used</th>
 						<td>
 							{previousYear && <>
-								<FormattedNumber value={previousYear.used} /> kWh
+								<FormattedNumber value={previousYear.used} /> kWh <Label type="solar"><FormattedNumber value={previousYear.percentageOfUsedIsSolar} /> %</Label>
 							</>}
 						</td>
 						<td>
 							{currentYear && <>
-								<FormattedNumber value={currentYear.used} /> kWh
+								<FormattedNumber value={currentYear.used} /> kWh <Label type="solar" title={`${intl.formatNumber(currentYear.ofUsedIsSolar)} kWh`}><FormattedNumber value={currentYear.percentageOfUsedIsSolar} /> %</Label>
 							</>}
 						</td>
 					</tr>
